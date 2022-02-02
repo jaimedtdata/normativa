@@ -1,0 +1,46 @@
+.none_arrows input::-webkit-outer-spin-button,
+.none_arrows input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.hov:hover{
+	background-color: #007bff;
+	color: white;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #aaa;
+}
+
+.select2-selection__rendered{
+	font-size: 15px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    text-align: center;
+}
+
+
+.select2-container--default .select2-selection--single {
+	border-radius: 0px !important; 
+}
+.bg-blue{
+	background-color: #A8E5FF;
+}
+
+.card-header.foro{
+	font-size: 18px;
+	background-color: black;
+	color: white;
+}
+.txt-foro{
+	font-size: 14px;
+}
+.border{
+	border: 1px solid black;
+	font-size: 12px;
+}
+.msg{
+	font-size: 12px;
+}

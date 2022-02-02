@@ -1,0 +1,22 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+{% block content %}
+    <form method="POST" >
+        {% csrf_token %}
+        <div class="col-md-4">
+        {{ form }}     
+        <br />
+        <div class="form-group">
+            <button type="submit" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-edit"></span> Grabar</button>
+        </div>
+        </div>
+    </form>
+
+{% endblock content %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}

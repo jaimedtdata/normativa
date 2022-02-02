@@ -1,0 +1,153 @@
+{% load static %}
+{% load user_tags %}
+
+<nav id="sidebar" class="{% if nonav %}active{% endif %}">
+    <div class="sidebar-header">
+        <img src="{% static 'img/logo_cap3.png' %}" alt="bootraper logo" width="170" class="app-logo">
+    </div>
+    <ul class="list-unstyled components text-secondary">
+        {% if request.user|has_group:"Premium" %} 
+            <li class="dropdown-toggle no-caret-down-active">
+                <a href="{% url 'home' %}"><i class="fas fa-home "></i> Home</a>
+            </li>
+        {% endif %}
+
+        {% if request.user|has_group:"Premium" %} 
+            <li class="dropdown-toggle no-caret-down-active">
+                <a href="{% url 'dash' %}"><i class="fas fa-home "></i> Estadistica</a>
+            </li>
+        {% endif %}
+    
+        <li>
+            <a  href="#uielementsmenu" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i class="fas fa-book"></i> Normativa</a>
+            <ul class="collapse list-unstyled " id="uielementsmenu">
+                <li>
+                <a href="{% url 'search_normat' %}"><i class="fas fa-balance-scale-left"></i>Busqueda Normas Legales</a>
+                {% comment %}
+                   <a href="{% url 'rules' %}"><i class="fas fa-balance-scale-left"></i>Busqueda Normas Legales</a>
+                {% endcomment %}
+                </li>
+                {% comment %}
+                    {% if request.user|has_group:"Premium" %} 
+                    <li>
+                    <a href="{% url 'admin:normas_master_normas_changelist' %}"><i class="fas fa-tasks"></i>Carga de Normas</a>
+                    </li>
+                    {% endif %}
+                {% endcomment %}
+
+                <li>
+                    <a href="{% url 'dateregister_norm' %}"><i class="fas fa-balance-scale-left"></i>Agregar Norma</a>
+                </li>
+                <li>
+                    <a href="{% url 'bus_provedor' %}"><i class="fas fa-balance-scale-left"></i>Busqueda por proveedor</a>
+                </li>
+
+            </ul>
+        </li>
+
+       <li>
+            <a href="{% url 'foro' %}" class="dropdown-toggle no-caret-down"><i class="fas fa-comments"></i> Foro Interactivo</a>
+        </li>
+
+        {% comment %}
+        <li>
+            <a href="#uielementsmenu3" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i class="fas fa-money-bill-wave-alt"></i> Suscripcion y Pagos</a>
+            <ul class="collapse list-unstyled " id="uielementsmenu3">
+                <li>
+                   <a href="{% url 'member' %}"><i class="fas fa-comments"></i>Gestion de Miembros</a>
+                </li>
+                <li>
+                   <a href="{% url 'plan' %}"><i class="fas fa-tasks"></i>Registro de Planes</a>
+                </li>
+                 {% comment %} <li>
+                   <a href="{% url 'configs' %}"><i class="fas fa-tasks"></i>Configuracion</a>
+                </li>
+
+
+
+            </ul>
+        </li>
+         {% endcomment %}
+        {% if request.user|has_group:"Premium" %} 
+         <li>
+            <a href="{% url 'admin:index' %}" target="_blank" class="dropdown-toggle no-caret-down"><i class="fas fa-tasks"></i>Adm. Base de Datos</a>
+        </li>
+        {% endif %}
+        {% comment %} <li>
+            <a href="#uielementsmenu2" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i class="fas fa-wrench"></i> Configuracion</a>
+            <ul class="collapse list-unstyled " id="uielementsmenu2">
+                <li>
+                    <a href="{% url 'admin:apps_member_changelist' %}"><i class="fas fa-user"></i>Roles y Permisos Usuarios</a>
+                </li>
+               
+
+
+            </ul>
+        </li> {% endcomment %}
+
+
+        
+         {% if request.user|has_group:"Premium" %} 
+            <li class=" {% if admin %}active{% endif %}">
+                <a href="{% url 'preguntas' %}"><i class="fas fa-user"></i>Preguntas Frecuentes</a>
+            </li>
+            <li class=" {% if admin %}active{% endif %}">
+                <a href="{% url 'plan_list' %}"><i class="fas fa-user"></i>Planes y Suscripción</a>
+            </li>
+         {% endif %}
+        
+         <!--Johao-->
+        {% comment %}
+            {% if request.user|has_group:"Premium" %} 
+                    <li class=" {% if admin %}active{% endif %}">
+                        <a href="{% url 'busqueda_normativa' %}"><i class="fas fa-user"></i>Busqueda Normas</a>
+                    </li>
+            {% endif %}
+        {% endcomment %}
+        
+        {% comment %}
+            <li>
+                <a  href="#uielementsmenu_norma" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i class="fas fa-book"></i> Prueba</a>
+                <ul class="collapse list-unstyled " id="uielementsmenu_norma">
+                    {% if request.user|has_group:"Premium" %}
+                        <li>
+                        <a href="{% url 'form_normativas' %}"><i class="fas fa-balance-scale-left"></i>Registrar Normas</a>
+                        </li>
+                    {% endif %}
+                    {% if request.user|has_group:"Premium" %} 
+                        <li>
+                        <a href="{% url 'dateregister_norm' %}"><i class="fas fa-tasks"></i>Consulta Normas</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </li>
+        {% endcomment %}
+
+
+         <!--end-->
+
+         
+       
+    </ul>
+</nav>
+
+<!--Stylos Navbar-->
+<style>
+    a{
+        text-decoration:none;
+        color:white;
+    }
+    .bg-white{
+    background-color: black !important;
+    }
+    .navbar-expand-lg .navbar-collapse{
+        background-color: black;
+    }
+   
+</style>
+
+
+
+{% comment %} https://fontawesome.com/v5.15/icons?d=gallery&p=2&q=conf {% endcomment %}

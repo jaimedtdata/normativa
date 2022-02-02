@@ -1,0 +1,44 @@
+<form class="form-horizontal" method="POST">
+	{% csrf_token %}
+	<div class="form-group row">
+		<label class="col-sm-2" for="sections">Tipo de Normativa:</label>
+		<div class="col-sm-4">
+			{{filter.sections}}
+		</div>
+		<label class="col-sm-2" for="rule_type">Uso/Categoria::</label>
+		<div class="col-sm-4">
+			{{filter.rule_type}}
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2" for="locations">Locacion:</label>
+		<div class="col-sm-4">
+			{{filter.locations}}
+		</div>
+
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2 pt-2">Publicación:</label>
+		<label class="col-sm-2 pt-2" for="f_in">Desde</label>
+		<div class="col-sm-2">
+			{{filter.f_in}}
+		</div>
+		<label class="col-sm-2 pt-2" for="f_out">Hasta</label>
+		<div class="col-sm-2">
+			{{filter.f_out}}
+		</div>
+		{% comment %} <label class="col-sm-1 pt-2" for="year">Año</label>
+		<div class="col-sm-2">
+			{{filter.year}}
+		</div> {% endcomment %}
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2" for="f_in">Palabras Clave:</label>
+		<div class="col-sm-8">
+			{{filter.title}}
+		</div>
+		<div class="col-sm-2">
+			<button class="mt-1 btn btn-primary btn-sm btn-block" type="submit">Buscar <i class="fa fa-search float-right mt-1"></i></button>
+		</div>
+	</div>
+</form>

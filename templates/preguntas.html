@@ -1,0 +1,128 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+{% block content %}
+{% comment %} https://www.solodev.com/blog/web-design/how-to-use-bootstrap-accordions-to-organize-faq-pages.stml {% endcomment %}
+<div class="container-fluid">
+
+<section class="accordion-section clearfix mt-3" aria-label="Question Accordions">
+  <div class="container">
+	  <h2>Preguntas Frecuentes  <a href="{% url 'admin:apps_policies_usage_changelist' %}" class="btn btn-square btn-info" ><i class="fas fa-user-shield"></i> Agregar pregunta</a>  </h2>
+</div>
+<div id="main">
+  <div class="container">
+<div class="accordion" id="faq">
+        {% for muni in cuestions %}
+                    <div class="card">
+                        <div class="card-header" id="faqhead1">
+                            <a href="#" class="btn btn-header-link  collapsed" data-toggle="collapse" data-target="#faq{{muni.id}}"
+                            aria-expanded="true" aria-controls="faq{{muni.id}}">{{muni.title}}</a>
+							 
+                        </div>
+
+                        <div id="faq{{muni.id}}" class="collapse" aria-labelledby="faqhead1" data-parent="#faq">
+                                      
+                            <div class="card-body">
+
+                              {{muni.message}}
+                              <br>Norma Ref: {{ class}}</br>
+                              {% for class in muni.norma_name.all %}
+                                   <li>Normas: {{ class}}</li>
+                              {% endfor %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                    
+	        	{% endfor %}
+
+
+                </div>
+    </div>
+  </div>
+            
+
+           
+<style>
+#main {
+  margin: 50px 0;
+}
+
+#main #faq .card {
+  margin-bottom: 30px;
+  border: 0;
+}
+
+#main #faq .card .card-header {
+  border: 0;
+  -webkit-box-shadow: 0 0 20px 0 rgba(213, 213, 213, 0.5);
+          box-shadow: 0 0 20px 0 rgba(213, 213, 213, 0.5);
+  border-radius: 2px;
+  padding: 0;
+}
+
+#main #faq .card .card-header .btn-header-link {
+   color: #222;
+  display: block;
+  text-align: left;
+  background: white;
+
+  padding: 20px;
+}
+
+#main #faq .card .card-header .btn-header-link:after {
+  content: "\f107";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  float: right;
+}
+
+#main #faq .card .card-header .btn-header-link.collapsed {
+
+}
+
+#main #faq .card .card-header .btn-header-link.collapsed:after {
+  content: "\f106";
+}
+
+#main #faq .card .collapsing {
+  line-height: 30px;
+}
+
+#main #faq .card .collapse {
+  border: 0;
+}
+
+#main #faq .card .collapse.show {
+
+  line-height: 30px;
+  color: #222;
+}
+</style>
+{% endblock content %}
+
+{% block css %}
+    <link href="{% static 'vendor/DataTables/datatables.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'vendor/select2/css/select2.min.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'dynamic-formset/app/formset_css.css' %}">
+    <link href="{% static 'vendor/airdatepicker/dist/css/datepicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/mdtimepicker/mdtimepicker.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+    <script src="{% static 'vendor/select2/js/select2.min.js' %}"></script>
+    <script src="{% static 'vendor/airdatepicker/dist/js/datepicker.min.js' %}"></script>
+    <script src="{% static 'vendor/airdatepicker/dist/js/i18n/datepicker.es.js' %}"></script>
+    <script src="{% static 'vendor/mdtimepicker/mdtimepicker.min.js' %}"></script>
+    <script src="{% static 'dynamic-formset/js/jquery.formset.js' %}"></script>
+    <script src="{% static 'dynamic-formset/app/create.js' %}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#id_entrevista_table tbody tr').formset(
+                get_dynamic_attr('{{ formset.prefix }}'),
+            );
+        })
+    </script>
+{% endblock %}

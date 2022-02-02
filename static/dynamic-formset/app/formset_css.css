@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@keyframes add {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+.delete-row {
+    /*float:right;*/
+    /*display:block;*/
+    font-size: 1.2em;
+	text-decoration: none;
+	/*margin-top: 20px;*/
+}
+.delete-row:hover {
+	text-decoration: none;
+}
+
+.add-row{
+    font-size: 1em;
+    /*font-family: 'Poppins', sans-serif;*/
+}
+.add-animation{
+	animation-name: add;
+	animation-duration: .5s;
+}

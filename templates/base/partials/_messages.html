@@ -1,0 +1,15 @@
+{% if messages %}
+<script type="text/javascript">
+	{% for message in messages %}
+		alertify.set('notifier','position', 'bottom-right');
+		alertify.set('notifier','delay', 10);
+		{% if message.tags == 'error' %}
+    		alertify.error('{{ message }}');
+		{% elif message.tags == 'success' %}
+    		alertify.success('{{ message }}');
+		{% elif message.tags == 'warning' %}
+    		alertify.warning('{{ message }}');
+		{% endif %} 
+	{% endfor %}
+</script>
+{% endif %} 

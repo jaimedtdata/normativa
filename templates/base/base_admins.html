@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block vendor_css %}
+    <link href="{% static 'vendor/select2/css/select2.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'vendor/DataTables/datatables.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'vendor/select2/css/select2.min.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block vendor_js %}
+    <script src="{% static 'vendor/select2/js/select2.min.js' %}"></script>
+    <script src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+{% endblock %}

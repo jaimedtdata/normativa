@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+		{% for work in works_list %}
+			<div class="col-md-6">
+				<div class="card">
+				  <h5 class="card-header"><i class="{{work.icon}}"></i> {{work.area}} <span class="float-right"><i class="fa fa-calendar-alt text-danger"></i> {{work.fecha}}</span></h5>
+				  <div class="card-body">
+				    <h5 class="card-title">{{work.title}}</h5>
+				    <p class="card-text"><i class="fa fa-home"></i> {{work.location}}</p>
+				    <a href="#" class="btn btn-sm btn-outline-secondary float-right">Postular</a>
+				  </div>
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,53 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="page-title">
+        <h3>Planes 
+            <a href="plan_edit" class="btn btn-sm btn-outline-primary float-right"><i class="fas fa-user-shield"></i> Agregar</a>
+        </h3>
+    </div>
+    <div class="box box-primary">
+        <div class="box-body">
+            <table width="100%" class="table table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tbody>
+                    {% for plan in plans %}
+                    <tr>
+                        <td>{{ plan.planame }}</td>
+                        <td>{{ plan.cost }}</td>
+                        <td>Manager</td>
+                        <td>Admin</td>
+                        <td>Active</td>
+                        <td class="text-right">
+                            <a href="plan_edit/{{ plan.id }}" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                            
+                            <a href="plan_delete/{{ plan.id }}" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}

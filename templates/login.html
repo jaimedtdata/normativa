@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Colegio de Arquitectos del Perú</title>
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
+    <!-- <link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  
+    
+    <!-- <link href="{% static 'css/auth.css' %}" rel="stylesheet"> -->
+      <!-- Custom styles for this template-->
+     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+    
+          <div class="col-xl-5 col-lg-12 col-md-9">
+    
+            <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                  
+                  <div class="col-lg-12">
+                    <div class="p-5">
+                      <div class="text-center">
+                        <img class="brand" src="{% static 'img/logo_cap.png' %}" alt="CAP LOGO">
+                        <h6 class="mb-4 text-muted">Plataforma Digital Interactiva de Normas</h6>
+                      </div>
+                      
+                      {% block form %}
+                         <form method="POST" id="login-form">
+                    {% csrf_token %}
+                        <div class="form-group">
+                          
+                         {{ form.username }}
+                         
+                        </div>
+                        <div class="form-group">
+                          
+                          {{ form.password }}
+                        </div>
+
+    
+
+                    {% include 'base/partials/_form_errors.html' %}
+                    <div class="btns">
+                        <button type="submit" class="btn btn-primary btn-user btn-block" >Ingresar</button>
+                    </div>
+                        <hr>
+                        {% comment %} <a href="index.html" class="btn btn-google btn-user btn-block">
+                          <i class="fab fa-google fa-fw"></i> Ingresar con Google
+                        </a>
+                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                          <i class="fab fa-facebook-f fa-fw"></i> Ingresar con Facebook
+                        </a> {% endcomment %}
+                      </form>
+                      <hr>
+                      
+                      <div class="text-center">
+                        <a class="small" href="{% url 'password_reset' %}">Olvidate tu Contraseña?</a>
+                      </div>
+                      <div class="text-center">
+                      
+                      <a class="small" href="{% url 'sign-up' %}">Crear una nueva cuenta!</a>
+                        
+                      </div>
+
+
+                         </form>
+                {% endblock %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
+    
+      </div>
+
+      
+
+    <!-- <script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap4/js/bootstrap.min.js' %}"></script>  -->
+
+        <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    {% block js %}
+    <script src="{% static 'js/login.js' %}"></script>
+    {% endblock %}
+
+</body>
+</html>

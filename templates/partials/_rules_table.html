@@ -1,0 +1,64 @@
+{% load static %}
+{% load user_tags %}
+<style>
+.text-primary text-center{
+	background-color:#8b7547  ;
+	}
+
+.card-body{
+	background-color:white;
+	}
+
+div.dataTables_wrapper div.dataTables_filter label {
+	font-size: 0;
+}
+
+.table-bordered thead th, .table-bordered thead td{
+	color: white;
+	font:-webkit-control;
+	}
+
+.btn-primary{
+	border-color:black;
+	background-color:black;
+		}
+
+</style>
+
+
+<table class="table table-sm table-bordered  datatable" id="rules">
+	<thead>
+		<tr style="background-color:#8b7547" class="text-primary text-center">
+			<th>N°</th>
+			<th>Normativa</th>
+			<th>Categoria</th>
+			<th>Norma</th>
+			<th>Denominación</th>
+			<th>Fecha de Publicación</th>
+			<th>Ver Norma</th>
+			<th>Ver Foro</th>
+			<th>?</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for rule in rules_list %}
+			<tr>
+				<td>{{rule.n}}</td>
+				<td class="text-center">{{rule.section}}</td>
+				<td class="text-center">{{rule.rule_type}}</td>
+				<td>{{rule.norm}}</td>
+				<td>{{rule.denom}}</td>
+				<td>{{rule.publication_date}}</td>
+				
+              	<td><a target="_blank" href="{% static rule.file %}"><button type="button" class="btn btn-primary"><i  class="far fa-eye"></i></button></a></td>
+              	{% if request.user|has_group:"Premium" %} 
+
+				  
+				<td><a target="_blank" href="{% url 'foro_comentarios' %}?rule_id={{rule.n}}" > <button  type="button" class="btn btn-success"><i  class="fas fa-comments"></i></button></a></td>
+                <td><a target="_blank" href="{% url 'preguntas' %}" > <button  type="button" class="btn btn-primary"><i  class="far fa-question-circle"></i></button></a></td>
+				{% endif %}
+				
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

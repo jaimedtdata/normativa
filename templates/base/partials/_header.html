@@ -1,0 +1,49 @@
+{% load static %}
+<header class="top no-print">
+    
+    <div class="social-icons">
+    	<a href="#"><i class="fab fa-facebook-square"></i></a>
+    	<a href="#"><i class="fab fa-instagram"></i></a>
+    	<a href="#"><i class="fab fa-twitter"></i></a>
+    	<a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+</header>
+<nav class="top-nav no-print">
+    <button type="button" id="sidebarCollapse" class="btn text-primary default-secondary-menu mx-2 mt-2">
+        <h3><i class="fas fa-bars"></i></h3>
+    </button>
+    <form class="form-inline search-users">
+        <input class="form-control input-sm mr-sm-2" type="search" placeholder="Buscar Arquitectos" aria-label="Search Architects" id="search-users-input">
+        <ul class="search-results" id="search-results">
+        </ul>
+    </form>
+    <div class="nav-dropdown mr-4">
+        <a href="" class="nav-item nav-link text-dark dropdown-toggle" data-toggle="dropdown">
+                {% comment %} {% if user.userprofile.photo %}
+                <div class="photo-div">
+                    <img src="{{ user.userprofile.photo.url }}" class="profile-photo">
+                </div>
+                {% else %}
+            	<div class="user-icon">
+        		  <h3><i class="fas fa-user-tie pt-2"></i></h3>
+            	</div>
+                {% endif %} {% endcomment %}
+        	<span>
+        		{{user.first_name|title}} {{user.last_name|title}}
+        	</span> 
+        	<i style="font-size: .8em;" class="fas fa-caret-down"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-leftt nav-link-menu">
+            {% comment %} <ul class="nav-list">
+                <li><a href="" class="dropdown-item"><i class="fas fa-user text-black"></i> {{ user.username }}</a></li>
+                <li><a href="" class="dropdown-item"><i class="fas fa-signature {% if user.userprofile.is_signature_validated %}text-success{% else %}text-danger{% endif %}"></i> {{ user.userprofile.full_name }}</a></li>
+                <li><a href="" class="dropdown-item"><img src="{% static 'img/logo.png' %}" class="micro-logo"> {{ user.userprofile.tuition }}</a></li>
+                <li><a href="" class="dropdown-item"><i class="fas fa-at text-primary"></i> {{ user.email }}</a></li>
+                {% if user.userprofile.tuition %}
+                {% endif %}
+                <div class="dropdown-divider"></div>
+                <li><a href="" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+            </ul> {% endcomment %}
+        </div>
+    </div>
+</nav>

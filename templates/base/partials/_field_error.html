@@ -1,0 +1,7 @@
+{% if field.errors %}
+<span class="text-danger field-error text-md">
+	{% for error in field.errors %}
+		{{error|escape}}<br>
+	{% endfor %}
+</span>
+{% endif %}

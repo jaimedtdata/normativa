@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Filtros</h5>
+        <p class="card-text">
+        	<div class="row">
+        		<div class="col-md-12">
+        			<ul class="list-group">
+        				<li class="list-group-item">
+        					<a data-toggle="collapse" href="#specialties" role="button" aria-expanded="false" aria-controls="specialties">Especialidades <i class="float-right fa fa-angle-down"></i></a>
+							<div class="collapse" id="specialties">
+								{% for specialty in specialties %}
+									<div>
+										<input type="checkbox" name="{{specialty}}">
+										<label for="{{specialty}}">{{specialty}}</label>
+									</div>
+								{% endfor %}
+							</div>
+        				</li>
+        				<li class="list-group-item">
+        					<a data-toggle="collapse" href="#ubicacion" role="button" aria-expanded="false" aria-controls="ubicacion">Ubicación <i class="float-right fa fa-angle-down"></i></a>
+							<div class="collapse" id="ubicacion">
+								{% for place in places %}
+									<div>
+										<input type="checkbox" name="{{place.1}}">
+										<label for="{{place.1}}">{{place.1}}</label>
+									</div>
+								{% endfor %}
+							</div>
+        				</li>
+        				<li class="list-group-item">
+        					<a data-toggle="collapse" href="#area" role="button" aria-expanded="false" aria-controls="area">Área <i class="float-right fa fa-angle-down"></i></a>
+							<div class="collapse" id="area">
+								{% for area in areas %}
+									<div>
+										<input type="checkbox" name="{{area}}">
+										<label for="{{area}}">{{area}}</label>
+									</div>
+								{% endfor %}
+							</div>
+        				</li>
+        				<li class="list-group-item">
+        					<a data-toggle="collapse" href="#puesto" role="button" aria-expanded="false" aria-controls="puesto">Tipo de Puesto <i class="float-right fa fa-angle-down"></i></a>
+							<div class="collapse" id="puesto">
+								{% for puesto in puestos %}
+									<div>
+										<input type="checkbox" name="{{puesto}}">
+										<label for="{{puesto}}">{{puesto}}</label>
+									</div>
+								{% endfor %}
+							</div>
+        				</li>
+        			</ul>
+        		</div>
+        	</div>
+        </p>
+    </div>
+</div>

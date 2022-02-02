@@ -1,0 +1,68 @@
+<form method="POST" autocomplete="off">
+	{% csrf_token %}
+	<div class="form-row mb-2">
+		<div class="col-md-5 text-right pt-2">
+			<label>Usuario:</label>
+		</div>
+		<div class="col-md-4">
+		    <div class="form-group shadow-top">
+		        <div class="input-group">
+					{{form.username}}
+		            <span class="input-group-prepend">
+		                <button type="button" class="btn btn-flat text-primary"><i class="fas fa-user"></i></button>
+		            </span>
+		        </div>
+		    </div>
+		</div>		
+	</div>
+	<div class="form-row mb-2">
+		<div class="col-md-5 text-right pt-2">
+			<label>Contraseña:</label>
+		</div>
+		<div class="col-md-4">
+		    <div class="form-group shadow-top">
+		        <div class="input-group">
+					{{form.password1}}
+		            <span class="input-group-prepend">
+		                <button type="button" class="btn btn-flat text-primary show-password"><i class="fas fa-eye"></i></button>
+		            </span>
+		        </div>
+		    </div>
+		</div>	
+	</div>
+	<div class="form-row mb-2">
+		<div class="col-md-5 text-right pt-2">
+			<label>Confirmar Contraseña:</label>
+		</div>
+		<div class="col-md-4">
+		    <div class="form-group shadow-top">
+		        <div class="input-group">
+					{{form.password2}}
+		            <span class="input-group-prepend">
+		                <button type="button" class="btn btn-flat text-primary"><i class="fas fa-lock"></i></button>
+		            </span>
+		        </div>
+		    </div>
+		</div>		
+	</div>
+	<div class="form-row">
+		{% include 'base/partials/_form_errors.html' %}
+	</div>
+	<div class="btns">
+		<button class="btn btn-primary"><i class="fa fa-check"></i> 
+			Completar Registro
+		</button>
+	</div>
+</form>
+<script type="text/javascript">
+	let eyes = document.getElementsByClassName('show-password')
+		pass1 = document.getElementById('id_password1')
+	for (var i = eyes.length - 1; i >= 0; i--) {
+		eyes[i].onmousedown = (ev)=>{
+			pass1.setAttribute('type','text')
+		}
+		eyes[i].onmouseup = (ev)=>{
+			pass1.setAttribute('type','password')
+		}
+	}
+</script>

@@ -1,0 +1,21 @@
+{% load static %}
+
+<ul class="list-group">
+	{% for theme in themes %}
+		<li class="list-group-item">
+			<div class="row">
+				<div class="col-md-2">
+					{% if theme.user.1 %}
+						<img width="30" class="mt-2" src="{% static 'img/avatar.png' %}">
+					{% else %}
+						<img width="30" class="mt-2" src="{% static 'img/avatar1.png' %}">
+					{% endif %}
+				</div>
+				<div class="col-md-10">
+					<span class="msg m-0"><a class="text-secondary" href="#">{{theme.theme}}</a></span><br>
+					<span class="msg text-secondary">{{theme.user.0}}</span> <span class="msg">{{theme.date}}</span><br>
+				</div>
+			</div>
+		</li>
+	{% endfor %}
+</ul>

@@ -1,0 +1,45 @@
+<a href="{% url 'rules'%}?rule_id={{id}}">
+<div  class="card">
+  <div  class="card-body">
+   <h5 class="text-center">{{subtitle}}</h5>
+  </div>
+</div>
+</a>
+
+<style>
+.card-body {
+  background:#24387C;
+}
+.card {
+    color: #c1a13f;
+}
+
+:root {
+    --color-one: #e6e6ff;
+    --color-two: #1a1aff;
+    --color-three: #b3b3ff;
+}
+
+
+.card {
+    border: 1px solid var(--color-three);
+    margin-bottom: 20px;
+    transition: border 0.1s, transform 0.3s;
+}
+
+.card:hover {
+    border: 1px solid var(--color-two);
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+    cursor: pointer;
+}
+
+
+.card img:hover {
+  opacity: 0.6;
+}
+
+
+
+</style>
+

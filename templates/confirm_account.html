@@ -1,0 +1,10 @@
+{% extends 'base/base_email.html' %}
+
+{% block body %}
+<div class="text" style="padding: 0 2.5em; text-align: center;">
+	<h2>{{ message }}</h2>
+	<h3>Completa tu registro en el siguiente link: </h3>
+	<p><a href="{{ request.scheme }}://{{ request.get_host }}{{ link }}" class="btn btn-primary">Completar mi registro</a></p>
+	<p><a href="{{ request.scheme }}://{{ request.get_host }}{{ link }}">{{ request.scheme }}://{{ request.get_host }}{{ link }}</a></p>
+</div>
+{% endblock %}

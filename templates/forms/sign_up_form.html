@@ -1,0 +1,110 @@
+
+<form method="POST" enctype="multipart/form-data" autocomplete="off">
+	{% csrf_token %}
+	{% if role_selection %}
+	<div class="form-row mb-2">
+		<div class="col-md-12">
+			<label>Roles para el usuario:</label>
+			{{form.roles}}
+		</div>
+	</div>
+	{% endif %}
+	<div class="form-row mb-2">
+		<div class="col-md-4">
+			<label>Nombres:</label>
+			{{form.names}}
+		</div>
+		<div class="col-md-4">
+			<label>Primer Apellido:</label>
+			{{form.first_surname}}
+		</div>		
+		<div class="col-md-4">
+			<label>Segundo Apellido:</label>
+			{{form.second_surname}}
+		</div>
+	</div>
+	<div class="form-row mb-2">
+		<div class="col-md-3 {% if form.identity.errors %}invalid{% endif %}">
+			<label>DNI:</label>
+			{{form.identity}}
+        	{% include 'base/partials/_field_error.html' with field=form.identity %}
+		</div>
+		<div class="col-md-3 {% if form.profession.errors %}invalid{% endif %}">
+			<label>Profesión:</label>
+			{{form.profession}}
+        	{% include 'base/partials/_field_error.html' with field=form.profession %}
+		</div>
+		<div class="col-md-3 {% if form.tuition.errors %}invalid{% endif %}">
+			<label id="tuition_title">CAP No.:</label>
+			{{form.tuition}}
+        	{% include 'base/partials/_field_error.html' with field=form.tuition %}
+		</div>
+		<div class="col-md-3 {% if form.secret_code.errors %}invalid{% endif %}">
+			<label>Código Secreto:</label>
+			{{form.secret_code}}
+        	{% include 'base/partials/_field_error.html' with field=form.secret_code %}
+        	<span class="text-sm text-cap">Solo para Arquitectos</span>
+		</div>
+	</div>
+	<div class="form-row mb-2">
+		
+		<div class="col-md-4 {% if form.person_type.errors %}invalid{% endif %}">
+			<label>Tipo</label>
+			{{form.person_type}}
+        	{% include 'base/partials/_field_error.html' with field=form.mobile %}
+		</div>
+		<div class="col-md-4 {% if form.mobile.errors %}invalid{% endif %}">
+			<label>Teléfono Celular:</label>
+			{{form.mobile}}
+        	{% include 'base/partials/_field_error.html' with field=form.mobile %}
+		</div>
+		<div class="col-md-8 {% if form.email.errors %}invalid{% endif %}">
+			<label>Correo Electrónico:</label>
+			{{form.email}}
+        	{% include 'base/partials/_field_error.html' with field=form.email %}
+		</div>
+	</div>	
+	<div class="form-row mb-2">
+		<div class="col-md-4 {% if form.phone.errors %}invalid{% endif %}">
+			<label>Teléfono Fijo:</label>
+			{{form.phone}}
+        	{% include 'base/partials/_field_error.html' with field=form.phone %}
+		</div>
+		<div class="col-md-8 {% if form.address.errors %}invalid{% endif %}">
+			<label>Dirección:</label>
+			{{form.address}}
+        	{% include 'base/partials/_field_error.html' with field=form.address %}
+		</div>
+	</div>	
+	{% comment %} <div class="form-row mb-2">
+		<div class="col-md-4 {% if form.photo.errors %}invalid{% endif %}">
+			<label class="mb-3">Fotografía:</label>
+			{{form.photo}}
+        	{% include 'base/partials/_field_error.html' with field=form.photo %}
+		</div>
+		<div class="col-md-4">
+			<label>Firma:</label>
+			{{form.signature}}
+		</div>
+		<div class="col-md-4 {% if form.signature.errors %}invalid{% endif %}">
+			{% if object and form.signature.value %}
+			<label>Firma Actual:</label>
+			< src="{{form.signature.value.url}}" width="100%">
+			{% else %}
+			<img src="#" id="peview" width="100%">
+			{% endif %}
+        	{% include 'base/partials/_field_error.html' with field=form.signature %}
+		</div>
+		<div class="col-md-8 offset-md-4">
+			{% if not form.signature.value %}
+			<span>{{form.signature.help_text}}</span>
+			{% endif %}
+		</div>
+	</div> {% endcomment %}
+
+	<div class="btns">
+		<button class="btn btn-primary"> 
+			{% if object %}Actualizar{% else %}Registrarme{% endif %}
+		</button>
+	</div>
+</form>	

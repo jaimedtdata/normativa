@@ -1,0 +1,4 @@
+QUITAR Uso/Categoria: 
+
+afregar columna RNE-Norma:
+mover dashboard

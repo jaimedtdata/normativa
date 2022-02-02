@@ -1,0 +1,51 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+{% load user_tags %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+    	<div class="col-md-3">
+    		<h4 style="color:#c1a13f; !important" >Foro Interactivo</h4>
+    	</div>
+        <div class="col-md-4">
+            <form class="ml-1">
+                <div class="form-row">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar por título, tema o categoría">
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-outline-danger"><i class="fas fa-search"></i></button>
+                        </span>
+                    </div>
+                    
+                </div>
+                
+            </form>
+        </div>
+        
+        <div class="col-md-2">
+        {% comment %} {% if request.user|has_group:"Premium" %} 
+           <a href="users_create" class="btn btn-square btn-info" ><i class="fas fa-user-shield"></i> Publicar Tema</a>  
+           {% endif %} {% endcomment %}
+        </div>   
+        
+        
+    	<div class="col-md-2">
+    		<h5 style="color:#c1a13f; !important">Últimos Temas</h5>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-9">
+    		{% include 'partials/_foro_list.html' %}
+    	</div>
+    	<div  class="col-md-3">
+    		{% include 'partials/_themes_list.html' %}
+    	</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}

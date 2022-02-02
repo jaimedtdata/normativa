@@ -1,0 +1,82 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'stylos/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'stylos/css/iconos.css' %}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container ">
+        <h1 class="text-center">Registrar Normativa</h1>
+        <br><br>
+        <form method='POST' action="{% url 'register_norm' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-6">
+                    <label for="norma">Norma</label>
+                    <input type="text" class="form-control" name="norma"/>
+                </div>
+                <div class="col-6">
+                        <div class="form-group">
+                            <label for="name_deno">Titulo</label>
+                            <input type="text" name="name_deno" class="form-control"/>
+                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="base">Base Legal</label>
+                    <input type="text" name="base_legal" class="form-control"/>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="fecha_publi">Publicacion</label>
+                        <input type="date" name="fecha_publi" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    Tipo Normativa:<select class="form-select" aria-label="Default select example" name="tip_norma">
+                                            <option selected></option>
+                                            {% for a in normativa %}
+                                                <option value="{{a.subcategory_name}}">{{a.subcategory_name}}</option>
+                                            {% endfor %}
+                                    </select>
+                </div>
+                    <div class="col-6">
+                        Tipo de Uso:<select class="form-select" aria-label="Default select example" name="tip_uso">
+                                        <option selected></option>
+                                        {% for tipo in tipo_uso %}
+                                            <option value="{{tipo.area_name }}">{{tipo.area_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                    </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Adjuntar Documento</label><br>
+                        <input type="file" name="documento"/>
+                      </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                   <button class="btn btn-primary" type="submit" style="margin-left:480px;background-color:#24387C;">Agregar</button>
+                </div>
+            </div>
+
+        </form>
+        <br>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <link rel="stylesheet" href="{% static 'stylos/js/bootstrap.bundle.min.js' %}"/>
+{% endblock %}

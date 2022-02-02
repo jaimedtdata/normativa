@@ -1,0 +1,17 @@
+{% if form.errors %}
+	<div class="form-errors">
+		<div class="text-danger">Por favor, corrija los siguientes errores:</div>
+	    {% for field in form %}
+	        {% for error in field.errors %}
+	            <div class="alert alert-danger p-2">
+	                <strong>{{field.label}} : </strong><span>{{ error|escape }}</span>
+	            </div>
+	        {% endfor %}
+	    {% endfor %}
+	    {% for error in form.non_field_errors %}
+	        <div class="alert alert-danger p-2">
+	            <strong>{{field.label}} : </strong><span>{{ error|escape }}</span>
+	        </div>
+	    {% endfor %}
+	</div>
+{% endif %}

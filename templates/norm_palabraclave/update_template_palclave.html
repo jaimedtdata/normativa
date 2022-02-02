@@ -1,0 +1,38 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'stylos/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'stylos/css/iconos.css' %}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container ">
+        <h1 class="text-center">Actualizar Palabra Clave</h1>
+        <br><br>
+        
+        <form method="POST" action="/update_clave/{{clave.0.id}}">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" value="{{clave.0.name}}" name="pala_clave"  aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary text-white" type="submit" id="button-addon2" style="background-color:#24387C;">Actualizar</button>
+            </div>
+            {% comment %}
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Registrar Normativa</option>
+                {% for norma_ in normativa %}
+                    <option value={{norma_.id}}>{{norma_.tipo_norma}}</option>
+                {% endfor %}
+            </select>
+            {% endcomment %}
+                  
+        </form>    
+
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <link rel="stylesheet" href="{% static 'stylos/js/bootstrap.bundle.min.js' %}"/>
+{% endblock %}

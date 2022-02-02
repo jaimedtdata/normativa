@@ -1,0 +1,5 @@
+<button type="submit" class="btn btn-sm btn-outline-primary">{% if not object %}Registrar{% else %}Actualizar{% endif %}</button>
+<a class="btn btn-sm btn-outline-danger" href="{% url cancel_link %}" onclick="return cancel_button()"></i> Cancelar</a>
+{% if object and add_link != 'None' %}
+<a class="btn btn-sm btn-outline-success" href="{% url add_link %}"></i> Nuevo</a>
+{% endif %}

@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block vendor_css %}
+<style type="text/css">
+    .top {
+        background-color: var(--blue);
+		justify-content: flex-end;
+    }
+</style>
+{% endblock %}
+
+{% block nav %}
+{% endblock %}
+
+{% block header %}
+	{% include 'base/partials/_header_public.html' %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block vendor_js %}
+	<script type="text/javascript">
+		let content_app = document.getElementsByClassName('content-app')
+		for (var i = content_app.length - 1; i >= 0; i--) {
+			content_app[i].classList.remove('content-app')
+		}
+	</script>
+{% endblock %}

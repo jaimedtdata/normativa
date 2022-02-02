@@ -1,0 +1,126 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<link href="{% static 'css/css-estilos_das.css' %}" rel="stylesheet">
+<link href="{% static 'css/css-paginacion_das.css' %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container-fluid">
+
+</div>    
+<!--   Area Form    -->
+<script type="text/javascript">
+    function submitByEnter(e) {
+        if (e.keyCode == 13) {
+            document.getElementById("FormListado:b_RealizaBusqueda").click();
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+<div class="gContainer gPositionRelative gContenido">
+    <div class="gAlignCenter">
+        <hr class="gSeparator gSeparatorTrans gSeparator15">
+        <h1 class="gUppercase gFontWeight700">
+            Buscador de
+            <span class="gColorNaranja">Resoluciones</span>
+            CAP
+        </h1>
+        
+        <h4 class="gFontWeight300">
+            Encuentre aquí todas las resoluciones 
+            <b>Por favor ingrese a una categoría.</b>
+        </h4>
+        <hr class="gWidth100 gSeparator gSeparatorTrans gInlineBlock">
+        
+        <hr class="gSeparator gSeparatorTrans gSeparator20">
+        <div class="gRowTemp">
+            <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+                <div class="gWidth50 gHeight3 gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                    <img src="{% static 'images/img-propiedad-intelectual2.png' %}" class="gInlineBlock gWidth50 gMarginTop31">
+                    
+                </div>
+                <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                    Búsqueda de 
+                    <br>
+                    Normas
+                </h3></a>
+            
+            <a href="#" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox3"> 
+                <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                
+                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                    <img src="{% static 'images/img-people.png' %}" class="gInlineBlock gWidth60 gMarginTop31">
+                </div>
+                
+                <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                    Foros de
+                    <br>
+                    Discusión
+                </h3>
+                </a>
+            
+            <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox4">
+                <div class="gWidth50 gHeight3 gFondoCircleRojo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleRojo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                    <img src="{% static 'images/img-people2.png' %}" class="gInlineBlock gWidth65 gMarginTop31">
+                </div>
+                <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                    Boletín
+                    <br>
+                    Normativo
+                </h3></a>
+        </div>
+        <hr class="gSeparator gSeparatorTrans gSeparator20">
+        <div class="gRowTemp">
+            <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox5">
+                <div class="gWidth50 gHeight3 gFondoCircleGris3 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris3 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                    <img src="{% static 'images/img-judicial.png' %}" class="gInlineBlock gMarginTop5" width="100">
+                </div>
+                
+                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Cursos
+                                                                                                            en<br>
+                                                                                                            Línea
+                                                                                                            </h3></a>
+            <a href="#" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
+                <div class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                    <img src="{% static 'images/img-arbitro.png' %}" class="gInlineBlock gMarginTop5" width="100">
+                    
+                </div>
+                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">FICHAS TÉCNICAS,
+                                                                                                            GUÍAS Y GRÁFICAS<br>
+                                                                                                            Las de empresas privadas (pagadas)
+                                                                                                            <br>
+                                                                                                            </h3></a>
+                                                                                                           
+
+            <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
+                <div class="gWidth50 gHeight3 gFondoCircleGris gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                    <img src="{% static 'images/img-tribunal.png' %}" class="gInlineBlock gWidth37 gMarginTop31">
+                    
+                </div>
+                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">CATÁLOGO PROVEEDORES</h3></a>
+                                                                                
+        </div>
+        
+        <hr class="gSeparator gSeparatorTrans gSeparator20">
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

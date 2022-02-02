@@ -1,0 +1,66 @@
+.gPaginacion {
+	display: inline-block;
+        margin-right: 10px;
+        
+}
+
+.gPaginacion a {
+	display:block;
+	padding:10px 20px;
+	color:#fff;
+	background:#024959;
+	text-decoration: none;
+}
+ 
+.gPaginacion a:hover {
+display: inline-block;
+	background:#037E8C;
+}
+ 
+.gPaginacionActive {
+display: inline-block;
+	background:#037E8C !Important;
+	font-weight:bold !Important;;
+}
+
+.paginacion {
+	display: inline-block;
+        margin-right: 10px;
+            #border-radius: 8px;
+}
+ 
+.paginacion ul {
+	list-style:none;
+	text-align: center;
+            border-radius: 8px;
+}
+ 
+.paginacion ul li {
+	display:inline-block;
+	margin-right:10px;
+            border-radius: 8px;
+}
+ 
+.paginacion ul li a {
+	display:block;
+	padding:3px 3px;
+	color:#fff;
+	background:#9e004f;
+	text-decoration: none;
+            border-radius: 8px;
+}
+ 
+.paginacion ul li a:hover {
+	background:#037E8C;
+            border-radius: 8px;
+}
+ 
+.paginacion ul li .active {
+	background:#037E8C;
+	font-weight:bold;
+            border-radius: 8px;
+}
+
+.divPageResult {
+    display: inherit;
+    }

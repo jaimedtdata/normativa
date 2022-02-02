@@ -1,0 +1,59 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h4 class="text-center">Normas Legales</h4>
+        </div>
+        <div class="col-md-9">
+            <form class="ml-1">
+                <div class="form-row">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar una Norma o Documento legal">
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-12">
+            {% include 'partials/_rulers_list.html' %}
+        </div>
+    </div>
+   
+        {% comment %} <div class="col-md-3">
+            {% include 'partials/_rulers_categories.html' %}
+        </div> {% endcomment %}
+
+
+</div>
+{% endblock content %}
+
+{% block css %}
+    <link href="{% static 'vendor/DataTables/datatables.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'vendor/select2/css/select2.min.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'dynamic-formset/app/formset_css.css' %}">
+    <link href="{% static 'vendor/airdatepicker/dist/css/datepicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/mdtimepicker/mdtimepicker.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+    <script src="{% static 'vendor/select2/js/select2.min.js' %}"></script>
+    <script src="{% static 'vendor/airdatepicker/dist/js/datepicker.min.js' %}"></script>
+    <script src="{% static 'vendor/airdatepicker/dist/js/i18n/datepicker.es.js' %}"></script>
+    <script src="{% static 'vendor/mdtimepicker/mdtimepicker.min.js' %}"></script>
+    <script src="{% static 'dynamic-formset/js/jquery.formset.js' %}"></script>
+    <script src="{% static 'dynamic-formset/app/create.js' %}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#id_entrevista_table tbody tr').formset(
+                get_dynamic_attr('{{ formset.prefix }}'),
+            );
+        })
+    </script>
+{% endblock %}
