@@ -16,7 +16,7 @@ from django.conf import settings
 
 urlpatterns = [
     #path('', login, name='login'),
-    #path('foro/', include('foro.urls')),
+    path('foro/', include('foro.urls')),
     path('', Login.as_view(), name='login'),
     path('login/', Login.as_view(), name='login'),
     path('home/', dashboard, name='home'),
@@ -34,9 +34,9 @@ urlpatterns = [
     path('carga_rules/', carga_rules, name='carga_rules'),
     # path('member/', member, name='member'),
 
-    path('foro/', foro, name='foro'),
-    path('foro_temas/', foro_temas, name='foro_temas'),
-    path('foro_comentarios/', foro_comentarios, name='foro_comentarios'),
+    # path('foro/', foro, name='foro'),
+    # path('foro_temas/', foro_temas, name='foro_temas'),
+    # path('foro_comentarios/', foro_comentarios, name='foro_comentarios'),
     
 
     path('sign-up/', SignUpOthers.as_view(), name='sign-up'),
