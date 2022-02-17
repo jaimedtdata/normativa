@@ -1,6 +1,6 @@
 {% load static %}
 
-<ul class="list-group">
+{% comment %} <ul class="list-group">
 	{% for theme in themes %}
 		<li class="list-group-item">
 			<div class="row">
@@ -14,6 +14,22 @@
 				<div class="col-md-10">
 					<span class="msg m-0"><a class="text-secondary" href="#">{{theme.theme}}</a></span><br>
 					<span class="msg text-secondary">{{theme.user.0}}</span> <span class="msg">{{theme.date}}</span><br>
+				</div>
+			</div>
+		</li>
+	{% endfor %}
+</ul> {% endcomment %}
+
+<ul class="list-group">
+	{% for theme in last_themes %}
+		<li class="list-group-item">
+			<div class="row">
+				<div class="col-md-2">
+						<img width="30" class="mt-2" src="{% static 'img/avatar1.png' %}">
+				</div>
+				<div class="col-md-10">
+					<span class="msg m-0"><a class="text-secondary" href="#">{{theme.themas_name}}</a></span><br>
+					<span class="msg text-secondary">{{theme.subcategories}}</span> <span class="msg">{{ theme.register_date_time }}</span><br>
 				</div>
 			</div>
 		</li>

@@ -87,7 +87,7 @@ def register_normativa(request):
         tip_uso=request.POST['tip_uso']
         file_pdf=request.FILES['documento']
         Register_Normativa.objects.create(norma=norma,name_denom=name_deno,base_legal=base_legal,
-        fecha_publi=fecha_publi,tipo_norma=tip_norma,tipo_uso=tip_uso,document=file_pdf)
+        fecha_publi=fecha_publi,tipo_norma=tip_norma,tipo_uso_id=tip_uso,document=file_pdf)
 
         return redirect('dateregister_norm')
 
@@ -116,7 +116,7 @@ def updatedate_normativa(request,codigo):
         tip_uso=request.POST['tip_uso']
         fecha_publi=request.POST['fecha_publi']
         name_deno=request.POST['name_deno']
-        Register_Normativa.objects.filter(id=codigo).update(tipo_norma=tip_norma,tipo_uso=tip_uso,
+        Register_Normativa.objects.filter(id=codigo).update(tipo_norma=tip_norma,tipo_uso_id=tip_uso,
         fecha_publi=fecha_publi,name_denom=name_deno)
         return redirect('dateregister_norm')
 

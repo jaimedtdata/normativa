@@ -1,4 +1,5 @@
 from django.db import models
+from sqlalchemy import true
 from apps.choices import *
 from django.contrib import admin
 from django.utils.html import format_html
@@ -25,14 +26,11 @@ def upload_photos(instance, filename):
 
 class Areas_Normas(models.Model):
     
-    area_name = models.CharField(max_length=200, blank=False,
-        help_text='Nombre de Categoria',
-        verbose_name='Nombre de la Categoria')      
-
+    area_name = models.CharField(max_length=200, blank=False, help_text='Nombre de Categoria', verbose_name='Nombre de la Categoria')      
     register_date_time = models.DateTimeField(
-        blank=False, null=False, auto_now_add=True,
-        help_text='Fecha de Registro',
-        verbose_name='Fecha de Registro')
+    blank=False, null=False, auto_now_add=True,
+    help_text='Fecha de Registro',
+    verbose_name='Fecha de Registro')
     
     class Meta:
         verbose_name_plural = '0.Normas - Tipo de Uso'
@@ -151,8 +149,7 @@ class Register_Normativa(models.Model):
     fecha_publi = models.DateField(blank=False,null=False,verbose_name='Publicacion')
     tipo_norma=models.CharField(blank=False,null=False,max_length=200,
     verbose_name='Tipo de Norma')
-    tipo_uso = models.CharField(blank=False,null=False,max_length=200,
-    verbose_name='Tipo de Uso')
+    tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=true, on_delete=models.SET_NULL, verbose_name='Tipo Uso', related_name='normas')
     document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos')
 
     class Meta:
