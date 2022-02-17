@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
-from apps.views import (Login, dashboard,home , index, liquid, comision, plan, plan_edit, plan_delete, carga_rules,plan_list,checkout,preguntas,signup,
+from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid, 
+    comision, plan, plan_edit, plan_delete, carga_rules,plan_list,checkout,preguntas,signup,
 	entrevistas, charts,member, configs, works, rules, foro, foro_temas,foro_comentarios,
     password_reset,SignUpOthers,success_sign_up,
     #johao
@@ -38,7 +39,7 @@ urlpatterns = [
     path('foro_temas/', foro_temas, name='foro_temas'),
     path('foro_comentarios/', foro_comentarios, name='foro_comentarios'),
     
-
+    path('sign-up-user', SignUpFormView.as_view(),name='sign-up-user'),
     path('sign-up/', SignUpOthers.as_view(), name='sign-up'),
     path('password_reset/', password_reset, name='password_reset'),
     path('preguntas/', preguntas, name='preguntas'),

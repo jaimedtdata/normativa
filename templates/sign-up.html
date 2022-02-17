@@ -11,7 +11,11 @@
     <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
     <link href="{% static 'vendor/chartsjs/Chart.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/flagiconcss3/css/flag-icon.min.css' %}" rel="stylesheet">
+    
+    {% comment %}
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
+      
+    {% endcomment %}
     <link href="{% static 'css/app.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     {% block css %}
@@ -25,13 +29,12 @@
 
     {% endblock %}
 
+    
 </head>
-<body>
+<body class="bg-light">
 
 
-
-
-              <div class="logo_container" style="background: #24387C;">
+        <div class="logo_container" style="background: #24387C;">
 					<span class="logo_helper"></span>
 					<a href="https://limacap.org/">
 						<img src="https://limacap.org/wp-content/uploads/2021/01/CAP_logofinal-2021-300-1.png" alt="Regional Lima " id="logo" data-height-percentage="47" data-actual-width="300" data-actual-height="85">
@@ -39,25 +42,36 @@
 				</div>
 
       <br>
-    <div class="container">
+    <div class="container ">
       <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
+        <div class="col-md-2 order-md-2 mb-4">
           
         </div>
-        <div class="col-md-8 order-md-1">
-         <h4 class="mb-3">Datos de Registro</h4>
-        {% include 'forms/sign_up_form.html' %}
-        
-            {% comment %} <hr class="mb-4">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="same-address">
-              <label class="custom-control-label" for="same-address">Deseo Recibir Promociones</label>
+        <div class="col-md-10 order-md-1 offset-1" >
+          <div class="card bg-light  mb-5">
+            <div class="card-body">
+              <div class="d-flex justify-content-center">
+                <h4 class="mb-3">Datos de Registro</h4>
+              </div>
+              <hr>
+              {% include 'forms/sign_up_form.html' %}
+              
+                  {% comment %} <hr class="mb-4">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="same-address">
+                    <label class="custom-control-label" for="same-address">Deseo Recibir Promociones</label>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="save-info">
+                    <label class="custom-control-label" for="save-info">Acepto los terminos y condiciones del servicio</label>
+                  </div>
+                  <hr class="mb-4"> {% endcomment %}
             </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="save-info">
-              <label class="custom-control-label" for="save-info">Acepto los terminos y condiciones del servicio</label>
-            </div>
-            <hr class="mb-4"> {% endcomment %}
+          </div>
+         
+          </div>
+        </div>
+      </div>
 
 </body>
 

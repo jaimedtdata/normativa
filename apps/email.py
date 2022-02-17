@@ -12,7 +12,7 @@ FROM_EMAIL = 'Colegio de Arquitectos <{}>'.format(settings.EMAIL_HOST_USER)
 def send_confirm_account(request, link, email):
 	context = {
 		'title': 'Verificación de correo electrónico',
-		'message': 'Confirmación de Correo Electrónico',
+		'message': 'Confirmación de Registro',
 		'link': link,
 		'request':request,
 	}

@@ -70,9 +70,9 @@ WSGI_APPLICATION = 'cap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bdnormativa',
+        'NAME': 'normativa3',
         'USER': 'postgres',
-        'PASSWORD': '123456',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': 5432,
     }
@@ -127,12 +127,20 @@ STATICFILES_DIRS = [
 MEDIA_URL='media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jaimemarston@gmail.com'
-EMAIL_HOST_PASSWORD = '42088985jrmm$$$'
+EMAIL_HOST_USER = 'suyon.dev@gmail.com'
+EMAIL_HOST_PASSWORD = 'bylouyapfxftsxqe'
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'jaimemarston@gmail.com'
+# EMAIL_HOST_PASSWORD = '42088985jrmm$$$'
 
 
 # EMAIL_HOST = config('EMAIL_HOST')

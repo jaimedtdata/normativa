@@ -1,4 +1,4 @@
-
+import uuid
 import random
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -8,11 +8,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from apps.email import (send_confirm_account, send_success_sign_up,
     send_password_reset, send_success_password_reset,)
 
-from django.views.generic import CreateView
+from django.views.generic import CreateView, FormView
 from django.urls import reverse, reverse_lazy
-from apps.forms import (LiquidForm, SessionFormset, ComisionForm,PlanForm,CommentForm,
-                             ArquitectFormset, EntrevistaFormset, EntrevistaForm, MUNI_CHOICES,
-                             PROVINCE_CHOICES, RulesForm, UserLoginForm, ExternalRegisterForm)
+from apps.forms import ( SignUpForm ,LiquidForm, SessionFormset, ComisionForm,PlanForm,
+                CommentForm,  ArquitectFormset, EntrevistaFormset, EntrevistaForm, MUNI_CHOICES,
+                PROVINCE_CHOICES, RulesForm, UserLoginForm, ExternalRegisterForm)
 from apps.choices import (AREAS_CHOICES, PUESTOS_CHOICES,
                                works_list, get_themes, SANCTIONS_CATEGORIES, PREVENTIONS_CHOICES,
                                SPECIALTIES_CHOICES)
@@ -266,16 +266,17 @@ class SignUpOthers(CreateView):
     form_class = ExternalRegisterForm
     template_name = 'sign-up.html'
     #success_url = reverse_lazy('profiles:check_your_email')
-    
+
     def form_valid(self, form):
         print('INGRESO A VALIDO!')
         
-
-
+        
+        
         profile = form.save(commit=False)
 
         group = Group.objects.get(name='Gratuito')      
         user = User.objects.create_user(profile.first_surname, profile.email, 'UEp8$x7rx@ZiSwU')
+        #user = User.objects.create_user(profile.first_surname, profile.email, password)
         user.last_name = profile.first_surname
         user.groups.add(group)
         user.save()
@@ -304,10 +305,48 @@ class SignUpOthers(CreateView):
         messages.error(self.request, 'Por favor, corrija los errores')
         return super(SignUpOthers, self).form_invalid(form)
 
+class SignUpFormView(FormView):
+    form_class = ExternalRegisterForm
+    template_name = 'register/sign-up-user.html'
+    success_url = reverse_lazy('success_sign_up')
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        cd = form.cleaned_data
+        
+        member, created = Member.objects.get_or_create(
+                            names= cd['names'],
+                            first_surname= cd['first_surname'], 
+                            second_surname= cd['second_surname'], 
+                            identity= cd['identity'], 
+                            person_type= cd['person_type'], 
+                            mobile= cd['mobile'], 
+                            phone= cd['phone'], 
+                            email= cd['email'], 
+                            address= cd['address'], 
+                            profession= cd['profession'], 
+                            tuition= cd['tuition'], 
+                            secret_code= cd['secret_code']
+        )
+        password = cd['password']
+
+
+
+
+        group = Group.objects.get(name='Gratuito')      
+        user = User.objects.create_user(member.first_surname, member.email, password)
+        user.last_name = member.first_surname
+        user.groups.add(group)
+        user.save()
+        token = UserToken(user_profile=member)
+
+        send_confirm_account(self.request, token.get_confirm_link(), member.email)
+
+        return HttpResponseRedirect(reverse_lazy('success_sign_up'))
 
 def success_sign_up(request):
     messages.success(request, 'Registro Exitoso')
-    return render(request, 'success_sign_up.html')	
+    return render(request, 'register/success_sign_up.html')	
 
 def signup(request):
     return render(request, 'sign-up.html')

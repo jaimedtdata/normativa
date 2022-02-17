@@ -60,7 +60,7 @@ class Member(models.Model):
     phone = models.CharField(max_length=10, blank=True,
         help_text='Número de Teléfono Fijo o de Oficina',
         verbose_name='Teléfono')
-    email = models.EmailField(max_length=50, blank=False,default='correo@dominio.com',
+    email = models.EmailField(max_length=50, blank=False,
         help_text='Correo Electrónico',
         verbose_name='Email')
     tuition = models.PositiveIntegerField(null=True, blank=True,

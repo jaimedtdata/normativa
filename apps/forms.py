@@ -4,7 +4,8 @@ from normas.models import Categories_Normas,Areas_Normas,Subcategories_Normas,Lo
 from .models import Plan, Member
 from foro.models import Coments_foro
 
-
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 USER_CONTROL = {'class': 'form-control', 'placeholder':'Usuario/CAP'}
 PASSWORD_CONTROL = {'class': 'form-control', 'placeholder':'Contraseña', 'type':'password'}
@@ -154,14 +155,24 @@ USE_AREA_CONTROL = {'class': 'form-control use_area_change','min':0}
 PASSWORD_CONTROL = {'class': 'form-control', 'placeholder':'Contraseña', 'type':'password'}
 PHONE_CONTROL = {'class': 'form-control','placeholder':'Ejemplo: 01202120'}
 CELLPHONE_CONTROL = {'class': 'form-control cellphone-case','min':900000000, 'max':999999999}
-EMAIL_CONTROL = {'class': 'form-control'}
+EMAIL_CONTROL = {'class': 'form-control', 'placeholder':'correo@dominio.com'}
 EMAIL_PH_CONTROL = {'class': 'form-control', 'placeholder':'Correo Electrónico'}
+
 
 #https://developer.mozilla.org/es/docs/Learn/Server-side/Django/Forms
 #https://stackoverflow.com/questions/2303268/djangos-forms-form-vs-forms-modelform
 #https://djangobook.com/mdj2-django-forms/
 
+
+
 class ExternalRegisterForm(forms.ModelForm):
+        #otro_campo = forms.CharField()
+        password = forms.CharField( widget=forms.PasswordInput(attrs={
+                        'class': "form-control",
+                        'placeholder' : 'Contraseña'
+                        }),
+                        help_text='Ingresa una contraseña',
+                        )
         class Meta:
                 model = Member
                 exclude = ('user','full_name','roles')
@@ -178,6 +189,7 @@ class ExternalRegisterForm(forms.ModelForm):
                     'profession',
                     'tuition',
                     'secret_code',
+                    
                 ]
                 widgets = {
                     'names': forms.TextInput(attrs=FORM_CONTROL_UPPER_N_LETTERS),
@@ -212,6 +224,37 @@ class ExternalRegisterForm(forms.ModelForm):
                         self.add_error('address', "Proporcione una dirección fiscal")
                     return cleaned_data
         
+class SignUpForm(ExternalRegisterForm):
+    otro_campo = forms.CharField()
+
+    class Meta(ExternalRegisterForm.Meta):
+        fields = ExternalRegisterForm.Meta.fields 
+
+    # class Meta:
+    #     model = User
+    #     fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+    #     #fields = '__all__'
+
+    #     widgets = {
+    #             'username': forms.TextInput(attrs={
+    #                 'class': 'form-control', 'placeholder':'Usuario'
+    #             }),
+    #             'first_name': forms.TextInput(attrs={
+    #                 'class': 'form-control', 'placeholder':'Nombres'
+    #             }),
+    #             'last_name': forms.TextInput(attrs={
+    #                 'class': 'form-control', 'placeholder':'Apellidos'
+    #             }),
+    #             'email': forms.TextInput(attrs={
+    #                 'class': 'form-control', 'placeholder':'Ingresa tu emial'
+    #             }),
+    #             'password1': forms.PasswordInput(attrs={
+    #                 'class': 'form-control', 'placeholder':'Contraseña', 'type':'password'
+    #             }),
+    #             'password2': forms.PasswordInput(attrs={
+    #                 'class': 'form-control', 'placeholder':'Repite tu contraseña'
+    #             }),
+    #         }
 
 
 class CommentForm(forms.ModelForm):
