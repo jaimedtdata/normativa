@@ -55,14 +55,14 @@ def busque_normativa(request):
         area_normas=Areas_Normas.objects.all()
 
         norma_clave=Register_Palabraclave.objects.filter(name=pal_clave)
-        normativa=Register_Normativa.objects.filter(tipo_uso=norma_tipo_uso)
+        #normativa=Register_Normativa.objects.filter(tipo_uso=norma_tipo_uso)
         a=SubNormativa.objects.all()
 
         
 
         context={   
             'norma_clave':norma_clave,
-            'normativa':normativa,
+            #'normativa':normativa,
             'area_normas':area_normas
         }
 
