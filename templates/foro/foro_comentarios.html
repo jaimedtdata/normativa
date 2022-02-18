@@ -14,12 +14,8 @@
             <img class="card-img-top" src="{% static 'img/Forofondo.jpg' %}" alt="Card image cap" style=" height:180px;">
             <div class="card-body" style='background:white;'>
             
-
-
-              {% for muni in denominacion %}
-                <h5 class="card-title">Normativa: {{muni.norma_rne}} </h5>               
-                <p class="card-text">Denominación: {{muni.norma_name}}</p>
-                {% endfor %}
+                <h5 class="card-title">Normativa: {{norma.name_denom}} </h5>               
+                <p class="card-text">Denominación: {{norma.norma}}</p>
             </div>
             
         </div>
@@ -43,7 +39,7 @@
                     <div id="contador">0/150</div>
                     <div class="form-group">    
                       <button  type="submit" class="btn btn-default">Comentar</button>
-                      <button type="cancel" class="btn btn-default">Cancelar</button>
+                      <button  type="cancel" class="btn btn-default">Cancelar</button>
                     </div>
                   </span>
                 </form>
@@ -59,7 +55,7 @@
                         </span>      
                         <p class="comment-txt more">{{muni.coments}}</p>
                       </div>
-                {% endfor %}
+              {% endfor %}
         
       </div>
     </div>

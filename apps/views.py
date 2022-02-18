@@ -86,8 +86,9 @@ def register_normativa(request):
         tip_norma=request.POST['tip_norma']
         tip_uso=request.POST['tip_uso']
         file_pdf=request.FILES['documento']
+        es_foro = True if request.POST['es_foro'] == 'on' else False
         Register_Normativa.objects.create(norma=norma,name_denom=name_deno,base_legal=base_legal,
-        fecha_publi=fecha_publi,tipo_norma=tip_norma,tipo_uso_id=tip_uso,document=file_pdf)
+        fecha_publi=fecha_publi,tipo_norma=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro)
 
         return redirect('dateregister_norm')
 

@@ -28,8 +28,8 @@
 						<img width="30" class="mt-2" src="{% static 'img/avatar1.png' %}">
 				</div>
 				<div class="col-md-10">
-					<span class="msg m-0"><a class="text-secondary" href="#">{{theme.themas_name}}</a></span><br>
-					<span class="msg text-secondary">{{theme.subcategories}}</span> <span class="msg">{{ theme.register_date_time }}</span><br>
+					<span class="msg m-0"><a class="text-secondary" href="{% url 'foro_comentarios' theme.tema_id %}">{{theme.tema.name_denom}}</a></span><br>
+					<span class="msg text-secondary">{{theme.subcategories}}</span> <span class="msg">{{ theme.user }}</span><br>
 				</div>
 			</div>
 		</li>
