@@ -4,36 +4,36 @@
 	
 	<div class="row mb-2">
 		<div class="col-md-4">
-			<label>Nombres:</label>
+			<label class="text-muted lead">Nombres:</label>
 			{{form.names}}
 		</div>
 		<div class="col-md-4">
-			<label>Primer Apellido:</label>
+			<label class="text-muted lead">Primer Apellido:</label>
 			{{form.first_surname}}
 		</div>		
 		<div class="col-md-4">
-			<label>Segundo Apellido:</label>
+			<label class="text-muted lead">Segundo Apellido:</label>
 			{{form.second_surname}}
 		</div>
 	</div>
 	<div class="row mb-2">
 		<div class="col-md-3 {% if form.identity.errors %}invalid{% endif %}">
-			<label>DNI:</label>
+			<label class="text-muted lead">DNI:</label>
 			{{form.identity}}
 			{% include 'base/partials/_field_error.html' with field=form.identity %}
 		</div>
 		<div class="col-md-3 {% if form.profession.errors %}invalid{% endif %}">
-			<label>Profesión:</label>
+			<label class="text-muted lead">Profesión:</label>
 			{{form.profession}}
 			{% include 'base/partials/_field_error.html' with field=form.profession %}
 		</div>
 		<div class="col-md-3 {% if form.tuition.errors %}invalid{% endif %}">
-			<label id="tuition_title">CAP No.:</label>
+			<label id="tuition_title" class="text-muted lead">CAP No.:</label>
 			{{form.tuition}}
 			{% include 'base/partials/_field_error.html' with field=form.tuition %}
 		</div>
 		<div class="col-md-3 {% if form.secret_code.errors %}invalid{% endif %}">
-			<label>Código Secreto:</label>
+			<label class="text-muted lead">Código Secreto:</label>
 			{{form.secret_code}}
 			{% include 'base/partials/_field_error.html' with field=form.secret_code %}
 			<span class="text-sm text-cap">Solo para Arquitectos</span>
@@ -42,36 +42,36 @@
 	<div class="row mb-2">
 		
 		<div class="col-md-4 {% if form.person_type.errors %}invalid{% endif %}">
-			<label>Tipo</label>
+			<label class="text-muted lead">Tipo de Persona</label>
 			{{form.person_type}}
 			{% include 'base/partials/_field_error.html' with field=form.mobile %}
 		</div>
 		<div class="col-md-4 offset-1 {% if form.mobile.errors %}invalid{% endif %}">
-			<label>Teléfono Celular:</label>
+			<label class="text-muted lead">Teléfono Celular:</label>
 			{{form.mobile}}
 			{% include 'base/partials/_field_error.html' with field=form.mobile %}
 		</div>
 		<div class="col-md-8 mt-3 {% if form.email.errors %}invalid{% endif %}">
-			<label>Correo Electrónico:</label>
+			<label class="text-muted lead">Correo Electrónico:</label>
 			{{form.email}}
 			{% include 'base/partials/_field_error.html' with field=form.email %}
 		</div>
 	</div>	
 	<div class="row mb-2">
 		<div class="col-md-4 {% if form.phone.errors %}invalid{% endif %}">
-			<label>Teléfono Fijo:</label>
+			<label class="text-muted lead">Teléfono Fijo:</label>
 			{{form.phone}}
 			{% include 'base/partials/_field_error.html' with field=form.phone %}
 		</div>
 		<div class="col-md-8 {% if form.address.errors %}invalid{% endif %}">
-			<label>Dirección:</label>
+			<label class="text-muted lead">Dirección:</label>
 			{{form.address}}
 			{% include 'base/partials/_field_error.html' with field=form.address %}
 		</div>
 	</div>	
     <div class="row mb-2">
 		<div class="col-md-4 ">
-			<label>Contraseña:</label>
+			<label class="text-muted lead">Contraseña:</label>
 			{{form.password}}
 			
 		</div>

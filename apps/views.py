@@ -311,7 +311,6 @@ class SignUpFormView(FormView):
     success_url = reverse_lazy('success_sign_up')
 
     def form_valid(self, form):
-        print(form.cleaned_data)
         cd = form.cleaned_data
         
         member, created = Member.objects.get_or_create(
@@ -334,7 +333,7 @@ class SignUpFormView(FormView):
 
 
         group = Group.objects.get(name='Gratuito')      
-        user = User.objects.create_user(member.first_surname, member.email, password)
+        user = User.objects.create_user(member.tuition, member.email, password)
         user.last_name = member.first_surname
         user.groups.add(group)
         user.save()

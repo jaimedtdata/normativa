@@ -99,6 +99,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'apps.authentication.EmailAuthBackend',
+]
+
 LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'America/Lima'
