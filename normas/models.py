@@ -151,6 +151,7 @@ class Register_Normativa(models.Model):
     verbose_name='Tipo de Norma')
     tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo Uso', related_name='normas')
     document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos')
+    es_foro=models.BooleanField(default=False, verbose_name='Es un foro')
 
     class Meta:
         verbose_name_plural='6.Normas Registradas-Frontend'

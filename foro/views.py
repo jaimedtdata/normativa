@@ -8,7 +8,8 @@ def foro(request):
     context = {
         'foro': True,
         'normas': Register_Normativa.objects.all(),
-        'last_themes': Themas_foro.objects.order_by('-register_date_time')
+        'area_normas' : Areas_Normas.objects.all(),
+        'last_themes': Coments_foro.objects.order_by('-register_date_time')
     }
     return render(request, 'foro/foro.html', context)
 
@@ -25,14 +26,13 @@ def foro_temas(request):
 def foro_comentarios(request, norma_id):
 
     norma = Register_Normativa.objects.get(id = norma_id)
-    # f_id = request.GET.get('rule_id')
-    # print ('ingreso Grabar!!')
-    # if request.method == "POST":
-    #     comentario = request.POST.get('comentario')
-    #     print ('POSTBOTON',comentario)
-    #     b = Coments_foro(themas=f_id,user=request.user, coments=comentario)
-    #     print ('POSTBBB',b)
-    #     b.save()
+    
+    if request.method == "POST":
+        comentario = request.POST.get('comentario')
+        print ('POSTBOTON',comentario)
+        b = Coments_foro(tema_id=norma_id,user=request.user, coments=comentario)
+        print ('POSTBBB',b)
+        b.save()
         
 
     #print("request",f_id)
@@ -59,8 +59,11 @@ def foro_comentarios(request, norma_id):
     #             'themes': [],
     #     }
 
+    comentarios_list = Coments_foro.objects.filter(tema_id = norma_id)
+
     context = {
-        'norma' : norma
+        'norma' : norma,
+        'comentarios_list' : comentarios_list 
     }
 
 
