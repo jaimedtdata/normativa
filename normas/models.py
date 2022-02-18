@@ -1,5 +1,5 @@
 from django.db import models
-from sqlalchemy import true
+#from sqlalchemy import true
 from apps.choices import *
 from django.contrib import admin
 from django.utils.html import format_html
@@ -149,7 +149,7 @@ class Register_Normativa(models.Model):
     fecha_publi = models.DateField(blank=False,null=False,verbose_name='Publicacion')
     tipo_norma=models.CharField(blank=False,null=False,max_length=200,
     verbose_name='Tipo de Norma')
-    tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=true, on_delete=models.SET_NULL, verbose_name='Tipo Uso', related_name='normas')
+    tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo Uso', related_name='normas')
     document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos')
 
     class Meta:
