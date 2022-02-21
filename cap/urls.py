@@ -5,9 +5,8 @@ from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid,
 	entrevistas, charts,member, configs, works, rules, foro, foro_temas,foro_comentarios,
     password_reset,SignUpOthers,success_sign_up,
     #johao
-    tipo_normativa,dash,register_normativa,date_register,delete_normativa,
-    update_normativa,updatedate_normativa,palabra_clave,delete_palclave,update_template,update_clave,
-    norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov)
+    tipo_normativa,dash,register_normativa,date_register,delete_normativa,updatedate_normativa,palabra_clave,delete_palclave,update_template,update_clave,
+    norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov, edit_normativa)
 
 from apps.views import busque_normativa,busqueda_clavenormativa,register_palabra_clave
     #end
@@ -58,7 +57,7 @@ urlpatterns = [
 
     path('register_norm/',register_normativa,name='register_norm'),
     path('dateregister_norm',date_register,name='dateregister_norm'),
-    path('update_datenorma/<int:codigo>',update_normativa,name='update_datenorma'),
+    path('edit_normativa/<int:codigo>', edit_normativa,name='update_datenorma'),
     path('udpate_normativa/<int:codigo>',updatedate_normativa,name='upate_normativa'),
     path('delete_normativa/<int:codigo>',delete_normativa,name='delete'),
     #palabra clave

@@ -39,20 +39,20 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    Tipo Normativa:<select class="form-select" aria-label="Default select example" name="tip_norma">
-                                            <option selected></option>
-                                            {% for a in normativa %}
-                                                <option value="{{a.subcategory_name}}">{{a.subcategory_name}}</option>
-                                            {% endfor %}
-                                    </select>
+                    <label> Tipo de Norma: </label>
+                    <select class="form-select" aria-label="Default select example" name="tip_norma">
+                            {% for a in normativa %}
+                                <option value="{{a.id}}">{{a.subcategory_name}}</option>
+                            {% endfor %}
+                    </select>
                 </div>
                     <div class="col-6">
-                        Tipo de Uso:<select class="form-select" aria-label="Default select example" name="tip_uso">
-                                        <option selected></option>
-                                        {% for tipo in tipo_uso %}
-                                            <option value="{{tipo.id }}">{{tipo.area_name }}</option>
-                                        {% endfor %}
-                                    </select>
+                        <label> Tipo de Uso: </label>
+                        <select class="form-select" aria-label="Default select example" name="tip_uso">
+                            {% for tipo in tipo_uso %}
+                                <option value="{{tipo.id }}">{{tipo.area_name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
             </div>
             <br>
@@ -62,14 +62,22 @@
                         <label>Adjuntar Documento</label><br>
                         <input type="file" name="documento"/>
                       </div>
+                      <div class="form-group">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="es_foro" name="es_foro">
+                            <label class="form-check-label" for="es_foro">Foro</label>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="es_vigente" name="es_vigente">
+                            <label class="form-check-label" for="es_vigente">Vigente</label>
+                          </div>
+                    </div>
                 </div>
                 <div class="col-6">
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox small">
-                            <input type="checkbox" class="custom-control-input" id="customCheck" name="es_foro" checked>
-                            <label class="custom-control-label" for="customCheck">Tiene foro?</label>
-                        </div>
-                    </div>
+                    <label>Descripción breve</label><br>
+                    <textarea class="form-control" rows="5" maxlength="200" name="descripcion"></textarea>
                 </div>
             </div>
             <br>

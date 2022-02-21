@@ -149,16 +149,16 @@ class Register_Normativa(models.Model):
     name_denom = models.TextField(blank=False,null=False,verbose_name='Denominacion')
     base_legal=models.CharField(blank=False,null=False,max_length=200,verbose_name='Base Legal')
     fecha_publi = models.DateField(blank=False,null=False,verbose_name='Publicacion')
-    tipo_norma=models.CharField(blank=False,null=False,max_length=200,
-    verbose_name='Tipo de Norma')
-    tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo Uso', related_name='normas')
-    document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos')
+    tipo_norma = models.ForeignKey(Subcategories_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo de Norma')
+    tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo Uso')
+    document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos',null=True)
     es_foro=models.BooleanField(default=False, verbose_name='Es un foro')
+    es_vigente=models.BooleanField(default=False, verbose_name='Esta vigente')
+    descripcion = models.CharField(blank=True,null=True,max_length=200,verbose_name='Descripcion')
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                      blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
                                      blank=True, null=True)
-
     class Meta:
         verbose_name_plural='6.Normas Registradas-Frontend'
         db_table='register_normativa'

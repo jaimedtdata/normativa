@@ -92,10 +92,12 @@ def register_normativa(request):
         fecha_publi=request.POST['fecha_publi']
         tip_norma=request.POST['tip_norma']
         tip_uso=request.POST['tip_uso']
-        file_pdf=request.FILES['documento']
-        es_foro = True if request.POST['es_foro'] == 'on' else False
+        file_pdf= request.FILES.get('documento', None)
+        es_foro = True if request.POST.get('es_foro', False) == 'on' else False
+        es_vigente = True if request.POST.get('es_vigente', False) == 'on' else False
+        descripcion = request.POST['descripcion']
         Register_Normativa.objects.create(norma=norma,name_denom=name_deno,base_legal=base_legal,
-        fecha_publi=fecha_publi,tipo_norma=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro)
+        fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
 
         return redirect('dateregister_norm')
 
@@ -106,7 +108,7 @@ def date_register(request):
     }
     return render(request,'normativa/datenorma_register.html',context)
 
-def update_normativa(request,codigo):
+def edit_normativa(request,codigo):
     normativa=Register_Normativa.objects.get(pk=codigo)
     tipo_uso=Areas_Normas.objects.all()
     tipo_normativa=Subcategories_Normas.objects.all()
@@ -116,7 +118,7 @@ def update_normativa(request,codigo):
         'tipo_normativa':tipo_normativa
     }
 
-    return render(request,'normativa/update_datenorma_register.html',context)
+    return render(request,'normativa/edit_normativa.html',context)
 
 def updatedate_normativa(request,codigo):
      if request.method=='POST':
