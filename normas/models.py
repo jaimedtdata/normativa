@@ -152,6 +152,10 @@ class Register_Normativa(models.Model):
     tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo Uso', related_name='normas')
     document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos')
     es_foro=models.BooleanField(default=False, verbose_name='Es un foro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
 
     class Meta:
         verbose_name_plural='6.Normas Registradas-Frontend'

@@ -54,14 +54,15 @@ def busque_normativa(request):
         norma_tipo_uso=request.POST['tipo_uso'].upper()
         area_normas=Areas_Normas.objects.all()
 
-        norma_clave=Register_Palabraclave.objects.filter(name=pal_clave)
+        norma_clave=Register_Palabraclave.objects.filter(name=pal_clave).order_by('normativa__tipo_norma')
         count_results= Register_Palabraclave.objects.filter(name=pal_clave).count()
         #normativa=Register_Normativa.objects.filter(tipo_uso=norma_tipo_uso)
         a=SubNormativa.objects.all()
 
         
 
-        context={   
+        context={ 
+            'pal_clave'  : pal_clave,
             'norma_clave':norma_clave,
             #'normativa':normativa,
             'area_normas':area_normas,
