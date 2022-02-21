@@ -55,6 +55,7 @@ def busque_normativa(request):
         area_normas=Areas_Normas.objects.all()
 
         norma_clave=Register_Palabraclave.objects.filter(name=pal_clave)
+        count_results= Register_Palabraclave.objects.filter(name=pal_clave).count()
         #normativa=Register_Normativa.objects.filter(tipo_uso=norma_tipo_uso)
         a=SubNormativa.objects.all()
 
@@ -63,10 +64,14 @@ def busque_normativa(request):
         context={   
             'norma_clave':norma_clave,
             #'normativa':normativa,
-            'area_normas':area_normas
+            'area_normas':area_normas,
+            'count_results': count_results
         }
 
         return render(request,'normativa/normativa_busqueda.html',context)
+
+    if request.method == 'GET':
+        return render(request, 'normativa/normativa_busqueda.html')
 
 # CRUD Normativa
 def tipo_normativa(request):
