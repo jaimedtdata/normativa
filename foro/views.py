@@ -1,4 +1,6 @@
 import random
+import json
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Coments_foro, Themas_foro
 from normas.models import Master_Normas, Areas_Normas, Register_Normativa
@@ -167,3 +169,24 @@ def get_coments():
 			},
 		)
 	return themes
+
+def search_theme(request):
+    theme = request.GET.get('tema')
+    area_id = request.GET.get('area_norma')
+
+    if area_id == '0' :
+        themes = Register_Normativa.objects.filter(name_denom__icontains=theme )
+    else :
+        themes = Register_Normativa.objects.filter(name_denom__icontains=theme ).filter(tipo_uso_id = area_id)
+    
+    themes = [ theme_serializer(theme) for theme in themes ]
+
+    return HttpResponse(json.dumps(themes, default=str), content_type="application/json")
+
+def theme_serializer(themes):
+    return {'id': themes.id, 
+            'name_denom' : themes.name_denom,  
+            'tipo_uso' : themes.tipo_uso.area_name,
+            'norma' : themes.norma,
+            'fecha_publi' : themes.fecha_publi
+            }

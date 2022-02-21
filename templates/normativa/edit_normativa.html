@@ -1,0 +1,118 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'stylos/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'stylos/css/iconos.css' %}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block content %}
+    
+    <div class="container ">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-1">
+                <a href="{% url 'dateregister_norm' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="color:black;"width="35" height="35" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                        <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                    </svg>
+                </a>
+            </div>
+    
+            <div class="col-8">
+                <h1 class="gUppercase gFontWeight700" style="padding-left:120px;">
+                    Editar Normativa
+                </h1>
+            </div>
+    
+            <div class="col-1">
+                <a href="{% url 'dateregister_norm' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="color:black;" width="35" height="45" fill="currentColor" class="bi bi-skip-end-btn-fill" viewBox="0 0 16 16">
+                        <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        <br><br>
+        <form method='POST' action="/udpate_normativa/{{normativa.id}}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-6">
+                    <label for="norma">Norma</label>
+                    <input type="text" class="form-control" name="norma" value="{{normativa.norma}}"/>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="name_deno">Titulo</label>
+                        <input type="text" name="name_deno" class="form-control" value="{{normativa.name_denom}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="base">Base Legal</label>
+                    <input type="text" name="base_legal" class="form-control" value="{{normativa.base_legal}}"/>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="fecha_publi">Publicacion</label>
+                        <input type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label> Tipo de Norma: </label>
+                    <select class="form-select" aria-label="Default select example" name="tip_norma">
+                                            {% for tipo_norma in tipo_normativa %}
+                                                <option value="{{a.id}}">{{tipo_norma.subcategory_name}}</option>
+                                            {% endfor %}
+                                    </select>
+                </div>
+                <div class="col-6">
+                    <label> Tipo de Uso: </label>
+                    <select class="form-select" aria-label="Default select example" name="tip_uso">
+                                    {% for tipo_uso in tipo_uso %}
+                                        <option value="{{tipo_uso.id}}">{{tipo_uso.area_name}}</option>
+                                    {% endfor %}
+                                </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Adjuntar Documento</label><br>
+                        <input type="file" name="documento"/>
+                      </div>
+                      <div class="form-group">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="es_foro" name="es_foro">
+                            <label class="form-check-label" for="es_foro">Foro</label>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="es_vigente" name="es_vigente">
+                            <label class="form-check-label" for="es_vigente">Vigente</label>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label>Descripción breve</label><br>
+                    <textarea class="form-control" rows="5" maxlength="200" name="descripcion"></textarea>
+                </div>
+            </div>
+            <br><br>
+            <button class="btn btn-primary" style="background-color: #24387C;position:relative;left:435px;" type="submit" >Editar Norma</button>
+        </form>
+            
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <link rel="stylesheet" href="{% static 'stylos/js/bootstrap.bundle.min.js' %}"/>
+{% endblock %}
