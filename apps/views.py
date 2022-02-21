@@ -1,5 +1,6 @@
 import uuid
 import random
+from django.forms import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,Group
@@ -61,7 +62,7 @@ def busque_normativa(request):
 
         context={   
             'norma_clave':norma_clave,
-            'normativa':normativa,
+            #'normativa':normativa,
             'area_normas':area_normas
         }
 
@@ -317,23 +318,20 @@ class SignUpFormView(FormView):
         cd = form.cleaned_data
         
         member, created = Member.objects.get_or_create(
-                            names= cd['names'],
-                            first_surname= cd['first_surname'], 
-                            second_surname= cd['second_surname'], 
-                            identity= cd['identity'], 
-                            person_type= cd['person_type'], 
-                            mobile= cd['mobile'], 
-                            phone= cd['phone'], 
-                            email= cd['email'], 
-                            address= cd['address'], 
-                            profession= cd['profession'], 
-                            tuition= cd['tuition'], 
-                            secret_code= cd['secret_code']
-        )
+                        names= cd['names'],
+                        first_surname= cd['first_surname'], 
+                        second_surname= cd['second_surname'], 
+                        identity= cd['identity'], 
+                        person_type= cd['person_type'], 
+                        mobile= cd['mobile'], 
+                        phone= cd['phone'], 
+                        email= cd['email'], 
+                        address= cd['address'], 
+                        profession= cd['profession'], 
+                        tuition= cd['tuition'], 
+                        secret_code= cd['secret_code']
+    )
         password = cd['password']
-
-
-
 
         group = Group.objects.get(name='Gratuito')      
         user = User.objects.create_user(member.tuition, member.email, password)
@@ -345,6 +343,11 @@ class SignUpFormView(FormView):
         send_confirm_account(self.request, token.get_confirm_link(), member.email)
 
         return HttpResponseRedirect(reverse_lazy('success_sign_up'))
+
+    # def form_invalid(self, form):
+    #     print('INGRESO A INNVALIDO!',self,form)
+    #     messages.error(self.request, 'Por favor, corrija los errores')
+    #     return super(SignUpOthers, self).form_invalid(form)
 
 def success_sign_up(request):
     messages.success(request, 'Registro Exitoso')

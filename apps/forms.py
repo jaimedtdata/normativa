@@ -166,17 +166,18 @@ EMAIL_PH_CONTROL = {'class': 'form-control', 'placeholder':'Correo Electrónico'
 
 
 class ExternalRegisterForm(forms.ModelForm):
-        #otro_campo = forms.CharField()
-        password = forms.CharField( widget=forms.PasswordInput(attrs={
-                        'class': "form-control",
-                        'placeholder' : 'Contraseña'
-                        }),
-                        help_text='Ingresa una contraseña',
-                        )
+        
+        password = forms.CharField(label='password' ,
+                        widget=forms.PasswordInput(attrs={
+                                'class': "form-control",
+                                'placeholder' : 'Contraseña'
+                                }),
+                                help_text='Ingresa una contraseña',
+                                )
         class Meta:
-                model = Member
-                exclude = ('user','full_name','roles')
-                fields = [
+            model = Member
+            exclude = ('user','full_name','roles')
+            fields = [
                     'names',
                     'first_surname',
                     'second_surname',
@@ -191,7 +192,7 @@ class ExternalRegisterForm(forms.ModelForm):
                     'secret_code',
                     
                 ]
-                widgets = {
+            widgets = {
                     'names': forms.TextInput(attrs=FORM_CONTROL_UPPER_N_LETTERS),
                     'first_surname': forms.TextInput(attrs=FORM_CONTROL_UPPER_N_LETTERS),
                     'second_surname': forms.TextInput(attrs=FORM_CONTROL_UPPER_N_LETTERS),
@@ -206,23 +207,55 @@ class ExternalRegisterForm(forms.ModelForm):
                     'person_type': forms.Select(attrs=SELECT2_CONTROL),
                 }
 
-                def clean(self):
-                    cleaned_data = super().clean()
-                    email = cleaned_data.get("email")
-                    identity = cleaned_data.get("identity")
-                    person_type = cleaned_data.get("person_type")
-                    address = cleaned_data.get("address")
+        def clean_email(self):
+            email = self.cleaned_data['email']
+            member = Member.objects.filter(email=email).exists()
 
-                    profiles = Member.objects.filter(email=email)
-                    if profiles:
-                        self.add_error('email', "Este correo electrónico ya se encuentra registrado")
-                    if  len(identity) != 8 and person_type == 'N':
-                        self.add_error('identity', "Ingrese un número de DNI válido")
-                    if  len(identity) != 11 and person_type == 'J':
-                        self.add_error('identity', "Ingrese un número de RUC válido")
-                    if  address == '' and person_type == 'J':
-                        self.add_error('address', "Proporcione una dirección fiscal")
-                    return cleaned_data
+            if member:
+                raise forms.ValidationError("Este email ya se encuentra registrado")
+            return email
+                    
+        def clean_tuition(self):
+            tuition = self.cleaned_data['tuition']
+            member = Member.objects.filter(tuition=tuition).exists()
+
+            if member:
+                raise forms.ValidationError("Este CAP ya se encuentra registrado")
+            return tuition
+
+        def clean_identity(self):
+            identity = self.cleaned_data['identity']
+            
+            if  len(identity) != 8:
+                raise forms.ValidationError("Ingrese un número de DNI válido")
+            
+            return identity
+
+        def clean_password(self):
+            password =self.data.get('password')
+            
+            if  len(password) < 8:
+                raise forms.ValidationError("Esta contraseña es demasiado corta. Debe contener al menos 8 caracteres.")
+            
+            return password
+
+        # def clean(self):
+        #             cleaned_data = super().clean()
+        #             email = cleaned_data.get("email")
+        #             identity = cleaned_data.get("identity")
+        #             person_type = cleaned_data.get("person_type")
+        #             address = cleaned_data.get("address")
+
+        #             profiles = Member.objects.filter(email=email)
+        #             if profiles:
+        #                 self.add_error('email', "Este correo electrónico ya se encuentra registrado")
+        #             if  len(identity) != 8 and person_type == 'N':
+        #                 self.add_error('identity', "Ingrese un número de DNI válido")
+        #             if  len(identity) != 11 and person_type == 'J':
+        #                 self.add_error('identity', "Ingrese un número de RUC válido")
+        #             if  address == '' and person_type == 'J':
+        #                 self.add_error('address', "Proporcione una dirección fiscal")
+        #             return cleaned_data
         
 class SignUpForm(ExternalRegisterForm):
     otro_campo = forms.CharField()

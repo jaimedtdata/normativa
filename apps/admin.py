@@ -6,6 +6,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 #from .models import Register_Normativa,Register_Palabraclave
 from normas.models import SubNormativa,Register_Normativa,Register_Palabraclave
+from .models import Member
+
+class MemberAdmin(admin.ModelAdmin):
+    list_display = ['names','first_surname', 'second_surname','profession']
+admin.site.register(Member,MemberAdmin)
 
 
 #johao
