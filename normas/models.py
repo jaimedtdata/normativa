@@ -72,6 +72,8 @@ class Subcategories_Normas(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    order = models.CharField(max_length=10, blank=True)
+
     class Meta:
         verbose_name_plural = '2.Normas - Subtipo De Normativa'
     def __str__(self):

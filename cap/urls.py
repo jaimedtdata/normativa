@@ -16,6 +16,9 @@ from django.conf import settings
 
 
 urlpatterns = [
+
+    path('', include('apps.urls')),
+
     #path('', login, name='login'),
     path('foro/', include('foro.urls')),
     path('', Login.as_view(), name='login'),
