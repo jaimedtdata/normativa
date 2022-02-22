@@ -375,10 +375,13 @@ def signup(request):
 
 class Login(LoginView):
     authentication_form = UserLoginForm
-    template_name = 'login.html'
+    template_name = 'login/login-interactivo.html'
 
-    #def form_invalid(self, form):
-    #    return super(Login, self).form_invalid(form)
+class LoginNuevo(LoginView):
+    authentication_form = UserLoginForm
+    template_name = 'login/login-interactivo.html'
+
+        
 
 
 #@login_required

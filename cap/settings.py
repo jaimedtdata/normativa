@@ -19,6 +19,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 )
 
 LOCAL_APPS = (
@@ -28,6 +29,7 @@ LOCAL_APPS = (
     'bus_normativa.apps.BusNormativaConfig'
 
 )
+
 
 # por Default agrega id automatico
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 

@@ -1,0 +1,146 @@
+{% load static %}
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Colegio de Arquitectos del Perú</title>
+    {% comment %}
+        <link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> 
+    {% endcomment %}
+    <link href="{% static 'vendor/bootstrap4/css/bootstrap.css' %}" rel="stylesheet"> 
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
+    <link href="{% static 'vendor/chartsjs/Chart.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/flagiconcss3/css/flag-icon.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/master.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/app.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-lg-10">
+                <div class="row  ">
+                    <div class="col-lg-6 col-md-6  col-sm-12 m-0 p-0 d-flex justify-content-center align-items-start">
+                        <div class="mt-5">
+                            <img src="{% static 'images/login/logo.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="card shadow-lg p-4 mb-4 ">
+                                        <div class="card-body">
+                                            {% include 'login/login-form.html' %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                            
+                            {% comment %}
+                                {% include 'login/login-form.html' %}
+                            {% endcomment %}
+                            
+                    </div>
+                </div>
+                <div class="">
+                    {% block content %}
+                        {% include 'login/dashboard-login.html' %}
+                    {% endblock %}
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-12 bg-secondary d-flex justify-content-center align-items-center">
+                <div>
+                    BANNER
+
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="container mb-4">
+            <div class="row d-flex justify-content-center">
+                <h4 class="text-primary">Enlaces de Interés</h4>
+            </div>
+            <br>
+            <div class="row mb-3">
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="card" style="width: 150px; height: 150px;">
+                        <a href="http://spij.minjus.gob.pe/Leg_Basica/spij_leg_basica.asp" target="_blank">
+                            <img src="{% static 'images/enlaces/spij.png' %}" alt="">
+                        </a>
+
+                    </div>
+                    
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <a href="https://www.nfpa.org/codes-and-standards/all-codes-and-standards/list-of-codes-and-standards/detail?code=101" target="_blank">NFPA</a>
+                    
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="card" style="width: 150px; height: 150px;">
+                        <a href="https://www.sunarp.gob.pe/seccion/servicios/detalles/0/a3.html" target="_blank">m,m
+                            <img src="{% static 'images/enlaces/SPRL.pgn' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="card" style="width: 150px; height: 150px;">
+                        <a href="https://diariooficial.elperuano.pe/Normas" target="_blank">
+                            <img src="{% static 'images/enlaces/elperuano.png' %}" alt="">
+                        </a>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <a href="http://www.transparencia.munlima.gob.pe/gobierno-abierto-municipal/transparencia/mml/datos-generales/disposiciones-emitidas-1/ordenanzas-municipales" target="_blank">Mun. de Lima</a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <a href="http://www.transparencia.munlima.gob.pe/gobierno-abierto-municipal/transparencia/mml/datos-generales/disposiciones-emitidas-1/ordenanzas-municipales" target="_blank">IMP</a>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+
+	
+    
+
+    <script src="{% static 'vendor/fontawesome5/js/solid.min.js' %}"></script>
+	<script src="{% static 'vendor/fontawesome5/js/fontawesome.min.js' %}"></script>
+
+    <script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.min.js' %}"></script>
+
+	<script src="{% static 'vendor/chartsjs/Chart.min.js' %}"></script>
+    <script src="{% static 'vendor/airdatepicker/dist/js/datepicker.min.js' %}"></script>
+    <script src="{% static 'vendor/airdatepicker/dist/js/i18n/datepicker.es.js' %}"></script>
+    <script src="{% static 'vendor/mdtimepicker/mdtimepicker.min.js' %}"></script>
+    <script src="{% static 'vendor/notyfy/notify.min.js' %}"></script>
+    
+    {% block js %}
+		<script src="{% static 'js/dashboard-charts.js' %}"></script>
+        <script src="{% static 'js/9631-js-jquery.js' %}"></script>
+        <script src="{% static 'js/5545-js-app.js' %}"></script>
+    {% endblock %}
+    
+    {% block script %}
+	<script src="{% static 'js/script.js' %}"></script>
+    {% endblock %}
+
+    
+
+</body>
+</html>
