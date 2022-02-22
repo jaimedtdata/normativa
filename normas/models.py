@@ -149,7 +149,7 @@ class Register_Normativa(models.Model):
     fecha_publi = models.DateField(blank=False,null=False,verbose_name='Publicacion')
     tipo_norma = models.ForeignKey(Subcategories_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo de Norma')
     tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo Uso')
-    document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos',null=True)
+    document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos',null=True,editable=True)
     es_foro=models.BooleanField(default=False, verbose_name='Es un foro')
     es_vigente=models.BooleanField(default=False, verbose_name='Esta vigente')
     descripcion = models.CharField(blank=True,null=True,max_length=200,verbose_name='Descripcion')
@@ -162,8 +162,8 @@ class Register_Normativa(models.Model):
         db_table='register_normativa'
     
 class Register_Palabraclave(models.Model):
-    name = models.TextField(blank=False,null=False,verbose_name='Nombre Palabra Clave')
-    normativa = models.ForeignKey(Register_Normativa,verbose_name='Normativa',on_delete=models.CASCADE)
+    name = models.CharField(blank=False,null=False,unique=True, max_length=200,verbose_name='Nombre Palabra Clave')
+    normativas = models.ManyToManyField(Register_Normativa,verbose_name='Normativa',related_name='keywords')
 
     class Meta:
         verbose_name_plural='7.Normas Registradas-Palabras Clave'

@@ -25,7 +25,7 @@ class SubNormativaAdmin(admin.ModelAdmin):
 
 admin.site.register(SubNormativa,SubNormativaAdmin)
 admin.site.register(Register_Normativa,Register_NormativaAdmin)
-admin.site.register(Register_Palabraclave,Register_PalabraclaveAdmin)
+admin.site.register(Register_Palabraclave)
 #
 class ListAdminMixin(object):
     def __init__(self, model, admin_site):
