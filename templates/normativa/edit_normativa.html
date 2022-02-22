@@ -37,7 +37,7 @@
             <div class="col-1"></div>
         </div>
         <br><br>
-        <form method='POST' action="/udpate_normativa/{{normativa.id}}">
+        <form method='POST' action="/udpate_normativa/{{normativa.id}}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
                 <div class="col-6">
@@ -59,32 +59,38 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="fecha_publi">Publicacion</label>
-                        <input type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi}}"/>
+                        <input type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}"/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label> Tipo de Norma: </label>
-                    <select class="form-select" aria-label="Default select example" name="tip_norma">
+                    <select class="form-select" aria-label="Default select example" name="tip_norma" id="tipo_norma">
                                             {% for tipo_norma in tipo_normativa %}
-                                                <option value="{{a.id}}">{{tipo_norma.subcategory_name}}</option>
+                                                <option value="{{tipo_norma.id}}">{{tipo_norma.subcategory_name}}</option>
                                             {% endfor %}
                                     </select>
                 </div>
                 <div class="col-6">
                     <label> Tipo de Uso: </label>
-                    <select class="form-select" aria-label="Default select example" name="tip_uso">
+                    <select class="form-select" aria-label="Default select example" name="tip_uso" id="tipo_uso">
                                     {% for tipo_uso in tipo_uso %}
                                         <option value="{{tipo_uso.id}}">{{tipo_uso.area_name}}</option>
                                     {% endfor %}
                                 </select>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-6">
                     <div class="form-group">
-                        <label>Adjuntar Documento</label><br>
+                        <label>Adjuntar Documento</label>
+                        <br>
+                        
+                        <a href="#" class="text-dark"> {{normativa.document}} </a>
+                        
+                        <br>
+                        <br>
                         <input type="file" name="documento"/>
                       </div>
                       <div class="form-group">
@@ -102,11 +108,11 @@
                 </div>
                 <div class="col-6">
                     <label>Descripción breve</label><br>
-                    <textarea class="form-control" rows="5" maxlength="200" name="descripcion"></textarea>
+                    <textarea class="form-control" rows="5" maxlength="200" name="descripcion">{{ normativa.descripcion }}</textarea>
                 </div>
             </div>
             <br><br>
-            <button class="btn btn-primary" style="background-color: #24387C;position:relative;left:435px;" type="submit" >Editar Norma</button>
+            <button class="btn btn-block btn-primary" type="submit" >Editar Norma</button>
         </form>
             
     </div>
@@ -114,5 +120,14 @@
 
 
 {% block js %}
-    <link rel="stylesheet" href="{% static 'stylos/js/bootstrap.bundle.min.js' %}"/>
+
+    <script>
+
+        $('#tipo_norma').val('{{normativa.tipo_norma_id}}')    
+        $('#tipo_uso').val('{{normativa.tipo_uso_id}}')    
+        $('#es_foro').prop('checked',  '{{normativa.es_foro}}' == 'True' ? true : false )
+        $('#es_vigente').prop('checked',  '{{normativa.es_vigente}}' == 'True' ? true : false )
+
+
+    </script>
 {% endblock %}

@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,Group
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.files.storage import FileSystemStorage
 
 from apps.email import (send_confirm_account, send_success_sign_up,
     send_password_reset, send_success_password_reset,)
@@ -132,13 +133,26 @@ def edit_normativa(request,codigo):
     return render(request,'normativa/edit_normativa.html',context)
 
 def updatedate_normativa(request,codigo):
-     if request.method=='POST':
+    if request.method=='POST':
+        norma=request.POST['norma']
+        name_deno=request.POST['name_deno']
+        base_legal=request.POST['base_legal']
+        fecha_publi=request.POST['fecha_publi']
         tip_norma=request.POST['tip_norma']
         tip_uso=request.POST['tip_uso']
-        fecha_publi=request.POST['fecha_publi']
-        name_deno=request.POST['name_deno']
-        Register_Normativa.objects.filter(id=codigo).update(tipo_norma=tip_norma,tipo_uso_id=tip_uso,
-        fecha_publi=fecha_publi,name_denom=name_deno)
+        es_foro = True if request.POST.get('es_foro', False) == 'on' else False
+        es_vigente = True if request.POST.get('es_vigente', False) == 'on' else False
+        descripcion = request.POST['descripcion']
+
+        
+        file_pdf = request.FILES.get('documento', None)
+        # fs = FileSystemStorage()
+        # filename = fs.save('Document_normativa/' + file_pdf.name, file_pdf)
+        # uploaded_file_url = 'Document_normativa/' + filename
+
+        Register_Normativa.objects.filter(id=codigo).update(norma=norma,name_denom=name_deno,base_legal=base_legal,
+        fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
+
         return redirect('dateregister_norm')
 
 def delete_normativa(request,codigo):
@@ -150,10 +164,14 @@ def delete_normativa(request,codigo):
 # CRUD Palabra clave
 def palabra_clave(request,codigo):
     normativa=Register_Normativa.objects.get(pk=codigo)
-    date_palaclave=Register_Palabraclave.objects.filter(normativa=codigo)
+    # date_palaclave=Register_Palabraclave.objects.filter(normativa=codigo)
+    palabras_claves_normativa = normativa.keywords.all()
+    palabras_clave = Register_Palabraclave.objects.all()
     context={
         'normativa':normativa,
-        'date_palaclave':date_palaclave
+        # 'date_palaclave':date_palaclave
+        'palabras_clave' : palabras_clave,
+        'palabras_claves_normativa' : palabras_claves_normativa
         }
     return render(request,'norm_palabraclave/agregar_palabraclave.html',context)
 
@@ -171,7 +189,7 @@ def register_palabra_clave(request,codigo):
     }
     return render(request,'norm_palabraclave/datos_palabras_claves.html',context)
 
-def delete_palclave(request,codigo):
+def delete_palclave(request, codigo):
     Register_Palabraclave.objects.filter(id=codigo).delete()
     return redirect('dateregister_norm')
 

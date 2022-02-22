@@ -36,7 +36,11 @@
                         {% for norma in norma_register %}
                         <tr>
                             <td>{{norma.norma}}</td>
-                            <td>{{norma.name_denom}}</td>
+                            <td>{{norma.name_denom}} 
+                                {% if norma.es_vigente == False %}
+                                    <span class="fst-italic fw-lighter fs-7">*No vigente</span>
+                                {% endif %}
+                            </td>
                             <td>{{norma.base_legal}}</td>
                             <td>{{norma.tipo_uso}}</td>
                             <td>

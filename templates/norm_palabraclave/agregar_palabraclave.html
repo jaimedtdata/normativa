@@ -5,10 +5,8 @@
 
 {% block content %}
     <div class="container">
-        <br>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-1">
+        <div class="row mt-3 text-center">
+            <div class="col-2">
                 <a href="{% url 'dateregister_norm' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" style="color:black;"width="35" height="35" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
@@ -18,93 +16,146 @@
             </div>
     
             <div class="col-8">
-                <h1 class="gUppercase gFontWeight700" style="padding-left:120px;">
+                <h1 class="gUppercase gFontWeight700" >
                     Agregar Palabra Clave
                 </h1>
             </div>
     
-            <div class="col-1">
+            <div class="col-2">
                 <a href="{% url 'dateregister_norm' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" style="color:black;" width="35" height="45" fill="currentColor" class="bi bi-skip-end-btn-fill" viewBox="0 0 16 16">
                         <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z"/>
                     </svg>
                 </a>
             </div>
-            <div class="col-1"></div>
         </div>
-        <br><br>
-            <div class="row">
-                <div class="col-6">
-                    <label for="norma">Norma</label>
-                    <input type="text" class="form-control" name="norma" value="{{normativa.norma}}"/>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="name_deno">Titulo</label>
-                        <input type="text" name="name_deno" class="form-control" value="{{normativa.name_denom}}"/>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card">
+
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'registrar-palabras-clave' normativa.id %}" id="registrar_palabras"> 
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>
+                                    Palabra Clave:
+                                </label>
+                                <select class="form-control select-pc" name="palabras_clave[]" multiple="multiple" style="width:100%;" id="select4">
+                                    {% for pc in palabras_clave %}
+                                        <option value="{{pc.name}}"> {{pc.name}} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+    
+                            
+                            <button type="submit" class="btn btn-block btn-primary"> Agregar </button>
+                        </form>
+                        
+                        <table class="table mt-5">
+                            <thead>
+                              <tr>
+                                <th style="width:10%" scope="col">#</th>
+                                <th  scope="col">Nombre</th>
+                                <th style="width:3%" scope="col">Eliminar</th>
+                              </tr>
+                            </thead>
+                            <tbody id="normativas_palabras_clave">
+                              {% for pcn in palabras_claves_normativa %}
+                                <tr>
+                                    <th scope="row">{{pcn.id}}</th>
+                                    <td>{{pcn.name}}</td>
+                                    <td>
+                                        <button type="button" onclick="eliminarPc({{pcn.id}})" class="btn btn-block btn-danger">    
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
                     </div>
-                </div>
+                  </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <label for="base">Base Legal</label>
-                    <input type="text" name="base_legal" class="form-control" value="{{normativa.base_legal}}"/>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="fecha_publi">Publicacion</label>
-                        <input type="text" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi}}"/>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <label for="">Tipo Normativa</label>
-                    <input type="text" class="form-control" value="{{normativa.tipo_norma}}"/>
-                </div>
-                <div class="col-6">
-                    <label for="">Tipo de Uso</label>
-                    <input type="text" class="form-control" value="{{normativa.tipo_uso}}"/>
-                </div>
-            </div>
-            <br><br>
-            <label for="">Palabra clave</label>
-            <form method="POST" action="/date_palabraclave/{{normativa.id}}">
-                {% csrf_token %}
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="palabra_clave" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="submit" style="background-color:#24387C; color:white;">Agregar</button>
-                </div>
-            </form>
-            {% if date_palaclave %}
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td><h6>Palabras clave</h6></td>
-                        <td><h6>Obsevaciones</h6></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for pala_clave in date_palaclave %}
-                            <tr>
-                                <td>{{pala_clave.name}}</td>
-                                    <div class="content-icono">
-                                        <td>
-                                            <a href="/update_template/{{pala_clave.id}}" class="btn btn-warning">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
-                                            <a href="/delete_clave/{{pala_clave.id}}" class="btn btn-danger">
-                                                <i class="bi bi-eraser-fill"></i>
-                                            </a>
-                                        </td>
-                                    </div>
-                            </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    {% endif %}
+
+        </div>
     </div>
 {% endblock %}
   
 {% block js %}
+
+<script>
+
+    $(document).ready(function() {
+
+        setTimeout(function() {
+            $('.select-pc').select2({
+                tags: true
+            });
+        }, 100)
+    
+        $("#registrar_palabras").submit( function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize()
+              }).done(function(data) {
+                $('#select4').val(null).trigger('change');
+                html = ``
+
+                data.forEach((e) => {
+                    html += /*html*/
+                            `<tr>
+                                <th scope="row">${e.id}</th>
+                                <td>${e.name}</td>
+                                <td>
+                                    <button type="button" onclick="eliminarPc(${e.id})" class="btn btn-block btn-danger">    
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>`
+                })
+
+                document.getElementById('normativas_palabras_clave').innerHTML = html;
+
+              });
+        })
+
+        
+        
+
+    });
+
+    function eliminarPc(id) {
+        $.ajax({
+            url: `{% url 'eliminar-palabras-clave-normativa' normativa.id %}`,
+            data: {
+                'palabra_clave_id' : id
+            }
+            }).done(function(data) {
+
+            html = ``
+
+            data.forEach((e) => {
+                html += /*html*/
+                        `<tr>
+                            <th scope="row">${e.id}</th>
+                            <td>${e.name}</td>
+                            <td>
+                                <button type="button" onclick="eliminarPc(${e.id})" class="btn btn-block btn-danger">    
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>`
+            })
+
+            document.getElementById('normativas_palabras_clave').innerHTML = html;
+
+            });
+    }
+
+</script>    
+
+
 {% endblock %}
