@@ -2,6 +2,12 @@ from pathlib import Path
 import dj_database_url
 from django.urls import reverse_lazy
 import os
+
+##variables de entorno
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'qrh*e^+4h@0j1zi_hc2knz5mx4ifq5*#3k-+dvf=2u$9%j@t43'
@@ -19,6 +25,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 )
 
 LOCAL_APPS = (
@@ -28,6 +35,7 @@ LOCAL_APPS = (
     'bus_normativa.apps.BusNormativaConfig'
 
 )
+
 
 # por Default agrega id automatico
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
@@ -67,28 +75,28 @@ WSGI_APPLICATION = 'cap.wsgi.application'
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'bdnormativa',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
-#         'PORT': 5432,
-#     }
-# }
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'normativa',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
+        'NAME': 'd4ot3mt28rcjob',
+        'USER': 'djmdailubuffcs',
+        'PASSWORD': '527d79120ffbcbba4dfd28b6a112541d902db70178ccdaf3468b547d6ac17cfc',
+        'HOST': 'ec2-44-192-245-97.compute-1.amazonaws.com',
         'PORT': 5432,
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd4ot3mt28rcjob',
+#         'USER': 'djmdailubuffcs',
+#         'PASSWORD': '527d79120ffbcbba4dfd28b6a112541d902db70178ccdaf3468b547d6ac17cfc',
+#         'HOST': 'ec2-44-192-245-97.compute-1.amazonaws.com',
+#         'PORT': 5432,
+#     }
+# }
 
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
@@ -148,8 +156,9 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'suyon.dev@gmail.com'
-EMAIL_HOST_PASSWORD = 'bylouyapfxftsxqe'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
 
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

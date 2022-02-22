@@ -55,19 +55,36 @@ def busque_normativa(request):
         norma_tipo_uso=request.POST['tipo_uso'].upper()
         area_normas=Areas_Normas.objects.all()
 
-        norma_clave=Register_Palabraclave.objects.filter(name=pal_clave)
+        norma_clave=Register_Palabraclave.objects.filter(name__icontains=pal_clave).order_by('normativa__tipo_norma__order')
+        count_results= Register_Palabraclave.objects.filter(name=pal_clave).count()
         #normativa=Register_Normativa.objects.filter(tipo_uso=norma_tipo_uso)
         a=SubNormativa.objects.all()
 
-        
+        normas_results = []
+        for n in norma_clave:
+            row ={
+                'tipo_norma': n.normativa.tipo_norma.subcategory_name,
+                'norma': n.normativa.norma,
+                'name_denom': n.normativa.name_denom,
+                'base_legal': n.normativa.base_legal,
+                'document': n.normativa.document,
+                'fecha_publi': n.normativa.fecha_publi
+            }
+            normas_results.append(row)
 
-        context={   
-            'norma_clave':norma_clave,
+        context={ 
+            'pal_clave'  : pal_clave,
+            #'norma_clave':norma_clave,
             #'normativa':normativa,
-            'area_normas':area_normas
+            'area_normas':area_normas,
+            'count_results': count_results,
+            'normas_results' : normas_results
         }
 
         return render(request,'normativa/normativa_busqueda.html',context)
+
+    if request.method == 'GET':
+        return render(request, 'normativa/normativa_busqueda.html')
 
 # CRUD Normativa
 def tipo_normativa(request):
@@ -376,10 +393,13 @@ def signup(request):
 
 class Login(LoginView):
     authentication_form = UserLoginForm
-    template_name = 'login.html'
+    template_name = 'login/login-interactivo.html'
 
-    #def form_invalid(self, form):
-    #    return super(Login, self).form_invalid(form)
+class LoginNuevo(LoginView):
+    authentication_form = UserLoginForm
+    template_name = 'login/login-interactivo.html'
+
+        
 
 
 #@login_required

@@ -31,6 +31,10 @@ class Areas_Normas(models.Model):
     blank=False, null=False, auto_now_add=True,
     help_text='Fecha de Registro',
     verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
     
     class Meta:
         verbose_name_plural = '0.Normas - Tipo de Uso'
@@ -54,6 +58,10 @@ class Categories_Normas(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
     
 
     class Meta:
@@ -72,6 +80,12 @@ class Subcategories_Normas(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    order = models.CharField(max_length=10, blank=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
+
     class Meta:
         verbose_name_plural = '2.Normas - Subtipo De Normativa'
     def __str__(self):
@@ -86,6 +100,11 @@ class Location_Normas(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
+
     class Meta:
         verbose_name_plural = '3.Normas - Locacion'
     def __str__(self):
@@ -126,6 +145,11 @@ class Master_Normas(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
+
     class Meta:
         verbose_name_plural = '4.Registrar Normas'
     def __str__(self):
@@ -134,6 +158,10 @@ class Master_Normas(models.Model):
 class SubNormativa(models.Model):
     norma=models.CharField(max_length=200,blank=False,verbose_name='Normativa')
     norma_sub=models.ForeignKey(Subcategories_Normas,blank=True,on_delete=models.CASCADE,verbose_name='Sub Normativa')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
 
     class Meta:
         verbose_name_plural='5.Normas-Normativa'
@@ -164,7 +192,10 @@ class Register_Normativa(models.Model):
 class Register_Palabraclave(models.Model):
     name = models.CharField(blank=False,null=False,unique=True, max_length=200,verbose_name='Nombre Palabra Clave')
     normativas = models.ManyToManyField(Register_Normativa,verbose_name='Normativa',related_name='keywords')
-
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                        blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                        blank=True, null=True)
     class Meta:
         verbose_name_plural='7.Normas Registradas-Palabras Clave'
         db_table='register_palabclave'
