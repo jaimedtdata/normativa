@@ -31,6 +31,10 @@ class Areas_Normas(models.Model):
     blank=False, null=False, auto_now_add=True,
     help_text='Fecha de Registro',
     verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
     
     class Meta:
         verbose_name_plural = '0.Normas - Tipo de Uso'
@@ -54,6 +58,10 @@ class Categories_Normas(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
     
 
     class Meta:
@@ -73,6 +81,10 @@ class Subcategories_Normas(models.Model):
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
     order = models.CharField(max_length=10, blank=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
 
     class Meta:
         verbose_name_plural = '2.Normas - Subtipo De Normativa'
@@ -88,6 +100,11 @@ class Location_Normas(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
+
     class Meta:
         verbose_name_plural = '3.Normas - Locacion'
     def __str__(self):
@@ -128,6 +145,11 @@ class Master_Normas(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
+
     class Meta:
         verbose_name_plural = '4.Registrar Normas'
     def __str__(self):
@@ -136,6 +158,10 @@ class Master_Normas(models.Model):
 class SubNormativa(models.Model):
     norma=models.CharField(max_length=200,blank=False,verbose_name='Normativa')
     norma_sub=models.ForeignKey(Subcategories_Normas,blank=True,on_delete=models.CASCADE,verbose_name='Sub Normativa')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
 
     class Meta:
         verbose_name_plural='5.Normas-Normativa'
@@ -149,8 +175,11 @@ class Register_Normativa(models.Model):
     name_denom = models.TextField(blank=False,null=False,verbose_name='Denominacion')
     base_legal=models.CharField(blank=False,null=False,max_length=200,verbose_name='Base Legal')
     fecha_publi = models.DateField(blank=False,null=False,verbose_name='Publicacion')
-    tipo_norma = models.ForeignKey(Subcategories_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo de Norma')
-    tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo Uso')
+    tipo_norma = models.ForeignKey(Subcategories_Normas, blank=True, null=True, 
+                                    on_delete=models.SET_NULL, verbose_name='Tipo de Norma',
+                                    related_name='tipo_norma')
+    tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, 
+                                    on_delete=models.SET_NULL, verbose_name='Tipo Uso')
     document=models.FileField(upload_to='Document_normativa',verbose_name='Documentos',null=True)
     es_foro=models.BooleanField(default=False, verbose_name='Es un foro')
     es_vigente=models.BooleanField(default=False, verbose_name='Esta vigente')
@@ -165,7 +194,12 @@ class Register_Normativa(models.Model):
     
 class Register_Palabraclave(models.Model):
     name = models.TextField(blank=False,null=False,verbose_name='Nombre Palabra Clave')
-    normativa = models.ForeignKey(Register_Normativa,verbose_name='Normativa',on_delete=models.CASCADE)
+    normativa = models.ForeignKey(Register_Normativa,verbose_name='Normativa',
+    on_delete=models.CASCADE, related_name='normativa')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
 
     class Meta:
         verbose_name_plural='7.Normas Registradas-Palabras Clave'
