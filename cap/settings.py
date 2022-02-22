@@ -2,6 +2,12 @@ from pathlib import Path
 import dj_database_url
 from django.urls import reverse_lazy
 import os
+
+##variables de entorno
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'qrh*e^+4h@0j1zi_hc2knz5mx4ifq5*#3k-+dvf=2u$9%j@t43'
@@ -150,8 +156,8 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'suyon.dev@gmail.com'
-EMAIL_HOST_PASSWORD = 'buhasyqhjkwkmcuc'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 
 
