@@ -1,3 +1,4 @@
 *.pyc
 s3/
-media/
+media/Document_normativa
+media/pdf
