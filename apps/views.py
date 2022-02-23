@@ -459,6 +459,10 @@ def plan_list(request):
     context = {'plans': plans}
     return render(request, 'plan_list.html', context)
 
+def plan_list_login(request):
+    plans = Plan.objects.all()
+    context = {'plans': plans}
+    return render(request, 'login/plan_list_login.html', context)
 
 def carga_rules(request):
     plans = Plan.objects.all()

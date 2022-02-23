@@ -3,7 +3,7 @@ from django.urls import path, include
 from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid, 
     comision, plan, plan_edit, plan_delete, carga_rules,plan_list,checkout,preguntas,signup,
 	entrevistas, charts,member, configs, works, rules, foro, foro_temas,foro_comentarios,
-    password_reset,SignUpOthers,success_sign_up,
+    password_reset,SignUpOthers,success_sign_up, plan_list_login,
     #johao
     tipo_normativa,dash,register_normativa,date_register,delete_normativa,updatedate_normativa,palabra_clave,delete_palclave,update_template,update_clave,
     norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov, edit_normativa)
@@ -48,6 +48,8 @@ urlpatterns = [
     path('preguntas/', preguntas, name='preguntas'),
 
     path('plan_list/', plan_list, name='plan_list'),
+    path('plan_list_login/', plan_list_login, name='plan_list_login'),
+
     path('checkout/', checkout, name='checkout'),
 
     #johao
