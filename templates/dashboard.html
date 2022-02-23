@@ -114,6 +114,29 @@
             <hr class="gSeparator gSeparatorTrans gSeparator20">
         </div>
     </div>
+    <hr>
+    <div class="row m-5">
+        <div class="col-lg-6 clom-md-6 col-sm-12 d-flex justify-content-center">
+                <a href="{% url 'plan_list' %}" class="text-danger font-weight-bold">
+                    <img src="{% static 'icons/sus.png' %}" class="gInlineBlock gWidth65 gMarginTop31">
+                    <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                        Planes y 
+                        <br>
+                        Suscripción
+                    </h3>
+                </a>
+        </div>
+        <div class="col-lg-6 clom-md-6 col-sm-12 d-flex justify-content-center">
+                <a href="{% url 'preguntas' %}" class="text-warning font-weight-bold" >
+                    <img src="{% static 'icons/question.png' %}" class="gInlineBlock gWidth65 gMarginTop31">
+                    <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                        Preguntas
+                        <br>
+                        Frecuentes
+                    </h3>
+                </a>
+        </div>
+    </div>
     <style>
         #sidebar ul li a {
            padding: 1.4rem 2rem;
