@@ -54,30 +54,25 @@ def busque_normativa(request):
         pal_clave=request.POST['pal_clave'].upper()
         norma_tipo_uso=request.POST['tipo_uso'].upper()
         area_normas=Areas_Normas.objects.all()
-
-        norma_clave=Register_Palabraclave.objects.filter(name__icontains=pal_clave).order_by('normativa__tipo_norma__order')
-        count_results= Register_Palabraclave.objects.filter(name=pal_clave).count()
-        #normativa=Register_Normativa.objects.filter(tipo_uso=norma_tipo_uso)
         a=SubNormativa.objects.all()
 
+        normas = Register_Normativa.objects.filter(keywords__name__icontains=pal_clave).order_by('tipo_norma__order')
+      
         normas_results = []
-        for n in norma_clave:
+        for n in normas:
             row ={
-                'tipo_norma': n.normativa.tipo_norma.subcategory_name,
-                'norma': n.normativa.norma,
-                'name_denom': n.normativa.name_denom,
-                'base_legal': n.normativa.base_legal,
-                'document': n.normativa.document,
-                'fecha_publi': n.normativa.fecha_publi
+                'tipo_norma': n.tipo_norma.subcategory_name,
+                'norma': n.norma,
+                'name_denom': n.name_denom,
+                'base_legal': n.base_legal,
+                'document': n.document,
+                'fecha_publi': n.fecha_publi
             }
             normas_results.append(row)
 
         context={ 
             'pal_clave'  : pal_clave,
-            #'norma_clave':norma_clave,
-            #'normativa':normativa,
             'area_normas':area_normas,
-            'count_results': count_results,
             'normas_results' : normas_results
         }
 

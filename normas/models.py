@@ -191,7 +191,8 @@ class Register_Normativa(models.Model):
     
 class Register_Palabraclave(models.Model):
     name = models.CharField(blank=False,null=False,unique=True, max_length=200,verbose_name='Nombre Palabra Clave')
-    normativas = models.ManyToManyField(Register_Normativa,verbose_name='Normativa',related_name='keywords')
+    normativas = models.ManyToManyField(Register_Normativa,verbose_name='Normativa',
+                                        related_name='keywords')
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                         blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
@@ -199,6 +200,9 @@ class Register_Palabraclave(models.Model):
     class Meta:
         verbose_name_plural='7.Normas Registradas-Palabras Clave'
         db_table='register_palabclave'
+
+    def __str__(self):
+        return self.name
     
 
 #end
