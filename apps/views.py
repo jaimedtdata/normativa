@@ -1,5 +1,6 @@
 import uuid
 import random
+from datetime import datetime
 from django.forms import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -87,7 +88,8 @@ def tipo_normativa(request):
    tipo_uso=Areas_Normas.objects.all()
    context = {
         'normativa':normativa,
-        'tipo_uso':tipo_uso
+        'tipo_uso':tipo_uso,
+        'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
     }
    return render(request,'normativa/form_normativa.html',context)
 
@@ -122,7 +124,9 @@ def edit_normativa(request,codigo):
     context = {
         'normativa':normativa,
         'tipo_uso':tipo_uso,
-        'tipo_normativa':tipo_normativa
+        'tipo_normativa':tipo_normativa,
+        'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
+
     }
 
     return render(request,'normativa/edit_normativa.html',context)
