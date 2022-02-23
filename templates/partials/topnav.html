@@ -2,9 +2,27 @@
 {% load user_tags %}
 
 <nav class="navbar navbar-expand-lg navbar-white bg-white">
-    <button type="button" id="sidebarCollapse" class="btn btn-outline-secondary default-secondary-menu"><i class="fas fa-bars"></i><span></span></button>
+    {% comment %} <button type="button" id="sidebarCollapse" class="btn btn-outline-secondary default-secondary-menu"><i class="fas fa-bars"></i><span></span></button> {% endcomment %}
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex justify-content-around bd-highlight">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2">
+                <a class="nav-link  text-white" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item p-2">
+                <a class="nav-link  text-white" aria-current="page" href="{% url 'dash' %}">Estadistica</a>
+                </li>
+                <li class="nav-item p-2">
+                <a class="nav-link  text-white" aria-current="page" href="{% url 'plan_list' %}">Planes y Suscripción</a>
+                </li>
+                <li class="nav-item p-2">
+                <a class="nav-link  text-white" aria-current="page" href="{% url 'preguntas' %}">Preguntas Frecuentes</a>
+                </li>
+            </ul>
+        </div>
+        
+
         <ul class="nav navbar-nav ml-auto">
             {% comment %} <li class="nav-item dropdown">
                 <div class="nav-dropdown">
@@ -21,12 +39,13 @@
                         </ul>
                     </div>
                 </div>
-            </li> {% endcomment %}
+            </li>  {% endcomment %}
             
             
             {% if request.user %}
             <li class="nav-item dropdown">
                 <div class="nav-dropdown">
+                    
                     <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>{{request.user.last_name}}</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                     <div class="dropdown-menu dropdown-menu-right nav-link-menu">   
                         <ul class="nav-list">
