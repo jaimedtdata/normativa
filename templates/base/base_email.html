@@ -327,7 +327,11 @@ ul.social li{
 	      </tr>
 	      <tr>
 	          <td valign="middle" class="hero bg_blue">
-	            <img src="{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo_cap_black_01.png' %}" alt="CAP Logo" style="width: 400px; max-width: 600px; height: auto; margin: auto; display: block;">
+              {% comment %}
+              <img src="https://github.com/jaimedtdata/normativa/blob/main/static/img/CAP_logofinal-2021-300-1.png" alt="CAP Logo" style="width: 400px; max-width: 600px; height: auto; margin: auto; display: block;">
+              {% endcomment %}
+	            <img src="{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo-final.png' %}" alt="CAP Logo" style="width: 400px; max-width: 600px; height: auto; margin: auto; display: block;">
+                
 	          </td>
 	      </tr>
 		  <tr>
@@ -375,7 +379,12 @@ ul.social li{
                       	<ul>
                       <li><a href="https://www.cap.org.pe/">Página Oficial</a></li>
 		                	<li><a href="https://limacap.org/">Lima CAP</a></li>
-                      <li><a href="{{ request.scheme }}://{{ request.get_host }}">Edificaciones</a></li>
+                      <li>
+                        {% comment %}
+                        <a href="{{ request.scheme }}://{{ request.get_host }}">Edificaciones</a>
+                        {% endcomment %}
+                        <a href="{{ request.scheme }}://{{ request.get_host }}"> Repositorio de normas de CAP</a>
+                      </li>
 		              	</ul>
                       </td>
                     </tr>
