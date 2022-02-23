@@ -16,31 +16,31 @@
             <div class="row">
                 <div class="col-6">
                     <label for="norma">Norma</label>
-                    <input type="text" class="form-control" name="norma"/>
+                    <input type="text" class="form-control" name="norma" required/>
                 </div>
                 <div class="col-6">
                         <div class="form-group">
                             <label for="name_deno">Titulo</label>
-                            <input type="text" name="name_deno" class="form-control"/>
+                            <input type="text" name="name_deno" class="form-control" required/>
                         </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label for="base">Base Legal</label>
-                    <input type="text" name="base_legal" class="form-control"/>
+                    <input type="text" name="base_legal" class="form-control" required/>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="fecha_publi">Publicacion</label>
-                        <input type="date" name="fecha_publi" class="form-control"/>
+                        <input type="date" name="fecha_publi" class="form-control" required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label> Tipo de Norma: </label>
-                    <select class="form-select" aria-label="Default select example" name="tip_norma">
+                    <select class="form-select" aria-label="Default select example" name="tip_norma" >
                             {% for a in normativa %}
                                 <option value="{{a.id}}">{{a.subcategory_name}}</option>
                             {% endfor %}

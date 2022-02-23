@@ -146,9 +146,12 @@ def updatedate_normativa(request,codigo):
 
         
         file_pdf = request.FILES.get('documento', None)
-        # fs = FileSystemStorage()
-        # filename = fs.save('Document_normativa/' + file_pdf.name, file_pdf)
-        # uploaded_file_url = 'Document_normativa/' + filename
+
+        if file_pdf != None:
+            fs = FileSystemStorage()
+            file_pdf.name = str(uuid.uuid4())
+            filename = fs.save(file_pdf.name + '.pdf', file_pdf)
+            file_pdf = filename
 
         Register_Normativa.objects.filter(id=codigo).update(norma=norma,name_denom=name_deno,base_legal=base_legal,
         fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
@@ -211,6 +214,7 @@ def update_clave(request,codigo):
 #
 def norma_edificatoria(request):
     return render(request,'normativa/normatividad_edificatoria.html',None)
+    
 def norma_datos(request):
     norma_date=Register_Normativa.objects.all()
     context={'norma_date':norma_date}
