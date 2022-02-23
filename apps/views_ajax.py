@@ -17,12 +17,28 @@ class ResultSearchAjax(View):
         return JsonResponse(data)
 
     def post(self, request):
-        data = {
-            'saludo' : 'Bienvenido'
-        }
+        res =  None
+    
+        pal_clave = request.POST.get('pal_clave')
+        normas = Register_Normativa.objects.filter(keywords__name__icontains=pal_clave).order_by('tipo_norma__order')
+        if len(normas)> 0 and len(pal_clave) >0 :
+            data = []
+            for position in normas:
+                item = {
+                    'tipo_norma': position.tipo_norma.subcategory_name,
+                    'norma': position.norma,
+                    'name_denom': position.name_denom,
+                    'base_legal': position.base_legal,
+                    'document': position.document,
+                    'fecha_publi': position.fecha_publi
+                    }
+                data.append(item)
+            res = data
+        else:
+            res = 'No existen datos para esa palabra ...'
+        return JsonResponse({'data':res})
 
-        return JsonResponse(data)
-
+#vista de prueba para la tabla
 def results_normas_prueba(request):
     if request.method=='POST':
         pal_clave=request.POST['pal_clave'].upper()
@@ -36,12 +52,12 @@ def results_normas_prueba(request):
         normas_results = []
         for n in norma_clave:
             row ={
-                'tipo_norma': n.normativa.tipo_norma.subcategory_name,
-                'norma': n.normativa.norma,
-                'name_denom': n.normativa.name_denom,
-                'base_legal': n.normativa.base_legal,
-                'document': n.normativa.document,
-                'fecha_publi': n.normativa.fecha_publi
+                'tipo_norma': position.normativa.tipo_norma.subcategory_name,
+                'norma': position.normativa.norma,
+                'name_denom': position.normativa.name_denom,
+                'base_legal': position.normativa.base_legal,
+                'document': position.normativa.document,
+                'fecha_publi': position.normativa.fecha_publi
             }
             normas_results.append(row)
         
