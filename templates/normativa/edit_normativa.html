@@ -42,24 +42,24 @@
             <div class="row">
                 <div class="col-6">
                     <label for="norma">Norma</label>
-                    <input type="text" class="form-control" name="norma" value="{{normativa.norma}}"/>
+                    <input type="text" class="form-control" name="norma" value="{{normativa.norma}}" required/>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="name_deno">Titulo</label>
-                        <input type="text" name="name_deno" class="form-control" value="{{normativa.name_denom}}"/>
+                        <input type="text" name="name_deno" class="form-control" value="{{normativa.name_denom}}" required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label for="base">Base Legal</label>
-                    <input type="text" name="base_legal" class="form-control" value="{{normativa.base_legal}}"/>
+                    <input type="text" name="base_legal" class="form-control" value="{{normativa.base_legal}}" required/>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="fecha_publi">Publicacion</label>
-                        <input type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}"/>
+                        <input type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}" required/>
                     </div>
                 </div>
             </div>
