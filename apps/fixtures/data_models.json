@@ -3,7 +3,7 @@
   "model": "admin.logentry",
   "pk": 1,
   "fields": {
-    "action_time": "2022-02-21T18:10:31.345",
+    "action_time": "2022-02-22T17:50:35.319",
     "user": 1,
     "content_type": 3,
     "object_id": "1",
@@ -16,7 +16,7 @@
   "model": "admin.logentry",
   "pk": 2,
   "fields": {
-    "action_time": "2022-02-21T18:10:40.687",
+    "action_time": "2022-02-22T17:50:43.934",
     "user": 1,
     "content_type": 3,
     "object_id": "2",
@@ -29,7 +29,7 @@
   "model": "admin.logentry",
   "pk": 3,
   "fields": {
-    "action_time": "2022-02-21T18:10:59.073",
+    "action_time": "2022-02-22T17:51:16.426",
     "user": 1,
     "content_type": 3,
     "object_id": "3",
@@ -42,33 +42,20 @@
   "model": "admin.logentry",
   "pk": 4,
   "fields": {
-    "action_time": "2022-02-21T18:25:14.741",
+    "action_time": "2022-02-22T17:54:56.699",
     "user": 1,
-    "content_type": 16,
+    "content_type": 4,
     "object_id": "1",
-    "object_repr": "VIVIENDA",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
+    "object_repr": "jesus",
+    "action_flag": 2,
+    "change_message": "[]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 5,
   "fields": {
-    "action_time": "2022-02-21T18:25:24.107",
-    "user": 1,
-    "content_type": 16,
-    "object_id": "2",
-    "object_repr": "RESTAURANTES",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 6,
-  "fields": {
-    "action_time": "2022-02-21T18:29:55.898",
+    "action_time": "2022-02-22T17:55:32.610",
     "user": 1,
     "content_type": 4,
     "object_id": "1",
@@ -79,13 +66,26 @@
 },
 {
   "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2022-02-22T18:03:10.761",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "VIVIENDA",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
   "pk": 7,
   "fields": {
-    "action_time": "2022-02-21T18:45:51.685",
+    "action_time": "2022-02-22T18:03:14.564",
     "user": 1,
-    "content_type": 20,
-    "object_id": "1",
-    "object_repr": "1.RNE",
+    "content_type": 16,
+    "object_id": "2",
+    "object_repr": "RESTAURANTES",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
@@ -94,7 +94,20 @@
   "model": "admin.logentry",
   "pk": 8,
   "fields": {
-    "action_time": "2022-02-21T18:46:08.289",
+    "action_time": "2022-02-22T18:04:19.159",
+    "user": 1,
+    "content_type": 20,
+    "object_id": "1",
+    "object_repr": "1. RNE",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2022-02-22T18:04:39.333",
     "user": 1,
     "content_type": 20,
     "object_id": "2",
@@ -105,9 +118,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 9,
+  "pk": 10,
   "fields": {
-    "action_time": "2022-02-21T18:46:32.001",
+    "action_time": "2022-02-22T18:05:07.989",
     "user": 1,
     "content_type": 20,
     "object_id": "3",
@@ -118,9 +131,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 10,
+  "pk": 11,
   "fields": {
-    "action_time": "2022-02-21T18:46:41.350",
+    "action_time": "2022-02-22T18:05:23.194",
     "user": 1,
     "content_type": 20,
     "object_id": "4",
@@ -131,9 +144,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 11,
+  "pk": 12,
   "fields": {
-    "action_time": "2022-02-21T18:46:52.798",
+    "action_time": "2022-02-22T18:05:30.759",
     "user": 1,
     "content_type": 20,
     "object_id": "5",
@@ -144,22 +157,22 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 12,
+  "pk": 13,
   "fields": {
-    "action_time": "2022-02-21T18:47:03.330",
+    "action_time": "2022-02-22T18:05:48.185",
     "user": 1,
     "content_type": 20,
     "object_id": "6",
-    "object_repr": "2.NORMAS SECTORIALES",
+    "object_repr": "2. NORMAS SECTORIALES",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
 },
 {
   "model": "admin.logentry",
-  "pk": 13,
+  "pk": 14,
   "fields": {
-    "action_time": "2022-02-21T18:47:13.003",
+    "action_time": "2022-02-22T18:05:54.738",
     "user": 1,
     "content_type": 20,
     "object_id": "7",
@@ -170,9 +183,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 14,
+  "pk": 15,
   "fields": {
-    "action_time": "2022-02-21T18:47:46.176",
+    "action_time": "2022-02-22T18:06:09.963",
     "user": 1,
     "content_type": 20,
     "object_id": "8",
@@ -183,9 +196,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 15,
+  "pk": 16,
   "fields": {
-    "action_time": "2022-02-21T18:48:00.587",
+    "action_time": "2022-02-22T18:06:31.178",
     "user": 1,
     "content_type": 20,
     "object_id": "9",
@@ -196,9 +209,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 16,
+  "pk": 17,
   "fields": {
-    "action_time": "2022-02-21T18:48:14.603",
+    "action_time": "2022-02-22T18:06:44.410",
     "user": 1,
     "content_type": 20,
     "object_id": "10",
@@ -209,9 +222,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 17,
+  "pk": 18,
   "fields": {
-    "action_time": "2022-02-21T18:48:19.765",
+    "action_time": "2022-02-22T18:06:53.762",
     "user": 1,
     "content_type": 20,
     "object_id": "11",
@@ -222,9 +235,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 18,
+  "pk": 19,
   "fields": {
-    "action_time": "2022-02-21T18:48:32.057",
+    "action_time": "2022-02-22T18:07:02.662",
     "user": 1,
     "content_type": 20,
     "object_id": "12",
@@ -235,9 +248,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 19,
+  "pk": 20,
   "fields": {
-    "action_time": "2022-02-21T18:49:01.109",
+    "action_time": "2022-02-22T18:07:13.861",
     "user": 1,
     "content_type": 20,
     "object_id": "13",
@@ -248,9 +261,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 20,
+  "pk": 21,
   "fields": {
-    "action_time": "2022-02-21T18:49:18.465",
+    "action_time": "2022-02-22T18:07:23.145",
     "user": 1,
     "content_type": 20,
     "object_id": "14",
@@ -261,9 +274,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 21,
+  "pk": 22,
   "fields": {
-    "action_time": "2022-02-21T18:49:43.973",
+    "action_time": "2022-02-22T18:07:36.057",
     "user": 1,
     "content_type": 20,
     "object_id": "15",
@@ -274,9 +287,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 22,
+  "pk": 23,
   "fields": {
-    "action_time": "2022-02-21T18:49:55.191",
+    "action_time": "2022-02-22T18:07:45.461",
     "user": 1,
     "content_type": 20,
     "object_id": "16",
@@ -287,9 +300,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 23,
+  "pk": 24,
   "fields": {
-    "action_time": "2022-02-21T18:50:08.447",
+    "action_time": "2022-02-22T18:07:58.244",
     "user": 1,
     "content_type": 20,
     "object_id": "17",
@@ -300,22 +313,22 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 24,
+  "pk": 25,
   "fields": {
-    "action_time": "2022-02-21T18:50:21.127",
+    "action_time": "2022-02-22T18:08:12.088",
     "user": 1,
     "content_type": 20,
     "object_id": "18",
-    "object_repr": "5.INDECOPI",
+    "object_repr": "5. INDECOPI",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
 },
 {
   "model": "admin.logentry",
-  "pk": 25,
+  "pk": 26,
   "fields": {
-    "action_time": "2022-02-21T18:50:34.222",
+    "action_time": "2022-02-22T18:08:21.817",
     "user": 1,
     "content_type": 20,
     "object_id": "19",
@@ -326,9 +339,9 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 26,
+  "pk": 27,
   "fields": {
-    "action_time": "2022-02-21T18:50:46.798",
+    "action_time": "2022-02-22T18:08:34.870",
     "user": 1,
     "content_type": 20,
     "object_id": "20",
@@ -339,41 +352,15 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 27,
+  "pk": 28,
   "fields": {
-    "action_time": "2022-02-21T18:50:59.139",
+    "action_time": "2022-02-22T18:08:46.516",
     "user": 1,
     "content_type": 20,
     "object_id": "21",
     "object_repr": "6.2 NORMAS DISTRITALES",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 28,
-  "fields": {
-    "action_time": "2022-02-21T18:51:35.828",
-    "user": 1,
-    "content_type": 20,
-    "object_id": "1",
-    "object_repr": "1.RNE",
-    "action_flag": 2,
-    "change_message": "[]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 29,
-  "fields": {
-    "action_time": "2022-02-21T19:04:23.269",
-    "user": 1,
-    "content_type": 20,
-    "object_id": "1",
-    "object_repr": "1. RNE",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Sub Categoria\"]}}]"
   }
 },
 {
@@ -1268,8 +1255,8 @@
   "model": "auth.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$260000$sN9k4sjdwx8B4wpqX6UTJ5$4x4kNNur7ASsz0/IyIlj33pX+Beh+YJXhoHynkJP3dw=",
-    "last_login": "2022-02-21T18:27:53",
+    "password": "pbkdf2_sha256$260000$ACXUdJ4gkGYQOJqlfmv5KR$L5L6wKwa4TMJJBMHngcDc6fauJWRtuKARFpfbB3YoXY=",
+    "last_login": "2022-02-22T17:54:16",
     "is_superuser": true,
     "username": "jesus",
     "first_name": "",
@@ -1277,7 +1264,7 @@
     "email": "",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2022-02-21T18:07:35",
+    "date_joined": "2022-02-22T17:49:41",
     "groups": [
       3
     ],
@@ -1288,16 +1275,16 @@
   "model": "auth.user",
   "pk": 2,
   "fields": {
-    "password": "pbkdf2_sha256$260000$J6bLQKlZbj8pcbw8rugo7l$Uj6vRKqrCk2mXZkxDj8RUawR1orLLREb/jqzZCip8to=",
-    "last_login": "2022-02-21T18:27:31.670",
+    "password": "pbkdf2_sha256$260000$Nigdyb0MIwrUwbB9XxYdsj$XCjt95OA1PvuztDokIdXti5dBukL37lhzwkFSqU5uAM=",
+    "last_login": "2022-02-22T17:53:35.070",
     "is_superuser": false,
     "username": "100",
     "first_name": "",
-    "last_name": "user1",
+    "last_name": "juser1",
     "email": "suyon.jesus@gmail.com",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2022-02-21T18:17:19.882",
+    "date_joined": "2022-02-22T17:53:13.325",
     "groups": [
       1
     ],
@@ -1498,10 +1485,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "e6w553i3m3zx5l1jsh3r9ouyg664orkd",
+  "pk": "2rtkohoue3zmmeqtirk237gq56vlmu4w",
   "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pBWGBhcuu8ZyDBDpWpoUtqV8e7apAvd_vfef6lI21ri1vISJ1EX1avT75aIH7nuQO5Ub7Pmua7LlPSu6IM2PcySn9fD_Tso1Mq3ph4CJ7SAoyFE43NnxAE5O6JxhAJMnpARiZOHINABni0xWAzeJ_X-ANvxN5Y:1nMI5x:g2JdMXHMS6HSnmAWMsw67fD4jN5Q6lfIUSYxh0L1WYc",
-    "expire_date": "2022-03-07T18:27:53.068"
+    "session_data": ".eJxVjEEOwiAQRe_C2hBmKCW4dO8ZyMAMUjU0Ke3KeHdt0oVu_3vvv1Skba1x67LEidVZgTr9bonyQ9oO-E7tNus8t3WZkt4VfdCurzPL83K4fweVev3WBsNYEMixHQpAEOvQB4aAORgnmI1nSwKcxkImI7qMFAYDlpm8JPX-AMaGN7U:1nMe2y:xR7khwnUxQFIdII8dec6SKxcrbw8DaHZzqvMqHZgCtw",
+    "expire_date": "2022-03-08T17:54:16.707"
   }
 },
 {
@@ -1509,23 +1496,23 @@
   "pk": 1,
   "fields": {
     "user": null,
-    "first_surname": "user1",
+    "first_surname": "juser1",
     "second_surname": "user1",
     "names": "user1",
     "full_name": "Nombre completo",
     "person_type": "N",
-    "identity": "73828383",
+    "identity": "73829483",
     "profession": "A",
-    "mobile": "938373738",
-    "phone": "98373637",
+    "mobile": "983988493",
+    "phone": "398",
     "email": "suyon.jesus@gmail.com",
     "tuition": 100,
-    "secret_code": 1010,
-    "address": "av. prueba",
+    "secret_code": 10938,
+    "address": "i39i",
     "area_interest": "",
     "institution": "",
     "photo": "",
-    "register_date_time": "2022-02-21T18:17:19.868"
+    "register_date_time": "2022-02-22T17:53:13.320"
   }
 },
 {
@@ -1533,9 +1520,9 @@
   "pk": 1,
   "fields": {
     "area_name": "VIVIENDA",
-    "register_date_time": "2022-02-21T18:25:14.738",
-    "created": "2022-02-21T18:25:14.738",
-    "updated": "2022-02-21T18:25:14.738"
+    "register_date_time": "2022-02-22T18:03:10.758",
+    "created": "2022-02-22T18:03:10.758",
+    "updated": "2022-02-22T18:03:10.758"
   }
 },
 {
@@ -1543,9 +1530,9 @@
   "pk": 2,
   "fields": {
     "area_name": "RESTAURANTES",
-    "register_date_time": "2022-02-21T18:25:24.105",
-    "created": "2022-02-21T18:25:24.105",
-    "updated": "2022-02-21T18:25:24.105"
+    "register_date_time": "2022-02-22T18:03:14.562",
+    "created": "2022-02-22T18:03:14.562",
+    "updated": "2022-02-22T18:03:14.562"
   }
 },
 {
@@ -1553,10 +1540,10 @@
   "pk": 1,
   "fields": {
     "subcategory_name": "1. RNE",
-    "register_date_time": "2022-02-21T18:45:51.682",
+    "register_date_time": "2022-02-22T18:04:19.156",
     "order": "1",
-    "created": "2022-02-21T18:45:51.682",
-    "updated": "2022-02-21T19:04:23.265"
+    "created": "2022-02-22T18:04:19.156",
+    "updated": "2022-02-22T18:04:19.156"
   }
 },
 {
@@ -1564,10 +1551,10 @@
   "pk": 2,
   "fields": {
     "subcategory_name": "1.1 Arquitectura",
-    "register_date_time": "2022-02-21T18:46:08.286",
+    "register_date_time": "2022-02-22T18:04:39.330",
     "order": "2",
-    "created": "2022-02-21T18:46:08.286",
-    "updated": "2022-02-21T18:46:08.286"
+    "created": "2022-02-22T18:04:39.330",
+    "updated": "2022-02-22T18:04:39.330"
   }
 },
 {
@@ -1575,10 +1562,10 @@
   "pk": 3,
   "fields": {
     "subcategory_name": "1.1.1 TRANSVERSALES",
-    "register_date_time": "2022-02-21T18:46:31.999",
+    "register_date_time": "2022-02-22T18:05:07.985",
     "order": "3",
-    "created": "2022-02-21T18:46:31.999",
-    "updated": "2022-02-21T18:46:31.999"
+    "created": "2022-02-22T18:05:07.985",
+    "updated": "2022-02-22T18:05:07.985"
   }
 },
 {
@@ -1586,10 +1573,10 @@
   "pk": 4,
   "fields": {
     "subcategory_name": "1.1.2 VIVIENDA",
-    "register_date_time": "2022-02-21T18:46:41.346",
+    "register_date_time": "2022-02-22T18:05:23.191",
     "order": "4",
-    "created": "2022-02-21T18:46:41.347",
-    "updated": "2022-02-21T18:46:41.347"
+    "created": "2022-02-22T18:05:23.191",
+    "updated": "2022-02-22T18:05:23.191"
   }
 },
 {
@@ -1597,21 +1584,21 @@
   "pk": 5,
   "fields": {
     "subcategory_name": "1.2 ESPECIALIDADES RELACIONADAS",
-    "register_date_time": "2022-02-21T18:46:52.796",
+    "register_date_time": "2022-02-22T18:05:30.757",
     "order": "5",
-    "created": "2022-02-21T18:46:52.796",
-    "updated": "2022-02-21T18:46:52.796"
+    "created": "2022-02-22T18:05:30.757",
+    "updated": "2022-02-22T18:05:30.757"
   }
 },
 {
   "model": "normas.subcategories_normas",
   "pk": 6,
   "fields": {
-    "subcategory_name": "2.NORMAS SECTORIALES",
-    "register_date_time": "2022-02-21T18:47:03.327",
+    "subcategory_name": "2. NORMAS SECTORIALES",
+    "register_date_time": "2022-02-22T18:05:48.182",
     "order": "6",
-    "created": "2022-02-21T18:47:03.327",
-    "updated": "2022-02-21T18:47:03.327"
+    "created": "2022-02-22T18:05:48.182",
+    "updated": "2022-02-22T18:05:48.182"
   }
 },
 {
@@ -1619,10 +1606,10 @@
   "pk": 7,
   "fields": {
     "subcategory_name": "2.1 GAS VIVIENDAS ENERGIA Y MINAS",
-    "register_date_time": "2022-02-21T18:47:13.000",
+    "register_date_time": "2022-02-22T18:05:54.735",
     "order": "7",
-    "created": "2022-02-21T18:47:13.000",
-    "updated": "2022-02-21T18:47:13.000"
+    "created": "2022-02-22T18:05:54.735",
+    "updated": "2022-02-22T18:05:54.735"
   }
 },
 {
@@ -1630,10 +1617,10 @@
   "pk": 8,
   "fields": {
     "subcategory_name": "2.2 RATDUS-Ministerio de Vivienda",
-    "register_date_time": "2022-02-21T18:47:46.173",
+    "register_date_time": "2022-02-22T18:06:09.959",
     "order": "8",
-    "created": "2022-02-21T18:47:46.173",
-    "updated": "2022-02-21T18:47:46.173"
+    "created": "2022-02-22T18:06:09.960",
+    "updated": "2022-02-22T18:06:09.960"
   }
 },
 {
@@ -1641,10 +1628,10 @@
   "pk": 9,
   "fields": {
     "subcategory_name": "2.3 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA",
-    "register_date_time": "2022-02-21T18:48:00.584",
+    "register_date_time": "2022-02-22T18:06:31.174",
     "order": "9",
-    "created": "2022-02-21T18:48:00.584",
-    "updated": "2022-02-21T18:48:00.584"
+    "created": "2022-02-22T18:06:31.174",
+    "updated": "2022-02-22T18:06:31.174"
   }
 },
 {
@@ -1652,10 +1639,10 @@
   "pk": 10,
   "fields": {
     "subcategory_name": "3.OPINIONES VINCULANTES",
-    "register_date_time": "2022-02-21T18:48:14.601",
+    "register_date_time": "2022-02-22T18:06:44.407",
     "order": "10",
-    "created": "2022-02-21T18:48:14.601",
-    "updated": "2022-02-21T18:48:14.601"
+    "created": "2022-02-22T18:06:44.407",
+    "updated": "2022-02-22T18:06:44.407"
   }
 },
 {
@@ -1663,10 +1650,10 @@
   "pk": 11,
   "fields": {
     "subcategory_name": "3.1 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA",
-    "register_date_time": "2022-02-21T18:48:19.763",
+    "register_date_time": "2022-02-22T18:06:53.760",
     "order": "11",
-    "created": "2022-02-21T18:48:19.763",
-    "updated": "2022-02-21T18:48:19.763"
+    "created": "2022-02-22T18:06:53.760",
+    "updated": "2022-02-22T18:06:53.760"
   }
 },
 {
@@ -1674,10 +1661,10 @@
   "pk": 12,
   "fields": {
     "subcategory_name": "4.REGLAMENTO COMENTADO",
-    "register_date_time": "2022-02-21T18:48:32.054",
+    "register_date_time": "2022-02-22T18:07:02.659",
     "order": "12",
-    "created": "2022-02-21T18:48:32.054",
-    "updated": "2022-02-21T18:48:32.054"
+    "created": "2022-02-22T18:07:02.659",
+    "updated": "2022-02-22T18:07:02.659"
   }
 },
 {
@@ -1685,10 +1672,10 @@
   "pk": 13,
   "fields": {
     "subcategory_name": "4.1 NORMA GRAFICA COMENTADA",
-    "register_date_time": "2022-02-21T18:49:01.106",
+    "register_date_time": "2022-02-22T18:07:13.859",
     "order": "13",
-    "created": "2022-02-21T18:49:01.106",
-    "updated": "2022-02-21T18:49:01.106"
+    "created": "2022-02-22T18:07:13.859",
+    "updated": "2022-02-22T18:07:13.859"
   }
 },
 {
@@ -1696,10 +1683,10 @@
   "pk": 14,
   "fields": {
     "subcategory_name": "4.2 CASUISTICA",
-    "register_date_time": "2022-02-21T18:49:18.463",
+    "register_date_time": "2022-02-22T18:07:23.143",
     "order": "14",
-    "created": "2022-02-21T18:49:18.463",
-    "updated": "2022-02-21T18:49:18.463"
+    "created": "2022-02-22T18:07:23.143",
+    "updated": "2022-02-22T18:07:23.143"
   }
 },
 {
@@ -1707,10 +1694,10 @@
   "pk": 15,
   "fields": {
     "subcategory_name": "4.2.1 APELACIONES RECONSIDERACIONES",
-    "register_date_time": "2022-02-21T18:49:43.971",
+    "register_date_time": "2022-02-22T18:07:36.055",
     "order": "15",
-    "created": "2022-02-21T18:49:43.971",
-    "updated": "2022-02-21T18:49:43.971"
+    "created": "2022-02-22T18:07:36.055",
+    "updated": "2022-02-22T18:07:36.055"
   }
 },
 {
@@ -1718,10 +1705,10 @@
   "pk": 16,
   "fields": {
     "subcategory_name": "4.2.2 CONCLUSIONES DE CHARLAS(OPINION DE ASUNTOS TECNICOS )",
-    "register_date_time": "2022-02-21T18:49:55.189",
+    "register_date_time": "2022-02-22T18:07:45.459",
     "order": "16",
-    "created": "2022-02-21T18:49:55.189",
-    "updated": "2022-02-21T18:49:55.189"
+    "created": "2022-02-22T18:07:45.459",
+    "updated": "2022-02-22T18:07:45.459"
   }
 },
 {
@@ -1729,21 +1716,21 @@
   "pk": 17,
   "fields": {
     "subcategory_name": "4.2.3 DIRECTIVAS CAP",
-    "register_date_time": "2022-02-21T18:50:08.445",
+    "register_date_time": "2022-02-22T18:07:58.242",
     "order": "17",
-    "created": "2022-02-21T18:50:08.445",
-    "updated": "2022-02-21T18:50:08.445"
+    "created": "2022-02-22T18:07:58.242",
+    "updated": "2022-02-22T18:07:58.242"
   }
 },
 {
   "model": "normas.subcategories_normas",
   "pk": 18,
   "fields": {
-    "subcategory_name": "5.INDECOPI",
-    "register_date_time": "2022-02-21T18:50:21.124",
+    "subcategory_name": "5. INDECOPI",
+    "register_date_time": "2022-02-22T18:08:12.087",
     "order": "18",
-    "created": "2022-02-21T18:50:21.124",
-    "updated": "2022-02-21T18:50:21.124"
+    "created": "2022-02-22T18:08:12.087",
+    "updated": "2022-02-22T18:08:12.087"
   }
 },
 {
@@ -1751,10 +1738,10 @@
   "pk": 19,
   "fields": {
     "subcategory_name": "6.NORMAS MUNICIPALES",
-    "register_date_time": "2022-02-21T18:50:34.221",
+    "register_date_time": "2022-02-22T18:08:21.814",
     "order": "19",
-    "created": "2022-02-21T18:50:34.221",
-    "updated": "2022-02-21T18:50:34.221"
+    "created": "2022-02-22T18:08:21.814",
+    "updated": "2022-02-22T18:08:21.814"
   }
 },
 {
@@ -1762,10 +1749,10 @@
   "pk": 20,
   "fields": {
     "subcategory_name": "6.1 NORMAS PROVINCIALES",
-    "register_date_time": "2022-02-21T18:50:46.795",
+    "register_date_time": "2022-02-22T18:08:34.868",
     "order": "20",
-    "created": "2022-02-21T18:50:46.795",
-    "updated": "2022-02-21T18:50:46.795"
+    "created": "2022-02-22T18:08:34.868",
+    "updated": "2022-02-22T18:08:34.868"
   }
 },
 {
@@ -1773,10 +1760,10 @@
   "pk": 21,
   "fields": {
     "subcategory_name": "6.2 NORMAS DISTRITALES",
-    "register_date_time": "2022-02-21T18:50:59.137",
+    "register_date_time": "2022-02-22T18:08:46.513",
     "order": "21",
-    "created": "2022-02-21T18:50:59.137",
-    "updated": "2022-02-21T18:50:59.137"
+    "created": "2022-02-22T18:08:46.513",
+    "updated": "2022-02-22T18:08:46.513"
   }
 },
 {
@@ -1784,35 +1771,35 @@
   "pk": 1,
   "fields": {
     "norma": "A.010\t",
-    "name_denom": "Condiciones Generales de diseño",
-    "base_legal": "R.M. N° 191-2021-Vivienda\t",
-    "fecha_publi": "2021-07-08",
-    "tipo_norma": 2,
+    "name_denom": "Condiciones Generales de diseño\t",
+    "base_legal": "R.M. N° 191-2021-Vivienda",
+    "fecha_publi": "2022-02-17",
+    "tipo_norma": 1,
     "tipo_uso": 1,
-    "document": "Document_normativa/RNE_A.010_Resol.Minist._Nº_191-2021-VIVIENDA-_A.010_Condiciones_Gener_21d67R0.pdf",
+    "document": "",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T18:57:08.879",
-    "updated": "2022-02-21T18:57:08.879"
+    "created": "2022-02-22T18:11:50.355",
+    "updated": "2022-02-22T18:11:50.355"
   }
 },
 {
   "model": "normas.register_normativa",
   "pk": 2,
   "fields": {
-    "norma": "A.020\t",
+    "norma": "A.020",
     "name_denom": "Vivienda del RNE\t",
     "base_legal": "R.M.N° 188-2021-Vivienda\t",
-    "fecha_publi": "2021-07-07",
+    "fecha_publi": "2020-02-11",
     "tipo_norma": 4,
     "tipo_uso": 1,
-    "document": "Document_normativa/RNE_A.010_Resol.Minist._Nº_191-2021-VIVIENDA-_A.010_Condiciones_Gener_ymCr6y6.pdf",
+    "document": "Document_normativa/2006.06.09_GE.020_COMPONENTES_Y_CARACTERISTICAS_DE_LOS_PROYECTOS_D.S._2fLiILI.pdf",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T18:59:36.370",
-    "updated": "2022-02-21T18:59:36.370"
+    "created": "2022-02-22T18:13:25.615",
+    "updated": "2022-02-22T18:13:25.615"
   }
 },
 {
@@ -1822,261 +1809,203 @@
     "norma": "A.010",
     "name_denom": "Condiciones Generales de diseño",
     "base_legal": "D.S. N° 191-2021-VIVIENDA",
-    "fecha_publi": "2020-08-08",
-    "tipo_norma": 5,
-    "tipo_uso": 2,
-    "document": "Document_normativa/RNE_A.010_Resol.Minist._Nº_191-2021-VIVIENDA-_A.010_Condiciones_Gener_AYqA0O0.pdf",
+    "fecha_publi": "2022-02-19",
+    "tipo_norma": 1,
+    "tipo_uso": 1,
+    "document": "Document_normativa/A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_PSkB3fx_B7ITcyI.pdf",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T19:01:00.522",
-    "updated": "2022-02-21T19:01:00.522"
+    "created": "2022-02-22T18:17:19.207",
+    "updated": "2022-02-22T18:17:19.207"
   }
 },
 {
   "model": "normas.register_normativa",
   "pk": 4,
   "fields": {
-    "norma": "A.120",
-    "name_denom": "Accesibilidad Universal en Edificaciones (antes \"Accesibilidad para personas con discapacidad\")",
-    "base_legal": "R.M.N° 079-2019 -VIVIENDA\t",
-    "fecha_publi": "2019-05-02",
-    "tipo_norma": 8,
-    "tipo_uso": 2,
-    "document": "Document_normativa/R.M.029-2021-VIVIENDA_MODIF.NORMA_G.040_DEFINICIONES_RNE_29.01.2021_D_pu3oCVz.pdf",
+    "norma": "A.130",
+    "name_denom": "Requisitos de Seguridad   - . NOTA: La R.M. 061-2021-VIVIENDA Derogó el Capítulo VIII Comercio, de la Norma Técnica A.130, La norma Comercio A.070 ya incluye seguridad",
+    "base_legal": "D.S. N° 011-2006-VIVIENDA y D.S. N° 017-2012-VIVIENDA",
+    "fecha_publi": "2022-02-02",
+    "tipo_norma": 1,
+    "tipo_uso": 1,
+    "document": "Document_normativa/A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_MkOxKSm_plO27Ct.pdf",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T19:02:06.603",
-    "updated": "2022-02-21T19:02:06.604"
+    "created": "2022-02-22T18:18:12.101",
+    "updated": "2022-02-22T18:18:12.101"
   }
 },
 {
   "model": "normas.register_normativa",
   "pk": 5,
   "fields": {
-    "norma": "A.130",
-    "name_denom": "Requisitos de Seguridad - . NOTA: La R.M. 061-2021-VIVIENDA Derogó el Capítulo VIII Comercio, de la Norma Técnica A.130, La norma Comercio A.070 ya incluye seguridad",
-    "base_legal": "D.S. N° 011-2006-VIVIENDA y D.S. N° 017-2012-VIVIENDA\t",
-    "fecha_publi": "2019-11-09",
-    "tipo_norma": 16,
+    "norma": "Norma A.020",
+    "name_denom": "",
+    "base_legal": "Tabla excell de Pozo de Luz\t",
+    "fecha_publi": "2018-03-01",
+    "tipo_norma": 13,
     "tipo_uso": 2,
-    "document": "Document_normativa/RNE_A.010_Resol.Minist._Nº_191-2021-VIVIENDA-_A.010_Condiciones_Gener_FGJTeUw.pdf",
+    "document": "Document_normativa/A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_mgGadIV_9RDD8AJ.pdf",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T19:02:51.438",
-    "updated": "2022-02-21T19:02:51.438"
+    "created": "2022-02-22T18:19:02.861",
+    "updated": "2022-02-22T18:19:02.861"
   }
 },
 {
   "model": "normas.register_normativa",
   "pk": 6,
   "fields": {
-    "norma": "Norma A.020",
-    "name_denom": "Tabla excell de Pozo de Luz\t",
-    "base_legal": "R.M.N° 188-2021-Vivienda",
-    "fecha_publi": "2018-06-07",
-    "tipo_norma": 9,
-    "tipo_uso": 1,
-    "document": "Document_normativa/2006.06.09_GE.020_COMPONENTES_Y_CARACTERISTICAS_DE_LOS_PROYECTOS_D.S._2WaWva8.pdf",
+    "norma": "Norma E.M.050\t",
+    "name_denom": "Instalaciones Climatización\t",
+    "base_legal": "D.S. N° 011-2006-VIVIENDA\t",
+    "fecha_publi": "2006-06-20",
+    "tipo_norma": 1,
+    "tipo_uso": 2,
+    "document": "Document_normativa/A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_mgGadIV_I2u6Lb2.pdf",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T19:04:08.230",
-    "updated": "2022-02-21T19:04:08.231"
+    "created": "2022-02-22T18:19:54.395",
+    "updated": "2022-02-22T18:19:54.395"
   }
 },
 {
   "model": "normas.register_normativa",
   "pk": 7,
   "fields": {
-    "norma": "Norma E.M.050",
-    "name_denom": "Instalaciones Climatización",
-    "base_legal": "D.S. N° 011-2006-VIVIENDA",
-    "fecha_publi": "2008-05-08",
-    "tipo_norma": 6,
-    "tipo_uso": 2,
-    "document": "Document_normativa/2006.06.09_GE.020_COMPONENTES_Y_CARACTERISTICAS_DE_LOS_PROYECTOS_D.S._emdmwcV.pdf",
+    "norma": "A.010\t",
+    "name_denom": "Condiciones Generales de diseño\t",
+    "base_legal": "D.S. N° 191-2021-VIVIENDA\t",
+    "fecha_publi": "2013-02-20",
+    "tipo_norma": 14,
+    "tipo_uso": 1,
+    "document": "",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T19:06:00.234",
-    "updated": "2022-02-21T19:06:00.234"
+    "created": "2022-02-22T18:20:54.895",
+    "updated": "2022-02-22T18:20:54.895"
   }
 },
 {
   "model": "normas.register_normativa",
   "pk": 8,
   "fields": {
-    "norma": "E.M.030-RNE",
+    "norma": "E.M.030-RNE\t",
     "name_denom": "Instalaciones de Ventilación del Reglamento Nacional de Edificaciones.\t",
-    "base_legal": "R.M. N° 232-2020-VIVIENDA",
-    "fecha_publi": "2016-03-10",
-    "tipo_norma": 2,
+    "base_legal": "R.M. N° 232-2020-VIVIENDA\t",
+    "fecha_publi": "2017-02-10",
+    "tipo_norma": 16,
     "tipo_uso": 2,
-    "document": "Document_normativa/A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_O09ITlr_o4tLdMo.pdf",
+    "document": "Document_normativa/A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_mgGadIV_I2u6Lb2_FEgcUfZ.pdf",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T19:06:42.131",
-    "updated": "2022-02-21T19:06:42.131"
+    "created": "2022-02-22T18:21:34.393",
+    "updated": "2022-02-22T18:21:34.393"
   }
 },
 {
   "model": "normas.register_normativa",
   "pk": 9,
   "fields": {
-    "norma": "A244",
-    "name_denom": "OTRA NORMA DE PRUEBA 2",
-    "base_legal": "R.M. N° 490-2021-VIVIENDA\t",
-    "fecha_publi": "2022-02-11",
-    "tipo_norma": 2,
-    "tipo_uso": 1,
-    "document": "Document_normativa/A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_mgGadIV_yFLFp5q_gEu51LO.pdf",
+    "norma": "A244\t",
+    "name_denom": "OTRA NORMA DE PRUEBA 2\t",
+    "base_legal": "R.M.N° 122-2021-Vivienda",
+    "fecha_publi": "2018-10-10",
+    "tipo_norma": 4,
+    "tipo_uso": 2,
+    "document": "Document_normativa/A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_cu3befn.pdf",
     "es_foro": false,
     "es_vigente": false,
     "descripcion": "",
-    "created": "2022-02-21T19:08:33.911",
-    "updated": "2022-02-21T19:08:33.911"
-  }
-},
-{
-  "model": "normas.register_normativa",
-  "pk": 10,
-  "fields": {
-    "norma": "A.0100",
-    "name_denom": "Instalaciones subterraneas",
-    "base_legal": "R.M. N° 322-2019-Lotes\t",
-    "fecha_publi": "2012-10-10",
-    "tipo_norma": 2,
-    "tipo_uso": 1,
-    "document": "Document_normativa/33617_E9PYr3x_3XmOePZ_OpSqnox.pdf",
-    "es_foro": false,
-    "es_vigente": false,
-    "descripcion": "",
-    "created": "2022-02-21T19:09:44.593",
-    "updated": "2022-02-21T19:09:44.593"
+    "created": "2022-02-22T18:22:25.919",
+    "updated": "2022-02-22T18:22:25.919"
   }
 },
 {
   "model": "normas.register_palabraclave",
   "pk": 1,
   "fields": {
-    "name": "VIVIENDA",
-    "normativa": 1,
-    "created": "2022-02-21T18:57:24.320",
-    "updated": "2022-02-21T18:57:24.320"
+    "name": "vivienda",
+    "created": "2022-02-22T18:13:40.603",
+    "updated": "2022-02-22T18:13:40.603",
+    "normativas": [
+      1,
+      4,
+      9
+    ]
   }
 },
 {
   "model": "normas.register_palabraclave",
   "pk": 2,
   "fields": {
-    "name": "EDIFICIO",
-    "normativa": 1,
-    "created": "2022-02-21T18:57:40.885",
-    "updated": "2022-02-21T18:57:40.885"
+    "name": "restaurantes",
+    "created": "2022-02-22T18:14:05.396",
+    "updated": "2022-02-22T18:14:05.396",
+    "normativas": [
+      1,
+      3,
+      5,
+      8
+    ]
   }
 },
 {
   "model": "normas.register_palabraclave",
   "pk": 3,
   "fields": {
-    "name": "VIVIENDA",
-    "normativa": 1,
-    "created": "2022-02-21T19:10:38.919",
-    "updated": "2022-02-21T19:10:38.919"
+    "name": "viviena",
+    "created": "2022-02-22T18:28:49.531",
+    "updated": "2022-02-22T18:28:49.531",
+    "normativas": [
+      2
+    ]
   }
 },
 {
   "model": "normas.register_palabraclave",
   "pk": 4,
   "fields": {
-    "name": "VIVIENDA",
-    "normativa": 2,
-    "created": "2022-02-21T19:10:52.578",
-    "updated": "2022-02-21T19:10:52.578"
+    "name": "casa de reposo",
+    "created": "2022-02-22T18:29:27.365",
+    "updated": "2022-02-22T18:29:27.365",
+    "normativas": [
+      4,
+      5,
+      9
+    ]
   }
 },
 {
   "model": "normas.register_palabraclave",
   "pk": 5,
   "fields": {
-    "name": "EDIFICIO MULTIFAMILIAR",
-    "normativa": 2,
-    "created": "2022-02-21T19:11:02.780",
-    "updated": "2022-02-21T19:11:02.780"
+    "name": "asilo",
+    "created": "2022-02-22T18:29:27.378",
+    "updated": "2022-02-22T18:29:27.378",
+    "normativas": [
+      4
+    ]
   }
 },
 {
   "model": "normas.register_palabraclave",
   "pk": 6,
   "fields": {
-    "name": "RESTAURANTES",
-    "normativa": 3,
-    "created": "2022-02-21T19:11:17.687",
-    "updated": "2022-02-21T19:11:17.687"
-  }
-},
-{
-  "model": "normas.register_palabraclave",
-  "pk": 7,
-  "fields": {
-    "name": "CASA DE REPOSO",
-    "normativa": 5,
-    "created": "2022-02-21T19:11:34.960",
-    "updated": "2022-02-21T19:11:34.960"
-  }
-},
-{
-  "model": "normas.register_palabraclave",
-  "pk": 8,
-  "fields": {
-    "name": "VIVIENDA",
-    "normativa": 6,
-    "created": "2022-02-21T19:11:48.202",
-    "updated": "2022-02-21T19:11:48.202"
-  }
-},
-{
-  "model": "normas.register_palabraclave",
-  "pk": 9,
-  "fields": {
-    "name": "RESTAURANTES",
-    "normativa": 7,
-    "created": "2022-02-21T19:12:01.153",
-    "updated": "2022-02-21T19:12:01.153"
-  }
-},
-{
-  "model": "normas.register_palabraclave",
-  "pk": 10,
-  "fields": {
-    "name": "VIVIENDA",
-    "normativa": 7,
-    "created": "2022-02-21T19:12:04.468",
-    "updated": "2022-02-21T19:12:04.468"
-  }
-},
-{
-  "model": "normas.register_palabraclave",
-  "pk": 11,
-  "fields": {
-    "name": "EDIFICIO",
-    "normativa": 10,
-    "created": "2022-02-21T19:12:17.715",
-    "updated": "2022-02-21T19:12:17.715"
-  }
-},
-{
-  "model": "normas.register_palabraclave",
-  "pk": 12,
-  "fields": {
-    "name": "RESTAURANTES",
-    "normativa": 10,
-    "created": "2022-02-21T19:12:38.486",
-    "updated": "2022-02-21T19:12:38.486"
+    "name": "edificio multifamiliar",
+    "created": "2022-02-22T18:30:34.540",
+    "updated": "2022-02-22T18:30:34.540",
+    "normativas": [
+      6,
+      8
+    ]
   }
 }
 ]
