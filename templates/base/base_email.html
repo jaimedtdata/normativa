@@ -328,12 +328,16 @@ ul.social li{
 	      <tr>
 	          <td valign="middle" class="hero bg_blue">
               {% comment %}
-              <img src="https://github.com/jaimedtdata/normativa/blob/main/static/img/CAP_logofinal-2021-300-1.png" alt="CAP Logo" style="width: 400px; max-width: 600px; height: auto; margin: auto; display: block;">
-              {% endcomment %}
 	            <img src="{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo-final.png' %}" alt="CAP Logo" style="width: 400px; max-width: 600px; height: auto; margin: auto; display: block;">
-                
+              {% endcomment %}
+                <h4>Region - Lima</h4>
 	          </td>
 	      </tr>
+        <tr>
+          <td valign="middle" class="hero bg_blue">
+              <h4>Repositorio de Normas Legales</h4>
+          </td>
+      </tr>
 		  <tr>
           <td valign="middle" class="hero bg_blue" style="padding: 2em 0 4em 0;">
             <table>
@@ -383,7 +387,7 @@ ul.social li{
                         {% comment %}
                         <a href="{{ request.scheme }}://{{ request.get_host }}">Edificaciones</a>
                         {% endcomment %}
-                        <a href="{{ request.scheme }}://{{ request.get_host }}"> Repositorio de normas de CAP</a>
+                        <a href="{{ request.scheme }}://{{ request.get_host }}"> Repositorio de normas CAP</a>
                       </li>
 		              	</ul>
                       </td>
