@@ -67,7 +67,8 @@ def busque_normativa(request):
                 'name_denom': n.name_denom,
                 'base_legal': n.base_legal,
                 'document': n.document,
-                'fecha_publi': n.fecha_publi
+                'fecha_publi': n.fecha_publi,
+                'tipo_uso' : n.tipo_uso
             }
             normas_results.append(row)
 
