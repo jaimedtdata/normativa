@@ -1,3 +1,6 @@
+{% load static %}
+{% load user_tags %}
+
 <nav class="navbar navbar-expand-lg navbar-white bg-white">
     <button type="button" id="sidebarCollapse" class="btn btn-outline-secondary default-secondary-menu"><i class="fas fa-bars"></i><span></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -19,15 +22,35 @@
                 </div>
             </li> {% endcomment %}
             
+            
             {% if request.user %}
             <li class="nav-item dropdown">
                 <div class="nav-dropdown">
                     <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>{{request.user.last_name}}</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                     <div class="dropdown-menu dropdown-menu-right nav-link-menu">   
                         <ul class="nav-list">
-                            <li><a href="" class="dropdown-item"><i class="fas fa-address-card"></i> Profile</a></li>
-                            <li><a href="" class="dropdown-item"><i class="fas fa-envelope"></i> Messages</a></li>
-                            <li><a href="" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a></li>
+                            {% if request.user|has_group:"Premium" %} 
+                            <li>
+                                <a  href="{% url 'admin:index' %}" class="dropdown-item" target="_blank"><i class="fas fa-address-card"></i> Adm. Base de Datos</a>
+                            </li>
+                            <li>
+                                <a  href="{% url 'dash' %}" class="dropdown-item"><i class="fas fa-address-card"></i>Estadistica</a>
+                            </li>
+                            <li>
+                                <a  href="{% url 'foro' %}" class="dropdown-item"><i class="fas fa-address-card"></i>Foro Interactivo</a>
+                            </li>
+                            <div class="dropdown-divider"></div>
+                            {% endif %}
+                           
+                            <li>
+                                <a href="{% url 'search_normat' %}" class="dropdown-item"><i class="fas fa-envelope"></i> Busqueda Normas Legales</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'dateregister_norm' %}" class="dropdown-item"><i class="fas fa-cog"></i> Agregar Norma</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'bus_provedor' %}" class="dropdown-item"><i class="fas fa-cog"></i> Busqueda por proveedor</a>
+                            </li>
                             <div class="dropdown-divider"></div>
                             <li><a href="{% url 'login' %}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Cerrar</a></li>
                         </ul>
