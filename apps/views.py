@@ -57,7 +57,7 @@ def busque_normativa(request):
         area_normas=Areas_Normas.objects.all()
         a=SubNormativa.objects.all()
 
-        normas = Register_Normativa.objects.filter(keywords__name__icontains=pal_clave).order_by('tipo_norma__order')
+        normas = Register_Normativa.objects.filter(keywords__name__search=pal_clave).order_by('tipo_norma__order')
       
         normas_results = []
         for n in normas:
