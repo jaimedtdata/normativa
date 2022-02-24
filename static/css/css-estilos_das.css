@@ -589,6 +589,7 @@ label.error { font-size: 11px; color: #ff4f42; margin-bottom: 0; position: absol
 .gMarginTop25 { margin-top: 25px; }
 
 .gMarginTop20 { margin-top: 20px !important; }
+.gMarginTop5 { margin-top: 5px !important; }
 
 .gMarginTop18 { margin-top: 18px; }
 
@@ -747,6 +748,7 @@ label.error { font-size: 11px; color: #ff4f42; margin-bottom: 0; position: absol
 .gPaddingLeft0 { padding-left: 0 !important; }
 
 .gPaddingBottom25 { padding-bottom: 25px !important; }
+.gPaddingBottom5 { padding-bottom: 5px !important; }
 
 .gBorder0 { border: 0; }
 
