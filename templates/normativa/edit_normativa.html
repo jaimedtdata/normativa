@@ -10,9 +10,8 @@
 {% block content %}
     
     <div class="container ">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-1">
+        <div class="row text-center">
+            <div class="col-2">
                 <a href="{% url 'dateregister_norm' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" style="color:black;"width="35" height="35" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
@@ -22,12 +21,12 @@
             </div>
     
             <div class="col-8">
-                <h1 class="gUppercase gFontWeight700" style="padding-left:120px;">
+                <h1 class="gUppercase gFontWeight700">
                     Editar Normativa
                 </h1>
             </div>
     
-            <div class="col-1">
+            <div class="col-2">
                 <a href="{% url 'dateregister_norm' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" style="color:black;" width="35" height="45" fill="currentColor" class="bi bi-skip-end-btn-fill" viewBox="0 0 16 16">
                         <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z"/>
@@ -59,7 +58,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="fecha_publi">Publicacion</label>
-                        <input type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}" required/>
+                        <input type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}" required min="1900-01-01" max="{{fecha_hoy}}"/>
                     </div>
                 </div>
             </div>

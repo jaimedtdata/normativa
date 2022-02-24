@@ -27,9 +27,8 @@
     }
 </script>
 <br>
-<div class="row">
-    <div class="col-1"></div>
-    <div class="col-1">
+<div class="row text-center">
+    <div class="col-2">
         <a href="{% url 'home' %}">
             <svg xmlns="http://www.w3.org/2000/svg" style="color:black;"  width="35" height="35" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
@@ -38,13 +37,14 @@
         </a>
     </div>
 
-    <div class="col-8">
-        <h1 class="gUppercase gFontWeight700" style="padding-left:94px;">
-            Normatividad Edificatoria
+    <div class="col-8" style="z-index: 1">
+        <h1 class="gUppercase gFontWeight700" >
+            Normativa Edificatoria
         </h1>
+        <a href="{% url 'search_normat' %}" class="btn btn-lg btn-warning text-dark" > <b> Búsqueda de normas </b> <i class="fas fa-search text-dark"> </i> </a>
     </div>
 
-    <div class="col-1">
+    <div class="col-2">
         <a href="{% url 'home' %}">
             <svg xmlns="http://www.w3.org/2000/svg" style="color:black;" width="35" height="45" fill="currentColor" class="bi bi-skip-end-btn-fill" viewBox="0 0 16 16">
                 <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z"/>
@@ -70,35 +70,35 @@
         <hr class="gSeparator gSeparatorTrans gSeparator20">
         <div class="gRowTemp">
             <a href="{% url 'norma_urb' %}" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
-                <div class="gWidth50 gHeight3 gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                    <img src="{% static 'images/img-propiedad-intelectual2.png' %}" class="gInlineBlock gWidth50 gMarginTop31">
-                    
+                <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                
+                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                    <img class="img-fluid mt-5" src="{% static 'images/edificaciones.svg' %}" class="gInlineBlock gWidth37 gMarginTop31">
                 </div>
+                
                 <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
                     Reglamento Nacional de
                     <br>
                     Edificaciones
                 </h3></a>
             
-            <a href="{% url 'norma_tecuso' %}" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox3"> 
-                <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                
-                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                    <img src="{% static 'images/img-people.png' %}" class="gInlineBlock gWidth60 gMarginTop31">
+            <a href="#" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox3"> 
+                <div class="gWidth50 gHeight3 gFondoCircleGris gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                    <img class="img-fluid " src="{% static 'images/por_uso.svg' %}" class="gInlineBlock gWidth37 gMarginTop31">
                 </div>
                 
                 <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                    Normas Tecnicas
+                    Normas
                     <br>
                     por uso
                 </h3>
                 </a>
             
-            <a href="competencia.html" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox4">
+            <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox4">
                 <div class="gWidth50 gHeight3 gFondoCircleRojo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                 <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleRojo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                    <img src="{% static 'images/img-people2.png' %}" class="gInlineBlock gWidth65 gMarginTop31">
+                    <img class="img-fluid mt-3" src="{% static 'images/municipales.svg' %}" class="gInlineBlock gWidth65 gMarginTop31">
                 </div>
                 <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
                     Normas
@@ -108,36 +108,37 @@
         </div>
         <hr class="gSeparator gSeparatorTrans gSeparator20">
         <div class="gRowTemp">
-            <a href="poderjudicial.html" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox5">
+            <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox5">
                 <div class="gWidth50 gHeight3 gFondoCircleGris3 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                 <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris3 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                    <img src="{% static 'images/img-judicial.png' %}" class="gInlineBlock gMarginTop5" width="100">
+                    <img class="img-fluid mt-4" src="{% static 'images/reglamento.svg' %}" class="gInlineBlock gMarginTop5" width="87">
                 </div>
                 
-                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Opiniones
-                                                                                                            vinculantes
-                                                                                                            y precedentes
+                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Reglamento <br>
+                                                                                                            Comentado
                                                                                                             </h3></a>
-            <a href="pgw_laudos.html" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
+            <a href="#" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
                 <div class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                 <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
                     <img src="{% static 'images/img-arbitro.png' %}" class="gInlineBlock gMarginTop5" width="100">
                     
                 </div>
-                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">normas proyectos
-                                                                                                            sostenibles<br>
+                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Opiniones
+                                                                                                            vinculantes
+                                                                                                            y cauística
+                                                                                                            <br>
                                                                                                             <br>
                                                                                                             </h3></a>
                                                                                                            
 
-            <a href="tribunal.html" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
-                <div class="gWidth50 gHeight3 gFondoCircleGris gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                    <img src="{% static 'images/img-tribunal.png' %}" class="gInlineBlock gWidth37 gMarginTop31">
+            <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
+                <div class="gWidth50 gHeight3 gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                    <img class="img-fluid mt-3" src="{% static 'images/boletin.svg' %}" class="gInlineBlock gWidth37 gMarginTop31" width="80">
                     
                 </div>
-                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Impacto vial 
-                                                                                                            <br>Impacto Ambiental</h3></a>
+                <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Boletín 
+                                                                                                            <br>Normativo</h3></a>
                                                                                 
         </div>
         
