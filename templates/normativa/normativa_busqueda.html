@@ -21,7 +21,7 @@
             <br><br>
             <div class="col">
                 <!--Input-->
-                <form method="POST" action="{% url 'bus_normaclave' %}">
+                <form method="POST" action="{% url 'bus_normaclave' %}" id="search-form" autocomplete="off">
                     {% csrf_token %}
                     <select class="form-select" name="tipo_uso" aria-label="Default select example">
                         <option selected>Todo</option>
@@ -31,10 +31,12 @@
                     </select>
                     <br>
                     <div class="input-group mb-3">
-                        <input type="text" name="pal_clave"class="form-control" placeholder="Busqueda de Palabra clave" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="text" name="pal_clave"class="form-control" placeholder="Busqueda de Palabra clave" aria-label="Recipient's username" aria-describedby="button-addon2" id="search-input">
                         <button type ="submit" class="btn btn-outline-secondary text-light" style="background-color: #8B7547" type="button" id="button-addon2">Buscar</button>
                     </div>
                 </form>
+                <div id="results-box" class="results-card not-visible">
+                </div>
                 <!--endinput-->
             </div>
             
@@ -637,8 +639,8 @@
     
     <script src="js/bootstrap.bundle.min.js" ></script>
     
-    {% comment %}
     <script src="{% static 'javascript/search_ajax.js' %}"></script>
+    {% comment %}
         
     {% endcomment %}
 {% endblock %}

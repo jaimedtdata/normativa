@@ -17,6 +17,7 @@ admin.site.register(Member,MemberAdmin)
 class Register_NormativaAdmin(admin.ModelAdmin):
     list_display=('id','norma','name_denom','base_legal','fecha_publi','tipo_norma','tipo_uso','document')
     #readonly_fields = ['created', 'updated']    
+    list_filter = ['es_vigente', 'created', 'name_denom']
 
 class Register_PalabraclaveAdmin(admin.ModelAdmin):
     list_display=('id','name','normativa')

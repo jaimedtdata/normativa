@@ -9,7 +9,6 @@
 
     <div class="text-center">
         <h3 class="mb-4 text-primary">ACCESO A SUSCRIPTORES</h3>
-        <h5 class="mb-4 text-muted">Iniciar Sesión</h5>
     </div>
 
     <form method="POST" id="login-form">
@@ -22,16 +21,15 @@
         </div>
         {% include 'base/partials/_form_errors.html' %}
         <div class="">
-            <button type="submit" class="btn btn-primary  btn-block" style="font-size: large;"  >Ingresar</button>
+            <button type="submit" class="btn btn-primary  btn-block" style="font-size: large;"  >Iniciar Sesión</button>
         </div>
         <hr>
     </form>
-    <hr>
 
-    <div class="text-center">
+    <div class="text-center text-primary">
         <a class="text-primary" href="{% url 'password_reset' %}">¿Olvidate tu Contraseña?</a>
     </div>
-    <div class="text-center">
+    <div class="text-center text-primary">
         <a class="text-primary" href="{% url 'sign-up-user' %}">¿No tienes cuenta? ¡Regístrate!</a>
     </div>
 
