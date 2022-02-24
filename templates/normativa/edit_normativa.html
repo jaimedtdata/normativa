@@ -86,7 +86,11 @@
                         <label>Adjuntar Documento</label>
                         <br>
                         
-                        <a href="#" class="text-dark"> {{normativa.document}} </a>
+                        {% if normativa.document %}
+                                    <a class="text-dark" target="_blank" href="{{normativa.document.url}}">
+                                        <b> Esta Normativa tiene archivo (click para ver) </b>
+                                    </a>
+                        {% endif %}
                         
                         <br>
                         <br>
