@@ -42,10 +42,10 @@
             
             {% if request.method == "POST" %}
                 {% if normas_results %}
-                <div class="text-muted"><i> Se encontraron <b>{{normas_results|length}}</b> resultados para "{{pal_clave|lower}}"</i></div>
+                <div class="text-muted"><i> Se encontraron <b>{{normas_results|length}}</b> resultados para <b class="text-primary font-weight-bolder">"{{pal_clave|lower}}</b>"</i></div>
                 {% else %}
                     {% if pal_clave != '' %}
-                    <div class="alert alert-danger">No se encontró ningun resultado para "{{pal_clave}}"</div>
+                    <div class="alert alert-danger">No se encontró ningun resultado para "{{pal_clave|lower}}"</div>
                     {% endif %}
                 {% endif %}
             {% endif %}

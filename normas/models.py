@@ -188,6 +188,9 @@ class Register_Normativa(models.Model):
     class Meta:
         verbose_name_plural='6.Normas Registradas-Frontend'
         db_table='register_normativa'
+
+    def __str__(self):
+        return self.norma
     
 class Register_Palabraclave(models.Model):
     name = models.CharField(blank=False,null=False,unique=True, max_length=200,verbose_name='Nombre Palabra Clave')
