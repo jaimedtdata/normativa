@@ -15,7 +15,7 @@
 <!--content-->
 {% block content %}
 
-<div class="container">
+<div class="mx-2">
 <!--   Area Form    -->
 <script type="text/javascript">
     function submitByEnter(e) {
@@ -32,10 +32,7 @@
 <div class="row text-center" >
     <div class="col-2">
         <a href="{% url 'home' %}">
-            <svg xmlns="http://www.w3.org/2000/svg" style="color:black;" width="35" height="35" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-            </svg>
+            <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
         </a>
     </div>
 
@@ -45,248 +42,270 @@
         </h1>
     </div>
 
-    <div class="col-1">
+    <div class="col-2">
         <a href="{% url 'norma_edificatoria' %}">
-            <svg xmlns="http://www.w3.org/2000/svg" style="color:black;" width="35" height="45" fill="currentColor" class="bi bi-skip-end-btn-fill" viewBox="0 0 16 16">
-                <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z"/>
-            </svg>
+            <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
         </a>
     </div>
-    <div class="col-2"></div>
 </div>
 <br><br>
-{% if norma_date %}
-    <table class="table table-bordered ">
-        <thead class="thead-dark">
-            <tr class="text-center">
-                <th>Norma</th>
-                <th style="width:30%">Titulo</th>
-                <th>Base Legal</th>
-                <th>Tipo Uso</th>
-                <th>Documento</th>
-                <th>Publicacion</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for norma in norma_date %}
-            <tr>
-                <td>
-                    {{norma.norma}}
-                </td>
-                <td>{{norma.name_denom}}
-                    {% if norma.es_vigente == False %}
-                        <span class="fst-italic fw-lighter fs-7">*No vigente</span>
-                    {% endif %}
 
-                    {% if norma.descripcion %}
-                        <p class="mt-3 "> <span class="fw-bold">Descripción:</span><small> {{norma.descripcion}}.</small>  </p>
-                    {% endif %}
-                </td>
-                <td>{{norma.base_legal}}</td>
-                <td>{{norma.tipo_uso}}</td>
-                <td class="text-center">
-                    {% if norma.document %}
-                        <a target="_blank" href="{{norma.document.url}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" style="color:black;position:relative;"width="28" height="28" fill="currentColor" class="bi bi-file-pdf" viewBox="0 0 16 16">
-                                <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
-                                <path d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.701 19.701 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.716 5.716 0 0 1-.911-.95 11.642 11.642 0 0 0-1.997.406 11.311 11.311 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.27.27 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.647 12.647 0 0 1 1.01-.193 11.666 11.666 0 0 1-.51-.858 20.741 20.741 0 0 1-.5 1.05zm2.446.45c.15.162.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.881 3.881 0 0 0-.612-.053zM8.078 5.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
-                            </svg>
-                        </a>
-                    {% else %}
-
-                    <span class="text-center"><i class="fa fa-minus fa-2x text-dark" aria-hidden="true"></i></span>
-                    {% endif %}
-                </td>
-                <td>{{norma.fecha_publi}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        
-    </table>
-{% endif %}
-
-{% comment %}
-<div class="gContainer gPositionRelative gContenido" style="margin-top:-45px;">
-    <div class="gAlignCenter">
-        <hr class="gSeparator gSeparatorTrans gSeparator15">
-        
-        <!--<h4 class="gFontWeight300">
-            Encuentre aquí todas las resoluciones 
-            <b>Por favor ingrese a una categoría.</b>
-        </h4>-->
-        <hr class="gWidth100 gSeparator gSeparatorTrans gInlineBlock">
-        
-        <hr class="gSeparator gSeparatorTrans gSeparator20">
-        <div class="gRowTemp">
-            <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
-                <div class="gWidth50 gHeight3 gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                    <img src="{% static 'images/img-propiedad-intelectual2.png' %}" class="gInlineBlock gWidth50 gMarginTop31">
-                    
-                </div>
-                <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                    Reglamento Nacional de
-                    <br>
-                    Edificaciones
-                </h3></a>
-        </div>
-    </div>
-</div>
-<br>
-<div class="container">
-    <h4 class="text-center">NORMAS TÉCNICAS DEL REGLAMENTO NACIONAL DE EDIFICACIONES VIGENTE</h4>
-    <br>
+<div class="">
     <div class="row">
-        <div class="col-6">
-            <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6"><h5>Titulo I<br><h5>Generalidades</h5></div>
-            </div>
-            <div class="row">
-                <div class="col-6">G.010</div>
-                <div class="col-6">Consideraciones Básicas</div>
-            </div>
-            <div class="row">
-                <div class="col-6">G.020</div>
-                <div class="col-6">Principios Generales</div>
-            </div>
-            <div class="row">
-                <div class="col-6">G.030</div>
-                <div class="col-6">
-                    Derechos y Responsabilidades<br>
-                    Modificación del artículo 11<br>
-                    (R.M.Nª 341-2018-VIVIENDA)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">G.040</div>
-                <div class="col-6">Definiciones<br>
-                    (R.M.Nº 029-2021-VIVIENDA)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">G.050</div>
-                <div class="col-6">Seguridad durante la Construcción<br>
-                    (D.S.Nª 010-2009-VIVIENDA)
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="row">
-                    <div class="col-6"></div>
-                    <div class="col-6">Titulo II HABILITACIONES URBANAS </div>
-                </div>
-                <div class="row">
-                    <div class="col"><h6 class="text-center">CONSIDERACIONES GENERALES DE LAS HABILITACIONES </h6></div>
-                </div>
-                <div class="row">
-                    <div class="col-6">GH.010</div>
-                    <div class="col-6">Componentes de Diseño Urbano<br>
-                                      (D.S.Nª 006-2011-VIVIENDA
+      <div class="col-sm" style="height:720px;">
+        <div class="form-group">
+            <select class="form-control" name="subnormativas[]" multiple="multiple" style="height:100%;" id="select-norms">
+                {% for sn in subtipo_normas %}
+                    <small>
+                        <option class="text-wrap" value="{{sn.id}}">{{sn.subcategory_name}} </option>
+
+                    </small>
+                {% endfor %}
+            </select>
+        </div>
+      </div>
+      
+      <div class="col-sm-9">
+        <div class="row mb-3 px-2">
+            <select class="form-control" id="area-normas">
+                <small>
+                    <option class="text-wrap" value="0">TODOS</option>
+
+                </small>
+                {% for an in area_normas %}
+                    <small>
+                        <option class="text-wrap" value="{{an.id}}">{{an.area_name}} </option>
+
+                    </small>
+                {% endfor %}
+
+            </select> 
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <div class="form-group">
+                    <div class="form-control mb-3">
+                        <input class="form-control" type="text" id="filter-input" placeholder="BUSCAR POR NORMA, TITULO O BASE LEGAL"/>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">GH.020</div>
-                    <div class="col-6">Componentes de Diseño Urbano<br>
-                                      (D.S.Nª 006-2011-VIVIENDA)
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6"> II.1</div>
-                    <div class="col-6">TIPOS DE HABILITACIONES</div>                    
-                </div>
-                <div class="row">
-                    <div class="col-6">TH.010</div>
-                    <div class="col-6">Habilitaciones residenciales</div>
-                </div>
-                <div class="row">
-                    <div class="col-6">TH.020</div>
-                    <div class="col-6">Habilitaciones Comerciales<br>
-                                      (D.S.Nª 006-2011-VIVIENDA)</div>
-                </div>
-                <div class="row">
-                    <div class="col-6">TH.030</div>
-                    <div class="col-6">Habilitaciones para uso industrial</div>
-                </div>
-                <div class="row">
-                    <div class="col-6">TH.040</div>
-                    <div class="col-6">Habilitaciones para usos especiales</div>
-                </div>
-                <div class="row">
-                    <div class="col-6">TH.050</div>
-                    <div class="col-6">Habilitaciones en riberas y laderas</div>
-                </div>
-                <div class="row">
-                    <div class="col-6">TH.060</div>
-                    <div class="col-6">Reurbanización</div>
-                </div>
+            </div>
+
+            <div class="col-md-3">
+                <input class="form-control" type="date" name="daterange"/>
             </div>
         </div>
-        <div class="col-6">
-            <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6">TITULO III<br>
-                                  EDIFICACIONES
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">CONSIDERACIONES GENERALES DE LAS EDIFICACIONES</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
-            <div class="row">
-                <div class="col-6">GE.010</div>
-                <div class="col-6">Alcances y Contenido</div>
-            </div>
+
+        <div class="row">
+
+
+            {% if norma_date %}
+            <table class="table table-bordered ">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th>Norma</th>
+                        <th style="width:30%">Titulo</th>
+                        <th>Base Legal</th>
+                        <th>Tipo Uso</th>
+                        <th>Documento</th>
+                        <th>Publicacion</th>
+                    </tr>
+                </thead>
+                <tbody id="normas_edificatorias">
+                    {% for norma in norma_date %}
+                    <tr>
+                        <td>
+                            {{norma.norma}}
+                        </td>
+                        <td>{{norma.name_denom}}
+                            {% if norma.es_vigente == False %}
+                                <span class="fst-italic fw-lighter fs-7 text-center text-danger">*No vigente</span>
+                            {% endif %}
+
+                            {% if norma.descripcion %}
+                                <p class="mt-3 "> <span class="fw-bold">Descripción:</span><small> {{norma.descripcion}}.</small>  </p>
+                            {% endif %}
+                        </td>
+                        <td>{{norma.base_legal}}</td>
+                        <td>{{norma.tipo_uso}}</td>
+                        <td class="text-center">
+                            {% if norma.document %}
+                                <a target="_blank" href="{{norma.document.url}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="color:black;position:relative;"width="28" height="28" fill="currentColor" class="bi bi-file-pdf" viewBox="0 0 16 16">
+                                        <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                        <path d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.701 19.701 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.716 5.716 0 0 1-.911-.95 11.642 11.642 0 0 0-1.997.406 11.311 11.311 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.27.27 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.647 12.647 0 0 1 1.01-.193 11.666 11.666 0 0 1-.51-.858 20.741 20.741 0 0 1-.5 1.05zm2.446.45c.15.162.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.881 3.881 0 0 0-.612-.053zM8.078 5.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+                                    </svg>
+                                </a>
+                            {% else %}
+
+                            <span class="text-center"><i class="fa fa-minus fa-2x text-dark" aria-hidden="true"></i></span>
+                            {% endif %}
+                        </td>
+                        <td>{{norma.fecha_publi}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        {% endif %}
+              
+
         </div>
+        
+      </div>
     </div>
-</div>
-{% endcomment %}
+  </div>
 
 </div>
    
 
 
 {% endblock %}
+
+{% block js %}
+
+<script>
+    
+    const normas = {{normas|safe}}
+    var resultado = normas;
+
+    $("#select-norms").change(function(){
+        
+        var subnormativas = $("#select-norms").val()
+        
+        if (subnormativas.length == 0) {
+            resultado = normas
+        } else {
+            resultado = getNormativas(subnormativas)
+        }
+
+        render(resultado)
+        
+    });
+
+    $("#filter-input").keyup(function(){
+        
+        var search = $("#filter-input").val()
+        
+        if (search.length == 0) {
+            resultado = normas
+        } else {
+            resultado = getSearchNormativas(search)
+
+        }
+        
+        render(resultado)
+    })
+
+    $("#area-normas").change(function(){
+        
+        var tipo_uso_id = $("#area-normas").val()
+        
+        if (tipo_uso_id == 0) {
+            resultado = normas
+        } else {
+            resultado = getTipoUsoNormativas(tipo_uso_id)
+        }
+        
+        render(resultado)
+    })
+
+    function getNormativas(subnormativas)
+    {
+
+        let respuesta = [];
+        
+        subnormativas.forEach(sn => {
+            let r = normas.filter(n => {
+                        return n.tipo_norma_id == sn
+                    })
+
+            respuesta = respuesta.concat(r)
+        })
+
+        return respuesta
+    }
+
+    function getSearchNormativas(search)
+    {
+        let respuesta = normas.filter(n => {
+            return n.norma.includes(search.toUpperCase()) || n.name_denom.includes(search.toUpperCase() || n.base_legal.includes(search.toUpperCase()))
+        })
+
+
+        return respuesta
+    }
+
+    function getTipoUsoNormativas(tipo_uso_id)
+    {
+        let respuesta = normas.filter(n => {
+            return n.tipo_uso_id == tipo_uso_id
+        })
+
+
+        return respuesta
+    }
+    
+    function render(resultado)
+    {
+        html = ``
+    
+        resultado.forEach((r) => {
+            html += /*html*/
+                    `<tr>
+                        <td>
+                            ${r.norma}`;
+                        
+            if (r.es_vigente) {
+                html += /*html*/`
+                    <span class="fst-italic fw-lighter fs-7 text-center text-danger">*No vigente</span>
+                `
+            }
+
+            html +=/*html*/
+                `</td>
+                    <td>
+                        ${r.name_denom}
+                        `
+                        
+                        if (r.descripcion) {
+                            html += /*html*/`
+                                <p class="mt-3 "> <span class="fw-bold">Descripción:</span><small> ${r.descripcion}.</small>  </p>
+                            `
+                        }
+                        
+                        html +=/*html*/`
+                    </td>
+                    <td>${r.base_legal}</td>
+                    <td>${r.tipo_uso}</td>
+                    <td class="text-center">
+                        `
+                        
+                        if (r.document) {
+                            html += /*html*/`
+                                <a target="_blank" href="${r.document}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="color:black;position:relative;"width="28" height="28" fill="currentColor" class="bi bi-file-pdf" viewBox="0 0 16 16">
+                                        <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                        <path d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.701 19.701 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.716 5.716 0 0 1-.911-.95 11.642 11.642 0 0 0-1.997.406 11.311 11.311 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.27.27 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.647 12.647 0 0 1 1.01-.193 11.666 11.666 0 0 1-.51-.858 20.741 20.741 0 0 1-.5 1.05zm2.446.45c.15.162.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.881 3.881 0 0 0-.612-.053zM8.078 5.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+                                    </svg>
+                                </a>
+
+                        
+                            `
+                        } else {
+                            html += /*html*/` <span class="text-center"><i class="fa fa-minus fa-2x text-dark" aria-hidden="true"></i></span>`
+                        }
+                        
+                        html += /*html*/`
+                    </td>
+                    <td>
+                        ${r.fecha_publi}
+                    </td>
+                </tr>`
+        })
+
+        document.getElementById('normas_edificatorias').innerHTML = html;
+    }
+
+</script>
+
+{% endblock js %}

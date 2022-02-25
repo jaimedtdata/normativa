@@ -12,11 +12,8 @@
     <div class="container ">
         <div class="row text-center">
             <div class="col-2">
-                <a href="{% url 'dateregister_norm' %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" style="color:black;"width="35" height="35" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                        <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-                    </svg>
+                <a href="{% url 'home' %}">
+                    <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
                 </a>
             </div>
     
@@ -28,9 +25,7 @@
     
             <div class="col-2">
                 <a href="{% url 'dateregister_norm' %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" style="color:black;" width="35" height="45" fill="currentColor" class="bi bi-skip-end-btn-fill" viewBox="0 0 16 16">
-                        <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z"/>
-                    </svg>
+                    <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
                 </a>
             </div>
             <div class="col-1"></div>
@@ -114,10 +109,11 @@
                     <textarea class="form-control" rows="5" maxlength="200" name="descripcion">{{ normativa.descripcion }}</textarea>
                 </div>
             </div>
-            <br><br>
-            <button class="btn btn-block btn-primary" type="submit" >Editar Norma</button>
+            <button class="btn btn-lg btn-primary float-right" type="submit" >Guardar Cambios</button>
         </form>
-            
+        <h2 class="text-center mt-5"> Editar Palabras Clave</h2>
+        {% include '../partials/_palabras_clave.html' %}
+        
     </div>
 {% endblock %}
 
@@ -126,11 +122,72 @@
 
     <script>
 
-        $('#tipo_norma').val('{{normativa.tipo_norma_id}}')    
-        $('#tipo_uso').val('{{normativa.tipo_uso_id}}')    
-        $('#es_foro').prop('checked',  '{{normativa.es_foro}}' == 'True' ? true : false )
-        $('#es_vigente').prop('checked',  '{{normativa.es_vigente}}' == 'True' ? true : false )
-
+        $(document).ready(function() {
+            $('#tipo_norma').val('{{normativa.tipo_norma_id}}')    
+            $('#tipo_uso').val('{{normativa.tipo_uso_id}}')    
+            $('#es_foro').prop('checked',  '{{normativa.es_foro}}' == 'True' ? true : false )
+            $('#es_vigente').prop('checked',  '{{normativa.es_vigente}}' == 'True' ? true : false )
+            
+            $("#registrar_palabras").submit( function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize()
+                  }).done(function(data) {
+                    $('.select-tags').val(null).trigger('change');
+                    html = ``
+    
+                    data.forEach((e) => {
+                        html += /*html*/
+                                `<tr>
+                                    <th scope="row">${e.id}</th>
+                                    <td>${e.name}</td>
+                                    <td>
+                                        <button type="button" onclick="eliminarPc(${e.id})" class="btn btn-block btn-danger">    
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>`
+                    })
+    
+                    document.getElementById('normativas_palabras_clave').innerHTML = html;
+    
+                  });
+            })
+    
+            
+            
+    
+        });
+    
+        function eliminarPc(id) {
+            $.ajax({
+                url: `{% url 'eliminar-palabras-clave-normativa' normativa.id %}`,
+                data: {
+                    'palabra_clave_id' : id
+                }
+                }).done(function(data) {
+    
+                html = ``
+    
+                data.forEach((e) => {
+                    html += /*html*/
+                            `<tr>
+                                <th scope="row">${e.id}</th>
+                                <td>${e.name}</td>
+                                <td>
+                                    <button type="button" onclick="eliminarPc(${e.id})" class="btn btn-block btn-danger">    
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>`
+                })
+    
+                document.getElementById('normativas_palabras_clave').innerHTML = html;
+    
+                });
+        }
 
     </script>
 {% endblock %}

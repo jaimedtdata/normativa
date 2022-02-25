@@ -99,6 +99,16 @@
                     <textarea class="form-control" rows="5" maxlength="200" name="descripcion"></textarea>
                 </div>
             </div>
+            <div class="form-group">
+                <label>
+                    Palabra Clave:
+                </label>
+                <select class="form-control select-tags" name="palabras_clave[]" multiple="multiple" style="width:100%;" id="select4">
+                    {% for pc in palabras_clave %}
+                        <option value="{{pc.name}}"> {{pc.name}} </option>
+                    {% endfor %}
+                </select>    
+            </div>
             <br>
             <div class="row">
                 <div class="col">
