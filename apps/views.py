@@ -27,6 +27,7 @@ from normas.models import Areas_Normas,Master_Normas,Categories_Normas
 from foro.models import Coments_foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchVector, SearchQuery
 
 # Johao #
 
@@ -55,10 +56,35 @@ def busque_normativa(request):
         pal_clave=request.POST['pal_clave'].upper()
         norma_tipo_uso=request.POST['tipo_uso'].upper()
         area_normas=Areas_Normas.objects.all()
-        a=SubNormativa.objects.all()
+        normas= None
+        #normas = Register_Normativa.objects.filter(keywords__name__search=pal_clave).order_by('tipo_norma__order')
+        
+        # normas = Register_Normativa.objects.annotate(
+        #                         search = SearchVector('keywords__name', 'norma','name_denom',
+        #                          'base_legal')
+        #                         ).filter(search=pal_clave).order_by('tipo_norma__order')
 
-        normas = Register_Normativa.objects.filter(keywords__name__search=pal_clave).order_by('tipo_norma__order')
-      
+        if norma_tipo_uso == 'TODO':
+            normas = Register_Normativa.objects.annotate(
+                                search = SearchVector('keywords__name', 'norma','name_denom',
+                                 'base_legal', config='Spanish')
+                                ).filter(search=SearchQuery( pal_clave, config='Spanish')).order_by('tipo_norma__order')
+
+        else:
+            normas = Register_Normativa.objects.filter(
+                    tipo_uso__area_name=norma_tipo_uso
+                    ).annotate(search = SearchVector('keywords__name', 'norma','name_denom',
+                                 'base_legal', config='Spanish')
+                                ).filter(search=SearchQuery( pal_clave, config='Spanish')).order_by('tipo_norma__order')
+        print(norma_tipo_uso)
+
+        # print('#####===============')
+        # for n in normas.values():
+        #     print(n)
+        #     print("--------------------------")
+        #     print("SEARCH: ", n['search'])
+        #     print('*********************')
+
         normas_results = []
         for n in normas:
             row ={
