@@ -28,18 +28,21 @@
                         <td>Documento</td>
                         <td>Publicacion</td>
                         <td>Observacion</td>
-                        <td>Palabra clave</td>
+                        {% comment %} <td>Palabra clave</td> {% endcomment %}
                     </tr>
                 </thead>
                 <tbody>
                     {% if norma_register %}
                         {% for norma in norma_register %}
                         <tr>
-                            <td>{{norma.norma}}</td>
-                            <td>{{norma.name_denom}} 
+                            <td>{{norma.norma}}
+                                <br>
                                 {% if norma.es_vigente == False %}
-                                    <span class="fst-italic fw-lighter fs-7">*No vigente</span>
+                                    <span class="fst-italic fw-lighter fs-7 text-danger">*No vigente</span>
                                 {% endif %}
+                            </td>
+                            <td>{{norma.name_denom}} 
+                                
                             </td>
                             <td>{{norma.base_legal}}</td>
                             <td>{{norma.tipo_uso}}</td>
@@ -66,11 +69,11 @@
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
-                            <td class="text-center">
+                            {% comment %} <td class="text-center">
                                 <a href="/register_clave/{{norma.id}}" class="btn btn-success">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </a>
-                            </td>
+                            </td> {% endcomment %}
                         </tr>
                         {% endfor %}
                     {% endif %}

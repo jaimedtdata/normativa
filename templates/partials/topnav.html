@@ -3,7 +3,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-white bg-white">
     {% comment %} <button type="button" id="sidebarCollapse" class="btn btn-outline-secondary default-secondary-menu"><i class="fas fa-bars"></i><span></span></button> {% endcomment %}
-    
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/cap-logo.svg' %}" width="200"  class="d-inline-block align-top" alt="">
+    </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="d-flex justify-content-around bd-highlight">
             <ul class="navbar-nav mr-auto">

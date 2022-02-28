@@ -1,3 +1,4 @@
+import json
 import uuid
 import random
 from datetime import datetime
@@ -33,6 +34,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery
 
 from bus_normativa.models import date_normativa
 from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave,SubNormativa
+from normas.serializer import normas_serializer
 
 
 def busqueda_clavenormativa(request):
@@ -111,11 +113,13 @@ def busque_normativa(request):
 
 # CRUD Normativa
 def tipo_normativa(request):
-   normativa = Subcategories_Normas.objects.all()
+   normativa = Subcategories_Normas.objects.order_by('order')
    tipo_uso=Areas_Normas.objects.all()
+   palabras_clave = Register_Palabraclave.objects.all()
    context = {
         'normativa':normativa,
         'tipo_uso':tipo_uso,
+        'palabras_clave' : palabras_clave,
         'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
     }
    return render(request,'normativa/form_normativa.html',context)
@@ -132,13 +136,20 @@ def register_normativa(request):
         es_foro = True if request.POST.get('es_foro', False) == 'on' else False
         es_vigente = True if request.POST.get('es_vigente', False) == 'on' else False
         descripcion = request.POST['descripcion']
-        Register_Normativa.objects.create(norma=norma,name_denom=name_deno,base_legal=base_legal,
-        fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
+        pcs = request.POST.getlist('palabras_clave[]')
+
+        normativa = Register_Normativa.objects.create(norma=norma,name_denom=name_deno,base_legal=base_legal,
+                    fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
+
+        # AQUI AGREGO, TAL VEZ SE PUEDA USAR OTRO METODO IDK
+        for pc in pcs:
+            objx, created = Register_Palabraclave.objects.get_or_create(name = pc)
+            objx.normativas.add(normativa)
 
         return redirect('dateregister_norm')
 
 def date_register(request):
-    norma_register = Register_Normativa.objects.all()
+    norma_register = Register_Normativa.objects.order_by('norma')
     context = {
         'norma_register':norma_register
     }
@@ -147,11 +158,17 @@ def date_register(request):
 def edit_normativa(request,codigo):
     normativa=Register_Normativa.objects.get(pk=codigo)
     tipo_uso=Areas_Normas.objects.all()
-    tipo_normativa=Subcategories_Normas.objects.all()
+    tipo_normativa=Subcategories_Normas.objects.order_by('order')
+    palabras_clave = Register_Palabraclave.objects.all()
+    palabras_claves_normativa = normativa.keywords.all()
+
+
     context = {
         'normativa':normativa,
         'tipo_uso':tipo_uso,
         'tipo_normativa':tipo_normativa,
+        'palabras_clave' : palabras_clave,
+        'palabras_claves_normativa' : palabras_claves_normativa,
         'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
 
     }
@@ -176,7 +193,8 @@ def updatedate_normativa(request,codigo):
         if file_pdf != None:
             fs = FileSystemStorage()
             file_pdf.name = str(uuid.uuid4())
-            filename = fs.save(file_pdf.name + '.pdf', file_pdf)
+            Register_Normativa.objects.get(id=codigo).document.delete()
+            filename = fs.save('Document_normativa/' + file_pdf.name + '.pdf', file_pdf)
             file_pdf = filename
 
         Register_Normativa.objects.filter(id=codigo).update(norma=norma,name_denom=name_deno,base_legal=base_legal,
@@ -242,9 +260,20 @@ def norma_edificatoria(request):
     return render(request,'normativa/normatividad_edificatoria.html',None)
     
 def norma_datos(request):
-    norma_date=Register_Normativa.objects.all()
-    context={'norma_date':norma_date}
+    norma_date = Register_Normativa.objects.order_by('norma')
+    subtipo_normas = Subcategories_Normas.objects.order_by('order')
+    area_normas = Areas_Normas.objects.all()
+
+    normas = [ normas_serializer(norma) for norma in norma_date ]
+
+    context={'norma_date':norma_date, 'subtipo_normas':subtipo_normas, 'normas' : json.dumps(normas), 'area_normas' : area_normas}
     return render(request,'normativa/norma_urb_edit.html',context)
+
+# FILTRAR NORMATIVAS DE EDIFICACIONES
+def filter_normativa_edificatoria(request):
+    subnormativas = request.GET.getlist('subnormativas[]')        
+    normativas = Register_Normativa.objects.filter(tipo_norma_id__in = subnormativas)
+    return HttpResponse(normativas)
 
 def normas_tecnicauso(request):
     return render(request,'normativa/norma_tecnuso.html',None)

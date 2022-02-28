@@ -5,19 +5,21 @@
             <div class="card-body">
                 <form method="POST" action="{% url 'registrar-palabras-clave' normativa.id %}" id="registrar_palabras"> 
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label>
-                            Palabra Clave:
-                        </label>
-                        <select class="form-control select-pc" name="palabras_clave[]" multiple="multiple" style="width:100%;" id="select4">
-                            {% for pc in palabras_clave %}
-                                <option value="{{pc.name}}"> {{pc.name}} </option>
-                            {% endfor %}
-                        </select>
-                    </div>
 
-                    
-                    <button type="submit" class="btn btn-block btn-primary"> Agregar </button>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <select class="form-control select-tags" name="palabras_clave[]" multiple="multiple" style="width:100%;height:100%;" id="select4">
+                                    {% for pc in palabras_clave %}
+                                        <option value="{{pc.name}}"> {{pc.name}} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-block btn-primary">Agregar</button>
+                        </div>
+                        </div>
                 </form>
                 
                 <table class="table mt-5">
@@ -51,12 +53,6 @@
 <script>
 
     $(document).ready(function() {
-
-        setTimeout(function() {
-            $('.select-pc').select2({
-                tags: true
-            });
-        }, 100)
     
         $("#registrar_palabras").submit( function(e) {
             e.preventDefault();

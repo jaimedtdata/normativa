@@ -6,7 +6,7 @@ from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid,
     password_reset,SignUpOthers,success_sign_up, plan_list_login,
     #johao
     tipo_normativa,dash,register_normativa,date_register,delete_normativa,updatedate_normativa,palabra_clave,delete_palclave,update_template,update_clave,
-    norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov, edit_normativa)
+    norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov, edit_normativa, filter_normativa_edificatoria)
 
 from apps.views import busque_normativa,busqueda_clavenormativa,register_palabra_clave
     #end
@@ -73,6 +73,7 @@ urlpatterns = [
     #
     path('norma_edificatoria/',norma_edificatoria,name='norma_edificatoria'),
     path('norma_urb',norma_datos,name='norma_urb'),
+    path('filter-normativa-edificatoria/',filter_normativa_edificatoria,name='filter-normativa-edificatoria'),
     path('norma_tecuso/',normas_tecnicauso,name='norma_tecuso'),
     path('bus_provedor/',busqueda_provedor,name='bus_provedor'),
     path('bus_palclave/',busq_palclave_prov,name='bus_palclave'),

@@ -2,11 +2,11 @@
 
 <div class="card mb-3">
 	<div class="row g-0">
-	  <div class="col-md-3 bg-foro text-center text-white">
+	  <div class="col-md-2 bg-foro text-center text-white">
 		<h3 class="mt-3"><i class="fa fa-comments"></i></h3>
 		<p class=""> <small >{{norma.tipo_uso}}</small> </p>
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 		<div class="card-body">
 		  {% if norma.es_foro %}
 		  	<a href="{% url 'foro_comentarios' norma.id %}" target="_blank">

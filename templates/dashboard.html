@@ -115,8 +115,8 @@
         </div>
     </div>
     <hr>
-    <div class="row m-5">
-        <div class="col-lg-6 clom-md-6 col-sm-12 d-flex justify-content-center">
+    <div class="row m-5 text-center">
+        <div class="col-lg-4 clom-md-6 col-sm-12 d-flex justify-content-center">
                 <a href="{% url 'plan_list' %}" class="text-danger font-weight-bold">
                     <img src="{% static 'icons/sus.png' %}" class="gInlineBlock gWidth65 gMarginTop31">
                     <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
@@ -126,7 +126,12 @@
                     </h3>
                 </a>
         </div>
-        <div class="col-lg-6 clom-md-6 col-sm-12 d-flex justify-content-center">
+        <div class="col-lg-4">
+            <a class="" href="{% url 'home' %}">
+                <img src="{% static 'img/logo_cap.png' %}"   class="d-inline-block align-top" alt="">
+            </a>
+        </div>
+        <div class="col-lg-4 clom-md-6 col-sm-12 d-flex justify-content-center">
                 <a href="{% url 'preguntas' %}" class="text-warning font-weight-bold" >
                     <img src="{% static 'icons/question.png' %}" class="gInlineBlock gWidth65 gMarginTop31">
                     <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
