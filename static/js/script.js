@@ -6,7 +6,12 @@ $('.timepicker').mdtimepicker();
 
 $(document).ready(function() {
     $('.select2').select2();
+    $('.select-tags').select2({
+        tags: true
+    });
 });
+
+
 // $('.datatable').DataTable({
 //     responsive: true,
 //     searching: true,
