@@ -32,7 +32,8 @@ LOCAL_APPS = (
     'apps',
     'foro',
     'normas',
-    'bus_normativa.apps.BusNormativaConfig'
+    'bus_normativa.apps.BusNormativaConfig',
+    'membership',
 
 )
 
@@ -66,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'membership.context_processors.membership_type',
             ],
         },
     },
@@ -75,28 +77,28 @@ WSGI_APPLICATION = 'cap.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4ot3mt28rcjob',
-        'USER': 'djmdailubuffcs',
-        'PASSWORD': '527d79120ffbcbba4dfd28b6a112541d902db70178ccdaf3468b547d6ac17cfc',
-        'HOST': 'ec2-44-192-245-97.compute-1.amazonaws.com',
-        'PORT': 5432,
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'bdnormativa',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
+#         'NAME': 'd4ot3mt28rcjob',
+#         'USER': 'djmdailubuffcs',
+#         'PASSWORD': '527d79120ffbcbba4dfd28b6a112541d902db70178ccdaf3468b547d6ac17cfc',
+#         'HOST': 'ec2-44-192-245-97.compute-1.amazonaws.com',
 #         'PORT': 5432,
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bdnormativa',
+        'USER': 'postgres',
+        'PASSWORD': 'jesus',
+        'HOST': 'localhost',
+        'PORT': 5432,
+    }
+}
 
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)

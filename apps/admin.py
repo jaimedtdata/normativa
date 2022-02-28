@@ -9,7 +9,7 @@ from normas.models import SubNormativa,Register_Normativa,Register_Palabraclave
 from .models import Member
 
 class MemberAdmin(admin.ModelAdmin):
-    list_display = ['names','first_surname', 'second_surname','profession']
+    list_display= ['names', 'first_surname' ,'identity', 'email', 'is_enabled', 'has_tutition' ,'penalty_fee']
 admin.site.register(Member,MemberAdmin)
 
 

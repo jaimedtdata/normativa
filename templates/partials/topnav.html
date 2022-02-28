@@ -21,6 +21,13 @@
                 <li class="nav-item p-2">
                 <a class="nav-link  text-white" aria-current="page" href="{% url 'preguntas' %}">Preguntas Frecuentes</a>
                 </li>
+                <li class="nav-item p-2">
+                    <a class="nav-link  text-primary" aria-current="page" href="#">
+                        {% if request.user.is_authenticated %}
+                            Tu plan actual es  {{membership}}
+                        {% endif %}
+                    </a>
+                </li>
             </ul>
         </div>
         

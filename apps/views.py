@@ -36,6 +36,7 @@ from bus_normativa.models import date_normativa
 from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave,SubNormativa
 from normas.serializer import normas_serializer
 
+from .utils import create_member_free
 
 def busqueda_clavenormativa(request):
     area_normas=Areas_Normas.objects.all()
@@ -411,30 +412,17 @@ class SignUpFormView(FormView):
     def form_valid(self, form):
         cd = form.cleaned_data
         
-        member, created = Member.objects.get_or_create(
-                        names= cd['names'],
-                        first_surname= cd['first_surname'], 
-                        second_surname= cd['second_surname'], 
-                        identity= cd['identity'], 
-                        person_type= cd['person_type'], 
-                        mobile= cd['mobile'], 
-                        phone= cd['phone'], 
-                        email= cd['email'], 
-                        address= cd['address'], 
-                        profession= cd['profession'], 
-                        tuition= cd['tuition'], 
-                        secret_code= cd['secret_code']
-    )
+        member = create_member_free(cd)
         password = cd['password']
 
-        group = Group.objects.get(name='Gratuito')      
+        #group = Group.objects.get(name='Gratuito')      
         user = User.objects.create_user(member.tuition, member.email, password)
         user.last_name = member.first_surname
-        user.groups.add(group)
+        #user.groups.add(group)
         user.save()
-        token = UserToken(user_profile=member)
-
-        send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        
+        #token = UserToken(user_profile=member)
+        #send_confirm_account(self.request, token.get_confirm_link(), member.email)
 
         return HttpResponseRedirect(reverse_lazy('success_sign_up'))
 
