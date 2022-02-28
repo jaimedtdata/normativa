@@ -7,6 +7,7 @@ METODPAY_CHOICES= (
 PROFESSION_CHOICES = (
     ('A', 'ARQUITECTO'),
     ('I', 'INGENIERO'),
+    #('O', 'OTRO'),
 )
 
 PLATAFORMA_TYPE_CHOICES = (
