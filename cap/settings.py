@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'cap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4ot3mt28rcjob',
-        'USER': 'djmdailubuffcs',
-        'PASSWORD': '527d79120ffbcbba4dfd28b6a112541d902db70178ccdaf3468b547d6ac17cfc',
-        'HOST': 'ec2-44-192-245-97.compute-1.amazonaws.com',
-        'PORT': 5432,
+        'NAME':  os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT'),
     }
 }
 
