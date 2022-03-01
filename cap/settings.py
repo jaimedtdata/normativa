@@ -26,6 +26,7 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres'
+    'storages'
 )
 
 LOCAL_APPS = (
