@@ -192,9 +192,9 @@ def updatedate_normativa(request,codigo):
 
         if file_pdf != None:
             fs = FileSystemStorage()
-            file_pdf.name = str(uuid.uuid4())
+            # file_pdf.name = str(uuid.uuid4())
             Register_Normativa.objects.get(id=codigo).document.delete()
-            filename = fs.save('Document_normativa/' + file_pdf.name + '.pdf', file_pdf)
+            filename = fs.save('Document_normativa/' + file_pdf.name, file_pdf)
             file_pdf = filename
 
         Register_Normativa.objects.filter(id=codigo).update(norma=norma,name_denom=name_deno,base_legal=base_legal,
