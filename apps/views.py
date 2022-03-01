@@ -420,6 +420,7 @@ class SignUpFormView(FormView):
         user.last_name = member.first_surname
         #user.groups.add(group)
         user.save()
+        member.user=user
         
         #token = UserToken(user_profile=member)
         #send_confirm_account(self.request, token.get_confirm_link(), member.email)

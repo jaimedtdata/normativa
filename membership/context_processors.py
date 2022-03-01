@@ -25,5 +25,5 @@ def membership_type(request):
         context = {'membership':membership}
         return context
     except:
-        return {}
+        return {'membership': 'null'}
     

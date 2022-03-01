@@ -5,7 +5,7 @@ from .models import Member
 def create_member_free(user):
     membership_agremiado = Membership.objects.get(membership_type='PLPA')
     membership_noagremiado = Membership.objects.get(membership_type='PNA')
-    
+
     cap_num=user['tuition']
     is_member = APIMember.objects.filter(cap_num=cap_num).exists()
 

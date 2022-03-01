@@ -26,6 +26,8 @@
                         {% if request.user.is_authenticated %}
                             Tu plan actual es  {{membership}}
                         {% endif %}
+                        /{{request.user.id}}/
+                        {{request.user.username}}
                     </a>
                 </li>
             </ul>
