@@ -1,29 +1,36 @@
 from apps.models import Member
 
-
 def membership_type(request):
-    membership= None
+    # try:
+    #     type_membership = Member.objects.get(tuition=request.user.username).membership
+    #     print(type_membership)
+
+    #     return {'membership':type_membership}
+    # except:
+    #     return {}
+    ##########
+
     try:
-        member= Member.objects.get(id=request.user.id)
-        if member.membership.membership_type == 'PNA':
+        type_membership = Member.objects.get(tuition=request.user.username).membership.membership_type
+        print(type_membership)
+        #type_membership = request.user.user_membership.membership
+        if type_membership == 'PNA' :
             membership = 'Plan no Agremiado'
-        elif member.membership.membership_type == 'PLPA':
+        elif type_membership == 'PLPA':
             membership = 'Pago en Linea - Plan Agremiado'
-        elif member.membership.membership_type == 'PLPPA':
+        elif type_membership == 'PLPPA':
             membership = 'Pago en Linea - Plan Premium Agremiado'
-        elif member.membership.membership_type == 'PLPP':
+        elif type_membership == 'PLPP':
             membership = 'Pago en Linea - Plan Profesional'
-        elif member.membership.membership_type == 'PPPA':
+        elif type_membership == 'PPPA':
             membership = 'Pagos Presenciales - Plan Agremiado'
-        elif member.membership.membership_type == 'PPPPA':
+        elif type_membership == 'PPPPA':
             membership = 'Pagos Presenciales - Plan Premium Agremiadoo'
-        elif member.membership.membership_type == 'PPPP':
+        elif type_membership == 'PPPP':
             membership = 'Pagos Presenciales - Plan Profesional'
 
-        print(member.membership.membership_type)
-
-        context = {'membership':membership}
-        return context
+        
+        return {'membership': membership}
     except:
-        return {'membership': 'null'}
+        return {}
     

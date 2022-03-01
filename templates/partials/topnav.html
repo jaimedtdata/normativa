@@ -21,36 +21,31 @@
                 <li class="nav-item p-2">
                 <a class="nav-link  text-white" aria-current="page" href="{% url 'preguntas' %}">Preguntas Frecuentes</a>
                 </li>
-                <li class="nav-item p-2">
-                    <a class="nav-link  text-primary" aria-current="page" href="#">
-                        {% if request.user.is_authenticated %}
-                            Tu plan actual es  {{membership}}
-                        {% endif %}
-                        /{{request.user.id}}/
-                        {{request.user.username}}
-                    </a>
-                </li>
+                
             </ul>
         </div>
         
 
         <ul class="nav navbar-nav ml-auto">
-            {% comment %} <li class="nav-item dropdown">
+             <li class="nav-item dropdown">
                 <div class="nav-dropdown">
-                    <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-check"></i> <span>Acceso Rápido</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
+                    <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-check"></i> 
+                        <span class="text-primary">
+                            {% if request.user.is_authenticated %}
+                                Tu plan actual es  
+                                {{membership}}
+                            {% endif %}
+                    </span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                     <div class="dropdown-menu dropdown-menu-right nav-link-menu">
                         <ul class="nav-list">
-                            <li><a href="" class="dropdown-item"><i class="fas fa-list"></i> Accesos</a></li>
+                            <li><a href="{% url 'plan_list' %}" class="dropdown-item text-success font-weight-bolder"><i class="fas fa-list"></i>
+                                 Para acceder a todos nuestros beneficios actualiza tu plan aquí</a></li>
                             <div class="dropdown-divider"></div>
-                            <li><a href="" class="dropdown-item"><i class="fas fa-database"></i> Backups</a></li>
-                            <div class="dropdown-divider"></div>
-                            <li><a href="" class="dropdown-item"><i class="fas fa-cloud-download-alt"></i> Actualizaciones</a></li>
-                            <div class="dropdown-divider"></div>
-                            <li><a href="" class="dropdown-item"><i class="fas fa-user-shield"></i> Roles de Usuario</a></li>
+                            
                         </ul>
                     </div>
                 </div>
-            </li>  {% endcomment %}
+            </li>  
             
             
             {% if request.user %}
