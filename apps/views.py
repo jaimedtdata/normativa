@@ -425,8 +425,8 @@ class SignUpFormView(FormView):
         m.user=user
         m.save()
         
-        #token = UserToken(user_profile=member)
-        #send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        token = UserToken(user_profile=member)
+        send_confirm_account(self.request, token.get_confirm_link(), member.email)
 
         return HttpResponseRedirect(reverse_lazy('success_sign_up'))
 
