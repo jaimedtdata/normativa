@@ -8,9 +8,11 @@
     <title>Colegio de Arquitectos del Perú</title>
     <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
    <link rel="stylesheet" href="{% static 'bootstrap5/css/bootstrap.css' %}">
-
+    <link rel="stylesheet" href=" {% static 'register/css/styles.css' %} ">
+    
     
 </head>
+
 <body class="bg-light">
 
 
@@ -25,12 +27,13 @@
     <div class="container ">
       <div class="row">
       
-        <div class="col-md-10 order-md-1 offset-1" >
-          <div class="card bg-light  mb-5">
+        <div class="col-md-10 order-md-1 offset-1 " >
+          {% include "register/form-dni.html" %}
+          <div id="test"></div>
+          <div class="card bg-light  mb-5 form-display">
             <div class="card-body">
-              <input type="text" name="cap" placeholder="Ingresa Numero CAP" id="cap" class="form-control">
-              <div class="d-flex justify-content-center">
-                <h4 class="mb-3">Datos de Registro</h4>
+              <div class="d-flex justify-content-center ">
+                <h4 class="mb-3 ">Datos de Registro</h4>
               </div>
               <hr>
               {% include 'register/form-signup.html' %}

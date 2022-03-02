@@ -5,7 +5,7 @@ from django.http import JsonResponse
 ##pruebas
 from normas.models import Areas_Normas, Register_Palabraclave, Register_Normativa
 from django.shortcuts import render
-
+from .models import Member
 
 class ResultSearchAjax(View):
 
@@ -76,3 +76,26 @@ def results_normas_prueba(request):
 
     if request.method == 'GET':
         return render(request, 'ajax/result.html')
+
+def get_dni(request):
+    if request.method == "GET":
+        data = {
+            'saludo' : 'hola'
+        }
+        return JsonResponse(data)
+
+    if request.method == "POST":
+        print(request.POST.get('dni'))
+        dni=request.POST.get('dni')
+        member=Member.objects.filter(identity=dni).exists()
+        if member:
+            
+            data = {
+                'msg' : 'Tu dni ya existe',
+                'dni':dni,
+                'cap' : '',
+                'names': '',
+            }
+            return JsonResponse({'data':data})
+        else:
+            return JsonResponse({'data':'Eres nuevo'})

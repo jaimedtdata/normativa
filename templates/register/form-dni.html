@@ -1,0 +1,16 @@
+{% load static %}
+<form method="POST" id="dni-form" autocomplete="off">
+	{% csrf_token %}
+    <label class="text-muted lead">Valida tu DNI:</label>
+	<div class="row mb-2">
+		<div class="col-md-4">
+            <input type="number" name="dni" placeholder="Ingresa DNI" id="dni-input" class="form-control">
+		</div>
+		<div class="col-md-4">
+            <input type="submit" value="Validar" class="btn btn-primary">
+		</div>		
+	</div>
+</form>	
+
+
+<script src="{% static 'register/js/results.js' %}"></script>
