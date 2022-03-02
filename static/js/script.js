@@ -5,11 +5,15 @@ $('#sidebarCollapse').on('click', function () {
 $('.timepicker').mdtimepicker();
 
 $(document).ready(function() {
-    $('.select2').select2();
+    $('.select2').select2({
+        placeholder: "BUSQUEDA POR PALABRAS CLAVE"
+    });
     $('.select-tags').select2({
         tags: true
     });
 });
+
+
 
 
 // $('.datatable').DataTable({

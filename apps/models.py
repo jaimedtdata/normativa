@@ -4,7 +4,7 @@ from .choices import *
 from django.contrib import admin
 from django.utils.html import format_html
 from django.contrib.auth.models import User
-from normas.models import Master_Normas
+from normas.models import Master_Normas, Register_Normativa
 from django.urls import reverse,reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -174,23 +174,24 @@ class Policies_usage(models.Model):
     message = models.TextField(blank=False,
         help_text='Respuesta',
         verbose_name='Respuesta')      
-    platform =  models.CharField(max_length=1,
-        help_text='Plataforma', choices=PLATAFORMA_TYPE_CHOICES,
-        verbose_name='Plataforma', blank=False) 
+    # platform =  models.CharField(max_length=1,
+    #     help_text='Plataforma', choices=PLATAFORMA_TYPE_CHOICES,
+    #     verbose_name='Plataforma', blank=False) 
     validity_date_start = models.DateField(
         blank=False, null=False, auto_now_add=False,
-        help_text='Fecha',
+        help_text='Fecha Inicio',
         verbose_name='Fecha Inicio')
     validity_date_finish = models.DateField(
         blank=False, null=False, auto_now_add=False,
-        help_text='Fecha',
+        help_text='Fecha Fin',
         verbose_name='Fecha Fin')
     register_date_time = models.DateTimeField(
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
 
-    norma_name = models.ManyToManyField(Master_Normas,related_name="normas_rel") 
+    # norma = models.ManyToManyField(Master_Normas,related_name="normas_rel") 
+    norma = models.ManyToManyField(Register_Normativa,related_name="preguntas_frecuentes") 
 
     class Meta:
         verbose_name_plural = 'Preguntas Frecuentes'

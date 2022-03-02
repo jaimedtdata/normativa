@@ -26,7 +26,7 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
-    'storages',
+    'django.contrib.humanize',
 )
 
 LOCAL_APPS = (
@@ -34,7 +34,6 @@ LOCAL_APPS = (
     'foro',
     'normas',
     'bus_normativa.apps.BusNormativaConfig'
-
 )
 
 
@@ -135,9 +134,9 @@ USE_L10N = True
 
 USE_TZ = False
 LOGIN_REDIRECT_URL = reverse_lazy('home')
-STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR / 's3'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 #STATICFILES_DIRS = [
