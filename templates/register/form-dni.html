@@ -4,13 +4,19 @@
     <label class="text-muted lead">Valida tu DNI:</label>
 	<div class="row mb-2">
 		<div class="col-md-4">
-            <input type="number" name="dni" placeholder="Ingresa DNI" id="dni-input" class="form-control">
+            <input type="number" name="dni" placeholder="Ingresa DNI" id="dni-input" min="8"  class="form-control">
 		</div>
 		<div class="col-md-4">
-            <input type="submit" value="Validar" class="btn btn-primary">
+            <input type="submit" id="input-value" value="Validar" class="btn btn-primary" >
 		</div>		
 	</div>
 </form>	
 
 
 <script src="{% static 'register/js/results.js' %}"></script>
+<script>
+    inputDNI=document.getElementById('dni-input').value
+    if (inputDNI<=8){
+        console.log('holaaa')
+    }
+</script>

@@ -26,13 +26,45 @@
             .then(data => {
                 test=document.getElementById('test')
                 console.log(data.data)
+                const user_data = data.data
                 
                 
-                if (data.data.dni){
-                    userExists=`<div>Ya tienes una cuenta registrada <a href="${base_url}/login">Inicia sesión aquí</a></div>`
+                if (user_data.dni){
+                    //users that are in model Member
+                    console.log(user_data.msg);
+                    userExists=`<div>Ya tienes una cuenta registrada <a href="${base_url}">Inicia sesión aquí.</a></div>
+                    <div>Si olvidaste tu contraseña <a href="${base_url}/password_reset/">recuperala aquí.</a></div>`
                     test.innerHTML = userExists
+                    document.getElementById('dni-input').disabled=true
+                    document.getElementById('input-value').disabled=true
+                    
+
+                }else{
+                    //users that are in ERP but still not have account in this system
+                    if (user_data.cap){
+                        console.log(user_data.msg);
+                        formRegister = document.getElementById('form-signup')
+                        formRegister.classList.remove('form-display')
+                        document.getElementById('id_identity').value= dniInput.value
+                        dniForm.classList.add('form-display')//hide form dni
+
+                    }else{
+                        //users thar are not in Member model neither APimember, they externals users(other professions)
+                        console.log(user_data.msg);
+                        document.getElementById('id_identity').value= dniInput.value
+                        formRegister=document.getElementById('form-signup')
+                        formRegister.classList.remove('form-display')
+                        dniForm.classList.add('form-display')//hide form dni
+                        
+                        
+                        document.getElementById('id_tuition').placeholder="Solo para colegiados";
+                        document.getElementById('id_tuition').disabled=true
+                        document.getElementById('id_secret_code').placeholder="Solo para colegiados";
+                        document.getElementById('id_secret_code').disabled=true
+
+                    }
                 }
             })
         
     })
-
+    

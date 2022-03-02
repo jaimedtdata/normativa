@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from normas.models import Areas_Normas, Register_Palabraclave, Register_Normativa
 from django.shortcuts import render
 from .models import Member
+from membership.models import APIMember
 
 class ResultSearchAjax(View):
 
@@ -89,13 +90,24 @@ def get_dni(request):
         dni=request.POST.get('dni')
         member=Member.objects.filter(identity=dni).exists()
         if member:
-            
             data = {
-                'msg' : 'Tu dni ya existe',
+                'msg' : 'Tu dni ya existe, puedes iniciar sesion',
                 'dni':dni,
-                'cap' : '',
-                'names': '',
             }
             return JsonResponse({'data':data})
         else:
-            return JsonResponse({'data':'Eres nuevo'})
+            userERP = APIMember.objects.filter(identity=dni).exists()
+            if userERP:
+                user=APIMember.objects.get(identity=dni)
+                data = {
+                    'msg' : 'Estas en el ERP, solo confirma algunos datos',
+                    'cap' : user.cap_num,
+                    'names': '',
+                }
+                return JsonResponse({'data': data})
+            else:
+                data = {
+                    'msg' : 'Eres usuario externo, necesitas registrarte',
+                    
+                }
+                return JsonResponse({'data': data})

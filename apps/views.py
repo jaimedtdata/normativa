@@ -420,6 +420,7 @@ class SignUpFormView(FormView):
         user.last_name = member.first_surname
         #user.groups.add(group)
         user.save()
+        #update member according to user created above
         m=Member.objects.get(id=member.id)
         m.user=user
         m.save()

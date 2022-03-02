@@ -14,6 +14,7 @@ def create_member_free(user):
         is_enabled = obj.is_enabled
         penalty_fee = obj.penalty_fee
         if is_enabled and not penalty_fee:
+            #users able to free account acording to ERP
             member, created = Member.objects.get_or_create(
                             names= user['names'],
                             first_surname= user['first_surname'], 
@@ -36,6 +37,7 @@ def create_member_free(user):
             print(member)
             return member
         else:
+            #users that not are abled to free account PLPA
             member, created=Member.objects.get_or_create(
                             names= user['names'],
                             first_surname= user['first_surname'], 
@@ -56,6 +58,7 @@ def create_member_free(user):
                             )
             return member
     else:
+        #external Users that can be other professionals
         member, created = Member.objects.get_or_create(
                             names= user['names'],
                             first_surname= user['first_surname'], 
@@ -67,7 +70,7 @@ def create_member_free(user):
                             email= user['email'], 
                             address= user['address'], 
                             profession= user['profession'], 
-                            tuition= user['tuition'], 
+                            tuition= user['identity'], 
                             secret_code= user['secret_code'],
                             membership= membership_noagremiado
                             )
