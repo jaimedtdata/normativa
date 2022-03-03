@@ -47,7 +47,7 @@ class Subcategories_foro(models.Model):
         return self.subcategory_name    
 
 class Themas_foro(models.Model):
-    subcategories =  subcategories = models.ForeignKey(Subcategories_foro,
+    subcategories = models.ForeignKey(Subcategories_foro,
         on_delete=models.CASCADE,)
     themas_name = models.CharField(max_length=200, blank=False,
         help_text='Nombre de Tema',

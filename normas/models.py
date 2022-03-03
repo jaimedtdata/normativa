@@ -185,6 +185,7 @@ class Register_Normativa(models.Model):
                                      blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
                                      blank=True, null=True)
+
     class Meta:
         verbose_name_plural='6.Normas Registradas-Frontend'
         db_table='register_normativa'
@@ -206,6 +207,36 @@ class Register_Palabraclave(models.Model):
 
     def __str__(self):
         return self.name
+
+class Policies_usage(models.Model):
     
+    title = models.CharField(max_length=200, blank=False,
+        help_text='Titulo de Consulta',
+        verbose_name='Titulo de Consulta')      
+    message = models.TextField(blank=False,
+        help_text='Respuesta',
+        verbose_name='Respuesta')      
+    # platform =  models.CharField(max_length=1,
+    #     help_text='Plataforma', choices=PLATAFORMA_TYPE_CHOICES,
+    #     verbose_name='Plataforma', blank=False) 
+    validity_date_start = models.DateField(
+        blank=False, null=False, auto_now_add=False,
+        help_text='Fecha Inicio',
+        verbose_name='Fecha Inicio')
+    validity_date_finish = models.DateField(
+        blank=False, null=False, auto_now_add=False,
+        help_text='Fecha Fin',
+        verbose_name='Fecha Fin')
+    register_date_time = models.DateTimeField(
+        blank=False, null=False, auto_now_add=True,
+        help_text='Fecha de Registro',
+        verbose_name='Fecha de Registro')
+
+    # norma = models.ManyToManyField(Master_Normas,related_name="normas_rel") 
+    norma = models.ManyToManyField(Register_Normativa,related_name="preguntas_frecuentes") 
+
+    class Meta:
+        verbose_name_plural = 'Preguntas Frecuentes'
+
 
 #end
