@@ -5,7 +5,7 @@ from django.contrib.sessions.models import Session
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 #from .models import Register_Normativa,Register_Palabraclave
-from normas.models import SubNormativa,Register_Normativa,Register_Palabraclave
+from normas.models import SubNormativa,Register_Normativa,Register_Palabraclave, Policies_usage
 from .models import Member
 
 class MemberAdmin(admin.ModelAdmin):
@@ -29,6 +29,7 @@ class SubNormativaAdmin(admin.ModelAdmin):
 admin.site.register(SubNormativa,SubNormativaAdmin)
 admin.site.register(Register_Normativa,Register_NormativaAdmin)
 admin.site.register(Register_Palabraclave)
+admin.site.register(Policies_usage)
 #
 class ListAdminMixin(object):
     def __init__(self, model, admin_site):

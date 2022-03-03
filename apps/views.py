@@ -264,10 +264,11 @@ def norma_datos(request):
     norma_date = Register_Normativa.objects.order_by('norma')
     subtipo_normas = Subcategories_Normas.objects.order_by('order')
     area_normas = Areas_Normas.objects.all()
+    palabras_clave = Register_Palabraclave.objects.all()
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
 
-    context={'norma_date':norma_date, 'subtipo_normas':subtipo_normas, 'normas' : json.dumps(normas), 'area_normas' : area_normas}
+    context={'norma_date':norma_date, 'subtipo_normas':subtipo_normas, 'normas' : json.dumps(normas), 'area_normas' : area_normas, 'palabras_clave' : palabras_clave}
     return render(request,'normativa/norma_urb_edit.html',context)
 
 # FILTRAR NORMATIVAS DE EDIFICACIONES
@@ -455,11 +456,15 @@ class LoginNuevo(LoginView):
 
 #@login_required
 def preguntas(request):
-    cuestions = Policies_usage.objects.all()
-    #cuestions = Policies_usage.objects.filter(pk=2)
-    #for staff in cuestions:
-    #    print (staff.norma_name.all())     
-    context = {'cuestions': cuestions}
+    norma_id = request.GET.get('norma_id')
+
+    if norma_id == None:
+        preguntas = Policies_usage.objects.all()
+    else:
+        preguntas = get_object_or_404(Register_Normativa, id = norma_id).preguntas_frecuentes.all()
+
+    context = {'preguntas': preguntas}
+
     return render(request, 'preguntas.html', context)
     
 

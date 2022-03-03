@@ -25,7 +25,8 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'membership.apps.MembershipConfig',
 )
 
 LOCAL_APPS = (
@@ -33,8 +34,6 @@ LOCAL_APPS = (
     'foro',
     'normas',
     'bus_normativa.apps.BusNormativaConfig',
-    'membership',
-
 )
 
 
