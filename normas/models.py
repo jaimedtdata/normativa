@@ -238,5 +238,8 @@ class Policies_usage(models.Model):
     class Meta:
         verbose_name_plural = 'Preguntas Frecuentes'
 
+    def __str__(self) -> str:
+        return self.title
+
 
 #end

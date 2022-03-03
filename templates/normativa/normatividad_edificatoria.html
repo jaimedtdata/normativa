@@ -46,7 +46,7 @@
         <h1 class="gUppercase gFontWeight700" >
             Normativa Edificatoria
         </h1>
-        <a href="{% url 'search_normat' %}" class="btn btn-lg btn-warning text-dark mb-0" style="z-index: -100;" > <b> Búsqueda de normas </b> <i class="fas fa-search text-dark"> </i> </a>
+        <a href="{% url 'norma_urb' %}" class="btn btn-lg btn-warning text-dark mb-0" style="z-index: -100;" > <b> Búsqueda de normas </b> <i class="fas fa-search text-dark"> </i> </a>
     
         <div class="mt-0 pt-0 gContainer gPositionRelative gContenido align-middle" style="width:100%;">
             <div class="mt-0 pt-0 gAlignCenter">     
@@ -80,16 +80,23 @@
                         </h3>
                         </a>
                     
-                    <a href="{% url 'norma_urb' %}?ne=3" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox4">
-                        <div class="gWidth50 gHeight3 gFondoCircleRojo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                        <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleRojo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                            <img class="img-fluid mt-3" src="{% static 'images/municipales.svg' %}" class="gInlineBlock gWidth65 gMarginTop31">
-                        </div>
-                        <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                            Normas
-                            <br>
-                            Municipales
-                        </h3></a>
+                    
+
+                        <a href="{% url 'norma_urb' %}?ne=3" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
+                            <div class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                            <img src="{% static 'images/img-arbitro.png' %}" class="gInlineBlock gMarginTop5" width="100">
+                                
+                            </div
+                            >
+                            <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Opiniones
+                                vinculantes
+                                y cauística
+                                <br>
+                                <br>
+                                </h3></a>
+                            </a>
+                    
                 </div>
                 <hr class="gSeparator gSeparatorTrans gSeparator20">
                 <div class="gRowTemp">
@@ -102,28 +109,30 @@
                         <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Reglamento <br>
                                                                                                                     Comentado
                                                                                                                     </h3></a>
+                                                                                                                    
                     <a href="{% url 'norma_urb' %}?ne=5" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
-                        <div class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                        <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                            <img src="{% static 'images/img-arbitro.png' %}" class="gInlineBlock gMarginTop5" width="100">
-                            
-                        </div>
-                        <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Opiniones
-                                                                                                                    vinculantes
-                                                                                                                    y cauística
-                                                                                                                    <br>
-                                                                                                                    <br>
-                                                                                                                    </h3></a>
-                                                                                                                   
-        
-                    <a href="{% url 'norma_urb' %}?ne=6" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
-                        <div class="gWidth50 gHeight3 gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                        <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                            <img class="img-fluid mt-3" src="{% static 'images/boletin.svg' %}" class="gInlineBlock gWidth37 gMarginTop31" width="80">
+                        <div class="gWidth50 gHeight3  gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                        <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                            <img class="img-fluid mt-3" src="{% static 'images/boletin.svg' %}" class="gInlineBlock gWidth37 gMarginTop31" width="70">
                             
                         </div>
                         <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Boletín 
-                                                                                                                    <br>Normativo</h3></a>
+                            <br>Normativo</h3>
+                    </a>
+
+                    
+                                                                                                                   
+                    <a href="{% url 'norma_urb' %}?ne=6" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox4">
+                        <div class="gWidth50 gHeight3 gFondoCircleRojo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                        <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleRojo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                            <img class="img-fluid mt-3" src="{% static 'images/municipales.svg' %}" class="gInlineBlock gWidth65 gMarginTop31">
+                        </div>
+                        <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                            Normas
+                            <br>
+                            Municipales
+                        </h3></a>
+
                                                                                         
                 </div>
                 
