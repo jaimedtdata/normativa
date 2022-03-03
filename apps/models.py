@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from normas.models import Master_Normas, Register_Normativa
 from django.urls import reverse,reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
+from membership.models import Membership
 
 def upload_file(instance, filename):
     ext = filename.split('.')[-1]
@@ -32,7 +33,7 @@ class Member(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE,
         help_text='Usuario', null=True, blank=True,
-        verbose_name='Usuario')
+        verbose_name='Usuario', related_name='user_membership')
     first_surname = models.CharField(max_length=50, blank=True,
         help_text='Apellido Paterno',
         verbose_name='Apellido Paterno')
@@ -93,11 +94,21 @@ class Member(models.Model):
         blank=False, null=False, auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
-
+    is_enabled = models.BooleanField(default=False, verbose_name='¿Esta habilitado?')
+    penalty_fee = models.BooleanField(default=False, verbose_name='¿Tiene multas?')
+    has_tutition = models.BooleanField(default=False, verbose_name='¿Es colegiado?')
+    membership = models.ForeignKey(Membership, related_name='user_membership', 
+                                        on_delete=models.SET_NULL,blank=True, null=True)
+    
     suscribcion_foro = models.ManyToManyField(Register_Normativa, related_name="suscribcion_foro") 
     
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Fecha de actualización')
+    
+
+    
     def __str__(self):
-        return self.full_name 
+        return f'{self.names}  {self.first_surname}'
  
     class Meta:
         ordering = ['created']
@@ -107,6 +118,7 @@ class Member(models.Model):
 
     class Meta:
         verbose_name_plural = 'Relacion de Miembros'
+
 
 class Plan(models.Model):
     
@@ -182,6 +194,7 @@ class UserToken(models.Model):
 
     def get_password_reset_link(self):
         return reverse('password_reset_token', kwargs={'token': self.token})
+ 
  
 
 
