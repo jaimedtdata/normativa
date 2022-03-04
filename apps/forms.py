@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from normas.models import Categories_Normas,Areas_Normas,Subcategories_Normas,Location_Normas
 from .models import Plan, Member
 from foro.models import Coments_foro
 

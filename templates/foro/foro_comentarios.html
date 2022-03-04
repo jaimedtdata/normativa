@@ -55,15 +55,25 @@
           </div>
  
               {% for muni in comentarios_list %}
-                  <div class="comment-box">
-                        <span class="commenter-pic">
-                          <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
-                        </span>
-                        <span class="commenter-name" >
-                          <a style='color:black;' href="#">{{muni.user}}</a>
-                        </span>      
-                        <p class="comment-txt more">{{muni.coments}}</p>
-                      </div>
+              <div class="d-flex align-items-center w-100">
+                <div class="comment-box mt-4 ">
+                  <span class="commenter-pic">
+                    <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
+                  </span>
+                  <span class="commenter-name" >
+                    <a style='color:black;' href="#">{{muni.user}}</a>
+                  </span>
+                  <p class="comment-txt more">{{muni.coments}}</p>                    
+                </div>
+              
+                <form method="POST" action="{% url 'borrar-comentario' norma.id muni.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-fat bg-danger float-right ml-2">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+                
+              </div>
               {% endfor %}
         
       </div>
@@ -245,6 +255,17 @@ mensaje.addEventListener('input', function(e) {
   function desuscribirse() {
     div_sus.innerHTML = btn_suscribirse
   }
+
+  // $.ajax({
+  //   method: 'POST',
+  //   url: "{% url 'foro-suscribcion' norma.id %}",
+  //   data: {
+
+  //   }
+  // })
+  // .done(function(e) {
+
+  // })
 
 </script>
 {% endblock %}

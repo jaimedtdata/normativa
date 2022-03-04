@@ -14,6 +14,5 @@ def normas_serializer(norma):
         'document' : norma.document.url if norma.document else False,
         'fecha_publi' : norma.fecha_publi.strftime('%Y-%m-%d'),
         'palabras_clave' : [k.id for k in norma.keywords.all()],
-        'tiene_preguntas' : norma.preguntas_frecuentes.all().count()
     }
 

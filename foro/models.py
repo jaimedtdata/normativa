@@ -15,53 +15,6 @@ from normas.models import Register_Normativa
 
 """
 
-
-
-class Categories_foro(models.Model):
-    category_name = models.CharField(max_length=200, blank=False,
-        help_text='Nombre de Categoria',
-        verbose_name='Nombre de Categoria')      
-    register_date_time = models.DateTimeField(
-        blank=False, null=False, auto_now_add=True,
-        help_text='Fecha de Registro',
-        verbose_name='Fecha de Registro')
-    class Meta:
-        verbose_name_plural = '1. Foro Categorias'
-    def __str__(self):
-        return self.category_name    
-
-class Subcategories_foro(models.Model):
-    categories = models.ForeignKey(Categories_foro,
-        on_delete=models.CASCADE,)
-    subcategory_name = models.CharField(max_length=200, blank=False,
-        help_text='Subcategoria',
-        verbose_name='Subcategoria')      
-
-    register_date_time = models.DateTimeField(
-        blank=False, null=False, auto_now_add=True,
-        help_text='Fecha de Registro',
-        verbose_name='Fecha de Registro')
-    class Meta:
-        verbose_name_plural = '2. Foro SubCategorias'
-    def __str__(self):
-        return self.subcategory_name    
-
-class Themas_foro(models.Model):
-    subcategories = models.ForeignKey(Subcategories_foro,
-        on_delete=models.CASCADE,)
-    themas_name = models.CharField(max_length=200, blank=False,
-        help_text='Nombre de Tema',
-        verbose_name='Nombre de Tema')      
-    register_date_time = models.DateTimeField(
-        blank=False, null=False, auto_now_add=True,
-        help_text='Fecha de Registro',
-        verbose_name='Fecha de Registro')
-    class Meta:
-        verbose_name_plural = '3. Foro Temas'
-    def __str__(self):
-        return self.themas_name   
-
-
 class Coments_foro(models.Model):
     
     tema = models.ForeignKey(Register_Normativa, on_delete=models.CASCADE, null=True, default=None)
@@ -82,15 +35,3 @@ class Coments_foro(models.Model):
         verbose_name_plural = 'Comentarios'
     def __str__(self):
         return self.coments  
-
-# class Area_interest(models.Model):
-    
-#     nombre_area = models.CharField(max_length=200, blank=False,
-#         help_text='Nombre de Area',
-#         verbose_name='Area')      
-#     register_date_time = models.DateTimeField(
-#         blank=False, null=False, auto_now_add=True,
-#         help_text='Fecha de Registro',
-#         verbose_name='Fecha de Registro')
-#     class Meta:
-#         verbose_name_plural = 'Areas de Interes'

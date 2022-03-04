@@ -37,8 +37,7 @@
     </div>
 
     <div class="col-8">
-        <h1 class="gUppercase gFontWeight700" >
-            Reglamento Nacional de Normas
+        <h1 class="gUppercase gFontWeight700" id="titulo">
         </h1>
     </div>
 
@@ -52,7 +51,7 @@
 
 <div class="">
     <div class="row">
-      <div class="col-sm" style="height:720px;">
+      <div class="col-sm-3 d-none" style="height:720px;" id="subnormas_caja">
         <div class="form-group">
             <select class="form-control" name="subnormativas[]" multiple="multiple" style="height:100%;" id="select-norms">
                 {% for sn in subtipo_normas %}
@@ -65,7 +64,7 @@
         </div>
       </div>
       
-      <div class="col-sm-9">
+      <div class="col-sm">
         <div class="row mb-3 px-2">
             <select class="form-control" id="area-normas">
                 <small>
@@ -192,6 +191,16 @@
     });
     // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
     var ne = params.ne; // "some_value"
+
+    
+    var titulo = params.norma
+    
+    if(params.norma == null) {
+        var titulo = 'Reglamento Nacional de Normas'
+        $('#subnormas_caja').removeClass('d-none')    
+    }
+
+    document.getElementById('titulo').innerHTML = titulo
 
     $('#datetimes').daterangepicker({
         locale: {
@@ -402,16 +411,6 @@
                             `
                         } else {
                             html += /*html*/` <span class="text-center"><i class="fa fa-minus fa-2x text-dark" aria-hidden="true"></i></span>`
-                        }
-
-                        if (r.tiene_preguntas) {
-                            html += /*html*/`
-                                <a target="_blank" href="/preguntas?norma_id=${r.id}">
-                                    <i class="fa fa-question fa-2x text-warning mr-1" aria-hidden="true"></i>
-                                </a>
-
-                        
-                            `
                         }
                         
                         html += /*html*/`
