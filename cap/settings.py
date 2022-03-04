@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'qrh*e^+4h@0j1zi_hc2knz5mx4ifq5*#3k-+dvf=2u$9%j@t43'
 
-DEBUG = True
+DEBUG = False
 #DEBUG = False
 
 ALLOWED_HOSTS = ['*']
@@ -26,6 +26,7 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
+    'storages',
     'membership.apps.MembershipConfig',
 )
 
@@ -74,32 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cap.wsgi.application'
 
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd4ot3mt28rcjob',
-#         'USER': 'djmdailubuffcs',
-#         'PASSWORD': '527d79120ffbcbba4dfd28b6a112541d902db70178ccdaf3468b547d6ac17cfc',
-#         'HOST': 'ec2-44-192-245-97.compute-1.amazonaws.com',
-#         'PORT': 5432,
-#     }
-# }
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'bdnormativa',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
-#         'PORT': 5432,
-#     }
-# }
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -147,15 +122,8 @@ USE_TZ = False
 
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 
-STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static'),
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
 #media
-MEDIA_URL='media/'
+MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 
@@ -164,26 +132,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-
-
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'jaimemarston@gmail.com'
-# EMAIL_HOST_PASSWORD = '42088985jrmm$$$'
-
-
-# EMAIL_HOST = config('EMAIL_HOST')
-# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-# EMAIL_SUBJECT_PREFIX = config('EMAIL_SUBJECT_PREFIX')
-# EMAIL_PORT = config('EMAIL_PORT', cast=int)
-# EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
-# EMAIL_USE_LOCALTIME = config('EMAIL_USE_LOCALTIME', cast=bool)
-
-
 
 # # Space AWS
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
@@ -195,7 +143,11 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_LOCATION = os.getenv('AWS_LOCATION')
 
-# activar iframe
-# X_FRAME_OPTIONS = 'ALLOWALL'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 
-# XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']# Configure Django App for Heroku.
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 's3'),
+]
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
