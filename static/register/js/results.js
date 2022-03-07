@@ -47,6 +47,12 @@
                         formRegister.classList.remove('form-display')
                         document.getElementById('id_identity').value= dniInput.value
                         dniForm.classList.add('form-display')//hide form dni
+                        document.getElementById('register_title').innerHTML= `Bienvenido ${user_data.names}, completa tus datos de registro`
+                        hideInputsCAP()
+                       //window.location.replace(`${base_url}/sign-up-erp/`);
+
+                        
+                        
 
                     }else{
                         //users thar are not in Member model neither APimember, they externals users(other professions)
@@ -54,13 +60,15 @@
                         document.getElementById('id_identity').value= dniInput.value
                         formRegister=document.getElementById('form-signup')
                         formRegister.classList.remove('form-display')
-                        dniForm.classList.add('form-display')//hide form dni
+                        //dniForm.classList.add('form-display')//hide form dni
                         
                         
-                        document.getElementById('id_tuition').placeholder="Solo para colegiados";
-                        document.getElementById('id_tuition').disabled=true
-                        document.getElementById('id_secret_code').placeholder="Solo para colegiados";
-                        document.getElementById('id_secret_code').disabled=true
+                        // document.getElementById('id_tuition').placeholder="Solo para colegiados";
+                        // document.getElementById('id_tuition').disabled=true
+                        // document.getElementById('id_secret_code').placeholder="Solo para colegiados";
+                        // document.getElementById('id_secret_code').disabled=true
+                        
+
 
                     }
                 }
@@ -68,3 +76,30 @@
         
     })
     
+    const hideInputsCAP = ()=>{
+        document.getElementById('id_names').setAttribute('type', 'hidden')
+        document.getElementById("label_names").style.display = 'none';
+        document.getElementById('id_first_surname').setAttribute('type', 'hidden')
+        document.getElementById("label_first_surname").style.display = 'none';
+        document.getElementById('id_second_surname').setAttribute('type', 'hidden')
+        document.getElementById("label_second_surname").style.display = 'none';
+        document.getElementById('id_second_surname').setAttribute('type', 'hidden')
+        document.getElementById("label_second_surname").style.display = 'none';
+
+        document.getElementById('id_identity').setAttribute('type', 'hidden')
+        document.getElementById("label_identity").style.display = 'none';
+        document.getElementById('id_profession').setAttribute('type', 'hidden')
+        document.getElementById("label_profession").style.display = 'none';
+        document.getElementById('id_tuition').setAttribute('type', 'hidden')
+        document.getElementById("tuition_title").style.display = 'none';
+        document.getElementById('id_secret_code').setAttribute('type', 'hidden')
+        document.getElementById("label_secret_code").style.display = 'none';
+        document.getElementById('id_person_type').setAttribute('type', 'hidden')
+        document.getElementById("label_person_type").style.display = 'none';
+        document.getElementById('id_mobile').setAttribute('type', 'hidden')
+        document.getElementById("label_mobile").style.display = 'none';
+        document.getElementById('id_phone').setAttribute('type', 'hidden')
+        document.getElementById("label_phone").style.display = 'none';
+        document.getElementById('id_address').setAttribute('type', 'hidden')
+        document.getElementById("label_address").style.display = 'none';
+    }

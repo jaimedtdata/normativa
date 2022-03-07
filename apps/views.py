@@ -412,7 +412,8 @@ class SignUpFormView(FormView):
 
     def form_valid(self, form):
         cd = form.cleaned_data
-        
+        print(cd)
+
         member = create_member_free(cd)
         password = cd['password']
 
@@ -426,8 +427,8 @@ class SignUpFormView(FormView):
         m.user=user
         m.save()
         
-        token = UserToken(user_profile=member)
-        send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        #token = UserToken(user_profile=member)
+        #send_confirm_account(self.request, token.get_confirm_link(), member.email)
 
         return HttpResponseRedirect(reverse_lazy('success_sign_up'))
 
@@ -435,6 +436,12 @@ class SignUpFormView(FormView):
     #     print('INGRESO A INNVALIDO!',self,form)
     #     messages.error(self.request, 'Por favor, corrija los errores')
     #     return super(SignUpOthers, self).form_invalid(form)
+
+def users_register_erp(request):
+    print('usuario: ',request.POST)
+    if request.method == 'POST':
+        print('usuario: ',request.POST)
+    return render(request, 'register/user_register_erp.html')
 
 def success_sign_up(request):
     messages.success(request, 'Registro Exitoso')

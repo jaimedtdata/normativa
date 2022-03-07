@@ -1,24 +1,24 @@
 
-<form method="POST" enctype="multipart/form-data" autocomplete="off">
+<form method="POST" enctype="multipart/form-data" autocomplete="off" id="form-register">
 	{% csrf_token %}
 	
 	<div class="row mb-2">
 		<div class="col-md-4">
-			<label class="text-muted lead">Nombres:</label>
+			<label class="text-muted lead" id="label_names">Nombres:</label>
 			{{form.names}}
 		</div>
 		<div class="col-md-4">
-			<label class="text-muted lead">Primer Apellido:</label>
+			<label class="text-muted lead" id="label_first_surname">Primer Apellido:</label>
 			{{form.first_surname}}
 		</div>		
 		<div class="col-md-4">
-			<label class="text-muted lead">Segundo Apellido:</label>
+			<label class="text-muted lead" id="label_second_surname">Segundo Apellido:</label>
 			{{form.second_surname}}
 		</div>
 	</div>
 	<div class="row mb-2">
 		<div class="col-md-3 {% if form.identity.errors %}invalid{% endif %}">
-			<label class="text-muted lead">DNI:</label>
+			<label class="text-muted lead"  id="label_identity" >DNI:</label>
 			{{form.identity}}
 			{% include 'base/partials/_field_error.html' with field=form.identity %}
 		</div>
@@ -27,42 +27,53 @@
 			{{form.identity.errors}}
 		</span>
 		{% endif %}
-		<div class="col-md-3 {% if form.profession.errors %}invalid{% endif %}">
-			<label class="text-muted lead">Profesión:</label>
-			{{form.profession}}
-			{% include 'base/partials/_field_error.html' with field=form.profession %}
-		</div>
-		<div class="col-md-3 {% if form.tuition.errors %}invalid{% endif %}">
-			<label id="tuition_title" class="text-muted lead">CAP No.:</label>
-			{{form.tuition}}
-			{% include 'base/partials/_field_error.html' with field=form.tuition %}
-		</div>
-			{% if field.errors %}
-			<span class="text-danger field-error text-md">
-				{{form.email.errors}}
-			</span>
-			{% endif %}
-		<div class="col-md-3 {% if form.secret_code.errors %}invalid{% endif %}">
-			<label class="text-muted lead">Código Secreto:</label>
-			{{form.secret_code}}
-			{% include 'base/partials/_field_error.html' with field=form.secret_code %}
-			<span class="text-sm text-cap">Solo para Arquitectos</span>
-		</div>
+
+		{% comment %}
+
+			<div class="col-md-3 {% if form.profession.errors %}invalid{% endif %}">
+				<label class="text-muted lead" id="label_profession">Profesión:</label>
+				{{form.profession}}
+				{% include 'base/partials/_field_error.html' with field=form.profession %}
+			</div>
+		
+			<div class="col-md-3 {% if form.tuition.errors %}invalid{% endif %}">
+				<label id="tuition_title" class="text-muted lead" id="label_tuition">CAP No.:</label>
+				{{form.tuition}}
+				{% include 'base/partials/_field_error.html' with field=form.tuition %}
+			</div>
+				{% if field.errors %}
+				<span class="text-danger field-error text-md">
+					{{form.email.errors}}
+				</span>
+				{% endif %}
+			<div class="col-md-3 {% if form.secret_code.errors %}invalid{% endif %}">
+				<label class="text-muted lead" id="label_secret_code">Código Secreto:</label>
+				{{form.secret_code}}
+				{% include 'base/partials/_field_error.html' with field=form.secret_code %}
+				<!-- <span class="text-sm text-cap">Solo para Arquitectos</span> -->
+			</div>
+		{% endcomment %}
+			
+		
 	</div>
 	<div class="row mb-2">
 		
+		{% comment %}
 		<div class="col-md-4 {% if form.person_type.errors %}invalid{% endif %}">
-			<label class="text-muted lead">Tipo de Persona</label>
+			<label class="text-muted lead" id="label_person_type">Tipo de Persona</label>
 			{{form.person_type}}
 			{% include 'base/partials/_field_error.html' with field=form.mobile %}
 		</div>
-		<div class="col-md-4 offset-1 {% if form.mobile.errors %}invalid{% endif %}">
-			<label class="text-muted lead">Teléfono Celular:</label>
+			
+		{% endcomment %}
+			
+		<div class="col-md-4  {% if form.mobile.errors %}invalid{% endif %}">
+			<label class="text-muted lead"  id="label_mobile">Teléfono Celular:</label>
 			{{form.mobile}}
 			{% include 'base/partials/_field_error.html' with field=form.mobile %}
 		</div>
 		<div class="col-md-8 mt-3 {% if form.email.errors %}invalid{% endif %}">
-			<label class="text-muted lead">Correo Electrónico:</label>
+			<label class="text-muted lead"  id="label_email">Correo Electrónico:</label>
 			{{form.email}}
 			{% include 'base/partials/_field_error.html' with field=form.email %}
 		</div>
@@ -74,19 +85,19 @@
 	</div>	
 	<div class="row mb-2">
 		<div class="col-md-4 {% if form.phone.errors %}invalid{% endif %}">
-			<label class="text-muted lead">Teléfono Fijo:</label>
+			<label class="text-muted lead" id="label_phone">Teléfono Fijo:</label>
 			{{form.phone}}
 			{% include 'base/partials/_field_error.html' with field=form.phone %}
 		</div>
 		<div class="col-md-8 {% if form.address.errors %}invalid{% endif %}">
-			<label class="text-muted lead">Dirección:</label>
+			<label class="text-muted lead" id="label_address">Dirección:</label>
 			{{form.address}}
 			{% include 'base/partials/_field_error.html' with field=form.address %}
 		</div>
 	</div>	
     <div class="row mb-2">
 		<div class="col-md-4 ">
-			<label class="text-muted lead">Contraseña:</label>
+			<label class="text-muted lead" id="label_password">Contraseña:</label>
 			{{form.password}}
 		</div>
 		<span class="text-danger field-error text-md">

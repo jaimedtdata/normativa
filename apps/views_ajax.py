@@ -32,7 +32,7 @@ def get_dni(request):
                 data = {
                     'msg' : 'Estas en el ERP, solo confirma algunos datos',
                     'cap' : user.cap_num,
-                    'names': '',
+                    'names': user.name_user,
                 }
                 return JsonResponse({'data': data})
             else:
