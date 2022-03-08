@@ -2,8 +2,14 @@ import random
 import json
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from apps.views import register_normativa
+from foro.emails import async_send_email_suscription, send_email_suscription
+
+from foro.exceptions import MyException
 from .models import Coments_foro
 from normas.models import Areas_Normas, Register_Normativa
+from apps.models import Member, UserToken
+from django.core.exceptions import ObjectDoesNotExist
 
 def foro(request):
 
@@ -36,11 +42,18 @@ def foro_comentarios(request, norma_id):
         print ('POSTBBB',b)
         b.save()
 
+        emails = [m.email for m in norma.suscripcion_foro.all()];
+        async_send_email_suscription(request, emails)
+
     comentarios_list = Coments_foro.objects.filter(tema_id = norma_id)
+
+    # HERMOSAMENTE SIMPLE
+    is_suscribed = Member.objects.filter(suscripcion_foro = norma).filter(user_id = request.user.id).exists()
 
     context = {
         'norma' : norma,
-        'comentarios_list' : comentarios_list 
+        'comentarios_list' : comentarios_list, 
+        'is_suscribed' : is_suscribed
     }
 
 
@@ -56,8 +69,27 @@ def borrar_comentario_foro(request, norma_id, comentario_id):
 
     return redirect('foro_comentarios', norma_id = norma_id)
 
-def foro_suscribcion(request, norma_id):
-    pass
+def foro_suscripcion(request, norma_id):
+
+    if request.method == "POST":
+        state = True if request.POST.get('state') == 'true' else False
+        norma = Register_Normativa.objects.get(id = norma_id)
+
+        try: 
+            member = Member.objects.get(user_id = request.user.id)
+
+            if state:
+                member.suscripcion_foro.add(norma)
+                message = 'Suscrito'
+            else:
+                member.suscripcion_foro.remove(norma)
+                message = 'desuscrito'
+
+            return HttpResponse(message, 201)
+        
+        except Member.DoesNotExist:
+            message = 'Tiene que ser miembro para estar suscrito'
+            return HttpResponse(message, 405)
 
 def get_foro_items():
     rpta_areas = Register_Normativa.objects.all()

@@ -101,7 +101,7 @@ class Member(models.Model):
     membership = models.ForeignKey(Membership, related_name='user_membership', 
                                         on_delete=models.SET_NULL,blank=True, null=True)
     
-    # suscribcion_foro = models.ManyToManyField(Register_Normativa, related_name="suscribcion_foro") 
+    suscripcion_foro = models.ManyToManyField(Register_Normativa, related_name="suscripcion_foro", blank=True) 
     
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion')
     updated = models.DateTimeField(auto_now=True, verbose_name='Fecha de actualización')
@@ -195,34 +195,6 @@ class UserToken(models.Model):
 
     def get_password_reset_link(self):
         return reverse('password_reset_token', kwargs={'token': self.token})
- 
- 
-class Policies_usage(models.Model):
-    
-    title = models.CharField(max_length=200, blank=False,
-        help_text='Titulo de Consulta',
-        verbose_name='Titulo de Consulta')      
-    message = models.TextField(blank=False,
-        help_text='Respuesta',
-        verbose_name='Respuesta')      
-    validity_date_start = models.DateField(
-        blank=False, null=False, auto_now_add=False,
-        help_text='Fecha Inicio',
-        verbose_name='Fecha Inicio')
-    validity_date_finish = models.DateField(
-        blank=False, null=False, auto_now_add=False,
-        help_text='Fecha Fin',
-        verbose_name='Fecha Fin')
-    register_date_time = models.DateTimeField(
-        blank=False, null=False, auto_now_add=True,
-        help_text='Fecha de Registro',
-        verbose_name='Fecha de Registro')
-
-    class Meta:
-        verbose_name_plural = 'Preguntas Frecuentes'
-
-    def __str__(self) -> str:
-        return self.title
 
 """
 

@@ -88,7 +88,7 @@ class Register_Normativa(models.Model):
 class Register_Palabraclave(models.Model):
     name = models.CharField(blank=False,null=False,unique=True, max_length=200,verbose_name='Nombre Palabra Clave')
     normativas = models.ManyToManyField(Register_Normativa,verbose_name='Normativa',
-                                        related_name='keywords')
+                                        related_name='keywords', blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                         blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
@@ -101,5 +101,30 @@ class Register_Palabraclave(models.Model):
         return self.name
 
 
+class Policies_usage(models.Model):
+    tipo_uso = models.ManyToManyField(Areas_Normas,verbose_name='Tipo de uso',
+                                        related_name='preguntas', blank=True)
+    title = models.CharField(max_length=200, blank=False,
+        help_text='Titulo de Consulta',
+        verbose_name='Titulo de Consulta')      
+    message = models.TextField(blank=False,
+        help_text='Respuesta',
+        verbose_name='Respuesta')      
+    validity_date_start = models.DateField(
+        blank=False, null=False, auto_now_add=False,
+        help_text='Fecha Inicio',
+        verbose_name='Fecha Inicio')
+    validity_date_finish = models.DateField(
+        blank=False, null=False, auto_now_add=False,
+        help_text='Fecha Fin',
+        verbose_name='Fecha Fin')
+    register_date_time = models.DateTimeField(
+        blank=False, null=False, auto_now_add=True,
+        help_text='Fecha de Registro',
+        verbose_name='Fecha de Registro')
 
+    class Meta:
+        verbose_name_plural = 'Preguntas Frecuentes'
 
+    def __str__(self) -> str:
+        return self.title
