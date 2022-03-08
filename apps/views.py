@@ -59,7 +59,7 @@ def busque_normativa(request):
     if request.method=='POST':
         pal_clave=request.POST['pal_clave'].upper()
         norma_tipo_uso=request.POST['tipo_uso'].upper()
-        area_normas=Areas_Normas.objects.all()
+        area_normas=Areas_Normas.objects.order_by('area_name')
         normas= None
         #normas = Register_Normativa.objects.filter(keywords__name__search=pal_clave).order_by('tipo_norma__order')
         
@@ -116,7 +116,7 @@ def busque_normativa(request):
 # CRUD Normativa
 def tipo_normativa(request):
    normativa = Subcategories_Normas.objects.order_by('order')
-   tipo_uso=Areas_Normas.objects.order_by('order')
+   tipo_uso=Areas_Normas.objects.order_by('area_name')
    palabras_clave = Register_Palabraclave.objects.all()
    context = {
         'normativa':normativa,
@@ -159,7 +159,7 @@ def date_register(request):
 
 def edit_normativa(request,codigo):
     normativa=Register_Normativa.objects.get(pk=codigo)
-    tipo_uso=Areas_Normas.objects.all()
+    tipo_uso=Areas_Normas.objects.order_by('area_name')
     tipo_normativa=Subcategories_Normas.objects.order_by('order')
     palabras_clave = Register_Palabraclave.objects.all()
     palabras_claves_normativa = normativa.keywords.all()
@@ -264,7 +264,7 @@ def norma_edificatoria(request):
 def norma_datos(request):
     norma_date = Register_Normativa.objects.order_by('norma')
     subtipo_normas = Subcategories_Normas.objects.order_by('order')
-    area_normas = Areas_Normas.objects.order_by('order')
+    area_normas = Areas_Normas.objects.order_by('area_name')
     palabras_clave = Register_Palabraclave.objects.all()
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
@@ -341,7 +341,7 @@ def busq_palclave_prov(request):
 
         
 def dashboard(request):
-    rpta_areas = Areas_Normas.objects.all()
+    rpta_areas = Areas_Normas.objects.order_by('area_name')
     context = {'rpta_areas': rpta_areas}
     print (context)
     return render(request, 'dashboard.html', context)
@@ -474,9 +474,15 @@ class LoginNuevo(LoginView):
 
 #@login_required
 def preguntas(request):
+    tipo_uso = Areas_Normas.objects.order_by('area_name')
     preguntas = Policies_usage.objects.all()
-    tipo_uso = Areas_Normas.objects.order_by('order')
 
+    if request.method == 'POST':
+        tu_id = request.POST.get('tipo_uso_id')
+        pregunta = request.POST.get('pregunta')
+
+        preguntas = Policies_usage.objects.filter(title__icontains = pregunta)
+        
     context = {
                 'preguntas': preguntas,
                 'tipo_uso' : tipo_uso,
