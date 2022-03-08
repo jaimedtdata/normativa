@@ -67,8 +67,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-<<<<<<< HEAD
-=======
             name='Policies_usage',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -83,7 +81,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
->>>>>>> 1f5b41e743adc950020fe92de49df0a25bfd80a1
             name='UserToken',
             fields=[
                 ('token', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
