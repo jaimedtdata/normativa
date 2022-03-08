@@ -61,13 +61,12 @@ class RegisterCapAPIView(APIView):
         if serializer.is_valid():
             cd = serializer.validated_data
             register_cap_users(cd)
-            print(serializer.data)
-            print(serializer.data['email'])
+            data = {
+                'email': serializer.data['email'],
+            }
 
-            return Response({'data':serializer.data, 'success':'registro exitoso'}, status=status.HTTP_201_CREATED)
-        #email = 
-        #APIMember.objects.get(email=email)
-        print(serializer.errors)
+            return Response({'data':data, 'success':'registro exitoso'}, status=status.HTTP_201_CREATED)
+        
         return Response({'data' : serializer.errors, 'error':'tienes un error'}, status=status.HTTP_400_BAD_REQUEST)
 
 class RegisterExternalUsersAPIView(APIView):
@@ -78,13 +77,15 @@ class RegisterExternalUsersAPIView(APIView):
         if serializer.is_valid():
             cd = serializer.validated_data
             register_external_user(cd)
-            print(serializer.data)
-            print(cd['phone'])
+            data = {
+                'names': serializer.data['names'],
+                'identity': serializer.data['identity'],
+                'email': serializer.data['email'],
+                'mobile': serializer.data['mobile'],
+            }
 
-            return Response({'data':serializer.data, 'success':'registro exitoso'}, status=status.HTTP_201_CREATED)
-        #email = 
-        #APIMember.objects.get(email=email)
-        print(serializer.errors)
+            return Response({'data':data, 'success':'registro exitoso'}, status=status.HTTP_201_CREATED)
+        
         return Response({'data' : serializer.errors, 'error':'tienes un error'}, status=status.HTTP_400_BAD_REQUEST)
 
 class APIMemberView(APIView):

@@ -13,7 +13,7 @@ class MemberCAPSerializer(serializers.Serializer):
     def validate_email(self, value):
         member = APIMember.objects.filter(email=value).exists()
         if  not member :
-            raise ValidationError("Tu email debe ser igual con el cual estas registado en el CAP.")
+            raise ValidationError("Tu email debe ser igual al que tienes registrado en el CAP.")
         return value
 
     def validate(self, data):

@@ -111,7 +111,6 @@ const RegisterUserCap = (cap, user_data)=>{
             }
 
             if (data.error){
-                console.log(data.error);
                 document.getElementById('error_id_formulario1-email').innerHTML=  `<ul><li>${data.data.email}</li></ul>`
                 if(data.data.email === undefined){
                     document.getElementById('error_id_formulario1-email').classList.add('form-hide')
@@ -136,10 +135,7 @@ const RegisterUserCap = (cap, user_data)=>{
             //window.location.replace(`${base_url}/success_sign_up/`);
 
             }
-
-            
-            console.log(data);
-            
+                    
         })
         .catch(error => {
             //console.log( error)
@@ -184,8 +180,6 @@ const RegisterExternalUser = ()=>{
     fetch(urlExternalUser, optionsExternal)
         .then(resp=> resp.json())
         .then(data =>{
-            console.log(data)
-            console.log(data.data.non_field_errors);
 
             //show errors in the each field
             if (data.data.non_field_errors){
@@ -193,7 +187,6 @@ const RegisterExternalUser = ()=>{
             }
             
             if (data.error){
-                console.log(data.error);
                 document.getElementById('error_id_formulario2-email').innerHTML=  `<ul><li>${data.data.email}</li></ul>`
                 document.getElementById('error_id_formulario2-mobile').innerHTML=  `<ul><li>${data.data.mobile}</li></ul>`
                 if(data.data.email === undefined){
