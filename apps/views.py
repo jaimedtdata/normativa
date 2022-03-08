@@ -593,8 +593,10 @@ def home(request):
     return render(request, 'home.html', context)
 
 def dash(request):
+    afiliados = Member.objects.count()
     context = {
         'dashboard': True,
+        'afiliados': afiliados,
     }
     return render(request, 'dash.html', context)
 

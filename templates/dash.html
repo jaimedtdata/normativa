@@ -18,7 +18,15 @@
                                         <div class="col-sm-8">
                                             <div class="detail text-center">
                                                 <p>Afiliados</p>
-                                                <span class="number">6,267</span>
+                                                <span class="number">
+                                                    
+                                                    {% if afiliados %}
+                                                        {{afiliados}}
+                                                    {% else %}
+                                                    0
+                                                    {% endif %}
+                                                        
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
