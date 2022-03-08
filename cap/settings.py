@@ -27,6 +27,7 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'membership.apps.MembershipConfig',
+    'rest_framework',
 )
 
 LOCAL_APPS = (
