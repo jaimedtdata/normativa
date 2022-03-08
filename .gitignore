@@ -1,12 +1,9 @@
 *.pyc
 s3/
 .env
+env/
 media/Document_normativa
 media/pdf
-static
-static/
-cap/settings.py
-
 ### Django ###
 *.log
 *.pot

@@ -1,0 +1,42 @@
+
+<form method="POST" enctype="multipart/form-data" autocomplete="off" id="form-cap">
+	{% csrf_token %}
+	
+	
+	<div class="row mb-2">
+		<div class="col-md-8 mt-3">
+			<label class="text-muted lead"  >Correo Electrónico:</label>
+			{{formCap.email}}
+		</div>
+		<span class="text-danger" id="error_id_formulario1-email"></span>
+		<span class="text-success" id="success_id_formulario1-email"></span>
+
+		
+	</div>	
+
+    <div class="row mb-2">
+		<div class="col-md-4 ">
+			<label class="text-muted lead" >Contraseña:</label>
+			{{formCap.password1}}
+		</div>
+		<div class="col-md-4 ">
+			<label class="text-muted lead" >Confirma tu Contraseña:</label>
+			{{formCap.password2}}
+		</div>
+		<span class="text-danger" id="password_error_form1"></span>
+
+		
+		
+		
+	</div>
+    
+	<div class="d-flex justify-content-end">
+		<a href="{% url 'login' %}" class="btn btn-danger me-3 mt-3"> 
+			Cancelar
+		</a>
+		<button class="btn btn-primary mt-3"> 
+			Registrarme
+		</button>
+	</div>
+</form>	
+

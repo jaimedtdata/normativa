@@ -6,7 +6,7 @@ from foro.models import Coments_foro
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-USER_CONTROL = {'class': 'form-control', 'placeholder':'Ingrese CAP o su email'}
+USER_CONTROL = {'class': 'form-control', 'placeholder':'Ingrese CAP o email'}
 PASSWORD_CONTROL = {'class': 'form-control', 'placeholder':'Contraseña', 'type':'password'}
 
 
@@ -214,13 +214,13 @@ class ExternalRegisterForm(forms.ModelForm):
                 raise forms.ValidationError("Este email ya se encuentra registrado")
             return email
                     
-        def clean_tuition(self):
-            tuition = self.cleaned_data['tuition']
-            member = Member.objects.filter(tuition=tuition).exists()
+        # def clean_tuition(self):
+        #     tuition = self.cleaned_data['tuition']
+        #     member = Member.objects.filter(tuition=tuition).exists()
 
-            if member:
-                raise forms.ValidationError("Este CAP ya se encuentra registrado")
-            return tuition
+        #     if member:
+        #         raise forms.ValidationError("Este CAP ya se encuentra registrado")
+        #     return tuition
 
         def clean_identity(self):
             identity = self.cleaned_data['identity']

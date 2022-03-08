@@ -6,14 +6,38 @@
 <div class="container">
   <section class="accordion-section clearfix mt-3" aria-label="Question Accordions">
     
-    <h2>Preguntas Frecuentes  
+    <h2>
+      Preguntas Frecuentes  
     </h2>
+
+    <form class="form-group" action="" method="POST">
+    <div class="row">
+        {% csrf_token %}
+        <div class="col-5">
+          <select  class="form-control"  name="tipo_uso_id" id="">
+            {% for tu in tipo_uso %}
+              <option value="{{tu.id}}">{{tu.area_name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-6">
+          <input type="text" class="form-control" name="pregunta" placeholder="Escriba una pregunta">
+        </div>
+        <div class="col-1">
+          <button class="btn btn-info btn-block btn-lg" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
     
-    {% if perms.apps.add_policies_usage %}
-      <a href="{% url 'admin:apps_policies_usage_changelist' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar pregunta</a> 
+    {% if perms.normas.add_policies_usage %}
+      <a href="{% url 'admin:normas_policies_usage_changelist' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar pregunta</a> 
     {% endif %}
+
+
     
-    <div class="accordion" id="accordionExample">
+    <div class="accordion mt-3" id="accordionExample">
       {% for p in preguntas %}
       <div class="card">
         <div class="card-header bg-info" id="headingOne">
@@ -40,4 +64,53 @@
 
 {% endblock content %}
 
-          
+{% block js %}
+
+<script>
+
+    $(document).ready(function() {
+        $("#buscar_tema").submit( function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize()
+              }).done(function(data) {
+                let html = ``
+
+                data.forEach( tema => {
+                    html +=  /*html*/
+                            `<div class="card mb-3">
+                                <div class="row g-0">
+                                <div class="col-md-2 bg-foro text-center text-white">
+                                    <h3 class="mt-3"><i class="fa fa-comments"></i></h3>
+                                    <p class=""> <small>${tema.tipo_uso}</small> </p>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <a href="${tema.id}/comentarios" target="_blank">
+                                            <p class="text-dark"> ${tema.norma} - ${tema.name_denom} 
+                                                <span class="text-dark">
+                                                    <i class="fa fa-link text-dark" aria-hidden="true"></i> 
+                                                </span>
+                                            </p> 
+                                        </a>
+                                    <p class="card-text"><small class="text-muted">${tema.fecha_publi}</small></p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>`
+                })
+
+                document.getElementById('temas').innerHTML = html;
+
+              });
+        })
+
+        
+    })
+    
+</script>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+
+<form method="POST" enctype="multipart/form-data" autocomplete="off" id="form-external">
+	{% csrf_token %}
+	
+	<div class="row mb-2">
+		<div class="col-md-4">
+			<label class="text-muted lead" >Nombres:</label>
+			{{formExternal.names}}
+		</div>
+		<div class="col-md-4">
+			<label class="text-muted lead" >Primer Apellido:</label>
+			{{formExternal.first_surname}}
+		</div>		
+		<div class="col-md-4">
+			<label class="text-muted lead" >Segundo Apellido:</label>
+			{{formExternal.second_surname}}
+		</div>
+	</div>
+	<div class="row mb-2">
+		<div class="col-md-4 ">
+			<label class="text-muted lead" >DNI:</label>
+			{{formExternal.identity}}
+		</div>
+		
+
+		<div class="col-md-4">
+			<label class="text-muted lead" >Teléfono Celular:</label>
+			{{formExternal.mobile}}
+			<span class="text-danger" id="error_id_formulario2-mobile"></span>
+			<span class="text-success" id="success_id_formulario2-mobile"></span>
+		</div>
+	
+		<div class="col-md-4 ">
+			<label id="tuition_title" class="text-muted lead" >Teléfono Fijo:</label>
+			{{formExternal.phone}}
+		</div>
+			
+	</div>
+
+	<div class="row mb-2">
+		
+		<div class="col-md-5">
+			<label class="text-muted lead" >Correo Electrónico:</label>
+			{{formExternal.email}}
+		<span class="text-danger" id="error_id_formulario2-email"></span>
+		<span class="text-success" id="success_id_formulario2-email"></span>
+
+		</div>
+			
+			
+		<div class="col-md-5 ">
+			<label class="text-muted lead">Dirección:</label>
+			{{formExternal.address}}
+		</div>
+		
+		
+	</div>	
+	
+    <div class="row mb-2">
+		<div class="col-md-4 ">
+			<label class="text-muted lead" >Contraseña:</label>
+			{{formExternal.password1}}
+		</div>
+		<div class="col-md-4 ">
+			<label class="text-muted lead" >Confirma tu Contraseña:</label>
+			{{formExternal.password2}}
+		</div>
+		<span class="text-danger" id="password_error_form2"></span>
+		
+	</div>
+    
+	<div class="d-flex justify-content-end">
+		<a href="{% url 'login' %}" class="btn btn-danger me-3 mt-3"> 
+			Cancelar
+		</a>
+		<button class="btn btn-primary mt-3"> 
+			Registrarme
+		</button>
+	</div>
+</form>	
+
