@@ -1,9 +1,9 @@
 import random
 import json
 from django.http import HttpResponse
-from django.shortcuts import render
-from .models import Coments_foro, Themas_foro
-from normas.models import Master_Normas, Areas_Normas, Register_Normativa
+from django.shortcuts import redirect, render
+from .models import Coments_foro
+from normas.models import Areas_Normas, Register_Normativa
 
 def foro(request):
 
@@ -35,31 +35,6 @@ def foro_comentarios(request, norma_id):
         b = Coments_foro(tema_id=norma_id,user=request.user, coments=comentario)
         print ('POSTBBB',b)
         b.save()
-        
-
-    #print("request",f_id)
-    
-    # normas = Master_Normas.objects.filter(id=f_id)
-    # comentarios = Coments_foro.objects.filter(user=1 ,themas=f_id)
-    # number_coments = comentarios.count()
-    
-    #data=model_to_dict(normas)  
-    # if not normas:
-    #     context = {
-    #         'foro': True,
-    #             'denominacion':'',
-    #             'ncomentarios': 0,
-    #             'comentarios_list': [],
-    #             'themes': [],
-    #     }    
-    # else:
-    #     context = {
-    #         'foro': True,
-    #             'denominacion':normas,
-    #             'ncomentarios': number_coments,
-    #             'comentarios_list': comentarios,
-    #             'themes': [],
-    #     }
 
     comentarios_list = Coments_foro.objects.filter(tema_id = norma_id)
 
@@ -74,88 +49,20 @@ def foro_comentarios(request, norma_id):
     #print ('foro_datos',context)
     return render(request, 'foro/foro_comentarios.html', context)
 
-# def comentarios_save(request, pk=None):
-    
-#     post = get_object_or_404(Coments_foro, pk=pk)
-   
-#     if request.method == "POST":
-#         form = CommentForm(request.POST, instance=post)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.author = request.user
-            
-#             #post.published_date = timezone.now()
-#             post.save()
-#             return redirect('post_detail', pk=post.pk)
-#     else:
-#         form = CommentForm(instance=post)
-    
+def borrar_comentario_foro(request, norma_id, comentario_id):
+    if request.method == "POST":
+        comentario = Coments_foro.objects.filter(id = comentario_id)
+        comentario.delete()
+
+    return redirect('foro_comentarios', norma_id = norma_id)
+
+def foro_suscribcion(request, norma_id):
+    pass
 
 def get_foro_items():
     rpta_areas = Register_Normativa.objects.all()
 
     return rpta_areas
-
-    # col_list = ['norma_name', 'id']
-    # category_list.append(
-    #     {
-    #         'title': rpta_areas[1],
-    #         'items': Master_Normas.objects.all().values_list(*col_list),
-    #     },
-
-    # )
-    # category_list = (
-    #     {
-    #         'title': 'Temas Normativos',
-    #         'items': [
-    #             {
-    #                 'title':'Licencias, Procedimientos Administrativos  para Licencias de Edificación',
-    #                 'themes_count': random.randint(10,50),
-    #                 'messages_count': random.randint(50,200),
-    #             },
-    #             {
-    #                 'title':'Convenios',
-    #                 'themes_count': random.randint(10,50),
-    #                 'messages_count': random.randint(50,200),
-    #                 'last_messages': (
-    #                     {
-    #                         'message':'Convenio Rimac Seguros',
-    #                         'date':'Hoy {}:{} {}'.format(random.randint(1,12), random.randint(10,59), random.choice(['a.m.','p.m.'])),						
-    #                     },
-    #                     {
-    #                         'message':'Convenio Clínica Ricardo Palma',
-    #                         'date':'Ayer {}:{} {}'.format(random.randint(1,12), random.randint(10,59), random.choice(['a.m.','p.m.'])),						
-    #                     },
-    #                 )
-    #             },				
-    #         ],
-    #     },
-        
-    # )
-    # return category_list
-
-
-def get_themes():
-	users = (
-		('ariel12',False),
-		('max2020',True),
-		('superarquitecto',True),
-		('megaarquitecto',False),
-		('maria2021',False),
-		('juan_12',True),
-		('jorge_3',True),
-		('jaime23',True),
-	)
-	themes = []
-	for x in range(1,15):
-		themes.append(
-			{
-				'theme': random.choice(random.choice(random.choice(get_foro_items())['items'])['last_messages'])['message'],
-				'user': random.choice(users),
-				'date':'Hoy {}:{} {}'.format(random.randint(1,12), random.randint(10,59), random.choice(['a.m.','p.m.'])),						
-			},
-		)
-	return themes
 
 def get_coments():
 	themes = []

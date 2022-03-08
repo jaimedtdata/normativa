@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid, 
     comision, plan, plan_edit, plan_delete, carga_rules,plan_list,checkout,preguntas,signup,
-	entrevistas, charts,member, configs, works, rules, foro, foro_temas,foro_comentarios,
+	entrevistas, charts,member, configs, works, foro_comentarios,
     password_reset,SignUpOthers,success_sign_up, plan_list_login,
     #johao
     tipo_normativa,dash,register_normativa,date_register,delete_normativa,updatedate_normativa,palabra_clave,delete_palclave,update_template,update_clave,
@@ -31,9 +31,6 @@ urlpatterns = [
     #path('foro/', include('apps.foro.urls',namespace='Normas')),
     
     path('dash/', dash, name='dash'),
-    
-    #path('rules/', rules, name='rules'),
-    path('rules/', rules, name='rules'),
 
     path('carga_rules/', carga_rules, name='carga_rules'),
     # path('member/', member, name='member'),

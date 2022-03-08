@@ -4,10 +4,11 @@ from .choices import *
 from django.contrib import admin
 from django.utils.html import format_html
 from django.contrib.auth.models import User
-from normas.models import Master_Normas, Register_Normativa
 from django.urls import reverse,reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from membership.models import Membership
+from normas.models import Register_Normativa
+
 
 def upload_file(instance, filename):
     ext = filename.split('.')[-1]
@@ -100,7 +101,7 @@ class Member(models.Model):
     membership = models.ForeignKey(Membership, related_name='user_membership', 
                                         on_delete=models.SET_NULL,blank=True, null=True)
     
-    suscribcion_foro = models.ManyToManyField(Register_Normativa, related_name="suscribcion_foro") 
+    # suscribcion_foro = models.ManyToManyField(Register_Normativa, related_name="suscribcion_foro") 
     
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion')
     updated = models.DateTimeField(auto_now=True, verbose_name='Fecha de actualización')
@@ -196,7 +197,32 @@ class UserToken(models.Model):
         return reverse('password_reset_token', kwargs={'token': self.token})
  
  
+class Policies_usage(models.Model):
+    
+    title = models.CharField(max_length=200, blank=False,
+        help_text='Titulo de Consulta',
+        verbose_name='Titulo de Consulta')      
+    message = models.TextField(blank=False,
+        help_text='Respuesta',
+        verbose_name='Respuesta')      
+    validity_date_start = models.DateField(
+        blank=False, null=False, auto_now_add=False,
+        help_text='Fecha Inicio',
+        verbose_name='Fecha Inicio')
+    validity_date_finish = models.DateField(
+        blank=False, null=False, auto_now_add=False,
+        help_text='Fecha Fin',
+        verbose_name='Fecha Fin')
+    register_date_time = models.DateTimeField(
+        blank=False, null=False, auto_now_add=True,
+        help_text='Fecha de Registro',
+        verbose_name='Fecha de Registro')
 
+    class Meta:
+        verbose_name_plural = 'Preguntas Frecuentes'
+
+    def __str__(self) -> str:
+        return self.title
 
 """
 

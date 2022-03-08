@@ -27,13 +27,6 @@
                    <a href="{% url 'rules' %}"><i class="fas fa-balance-scale-left"></i>Busqueda Normas Legales</a>
                 {% endcomment %}
                 </li>
-                {% comment %}
-                    {% if request.user|has_group:"Premium" %} 
-                    <li>
-                    <a href="{% url 'admin:normas_master_normas_changelist' %}"><i class="fas fa-tasks"></i>Carga de Normas</a>
-                    </li>
-                    {% endif %}
-                {% endcomment %}
 
                 <li>
                     <a href="{% url 'dateregister_norm' %}"><i class="fas fa-balance-scale-left"></i>Agregar Norma</a>

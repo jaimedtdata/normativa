@@ -23,8 +23,8 @@ from apps.choices import (AREAS_CHOICES, PUESTOS_CHOICES,
 from django.contrib.auth.views import (LoginView, LogoutView, 
     PasswordResetView, PasswordResetDoneView,)
 from django.forms.models import model_to_dict
-from apps.models import Plan, Member, UserToken
-from normas.models import Areas_Normas,Master_Normas,Categories_Normas, Policies_usage
+from apps.models import Plan, Member, UserToken, Policies_usage
+from normas.models import Areas_Normas
 from foro.models import Coments_foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -33,7 +33,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery
 # Johao #
 
 from bus_normativa.models import date_normativa
-from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave,SubNormativa
+from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
 from normas.serializer import normas_serializer
 
 from .utils import create_member_free
@@ -116,7 +116,7 @@ def busque_normativa(request):
 # CRUD Normativa
 def tipo_normativa(request):
    normativa = Subcategories_Normas.objects.order_by('order')
-   tipo_uso=Areas_Normas.objects.all()
+   tipo_uso=Areas_Normas.objects.order_by('order')
    palabras_clave = Register_Palabraclave.objects.all()
    context = {
         'normativa':normativa,
@@ -145,7 +145,7 @@ def register_normativa(request):
 
         # AQUI AGREGO, TAL VEZ SE PUEDA USAR OTRO METODO IDK
         for pc in pcs:
-            objx, created = Register_Palabraclave.objects.get_or_create(name = pc)
+            objx, created = Register_Palabraclave.objects.get_or_create(name = pc.upper())
             objx.normativas.add(normativa)
 
         return redirect('dateregister_norm')
@@ -264,7 +264,7 @@ def norma_edificatoria(request):
 def norma_datos(request):
     norma_date = Register_Normativa.objects.order_by('norma')
     subtipo_normas = Subcategories_Normas.objects.order_by('order')
-    area_normas = Areas_Normas.objects.all()
+    area_normas = Areas_Normas.objects.order_by('order')
     palabras_clave = Register_Palabraclave.objects.all()
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
@@ -320,24 +320,24 @@ def busq_palclave_prov(request):
 
 
 
-def get_rules(pk):
-    #rpta_normas = Master_Normas.objects.all()
-    rpta_normas = Master_Normas.objects.filter(area_name=pk)
-    rules = []
-    for i in rpta_normas:
-            rules.append(
-                {
-                    'n': i.id,
-                    'section': i.category_name,
-                    'rule_type': i.subcategory_name,
-                    'locations': i.location_name,
-                    'norm': i.norma_rne,
-                    'denom': i.norma_name,
-                    'publication_date': i.validity_date_start,
-                    'file':i.file,
-                }
-            )
-    return rules
+# def get_rules(pk):
+#     #rpta_normas = Master_Normas.objects.all()
+#     rpta_normas = Master_Normas.objects.filter(area_name=pk)
+#     rules = []
+#     for i in rpta_normas:
+#             rules.append(
+#                 {
+#                     'n': i.id,
+#                     'section': i.category_name,
+#                     'rule_type': i.subcategory_name,
+#                     'locations': i.location_name,
+#                     'norm': i.norma_rne,
+#                     'denom': i.norma_name,
+#                     'publication_date': i.validity_date_start,
+#                     'file':i.file,
+#                 }
+#             )
+#     return rules
 
         
 def dashboard(request):
@@ -474,12 +474,7 @@ class LoginNuevo(LoginView):
 
 #@login_required
 def preguntas(request):
-    norma_id = request.GET.get('norma_id')
-
-    if norma_id == None:
-        preguntas = Policies_usage.objects.all()
-    else:
-        preguntas = get_object_or_404(Register_Normativa, id = norma_id).preguntas_frecuentes.all()
+    preguntas = Policies_usage.objects.all()
 
     context = {'preguntas': preguntas}
 
@@ -618,43 +613,6 @@ def works(request):
         context['alert'] = 'Registros Filtrados'
     return render(request, 'works.html', context)
 
-@login_required
-def rules(request):
-   
-    tipouso_id = request.GET.get('rule_id')
-    print("request",tipouso_id)
-
-    context = {
-        'rules': True,
-            'nonav': False,
-            'categories': 'RULES_CATEGORIES',
-            'sanctions': SANCTIONS_CATEGORIES,
-            'preventions': PREVENTIONS_CHOICES,
-            'filter': RulesForm(),
-            'rules_list': get_rules(tipouso_id),
-    }
-    if request.method == 'POST':
-        context['alert'] = 'Registros Filtrados'
-    return render(request, 'rules.html', context)
-
-
-def foro(request):
-    context = {
-        'foro': True,
-            'category_list': get_foro_items(),
-            'themes': get_themes(),
-    }
-    return render(request, 'foro.html', context)
-
-
-def foro_temas(request):
-    context = {
-        'foro': True,
-            'category_list': [],
-            'themes': [],
-    }
-    return render(request, 'foro_temas.html', context)
-
 
 def foro_comentarios(request):
     f_id = request.GET.get('rule_id')
@@ -668,33 +626,16 @@ def foro_comentarios(request):
         
 
     #print("request",f_id)
-    
-    normas = Master_Normas.objects.filter(id=f_id)
     comentarios = Coments_foro.objects.filter(user=1 ,themas=f_id)
     number_coments = comentarios.count()
     
-    #data=model_to_dict(normas)  
-    if not normas:
-        context = {
+    context = {
             'foro': True,
-                'denominacion':'',
-                'ncomentarios': 0,
-                'comentarios_list': [],
-                'themes': [],
-        }    
-    else:
-        context = {
-            'foro': True,
-                'denominacion':normas,
                 'ncomentarios': number_coments,
                 'comentarios_list': comentarios,
                 'themes': [],
         }
 
-
-    #comentarios_save(f_id)
-    #context = {'data': normas}
-    #print ('foro_datos',context)
     return render(request, 'foro_comentarios.html', context)
 
 # def comentarios_save(request, pk=None):
@@ -770,79 +711,3 @@ def entrevistas(request):
     }
     return render(request, 'entrevistas.html', context)
 
-
-def get_foro_items():
-    rpta_areas = Areas_Normas.objects.all()
-    
-    category_list = []
-    title_list = {}
-    detail_list = []
-    item_list = []
-
-    for a in rpta_areas:
-
-        title_list['title']= a.area_name.title()
-        
-        rpta_normas = Master_Normas.objects.filter(area_name=a.id)
-        nmessages=rpta_normas.count()
-        for i in rpta_normas:
-                
-                item_list.append(
-                        {
-                        'title':i.norma_name.title(),
-                        'themes_count': i.id,
-                        'messages_count': nmessages,
-                        'id': i.id,
-                        },
-                )
-                
-                dictionary_title_list= item_list.copy()
-        title_list['items']=dictionary_title_list
-        item_list = []
-        print (dictionary_title_list)
-        
-        dictionary_copy = title_list.copy()
-        
-        detail_list.append(dictionary_copy)
-
-    
-    
-    return detail_list
-
-    # col_list = ['norma_name', 'id']
-    # category_list.append(
-    #     {
-    #         'title': rpta_areas[1],
-    #         'items': Master_Normas.objects.all().values_list(*col_list),
-    #     },
-
-    # )
-    # category_list = (
-    #     {
-    #         'title': 'Temas Normativos',
-    #         'items': [
-    #             {
-    #                 'title':'Licencias, Procedimientos Administrativos  para Licencias de Edificación',
-    #                 'themes_count': random.randint(10,50),
-    #                 'messages_count': random.randint(50,200),
-    #             },
-    #             {
-    #                 'title':'Convenios',
-    #                 'themes_count': random.randint(10,50),
-    #                 'messages_count': random.randint(50,200),
-    #                 'last_messages': (
-    #                     {
-    #                         'message':'Convenio Rimac Seguros',
-    #                         'date':'Hoy {}:{} {}'.format(random.randint(1,12), random.randint(10,59), random.choice(['a.m.','p.m.'])),						
-    #                     },
-    #                     {
-    #                         'message':'Convenio Clínica Ricardo Palma',
-    #                         'date':'Ayer {}:{} {}'.format(random.randint(1,12), random.randint(10,59), random.choice(['a.m.','p.m.'])),						
-    #                     },
-    #                 )
-    #             },				
-    #         ],
-    #     },
-        
-    # )
-    # return category_list

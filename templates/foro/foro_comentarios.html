@@ -11,14 +11,24 @@
 
 <body>
 <div class="card border-secondary mb-3" > 
-            <img class="card-img-top" src="{% static 'img/Forofondo.jpg' %}" alt="Card image cap" style=" height:180px;">
-            <div class="card-body" style='background:white;'>
-            
-                <h5 class="card-title">Normativa: {{norma.name_denom}} </h5>               
-                <p class="card-text">Denominación: {{norma.norma}}</p>
-            </div>
-            
+  <img class="card-img-top" src="{% static 'img/Forofondo.jpg' %}" alt="Card image cap" style=" height:180px;">
+  <div class="card-body" style='background:white;'>
+  
+      <div class="row">
+        <div class="col-md-10">
+          <h5 class="card-title">Normativa: {{norma.name_denom}} </h5>               
+          <p class="card-text">Denominación: {{norma.norma}}</p>
         </div>
+        <div class="col-md-2" id="accion_suscribe">
+          <button class="btn btn-success" onclick="suscribirse()">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+            Suscribirse
+          </button>
+        </div>
+      </div>
+  </div>
+            
+</div>
         
 <div class="container">
   <div class="row">
@@ -39,22 +49,31 @@
                     <div id="contador">0/150</div>
                     <div class="form-group">    
                       <button  type="submit" class="btn btn-default">Comentar</button>
-                      <button  type="cancel" class="btn btn-default">Cancelar</button>
                     </div>
                   </span>
                 </form>
           </div>
  
               {% for muni in comentarios_list %}
-                  <div class="comment-box">
-                        <span class="commenter-pic">
-                          <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
-                        </span>
-                        <span class="commenter-name" >
-                          <a style='color:black;' href="#">{{muni.user}}</a>
-                        </span>      
-                        <p class="comment-txt more">{{muni.coments}}</p>
-                      </div>
+              <div class="d-flex align-items-center w-100">
+                <div class="comment-box mt-4 ">
+                  <span class="commenter-pic">
+                    <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
+                  </span>
+                  <span class="commenter-name" >
+                    <a style='color:black;' href="#">{{muni.user}}</a>
+                  </span>
+                  <p class="comment-txt more">{{muni.coments}}</p>                    
+                </div>
+              
+                <form method="POST" action="{% url 'borrar-comentario' norma.id muni.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-fat bg-danger float-right ml-2">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+                
+              </div>
               {% endfor %}
         
       </div>
@@ -216,5 +235,38 @@ mensaje.addEventListener('input', function(e) {
 {% endblock %}
 
 {% block js %}
+<script>
+  var btn_suscribirse = /*html*/`<button class="btn btn-success" onclick="suscribirse()">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+            Suscribirse
+          </button>`;
+
+  var btn_desuscribirse = /*html*/`<button class="btn btn-danger" onclick="desuscribirse()">
+            <i class="fa fa-bell-slash" aria-hidden="true"></i>
+            Desuscribirse
+          </button>`;
+      
+  var div_sus = document.getElementById('accion_suscribe');
+
+  function suscribirse() {
+    div_sus.innerHTML = btn_desuscribirse
+  }
+
+  function desuscribirse() {
+    div_sus.innerHTML = btn_suscribirse
+  }
+
+  // $.ajax({
+  //   method: 'POST',
+  //   url: "{% url 'foro-suscribcion' norma.id %}",
+  //   data: {
+
+  //   }
+  // })
+  // .done(function(e) {
+
+  // })
+
+</script>
 {% endblock %}
 
