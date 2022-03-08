@@ -23,8 +23,8 @@ from apps.choices import (AREAS_CHOICES, PUESTOS_CHOICES,
 from django.contrib.auth.views import (LoginView, LogoutView, 
     PasswordResetView, PasswordResetDoneView,)
 from django.forms.models import model_to_dict
-from apps.models import Plan, Member, UserToken, Policies_usage
-from normas.models import Areas_Normas
+from apps.models import Plan, Member, UserToken
+from normas.models import Areas_Normas, Policies_usage
 from foro.models import Coments_foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -457,8 +457,12 @@ class LoginNuevo(LoginView):
 #@login_required
 def preguntas(request):
     preguntas = Policies_usage.objects.all()
+    tipo_uso = Areas_Normas.objects.order_by('order')
 
-    context = {'preguntas': preguntas}
+    context = {
+                'preguntas': preguntas,
+                'tipo_uso' : tipo_uso,
+                }
 
     return render(request, 'preguntas.html', context)
     

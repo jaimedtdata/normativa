@@ -1,6 +1,7 @@
 *.pyc
 s3/
 .env
+env/
 media/Document_normativa
 media/pdf
 

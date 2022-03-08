@@ -16,15 +16,28 @@
   
       <div class="row">
         <div class="col-md-10">
-          <h5 class="card-title">Normativa: {{norma.name_denom}} </h5>               
+          <h5 class="card-title">Normativa: {{norma.name_denom}}</h5>               
           <p class="card-text">Denominación: {{norma.norma}}</p>
         </div>
-        <div class="col-md-2" id="accion_suscribe">
-          <button class="btn btn-success" onclick="suscribirse()">
-            <i class="fa fa-bell" aria-hidden="true"></i>
-            Suscribirse
-          </button>
-        </div>
+        {% if request.user.user_membership.user_id == request.user.id %}
+
+          {% if is_suscribed %}
+          <div class="col-md-2" id="accion_suscribe">
+            <button class="btn btn-danger" onclick="desuscribirse()">
+              <i class="fa fa-bell-slash" aria-hidden="true"></i>
+              Desuscribirse
+            </button>
+          </div>
+          {% else %}
+          <div class="col-md-2" id="accion_suscribe">
+            <button class="btn btn-success" onclick="suscribirse()">
+              <i class="fa fa-bell" aria-hidden="true"></i>
+              Suscribirse
+            </button>
+          </div>
+          {% endif %}
+
+        {% endif %}
       </div>
   </div>
             
@@ -72,7 +85,7 @@
                     <i class="fas fa-trash"></i>
                   </button>
                 </form>
-                
+              
               </div>
               {% endfor %}
         
@@ -231,9 +244,6 @@ mensaje.addEventListener('input', function(e) {
 
 {% endblock %}
 
-{% block script %}
-{% endblock %}
-
 {% block js %}
 <script>
   var btn_suscribirse = /*html*/`<button class="btn btn-success" onclick="suscribirse()">
@@ -249,23 +259,30 @@ mensaje.addEventListener('input', function(e) {
   var div_sus = document.getElementById('accion_suscribe');
 
   function suscribirse() {
-    div_sus.innerHTML = btn_desuscribirse
+    sendAjax(true, btn_desuscribirse)
   }
 
   function desuscribirse() {
-    div_sus.innerHTML = btn_suscribirse
+    sendAjax(false, btn_suscribirse)
   }
 
-  // $.ajax({
-  //   method: 'POST',
-  //   url: "{% url 'foro-suscribcion' norma.id %}",
-  //   data: {
-
-  //   }
-  // })
-  // .done(function(e) {
-
-  // })
+  function sendAjax(state, html) {
+    $.ajax({
+      method: 'POST',
+      url: "{% url 'foro-suscripcion' norma.id %}",
+      data: {
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        state : state,
+      },
+      success: function(data){
+        console.log(data)
+        div_sus.innerHTML = html
+      },
+      error: function(xhr, status, error){
+        console.log(error)
+      },
+    })
+  }
 
 </script>
 {% endblock %}
