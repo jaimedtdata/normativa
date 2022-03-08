@@ -12,7 +12,7 @@ from django.core.files.storage import FileSystemStorage
 from apps.email import (send_confirm_account, send_success_sign_up,
     send_password_reset, send_success_password_reset,)
 
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, TemplateView
 from django.urls import reverse, reverse_lazy
 from apps.forms import ( SignUpForm ,LiquidForm, SessionFormset, ComisionForm,PlanForm,
                 CommentForm,  ArquitectFormset, EntrevistaFormset, EntrevistaForm, MUNI_CHOICES,
@@ -37,6 +37,7 @@ from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,R
 from normas.serializer import normas_serializer
 
 from .utils import create_member_free
+from .forms_register import MemberCapForm, ExternalUserForm
 
 def busqueda_clavenormativa(request):
     area_normas=Areas_Normas.objects.all()
@@ -436,6 +437,16 @@ class SignUpFormView(FormView):
     #     print('INGRESO A INNVALIDO!',self,form)
     #     messages.error(self.request, 'Por favor, corrija los errores')
     #     return super(SignUpOthers, self).form_invalid(form)
+
+class RegisterMemberTemplateView(TemplateView):
+    template_name = 'register/sign-up-user.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['formCap'] = MemberCapForm( prefix='formulario1')
+        context['formExternal'] = ExternalUserForm( prefix='formulario2')
+        return context
+
 
 def users_register_erp(request):
     print('usuario: ',request.POST)

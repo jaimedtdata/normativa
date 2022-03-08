@@ -29,13 +29,27 @@
         <div class="col-md-10 order-md-1 offset-1 " >
           {% include "register/form-dni.html" %}
           <div id="test"></div>
-          <div id="form-signup" class="card bg-light  mb-5 form-display">
+
+          <!-- Form CAP -->
+          <div id="alert-succes"></div>
+          <div id="block-cap" class="card bg-light form-hide  mb-5" >
             <div class="card-body">
               <div class="d-flex justify-content-center ">
-                <h4 class="mb-3 " id="register_title">Datos de Registro</h4>
+                <h4 class="mb-3 " id="title_cap">Datos de Registro usuario CAP</h4>
               </div>
               <hr>
-              {% include 'register/form-signup.html' %}
+              {% include 'register/form_cap_register.html' %}
+            </div>
+          </div>
+
+          <!-- Form External -->
+          <div id="block-external" class="card bg-light form-hide mb-5">
+            <div class="card-body">
+              <div class="d-flex justify-content-center ">
+                <h4 class="mb-3 " id="title_external">Datos de Registro</h4>
+              </div>
+              <hr>
+              {% include 'register/form_external_register.html' %}
             </div>
           </div>
          
@@ -43,8 +57,41 @@
         </div>
       </div>
 
+      <!-- Button to Open the Modal -->
+      <button type="button" class="btn btn-primary form-hide" data-bs-toggle="modal" data-bs-target="#myModal">
+        Open modal
+      </button>
+
+      <!-- The Modal -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Modal Heading</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              Modal body..
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
 
       <script src="{% static 'bootstrap5/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'register/js/results.js' %}"></script>
+
 
 </body>
 

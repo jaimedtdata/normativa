@@ -18,3 +18,9 @@ PERSON_TYPE_CHOICES = (
     ('N', 'NATURAL'),
     ('J', 'JURÍDICA'),
 )
+
+PAYMENT_CHOICES = [
+    ('V', 'VISA'),
+    ('M', 'MASTERCARD'),
+    ('E', 'EFECTIVO'),
+]

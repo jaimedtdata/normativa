@@ -2,7 +2,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-from .choices import MEMBERSHIP_CHOICES, PROFESSION_CHOICES, PERSON_TYPE_CHOICES
+from .choices import MEMBERSHIP_CHOICES, PROFESSION_CHOICES, PERSON_TYPE_CHOICES, PAYMENT_CHOICES
 # Create your models here.
 
 
@@ -78,6 +78,10 @@ class APIMember(models.Model):
     address = models.CharField(max_length=200, blank=True,
         help_text='Dirección',
         verbose_name='Dirección')
+    price_month = models.DecimalField(default=0, max_digits=10, decimal_places=2, null=True, blank=True)
+    price_year = models.DecimalField(default=0, max_digits=10, decimal_places=2, null=True, blank=True)
+    payment_method = models.CharField(choices=PAYMENT_CHOICES, default='V',max_length=10 ,null=True, blank=True)
+    membership_type = models.CharField(choices=MEMBERSHIP_CHOICES, default='PLPA', max_length=30, blank=True, null=True)
 
     is_enabled = models.BooleanField(default=False, verbose_name='¿Esta habilitado?')
     penalty_fee = models.BooleanField(default=False, verbose_name='¿Tiene multas?')

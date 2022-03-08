@@ -58,7 +58,7 @@ class Member(models.Model):
     mobile = models.CharField(max_length=12, blank=True,
         help_text='Número de Teléfono Celular',
         verbose_name='Celular')
-    phone = models.CharField(max_length=10, blank=True,
+    phone = models.CharField(max_length=10, blank=True, null=True,
         help_text='Número de Teléfono Fijo o de Oficina',
         verbose_name='Teléfono')
     email = models.EmailField(max_length=50, blank=False,
@@ -70,7 +70,7 @@ class Member(models.Model):
     secret_code = models.PositiveIntegerField(null=True, blank=True,
         help_text='Código Secreto de Arquitecto',
         verbose_name='Código Secreto de Arquitecto')
-    address = models.CharField(max_length=200, blank=True,
+    address = models.CharField(max_length=200, blank=True, null=True,
         help_text='Dirección',
         verbose_name='Dirección')
     # is_signature_validated = models.BooleanField(blank=True,

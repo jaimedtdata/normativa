@@ -42,7 +42,7 @@ urlpatterns = [
     # path('foro_temas/', foro_temas, name='foro_temas'),
     # path('foro_comentarios/', foro_comentarios, name='foro_comentarios'),
     
-    path('sign-up-user/', SignUpFormView.as_view(),name='sign-up-user'),
+    #path('sign-up-user/', SignUpFormView.as_view(),name='sign-up-user'),
     path('sign-up/', SignUpOthers.as_view(), name='sign-up'),
     path('password_reset/', password_reset, name='password_reset'),
     path('preguntas/', preguntas, name='preguntas'),
