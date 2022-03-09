@@ -341,11 +341,7 @@ def busq_palclave_prov(request):
 
         
 def dashboard(request):
-    rpta_areas = Areas_Normas.objects.order_by('area_name')
-    context = {'rpta_areas': rpta_areas}
-    print (context)
-    return render(request, 'dashboard.html', context)
-
+    return render(request, 'dashboard.html')
 
 def get_user_by_form_data(data, roles=[]):
         user = {

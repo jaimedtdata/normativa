@@ -17,10 +17,9 @@ from django.conf import settings
 urlpatterns = [
 
     path('', include('apps.urls')),
-
     #path('', login, name='login'),
     path('foro/', include('foro.urls')),
-    path('normativa/', include('normas.urls')),
+    path('normativas/', include('normas.urls')),
     path('', Login.as_view(), name='login'),
     path('login/', Login.as_view(), name='login'),
     path('home/', dashboard, name='home'),

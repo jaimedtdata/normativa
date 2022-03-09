@@ -1,90 +1,102 @@
 {% load static %}
+
+{% block css %}
+<style>
+    .bg-cap {
+        background-color: #24387C;
+    }
+</style>
+{% endblock %}
+
 {% load user_tags %}
 
-<nav class="navbar navbar-expand-lg navbar-white bg-white">
-    {% comment %} <button type="button" id="sidebarCollapse" class="btn btn-outline-secondary default-secondary-menu"><i class="fas fa-bars"></i><span></span></button> {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-cap">
     <a class="navbar-brand" href="{% url 'home' %}">
         <img src="{% static 'img/cap-logo.svg' %}" width="200"  class="d-inline-block align-top" alt="">
     </a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="d-flex justify-content-around bd-highlight">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item p-2">
-                <a class="nav-link  text-white" aria-current="page" href="{% url 'home' %}">Home</a>
-                </li>
-                <li class="nav-item p-2">
-                <a class="nav-link  text-white" aria-current="page" href="{% url 'dash' %}">Estadistica</a>
-                </li>
-                <li class="nav-item p-2">
-                <a class="nav-link  text-white" aria-current="page" href="{% url 'plan_list' %}">Planes y Suscripción</a>
-                </li>
-                <li class="nav-item p-2">
-                <a class="nav-link  text-white" aria-current="page" href="{% url 'preguntas' %}">Preguntas Frecuentes</a>
-                </li>
-                
-            </ul>
-        </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+            <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'dash' %}">Estadistica</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'plan_list' %}">Planes y Suscripción</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'preguntas' %}">Preguntas Frecuentes</a>
+            </li>
+        </ul>
         
+        <ul class="navbar-nav d-flex">
 
-        <ul class="nav navbar-nav ml-auto">
-             <li class="nav-item dropdown">
-                <div class="nav-dropdown">
-                    <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-check"></i> 
-                        <span class="text-primary">
-                            {% if request.user.is_authenticated %}
-                                Tu plan actual es  
-                                {{membership}}
-                            {% endif %}
-                    </span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                        <ul class="nav-list">
-                            <li><a href="{% url 'plan_list' %}" class="dropdown-item text-success font-weight-bolder"><i class="fas fa-list"></i>
-                                 Para acceder a todos nuestros beneficios actualiza tu plan aquí</a></li>
-                            <div class="dropdown-divider"></div>
-                            
-                        </ul>
-                    </div>
-                </div>
-            </li>  
-            
-            
-            {% if request.user %}
+            {% if request.user.user_membership %}
             <li class="nav-item dropdown">
-                <div class="nav-dropdown">
-                    
-                    <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>{{request.user.last_name}}</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right nav-link-menu">   
-                        <ul class="nav-list">
-                            {% if request.user|has_group:"Premium" %} 
-                            <li>
-                                <a  href="{% url 'admin:index' %}" class="dropdown-item" target="_blank"><i class="fas fa-address-card"></i> Adm. Base de Datos</a>
-                            </li>
-                            <li>
-                                <a  href="{% url 'dash' %}" class="dropdown-item"><i class="fas fa-address-card"></i>Estadistica</a>
-                            </li>
-                            <li>
-                                <a  href="{% url 'foro' %}" class="dropdown-item"><i class="fas fa-address-card"></i>Foro Interactivo</a>
-                            </li>
-                            <div class="dropdown-divider"></div>
-                            {% endif %}
-                           
-                            <li>
-                                <a href="{% url 'norma_urb' %}" class="dropdown-item"><i class="fas fa-envelope"></i> Busqueda Normas Legales</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'dateregister_norm' %}" class="dropdown-item"><i class="fas fa-cog"></i> Agregar Norma</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'bus_provedor' %}" class="dropdown-item"><i class="fas fa-cog"></i> Busqueda por proveedor</a>
-                            </li>
-                            <div class="dropdown-divider"></div>
-                            <li><a href="{% url 'login' %}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Cerrar</a></li>
-                        </ul>
+                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-check"></i> 
+                    <span class="">
+                            Tu plan actual es  
+                            {{request.user.user_membership.membership}}
+                        </span> 
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right nav-link-menu">
+                        <a href="{% url 'plan_list' %}" class="dropdown-item text-success font-weight-bolder">
+                            <i class="fas fa-list"></i>
+                            Para acceder a todos nuestros beneficios actualiza tu plan aquí
+                        </a>
                     </div>
+                </li>  
+            {% endif %}
+           
+           
+           {% if request.user %}
+           <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user"></i> <span>@{{request.user.username}}</span> 
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a  href="{% url 'admin:index' %}" class="dropdown-item" target="_blank">
+                        <i class="fas fa-address-card"></i> 
+                        Adm. Base de Datos
+                    </a>
+                    <a  href="{% url 'dash' %}" class="dropdown-item">
+                        <i class="fas fa-address-card"></i>
+                        Estadistica
+                    </a>
+                    <a  href="{% url 'foro' %}" class="dropdown-item">
+                        <i class="fas fa-address-card"></i>
+                        Foro Interactivo
+                    </a>
+                    <a href="{% url 'norma_urb' %}" class="dropdown-item">
+                        <i class="fas fa-envelope"></i> 
+                        Busqueda Normas Legales
+                    </a>
+                    <a href="{% url 'index-normativas' %}" class="dropdown-item">
+                        <i class="fas fa-plus"></i> 
+                        Agregar Norma
+                    </a>
+                    <a href="{% url 'bus_provedor' %}" class="dropdown-item">
+                        <i class="fas fa-cog"></i> 
+                        Busqueda por proveedor
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'login' %}" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i> 
+                        Cerrar
+                    </a>
+
                 </div>
             </li>
-            {% endif %}
 
-        </ul>
+           
+           {% endif %}
+
+       </ul>
     </div>
+
 </nav>
