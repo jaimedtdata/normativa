@@ -7,7 +7,7 @@ from .choices import MEMBERSHIP_CHOICES, PROFESSION_CHOICES, PERSON_TYPE_CHOICES
 
 
 class MembershipBenefits(models.Model):
-    name = models.CharField(max_length=250, verbose_name='Beneficios de las membresia')
+    name = models.CharField(max_length=250, verbose_name='Beneficios de las membresias')
     
     def __str__(self):
        return self.name
@@ -15,12 +15,22 @@ class MembershipBenefits(models.Model):
     class Meta:
         verbose_name_plural = 'Beneficios de las Membresías'
 
+class MembershipConditions(models.Model):
+    name = models.CharField(max_length=250, verbose_name='Condiciones de las membresias')
+    
+    def __str__(self):
+       return self.name
+
+    class Meta:
+        verbose_name_plural = 'Condiciones de las Membresías'
+
 class Membership(models.Model):
     membership_type = models.CharField(
                 choices=MEMBERSHIP_CHOICES, default='PLPA', max_length=30)
     price_month = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     price_year = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     benefits = models.ManyToManyField(MembershipBenefits)
+    conditions= models.ManyToManyField(MembershipConditions, blank=True)
     #Plan por fechas (mdiario, mensual, tri, sem, anual) Foreign
     #fecha de inicio
     #fecha fin

@@ -39,6 +39,8 @@ from normas.serializer import normas_serializer
 from .utils import create_member_free
 from .forms_register import MemberCapForm, ExternalUserForm
 
+from membership.models import Membership
+
 def busqueda_clavenormativa(request):
     area_normas=Areas_Normas.objects.all()
 
@@ -375,11 +377,11 @@ class SignUpOthers(CreateView):
         
         profile = form.save(commit=False)
 
-        group = Group.objects.get(name='Gratuito')      
+        #group = Group.objects.get(name='Gratuito')      
         user = User.objects.create_user(profile.first_surname, profile.email, 'UEp8$x7rx@ZiSwU')
         #user = User.objects.create_user(profile.first_surname, profile.email, password)
         user.last_name = profile.first_surname
-        user.groups.add(group)
+        #user.groups.add(group)
         user.save()
 
 
@@ -526,11 +528,18 @@ def preguntas_delete(request, pk):
 def checkout(request):
     plans = Plan.objects.all()
     context = {'plans': plans}
-    return render(request, 'checkout.html', context)
+    return render(request, 'checkout/checkout.html', context)
 
 def plan_list(request):
-    plans = Plan.objects.all()
-    context = {'plans': plans}
+    
+    context = {
+        'pl_agremiado': Membership.objects.get(membership_type="PLPA"),
+        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+        'pl_profesional': Membership.objects.get(membership_type="PLPP"),
+        'pp_agremiado': Membership.objects.get(membership_type="PPPA"),
+        'pp_premium_agremiado': Membership.objects.get(membership_type="PPPPA"),
+        'pp_profesional': Membership.objects.get(membership_type="PPPP"),
+        }
     return render(request, 'plan_list.html', context)
 
 def plan_list_login(request):

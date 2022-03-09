@@ -38,7 +38,7 @@
                     </span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                     <div class="dropdown-menu dropdown-menu-right nav-link-menu">
                         <ul class="nav-list">
-                            <li><a href="{% url 'plan_list' %}" class="dropdown-item text-success font-weight-bolder"><i class="fas fa-list"></i>
+                            <li><a href="{% url 'checkout' %}" class="dropdown-item text-success font-weight-bolder"><i class="fas fa-list"></i>
                                  Para acceder a todos nuestros beneficios actualiza tu plan aquí</a></li>
                             <div class="dropdown-divider"></div>
                             
@@ -55,7 +55,14 @@
                     <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>{{request.user.last_name}}</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                     <div class="dropdown-menu dropdown-menu-right nav-link-menu">   
                         <ul class="nav-list">
-                            {% if request.user|has_group:"Premium" %} 
+                            
+                            {% comment %}
+                                {% if request.user|has_group:"Premium" %} 
+                                {% endif %}
+                                
+                            {% endcomment %}
+                                
+
                             <li>
                                 <a  href="{% url 'admin:index' %}" class="dropdown-item" target="_blank"><i class="fas fa-address-card"></i> Adm. Base de Datos</a>
                             </li>
@@ -66,8 +73,8 @@
                                 <a  href="{% url 'foro' %}" class="dropdown-item"><i class="fas fa-address-card"></i>Foro Interactivo</a>
                             </li>
                             <div class="dropdown-divider"></div>
-                            {% endif %}
-                           
+
+                            <!-- aqui iba el tag Premium -->
                             <li>
                                 <a href="{% url 'norma_urb' %}" class="dropdown-item"><i class="fas fa-envelope"></i> Busqueda Normas Legales</a>
                             </li>
