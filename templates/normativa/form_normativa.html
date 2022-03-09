@@ -2,35 +2,32 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'stylos/css/bootstrap.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'stylos/css/iconos.css' %}"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 {% endblock %}
 
 {% block content %}
-    <div class="container ">
+    <div class="container">
         <h1 class="text-center">Registrar Normativa</h1>
         <br><br>
         
         {% if errors %}
-        <div class="alert alert-error">
-          <h4>Please fix the following errors</h4>
-          <ul>
-            {% for field in form %}
-              {% if field.errors %}
-                {% for error in field.errors %}
-                  <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+            <div class="alert alert-error">
+            <h4>Please fix the following errors</h4>
+            <ul>
+                {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                    <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                    {% endfor %}
+                {% endif %}
                 {% endfor %}
-              {% endif %}
-            {% endfor %}
-          </ul>
-          {% if form.non_field_errors %}
-            {{ form.non_field_errors }}
-          {% endif %}
-        </div>
-      {% endif %}
+            </ul>
+            {% if form.non_field_errors %}
+                {{ form.non_field_errors }}
+            {% endif %}
+            </div>
+        {% endif %}
 
-        <form method='POST' action="{% url 'register_norm' %}" enctype="multipart/form-data">
+        <form method='POST' action="{% url 'registrar-normativa' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
                 <div class="col-6">
@@ -59,7 +56,7 @@
             <div class="row">
                 <div class="col-6">
                     <label> Tipo de Norma: </label>
-                    <select class="form-select" aria-label="Default select example" name="tip_norma" >
+                    <select class="form-control" aria-label="Default select example" name="tip_norma" >
                             {% for a in normativa %}
                                 <option value="{{a.id}}">{{a.subcategory_name}}</option>
                             {% endfor %}
@@ -67,7 +64,7 @@
                 </div>
                     <div class="col-6">
                         <label> Tipo de Uso: </label>
-                        <select class="form-select" aria-label="Default select example" name="tip_uso">
+                        <select class="form-control" aria-label="Default select example" name="tip_uso">
                             {% for tipo in tipo_uso %}
                                 <option value="{{tipo.id }}">{{tipo.area_name }}</option>
                             {% endfor %}
@@ -80,18 +77,18 @@
                     <div class="form-group">
                         <label>Adjuntar Documento</label><br>
                         <input type="file" name="documento"/>
-                      </div>
-                      <div class="form-group">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="es_foro" name="es_foro">
-                            <label class="form-check-label" for="es_foro">Foro</label>
-                          </div>
                     </div>
                     <div class="form-group">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="es_vigente" name="es_vigente">
-                            <label class="form-check-label" for="es_vigente">Vigente</label>
-                          </div>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="es_vigente" name="es_vigente">
+                            <label class="custom-control-label" for="es_vigente">Vigente</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="es_foro" name="es_foro">
+                            <label class="custom-control-label" for="es_foro">Foro</label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
@@ -123,7 +120,4 @@
 
 
 {% block js %}
-    <link rel="stylesheet" href="{% static 'stylos/js/bootstrap.bundle.min.js' %}"/>
-
-
 {% endblock %}

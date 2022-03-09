@@ -2,7 +2,6 @@ import random
 import json
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from apps.views import register_normativa
 from foro.emails import async_send_email_suscription, send_email_suscription
 
 from foro.exceptions import MyException
