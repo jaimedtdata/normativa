@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Membership, MembershipBenefits, APIMember
+from .models import Membership, MembershipBenefits, APIMember, MembershipConditions
 # Register your models here.
 
 @admin.register(Membership)
@@ -9,6 +9,10 @@ class MemberShipAdmin(admin.ModelAdmin):
 
 @admin.register(MembershipBenefits)
 class MemberBenefitsAdmin(admin.ModelAdmin):
+    list_display= ['name']
+
+@admin.register(MembershipConditions)
+class MemberConditionsAdmin(admin.ModelAdmin):
     list_display= ['name']
 
 

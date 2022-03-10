@@ -1,0 +1,335 @@
+[
+{
+  "model": "membership.membershipbenefits",
+  "pk": 1,
+  "fields": {
+    "name": "Acceso al home"
+  }
+},
+{
+  "model": "membership.membershipbenefits",
+  "pk": 2,
+  "fields": {
+    "name": "Acceso total a las Normas"
+  }
+},
+{
+  "model": "membership.membershipbenefits",
+  "pk": 3,
+  "fields": {
+    "name": "Acceso total a videos de cursos"
+  }
+},
+{
+  "model": "membership.membershipbenefits",
+  "pk": 4,
+  "fields": {
+    "name": "Acceso total al Foro"
+  }
+},
+{
+  "model": "membership.membership",
+  "pk": 1,
+  "fields": {
+    "membership_type": "PLPA",
+    "price_month": "0.00",
+    "price_year": "0.00",
+    "benefits": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "membership.membership",
+  "pk": 2,
+  "fields": {
+    "membership_type": "PNA",
+    "price_month": "0.00",
+    "price_year": "0.00",
+    "benefits": [
+      1
+    ]
+  }
+},
+{
+  "model": "membership.membership",
+  "pk": 3,
+  "fields": {
+    "membership_type": "PLPP",
+    "price_month": "18.00",
+    "price_year": "179.00",
+    "benefits": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "membership.membership",
+  "pk": 4,
+  "fields": {
+    "membership_type": "PLPPA",
+    "price_month": "22.00",
+    "price_year": "209.00",
+    "benefits": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "membership.membership",
+  "pk": 5,
+  "fields": {
+    "membership_type": "PPPA",
+    "price_month": "0.00",
+    "price_year": "0.00",
+    "benefits": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "membership.membership",
+  "pk": 6,
+  "fields": {
+    "membership_type": "PPPPA",
+    "price_month": "22.00",
+    "price_year": "209.00",
+    "benefits": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "membership.membership",
+  "pk": 7,
+  "fields": {
+    "membership_type": "PPPP",
+    "price_month": "30.00",
+    "price_year": "289.00",
+    "benefits": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "membership.apimember",
+  "pk": 1,
+  "fields": {
+    "name_user": "Juan",
+    "first_surname": "Garcia",
+    "second_surname": "Munoz",
+    "cap_num": 1000,
+    "identity": "10001000",
+    "person_type": "N",
+    "profession": "A",
+    "mobile": "982312345",
+    "phone": "",
+    "email": "juan@gmail.com",
+    "secret_code": null,
+    "address": "Av. pardo",
+    "price_month": "10.00",
+    "price_year": "0.00",
+    "payment_method": "V",
+    "membership_type": "PLPA",
+    "is_enabled": true,
+    "penalty_fee": false,
+    "has_tutition": true,
+    "date_enrollment": "2022-03-03",
+    "date_expired": "2022-03-03",
+    "created": "2022-03-03T12:41:01.289",
+    "updated": "2022-03-07T10:40:11.986"
+  }
+},
+{
+  "model": "membership.apimember",
+  "pk": 2,
+  "fields": {
+    "name_user": "Alberto",
+    "first_surname": "Gutierrez",
+    "second_surname": "Toscano",
+    "cap_num": 2000,
+    "identity": "20002000",
+    "person_type": "N",
+    "profession": "A",
+    "mobile": "983527289",
+    "phone": "",
+    "email": "alberto@gmail.com",
+    "secret_code": null,
+    "address": "Av. los naranjos",
+    "price_month": "10.00",
+    "price_year": "0.00",
+    "payment_method": "V",
+    "membership_type": "PLPA",
+    "is_enabled": true,
+    "penalty_fee": false,
+    "has_tutition": true,
+    "date_enrollment": "2022-03-03",
+    "date_expired": "2022-03-03",
+    "created": "2022-03-03T12:43:13.772",
+    "updated": "2022-03-07T10:40:40.045"
+  }
+},
+{
+  "model": "membership.apimember",
+  "pk": 3,
+  "fields": {
+    "name_user": "Antonio",
+    "first_surname": "Cisneros",
+    "second_surname": "Barrantes",
+    "cap_num": 3000,
+    "identity": "30003000",
+    "person_type": "N",
+    "profession": "I",
+    "mobile": "987234567",
+    "phone": "",
+    "email": "antonio@gmail.com",
+    "secret_code": null,
+    "address": "Av. cornejo",
+    "price_month": "10.00",
+    "price_year": "0.00",
+    "payment_method": "V",
+    "membership_type": "PLPA",
+    "is_enabled": true,
+    "penalty_fee": false,
+    "has_tutition": true,
+    "date_enrollment": "2022-03-03",
+    "date_expired": "2022-03-03",
+    "created": "2022-03-03T12:43:42.389",
+    "updated": "2022-03-07T10:40:50.211"
+  }
+},
+{
+  "model": "membership.apimember",
+  "pk": 4,
+  "fields": {
+    "name_user": "Carmen",
+    "first_surname": "Solis",
+    "second_surname": "Carrasco",
+    "cap_num": 4000,
+    "identity": "40004000",
+    "person_type": "N",
+    "profession": "A",
+    "mobile": "987123456",
+    "phone": "",
+    "email": "carmen@gmail.com",
+    "secret_code": 789,
+    "address": "av. manzanal",
+    "price_month": "18.00",
+    "price_year": "0.00",
+    "payment_method": "V",
+    "membership_type": "PNA",
+    "is_enabled": true,
+    "penalty_fee": true,
+    "has_tutition": true,
+    "date_enrollment": "2022-03-03",
+    "date_expired": "2022-03-03",
+    "created": "2022-03-03T12:44:14.124",
+    "updated": "2022-03-07T10:55:07.642"
+  }
+},
+{
+  "model": "membership.apimember",
+  "pk": 5,
+  "fields": {
+    "name_user": "Diana",
+    "first_surname": "Vertiz",
+    "second_surname": "Solis",
+    "cap_num": 5000,
+    "identity": "50005000",
+    "person_type": "N",
+    "profession": "A",
+    "mobile": "987123467",
+    "phone": "739833",
+    "email": "diana@gmail.com",
+    "secret_code": null,
+    "address": "Av. la marina 456",
+    "price_month": "18.00",
+    "price_year": "0.00",
+    "payment_method": "V",
+    "membership_type": "PNA",
+    "is_enabled": false,
+    "penalty_fee": true,
+    "has_tutition": true,
+    "date_enrollment": "2022-03-04",
+    "date_expired": "2022-03-04",
+    "created": "2022-03-04T10:28:17.744",
+    "updated": "2022-03-07T10:54:58.841"
+  }
+},
+{
+  "model": "membership.apimember",
+  "pk": 6,
+  "fields": {
+    "name_user": "Oscar",
+    "first_surname": "Ramirez",
+    "second_surname": "Quiroga",
+    "cap_num": 6000,
+    "identity": "60006000",
+    "person_type": "N",
+    "profession": "A",
+    "mobile": "987123456",
+    "phone": "",
+    "email": "oscar@gmail.com",
+    "secret_code": null,
+    "address": "Av. javier prado 2020",
+    "price_month": "18.00",
+    "price_year": "0.00",
+    "payment_method": "V",
+    "membership_type": "PNA",
+    "is_enabled": false,
+    "penalty_fee": true,
+    "has_tutition": true,
+    "date_enrollment": "2022-03-03",
+    "date_expired": "2022-03-03",
+    "created": "2022-03-03T12:46:37.104",
+    "updated": "2022-03-07T10:54:48.691"
+  }
+},
+{
+  "model": "membership.apimember",
+  "pk": 7,
+  "fields": {
+    "name_user": "Lorena",
+    "first_surname": "Altamirano",
+    "second_surname": "Avalos",
+    "cap_num": 7000,
+    "identity": "70007000",
+    "person_type": "N",
+    "profession": "A",
+    "mobile": "987345678",
+    "phone": "",
+    "email": "lorena@gmail.com",
+    "secret_code": null,
+    "address": "av. bolognesi 403",
+    "price_month": "18.00",
+    "price_year": "0.00",
+    "payment_method": "V",
+    "membership_type": "PNA",
+    "is_enabled": false,
+    "penalty_fee": true,
+    "has_tutition": true,
+    "date_enrollment": "2022-03-04",
+    "date_expired": "2022-03-04",
+    "created": "2022-03-04T10:33:19.051",
+    "updated": "2022-03-07T10:54:39.000"
+  }
+}
+]

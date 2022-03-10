@@ -5,8 +5,8 @@ from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid,
 	entrevistas, charts,member, configs, works, foro_comentarios,
     password_reset,SignUpOthers,success_sign_up, plan_list_login,
     #johao
-    tipo_normativa,dash,register_normativa,date_register,delete_normativa,updatedate_normativa,palabra_clave,delete_palclave,update_template,update_clave,
-    norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov, edit_normativa, filter_normativa_edificatoria)
+    dash,palabra_clave,delete_palclave,update_template,update_clave,
+    norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov, filter_normativa_edificatoria)
 
 from apps.views import busque_normativa,busqueda_clavenormativa,register_palabra_clave
     #end
@@ -17,10 +17,9 @@ from django.conf import settings
 urlpatterns = [
 
     path('', include('apps.urls')),
-
     #path('', login, name='login'),
     path('foro/', include('foro.urls')),
-    path('normativa/', include('normas.urls')),
+    path('normativas/', include('normas.urls')),
     path('', Login.as_view(), name='login'),
     path('login/', Login.as_view(), name='login'),
     path('home/', dashboard, name='home'),
@@ -52,14 +51,6 @@ urlpatterns = [
     #johao
     path('search_normat/',busqueda_clavenormativa,name='search_normat'),
     path('bus_normaclave/',busque_normativa,name='bus_normaclave'),
-
-    path('form_normativas/',tipo_normativa,name='form_normativas'),
-
-    path('register_norm/',register_normativa,name='register_norm'),
-    path('dateregister_norm',date_register,name='dateregister_norm'),
-    path('edit_normativa/<int:codigo>', edit_normativa,name='update_datenorma'),
-    path('udpate_normativa/<int:codigo>',updatedate_normativa,name='upate_normativa'),
-    path('delete_normativa/<int:codigo>',delete_normativa,name='delete'),
     #palabra clave
     path('register_clave/<int:codigo>',palabra_clave,name='register_clave'),
     path('date_palabraclave/<int:codigo>',register_palabra_clave,name='date_palabraclave'),

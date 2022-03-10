@@ -1,0 +1,157 @@
+/**
+* Template Name: Company - v4.7.0
+* Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #4d4643;
+  }
+  
+  a {
+    color: #24387C;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #24387C;
+    text-decoration: none;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto", sans-serif;
+  }
+  
+  
+  /*--------------------------------------------------------------
+  # Disable AOS delay on mobile
+  --------------------------------------------------------------*/
+  @media screen and (max-width: 768px) {
+    [data-aos-delay] {
+      transition-delay: 0 !important;
+    }
+  }
+  
+  /*--------------------------------------------------------------
+  # Pricing
+  --------------------------------------------------------------*/
+  .pricing .box {
+    padding: 20px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    /* height: 528px; */
+  }
+  .pricing h3 {
+    font-weight: 400;
+    margin: -20px -20px 20px -20px;
+    padding: 20px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #847872;
+    background: #f8f8f8;
+  }
+  .pricing h4 {
+    font-size: 36px;
+    color: #24387C;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 20px;
+  }
+  .pricing h4 sup {
+    font-size: 20px;
+    top: -15px;
+    left: -3px;
+  }
+  .pricing h4 span {
+    color: #bababa;
+    font-size: 16px;
+    font-weight: 300;
+  }
+  .pricing ul {
+    padding: 0;
+    list-style: none;
+    color: #4d4643;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+  }
+  .pricing ul li {
+    padding-bottom: 1px;
+  }
+  .pricing ul i {
+    color: #337ab7;
+    font-size: 18px;
+    padding-right: 4px;
+  }
+  .benefits{
+    font-size: 15px !important;
+  }
+  .pricing ul .na {
+    color: #ccc;
+    text-decoration: line-through;
+  }
+  .pricing .btn-wrap {
+    margin: 20px -20px -20px -20px;
+    padding: 20px 15px;
+    background: #f8f8f8;
+    text-align: center;
+  }
+  .pricing .btn-buy {
+    background: #24387C;
+    display: inline-block;
+    padding: 8px 35px 10px 35px;
+    border-radius: 4px;
+    color: #fff;
+    transition: none;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .pricing .btn-free {
+    background: #337ab7;
+    display: inline-block;
+    padding: 8px 35px 10px 35px;
+    border-radius: 4px;
+    color: #fff;
+    transition: none;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .pricing .btn-buy:hover {
+    background: #073ceb;
+  }
+  .pricing .btn-free:hover {
+    background: #c1a13f;
+  }
+  .pricing .featured h3 {
+    color: #fff;
+    background: #24387C;
+  }
+  .pricing .advanced {
+    width: 200px;
+    position: absolute;
+    top: 18px;
+    right: -68px;
+    transform: rotate(45deg);
+    z-index: 1;
+    font-size: 14px;
+    padding: 1px 0 3px 0;
+    background: #c1a13f;
+    color: #fff;
+  }
+  
+  /* f80ca9 */

@@ -39,6 +39,8 @@ from normas.serializer import normas_serializer
 from .utils import create_member_free
 from .forms_register import MemberCapForm, ExternalUserForm
 
+from membership.models import Membership
+
 def busqueda_clavenormativa(request):
     area_normas=Areas_Normas.objects.all()
 
@@ -112,103 +114,6 @@ def busque_normativa(request):
 
     if request.method == 'GET':
         return render(request, 'normativa/normativa_busqueda.html')
-
-# CRUD Normativa
-def tipo_normativa(request):
-   normativa = Subcategories_Normas.objects.order_by('order')
-   tipo_uso=Areas_Normas.objects.order_by('area_name')
-   palabras_clave = Register_Palabraclave.objects.all()
-   context = {
-        'normativa':normativa,
-        'tipo_uso':tipo_uso,
-        'palabras_clave' : palabras_clave,
-        'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
-    }
-   return render(request,'normativa/form_normativa.html',context)
-
-def register_normativa(request):
-    if request.method=='POST':
-        norma=request.POST['norma']
-        name_deno=request.POST['name_deno']
-        base_legal=request.POST['base_legal']
-        fecha_publi=request.POST['fecha_publi']
-        tip_norma=request.POST['tip_norma']
-        tip_uso=request.POST['tip_uso']
-        file_pdf= request.FILES.get('documento', None)
-        es_foro = True if request.POST.get('es_foro', False) == 'on' else False
-        es_vigente = True if request.POST.get('es_vigente', False) == 'on' else False
-        descripcion = request.POST['descripcion']
-        pcs = request.POST.getlist('palabras_clave[]')
-
-        normativa = Register_Normativa.objects.create(norma=norma,name_denom=name_deno,base_legal=base_legal,
-                    fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
-
-        # AQUI AGREGO, TAL VEZ SE PUEDA USAR OTRO METODO IDK
-        for pc in pcs:
-            objx, created = Register_Palabraclave.objects.get_or_create(name = pc.upper())
-            objx.normativas.add(normativa)
-
-        return redirect('dateregister_norm')
-
-def date_register(request):
-    norma_register = Register_Normativa.objects.order_by('norma')
-    context = {
-        'norma_register':norma_register
-    }
-    return render(request,'normativa/datenorma_register.html',context)
-
-def edit_normativa(request,codigo):
-    normativa=Register_Normativa.objects.get(pk=codigo)
-    tipo_uso=Areas_Normas.objects.order_by('area_name')
-    tipo_normativa=Subcategories_Normas.objects.order_by('order')
-    palabras_clave = Register_Palabraclave.objects.all()
-    palabras_claves_normativa = normativa.keywords.all()
-
-
-    context = {
-        'normativa':normativa,
-        'tipo_uso':tipo_uso,
-        'tipo_normativa':tipo_normativa,
-        'palabras_clave' : palabras_clave,
-        'palabras_claves_normativa' : palabras_claves_normativa,
-        'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
-
-    }
-
-    return render(request,'normativa/edit_normativa.html',context)
-
-def updatedate_normativa(request,codigo):
-    if request.method=='POST':
-        norma=request.POST['norma']
-        name_deno=request.POST['name_deno']
-        base_legal=request.POST['base_legal']
-        fecha_publi=request.POST['fecha_publi']
-        tip_norma=request.POST['tip_norma']
-        tip_uso=request.POST['tip_uso']
-        es_foro = True if request.POST.get('es_foro', False) == 'on' else False
-        es_vigente = True if request.POST.get('es_vigente', False) == 'on' else False
-        descripcion = request.POST['descripcion']
-
-        
-        file_pdf = request.FILES.get('documento', None)
-
-        if file_pdf != None:
-            fs = FileSystemStorage()
-            file_pdf.name = str(uuid.uuid4())
-            Register_Normativa.objects.get(id=codigo).document.delete()
-            filename = fs.save('Document_normativa/' + file_pdf.name + '.pdf', file_pdf)
-            file_pdf = filename
-
-        Register_Normativa.objects.filter(id=codigo).update(norma=norma,name_denom=name_deno,base_legal=base_legal,
-        fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
-
-        return redirect('dateregister_norm')
-
-def delete_normativa(request,codigo):
-    Register_Normativa.objects.filter(id=codigo).delete()
-    return redirect('dateregister_norm')
-
-#end  Normativa
 
 # CRUD Palabra clave
 def palabra_clave(request,codigo):
@@ -341,11 +246,7 @@ def busq_palclave_prov(request):
 
         
 def dashboard(request):
-    rpta_areas = Areas_Normas.objects.order_by('area_name')
-    context = {'rpta_areas': rpta_areas}
-    print (context)
-    return render(request, 'dashboard.html', context)
-
+    return render(request, 'dashboard.html')
 
 def get_user_by_form_data(data, roles=[]):
         user = {
@@ -375,11 +276,11 @@ class SignUpOthers(CreateView):
         
         profile = form.save(commit=False)
 
-        group = Group.objects.get(name='Gratuito')      
+        #group = Group.objects.get(name='Gratuito')      
         user = User.objects.create_user(profile.first_surname, profile.email, 'UEp8$x7rx@ZiSwU')
         #user = User.objects.create_user(profile.first_surname, profile.email, password)
         user.last_name = profile.first_surname
-        user.groups.add(group)
+        #user.groups.add(group)
         user.save()
 
 
@@ -532,11 +433,18 @@ def preguntas_delete(request, pk):
 def checkout(request):
     plans = Plan.objects.all()
     context = {'plans': plans}
-    return render(request, 'checkout.html', context)
+    return render(request, 'checkout/checkout.html', context)
 
 def plan_list(request):
-    plans = Plan.objects.all()
-    context = {'plans': plans}
+    
+    context = {
+        'pl_agremiado': Membership.objects.get(membership_type="PLPA"),
+        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+        'pl_profesional': Membership.objects.get(membership_type="PLPP"),
+        'pp_agremiado': Membership.objects.get(membership_type="PPPA"),
+        'pp_premium_agremiado': Membership.objects.get(membership_type="PPPPA"),
+        'pp_profesional': Membership.objects.get(membership_type="PPPP"),
+        }
     return render(request, 'plan_list.html', context)
 
 def plan_list_login(request):
@@ -603,8 +511,10 @@ def home(request):
     return render(request, 'home.html', context)
 
 def dash(request):
+    afiliados = Member.objects.count()
     context = {
         'dashboard': True,
+        'afiliados': afiliados,
     }
     return render(request, 'dash.html', context)
 

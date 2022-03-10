@@ -5,12 +5,6 @@
 
 {% block css %}
 <link href="{% static 'css/css-estilos_das.css' %}" rel="stylesheet">
-<link href="{% static 'css/css-paginacion_das.css' %}" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'stylos/css/sidebar.css' %}"/>
-<!--boostrap icono-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 {% endblock %}
 
   
@@ -36,13 +30,13 @@
 
         <div class="my-5 py-5">
             <a  href="{% url 'home' %}">
-                <img src="{% static 'img/logo_cap.png' %}"   class="d-inline-block align-top" alt="">
+                <img class="img-fluid" src="{% static 'img/logo_cap.png' %}"   class="d-inline-block align-top" alt="">
             </a> 
         </div>   
 
     </div>
 
-    <div class="col-8 " >
+    <div class="col-8" >
         <h1 class="gUppercase gFontWeight700" >
             Normativa Edificatoria
         </h1>
@@ -58,26 +52,26 @@
                         <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                         
                         <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                            <img class="img-fluid mt-5" src="{% static 'images/edificaciones.svg' %}" class="gInlineBlock gWidth37 gMarginTop31">
+                            <img class="img-fluid mt-5" src="{% static 'images/edificaciones.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
                         </div>
                         
-                        <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                        <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
                             Reglamento Nacional de
                             <br>
                             Edificaciones
-                        </h3></a>
+                        </h5></a>
                     
                     <a href="{% url 'norma_urb' %}?norma=Normas Sectoriales&ne=2" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox3"> 
                         <div class="gWidth50 gHeight3 gFondoCircleGris gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                         <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                            <img class="img-fluid " src="{% static 'images/por_uso.svg' %}" class="gInlineBlock gWidth37 gMarginTop31">
+                            <img class="img-fluid " src="{% static 'images/por_uso.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
                         </div>
                         
-                        <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                        <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
                             Normas
                             <br>
                             Sectoriales
-                        </h3>
+                        </h5>
                         </a>
                     
                     
@@ -89,12 +83,12 @@
                                 
                             </div
                             >
-                            <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Opiniones
+                            <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Opiniones
                                 vinculantes
                                 y cauística
                                 <br>
                                 <br>
-                                </h3></a>
+                                </h5></a>
                             </a>
                     
                 </div>
@@ -106,17 +100,17 @@
                             <img class="img-fluid mt-4" src="{% static 'images/reglamento.svg' %}" class="gInlineBlock gMarginTop5" width="87">
                         </div>
                         
-                        <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Reglamento <br>
+                        <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Reglamento <br>
                                                                                                                     Comentado
-                                                                                                                    </h3></a>
+                                                                                                                    </h5></a>
                                                                                                                     
                     <a href="{% url 'norma_urb' %}?norma=Indecopi&ne=5" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
                         <div class="gWidth50 gHeight3  gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                         <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                            <img class="img-fluid mt-3" src="{% static 'images/boletin.svg' %}" class="gInlineBlock gWidth37 gMarginTop31" width="70">
+                            <img class="img-fluid mt-3" src="{% static 'images/boletin.svg' %}" class="gInlineBlock gWidth57 gMarginTop31" width="70">
                             
                         </div>
-                        <h3 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Indecopi</h3>
+                        <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">Indecopi</h5>
                     </a>
 
                     
@@ -126,11 +120,11 @@
                         <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleRojo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
                             <img class="img-fluid mt-3" src="{% static 'images/municipales.svg' %}" class="gInlineBlock gWidth65 gMarginTop31">
                         </div>
-                        <h3 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                        <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
                             Normas
                             <br>
                             Municipales
-                        </h3></a>
+                        </h5></a>
 
                                                                                         
                 </div>

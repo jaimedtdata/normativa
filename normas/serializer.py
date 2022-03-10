@@ -16,3 +16,8 @@ def normas_serializer(norma):
         'palabras_clave' : [k.id for k in norma.keywords.all()],
     }
 
+def keywords_serializer(palabra):
+    return {
+        'id' : palabra.id,
+        'name' : palabra.name
+        }
