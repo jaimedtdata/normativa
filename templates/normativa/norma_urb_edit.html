@@ -8,7 +8,7 @@
 <!--content-->
 {% block content %}
 
-<div class="container-xl">
+<div class="px-2">
     <div class="row text-center" >
         <div class="col-2">
             <a href="{% url 'home' %}">
@@ -33,12 +33,13 @@
         <div class="col-sm-3 d-none" style="height:720px;" id="subnormas_caja">
           <div class="form-group">
               <select class="form-control" name="subnormativas[]" multiple="multiple" style="height:100%;" id="select-norms">
-                  {% for sn in subtipo_normas %}
-                      <small>
-                          <option class="text-wrap" value="{{sn.id}}">{{sn.subcategory_name}} </option>
-    
-                      </small>
-                  {% endfor %}
+                    {% for sn in subtipo_normas %}
+                        {% if sn.order|length == 2 %}
+                            <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.subcategory_name}} </option>
+                        {% else %}
+                            <option class="text-wrap" value="{{sn.id}}">{{sn.subcategory_name}} </option>
+                        {% endif %}
+                    {% endfor %}
               </select>
           </div>
         </div>
@@ -51,7 +52,7 @@
                     <select class="form-control" id="area-normas">
                         <option class="text-wrap" value="0">TODOS</option>
                         {% for an in area_normas %}
-                        <option class="text-wrap" value="{{an.id}}">{{an.area_name}} </option>
+                        <option class="text-wrap" value="{{an.order}}">{{an.area_name}} </option>
                         {% endfor %}
                     </select> 
               </select> 
@@ -193,7 +194,7 @@
     var uac = normas;
     var subnormativas = $("#select-norms").val(),
         search = $("#filter-input").val()
-        tipo_uso_id = $("#area-normas").val(),
+        order = $("#area-normas").val(),
         date_range = undefined
         keywords = $("#keywords").val()
         date_range = undefined;
@@ -231,7 +232,7 @@
 
     $("#area-normas").change(function(){
         
-        tipo_uso_id = $("#area-normas").val()
+        order = $("#area-normas").val()
         execFilters()  
     })
 
@@ -281,11 +282,11 @@
         
     }
 
-    function getTipoUsoNormativas(tipo_uso_id)
+    function getTipoUsoNormativas(order)
     {
-        if (tipo_uso_id != 0) {
+        if (order != 0) {
             return uac.filter(n => {
-                return n.tipo_uso_id == tipo_uso_id
+                return n.order.includes(order, 0)
             })
         } else {
             return uac
@@ -330,7 +331,7 @@
     {
         uac = getNormativas(subnormativas)
         uac = getSearchNormativas(search)
-        uac = getTipoUsoNormativas(tipo_uso_id)
+        uac = getTipoUsoNormativas(order)
         uac = getNormasPorKeywords(keywords)
         uac = getNormasPorFechas(date_range)
 

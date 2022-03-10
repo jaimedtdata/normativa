@@ -8,6 +8,7 @@ def normas_serializer(norma):
         'base_legal' : norma.base_legal,
         'tipo_norma_id' : norma.tipo_norma_id,
         'tipo_uso_id' : norma.tipo_uso_id,
+        'order' : norma.tipo_uso.order,
         'tipo_uso' : norma.tipo_uso.area_name,
         'es_vigente' : norma.es_vigente,
         'descripcion' : norma.descripcion,
