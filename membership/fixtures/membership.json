@@ -28,6 +28,34 @@
   }
 },
 {
+  "model": "membership.membershipconditions",
+  "pk": 1,
+  "fields": {
+    "name": "Ser colegiado del CAP."
+  }
+},
+{
+  "model": "membership.membershipconditions",
+  "pk": 2,
+  "fields": {
+    "name": "Estar habilitado."
+  }
+},
+{
+  "model": "membership.membershipconditions",
+  "pk": 3,
+  "fields": {
+    "name": "No tener multas."
+  }
+},
+{
+  "model": "membership.membershipconditions",
+  "pk": 4,
+  "fields": {
+    "name": "Cualquier Profesional o Persona que desee acceder"
+  }
+},
+{
   "model": "membership.membership",
   "pk": 1,
   "fields": {
@@ -37,8 +65,12 @@
     "benefits": [
       1,
       2,
-      3,
       4
+    ],
+    "conditions": [
+      1,
+      2,
+      3
     ]
   }
 },
@@ -51,7 +83,8 @@
     "price_year": "0.00",
     "benefits": [
       1
-    ]
+    ],
+    "conditions": []
   }
 },
 {
@@ -65,6 +98,9 @@
       1,
       2,
       3,
+      4
+    ],
+    "conditions": [
       4
     ]
   }
@@ -81,6 +117,11 @@
       2,
       3,
       4
+    ],
+    "conditions": [
+      1,
+      2,
+      3
     ]
   }
 },
@@ -94,8 +135,12 @@
     "benefits": [
       1,
       2,
-      3,
       4
+    ],
+    "conditions": [
+      1,
+      2,
+      3
     ]
   }
 },
@@ -111,6 +156,11 @@
       2,
       3,
       4
+    ],
+    "conditions": [
+      1,
+      2,
+      3
     ]
   }
 },
@@ -125,6 +175,9 @@
       1,
       2,
       3,
+      4
+    ],
+    "conditions": [
       4
     ]
   }
@@ -329,7 +382,7 @@
     "date_enrollment": "2022-03-04",
     "date_expired": "2022-03-04",
     "created": "2022-03-04T10:33:19.051",
-    "updated": "2022-03-07T10:54:39.000"
+    "updated": "2022-03-07T10:54:39"
   }
 }
 ]
