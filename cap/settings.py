@@ -28,6 +28,8 @@ DJANGO_APPS = (
     'django.contrib.postgres',
     'storages',
     'membership.apps.MembershipConfig',
+    'rest_framework',
+    'django_filters',
 )
 
 LOCAL_APPS = (
