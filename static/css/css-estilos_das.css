@@ -1,5 +1,7 @@
 gTablegTablegTablegTable* { margin: 0; padding: 0; }
 
+a:hover { text-decoration: none;}
+
 .gBoxInputBuscar { background-image : none !important; }
 #busqueda-avanzada-content input.gMaxWidth95p,#busqueda-avanzada-content input.gWidth200 { background-image : none !important; border: 1px solid #d7d7d7 !important  }
 
@@ -67,8 +69,6 @@ input[type="button"].gBotonXSmall, input[type="submit"].gBotonXSmall, .gBotonXSm
 .gTabBusquedaAmarillo a.active { border-color: #fcb035 !important; }
 
 .gTabBusquedaRojo a.active { border-color: #bb0c50 !important; }
-
- 
 
 .gNavVertical { margin-bottom: 7px; }
 
