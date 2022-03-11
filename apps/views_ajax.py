@@ -27,7 +27,7 @@ def get_dni(request):
         dni=request.POST.get('dni')
         member=Member.objects.filter(identity=dni).exists()
         if member:
-            #when user exits in Memeber Model
+            #when user exits in Member Model
             data = {
                 'msg' : 'Tu dni ya existe, puedes iniciar sesion',
                 'dni':dni,
@@ -38,17 +38,27 @@ def get_dni(request):
             userERP = APIMember.objects.filter(identity=dni).exists()
             if userERP:
                 user=APIMember.objects.get(identity=dni)
-                data = {
-                    'msg' : 'Estas en el ERP, solo confirma algunos datos',
-                    'cap' : user.cap_num,
-                    'names': user.name_user,
-                }
-                return JsonResponse({'data': data})
+                #when user meet the conditions
+                if user.has_tutition and user.is_enabled and not user.penalty_fee:
+                    data = {
+                        'msg' : 'Estas en el ERP, solo confirma algunos datos',
+                        'cap' : user.cap_num,
+                        'names': user.name_user,
+                    }
+                    return JsonResponse({'data': data})
+                else:
+                #when user doesn't meet the conditions
+                    data = {
+                        'no_access' : "No puedes acceder debido a que tienes alguna multa  o no te encuentras habilitado, para mayor informacion por favor comunicate con el C.A.P.",
+                        'names': user.name_user,
+                    }
+                    return JsonResponse({'data': data})
+
             
             #when is a external user (doesn't belong to CAP )
             else:
                 data = {
-                    'msg' : 'Eres usuario externo, necesitas registrarte',
+                    'msg' : 'Eres usuario externo, necesitas adquirir un plan para registrarte',
                     
                 }
                 return JsonResponse({'data': data})

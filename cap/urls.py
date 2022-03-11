@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
 from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid, 
-    comision, plan, plan_edit, plan_delete, carga_rules,plan_list,checkout,preguntas,signup,
+    comision, plan, plan_edit, plan_delete, carga_rules,checkout,preguntas,signup,
 	entrevistas, charts,member, configs, works, foro_comentarios,
-    password_reset,SignUpOthers,success_sign_up, plan_list_login,
+    password_reset,SignUpOthers,success_sign_up,
     #johao
     dash,palabra_clave,delete_palclave,update_template,update_clave,
     norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov, filter_normativa_edificatoria)
@@ -42,9 +42,6 @@ urlpatterns = [
     path('sign-up/', SignUpOthers.as_view(), name='sign-up'),
     path('password_reset/', password_reset, name='password_reset'),
     path('preguntas/', preguntas, name='preguntas'),
-
-    path('plan_list/', plan_list, name='plan_list'),
-    path('plan_list_login/', plan_list_login, name='plan_list_login'),
 
     path('checkout/', checkout, name='checkout'),
 

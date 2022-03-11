@@ -28,6 +28,7 @@ class Membership(models.Model):
     membership_type = models.CharField(
                 choices=MEMBERSHIP_CHOICES, default='PLPA', max_length=30)
     price_month = models.DecimalField(default=0, max_digits=10, decimal_places=2)
+    price_quarterly = models.DecimalField(default=0, max_digits=10, decimal_places=2, verbose_name="Trimestral")
     price_year = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     benefits = models.ManyToManyField(MembershipBenefits)
     conditions= models.ManyToManyField(MembershipConditions, blank=True)

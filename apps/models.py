@@ -120,6 +120,24 @@ class Member(models.Model):
     class Meta:
         verbose_name_plural = 'Relacion de Miembros'
 
+class UsagePolicies(models.Model):
+    title = models.CharField(max_length = 200, blank=True)
+    order = models.IntegerField(default=0, blank=True)
+    description = models.TextField(verbose_name="Politicas de uso")
+    member_policies = models.ManyToManyField(Member,
+                                         related_name='member_policies', blank=True )
+    validity_date_start = models.DateField(help_text='Fecha Inicio',verbose_name='Fecha Inicio')
+    validity_date_finish = models.DateField(help_text='Fecha Fin',verbose_name='Fecha Fin')
+    register_date_time = models.DateTimeField(auto_now_add=True,
+                                                help_text='Fecha de Registro',
+                                                verbose_name='Fecha de Registro')
+
+    class Meta:
+        verbose_name="Politicas de Uso"
+        verbose_name_plural="Politicas de Uso"
+
+    def __str__(self):
+        return self.title
 
 class Plan(models.Model):
     
