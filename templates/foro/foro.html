@@ -71,19 +71,28 @@
                     html +=  /*html*/
                             `<div class="card mb-3">
                                 <div class="row g-0">
-                                <div class="col-md-2 bg-foro text-center text-white">
-                                    <h3 class="mt-3"><i class="fa fa-comments"></i></h3>
-                                    <p class=""> <small>${tema.tipo_uso}</small> </p>
+                                    <div class="col-md-2 bg-foro text-center bg-warning text-white">
+		                                <h3 class="mt-3"><i class="fa fa-comments fa-2x"></i></h3>
+                                        <p class=""> <small>${tema.tipo_uso}</small> </p>
                                 </div>
                                 <div class="col-md-10">
-                                    <div class="card-body">
-                                        <a href="${tema.id}/comentarios" target="_blank">
-                                            <p class="text-dark"> ${tema.norma} - ${tema.name_denom} 
-                                                <span class="text-dark">
-                                                    <i class="fa fa-link text-dark" aria-hidden="true"></i> 
-                                                </span>
-                                            </p> 
-                                        </a>
+                                    <div class="card-body">`
+
+
+                                        if(tema.es_foro){
+                                            html += /*html*/`<a href="${tema.id}/comentarios" target="_blank">
+                                                                <p class="text-dark"> ${tema.norma} - ${tema.name_denom} 
+                                                                    <span class="text-dark">
+                                                                    <i class="fa fa-link text-dark" aria-hidden="true"></i> 
+                                                                    </span>
+                                                                </p> 
+                                                            </a>`
+
+                                        }else{
+                                            html += /*html*/`<p class="text-dark"> ${tema.norma} - ${tema.name_denom} </p>`
+                                        }
+                                        
+                                      html += /*html*/ `
                                     <p class="card-text"><small class="text-muted">${tema.fecha_publi}</small></p>
                                     </div>
                                 </div>
