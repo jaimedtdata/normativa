@@ -5,6 +5,8 @@ var dniForm = document.getElementById('dni-form')
 var capForm = document.getElementById('form-cap')
 var externalForm = document.getElementById('form-external')
 var dniInput = document.getElementById('dni-input')
+var spinnerDni = document.getElementById('spinner-dni')
+
 var urlDni = '/dni/'
 var base_url = window.location.origin;
     
@@ -12,7 +14,8 @@ var base_url = window.location.origin;
         form = new FormData(dniForm)
         e.preventDefault()
         const dni = dniInput.value
-        
+        spinnerDni.innerHTML = `<div style="display: block;" class="spinner-border text-muted"></div>`
+
 
         var options= {
             method: "POST",
@@ -30,26 +33,33 @@ var base_url = window.location.origin;
                 console.log(data.data)
                 const user_data = data.data
                 
-                
                 if (user_data.dni){
                     //users that are in model Member
                     console.log(user_data.msg);
-                    userExists=`<div>Ya tienes una cuenta registrada <a href="${base_url}">Inicia sesión aquí.</a></div>
-                    <div>Si olvidaste tu contraseña <a href="${base_url}/password_reset/">recuperala aquí.</a></div>`
+                    userExists=`<div>Ya tienes una cuenta registrada <a class="font-weight-bold" href="${base_url}">Inicia sesión aquí.</a></div>
+                    <div>Si olvidaste tu contraseña <a class="font-weight-bold" href="${base_url}/password_reset/">recuperala aquí.</a></div>`
                     test.innerHTML = userExists
                     document.getElementById('dni-input').disabled=true
                     document.getElementById('input-value').disabled=true
+                    spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
+
                     
 
                 }else{
-                    //users that are in ERP but still not have account in this system
+                    // 2 cases for users that are in ERP but still not have account in this system
+                
+                        //when user meet the conditions
                     if (user_data.cap){
                         console.log(user_data.msg);
                         const cap = user_data.cap
-                        blockCap = document.getElementById('block-cap')
-                        blockCap.classList.remove('form-hide')
+                        // blockCap = document.getElementById('block-cap')
+                        // blockCap.classList.remove('form-hide')
+                        document.getElementById('block-cap').style.display="block"
+                        
                         dniForm.classList.add('form-hide')//hide form dni
                         document.getElementById('title_cap').innerHTML= `Bienvenido(a) ${user_data.names}, completa tus datos de registro`
+                        spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
+
                        //window.location.replace(`${base_url}/sign-up-erp/`);
 
                        capForm.addEventListener('submit', (e)=>{
@@ -60,18 +70,39 @@ var base_url = window.location.origin;
                         
                         
 
+                    }else if(user_data.no_access){
+                        //when user doesn't meet the conditions
+                        console.log(user_data.no_access);
+                        user_unenable=`<div>Estimado(a) <b> ${user_data.names}</b>, ${user_data.no_access} </div>
+                        <div><a class="font-weight-bold" href="${base_url}">Click aqui para Volver al inicio.</a></div>`
+                        test.innerHTML = user_unenable
+                        document.getElementById('dni-input').disabled=true
+                        document.getElementById('input-value').disabled=true
+                        spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
+
+
                     }else{
                         //users thar are not in Member model neither APimember, they externals users(other professions)
                         console.log(user_data.msg);
-                        document.getElementById('id_formulario2-identity').value= dniInput.value
+                        const user_external=`<div>Estimado(a) usuario, para completar tu registro debes adquirir alguno de nuestros planes disponibles, para usuarios no colegiados del C.A.P.</div>
+                        <div><a class="font-weight-bold" href="${base_url}">Click aquí para volver al inicio.</a></div>`
+                        test.innerHTML = user_external
+                        document.getElementById('dni-input').disabled=true
+                        document.getElementById('input-value').disabled=true
                         blockExternal=document.getElementById('block-external')
                         blockExternal.classList.remove('form-hide')
-                        dniForm.classList.add('form-hide')//hide form dni
+                        spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
+
                         
-                        externalForm.addEventListener('submit', (e)=>{
-                            e.preventDefault()
-                            RegisterExternalUser()
-                        })
+                        // document.getElementById('id_formulario2-identity').value= dniInput.value
+                        // blockExternal=document.getElementById('block-external')
+                        // blockExternal.classList.remove('form-hide')
+                        // dniForm.classList.add('form-hide')//hide form dni
+                        
+                        // externalForm.addEventListener('submit', (e)=>{
+                        //     e.preventDefault()
+                        //     RegisterExternalUser()
+                        // })
                         
                         
 
@@ -131,8 +162,8 @@ const RegisterUserCap = (cap, user_data)=>{
                 </div>
             `
             capForm.reset()
-            document.getElementById('block-cap').classList.add('form-hide')
-            //window.location.replace(`${base_url}/success_sign_up/`);
+            document.getElementById('block-cap').style.display="none"
+            //document.getElementById('block-cap').classList.add('form-hide')
 
             }
                     
@@ -228,14 +259,3 @@ const RegisterExternalUser = ()=>{
 }
 
 
-// const checkDni = (event)=>{
-//     value = dniInput.value
-//     if (event.keyCode === 13) {
-//         if (value.length < 8){
-//             document.getElementById('error_id_input_dni').innerHTML = "Ingresa un DNI válido."
-//         }
-//     }
-    
-// }
-
-// dniInput.addEventListener('keyup', checkDni)

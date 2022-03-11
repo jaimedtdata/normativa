@@ -41,6 +41,7 @@ from .utils import create_member_free
 from .forms_register import MemberCapForm, ExternalUserForm
 
 from membership.models import Membership
+from apps.models import UsagePolicies
 
 def busqueda_clavenormativa(request):
     area_normas=Areas_Normas.objects.all()
@@ -344,9 +345,17 @@ class RegisterMemberTemplateView(TemplateView):
     template_name = 'register/sign-up-user.html'
 
     def get_context_data(self, **kwargs):
+        exist_codigo_etica=UsagePolicies.objects.filter(title__icontains="codigo de etica").exists()
+
         context = super().get_context_data(**kwargs)
         context['formCap'] = MemberCapForm( prefix='formulario1')
         context['formExternal'] = ExternalUserForm( prefix='formulario2')
+        context['pl_profesional'] = Membership.objects.get(membership_type="PLPP")
+        context['pp_profesional'] = Membership.objects.get(membership_type="PPPP")
+        if exist_codigo_etica:
+            codigo_etica=UsagePolicies.objects.get(title__icontains="codigo de etica")
+            context['codigo_etica'] = codigo_etica
+
         return context
 
 
@@ -380,8 +389,7 @@ def preguntas(request):
     queryset = Policies_usage.objects.all()
     filter = PoliciesFilter(request.GET, queryset=queryset)
 
-    if filter.is_valid():
-            queryset = filter.qs
+    queryset = filter.qs
 
     context = {
                 'preguntas': queryset,
@@ -452,12 +460,14 @@ def plan_list(request):
         'pp_premium_agremiado': Membership.objects.get(membership_type="PPPPA"),
         'pp_profesional': Membership.objects.get(membership_type="PPPP"),
         }
-    return render(request, 'plan_list.html', context)
+    return render(request, 'plan/plan_list.html', context)
 
-def plan_list_login(request):
-    plans = Plan.objects.all()
-    context = {'plans': plans}
-    return render(request, 'login/plan_list_login.html', context)
+def plan_external_user(request):
+    context = {
+        'pl_profesional': Membership.objects.get(membership_type="PLPP"),
+        'pp_profesional': Membership.objects.get(membership_type="PPPP"),
+        }
+    return render(request, 'plan/plan_external_user.html', context)
 
 def carga_rules(request):
     plans = Plan.objects.all()

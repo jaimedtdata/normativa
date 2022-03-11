@@ -9,6 +9,12 @@
     <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
     <link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> 
     <link rel="stylesheet" href=" {% static 'register/css/styles.css' %} ">
+<!-- plans to external users -->
+    <link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'plan_list/css/style.css' %}" rel="stylesheet">
     
 </head>
 
@@ -28,11 +34,12 @@
       
         <div class="col-md-10 order-md-1 offset-1 " >
           {% include "register/form-dni.html" %}
+          <div id="spinner-dni"></div>
           <div id="test"></div>
 
           <!-- Form CAP -->
           <div id="alert-succes"></div>
-          <div id="block-cap" class="card bg-light form-hide  mb-5" >
+          <div id="block-cap" style="display: none;" class="card bg-light  mb-5" >
             <div class="card-body">
               <div class="d-flex justify-content-center ">
                 <h4 class="mb-3 " id="title_cap">Datos de Registro usuario CAP</h4>
@@ -43,13 +50,12 @@
           </div>
 
           <!-- Form External -->
-          <div id="block-external" class="card bg-light form-hide mb-5">
-            <div class="card-body">
-              <div class="d-flex justify-content-center ">
-                <h4 class="mb-3 " id="title_external">Datos de Registro</h4>
+          <div id="block-external" class="bg-light form-hide mt-1 mb-5">
+            <div class="">
+              <div id="plan-external-user">
+                {% include 'plan/plan_external_user.html' %}
               </div>
-              <hr>
-              {% include 'register/form_external_register.html' %}
+                
             </div>
           </div>
          
@@ -57,41 +63,14 @@
         </div>
       </div>
 
-      <!-- Button to Open the Modal -->
-      <button type="button" class="btn btn-primary form-hide" data-bs-toggle="modal" data-bs-target="#myModal">
-        Open modal
-      </button>
-
-      <!-- The Modal -->
-      <div class="modal" id="myModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">Modal Heading</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-              Modal body..
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
+      
 
 
       <script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
       <script src="{% static 'vendor/bootstrap4/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'register/js/results.js' %}"></script>
+<script src=" {% static 'vendor4/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+
 
 
 </body>

@@ -30,6 +30,7 @@ DJANGO_APPS = (
     'membership.apps.MembershipConfig',
     'rest_framework',
     'django_filters',
+    'crispy_forms',
 )
 
 LOCAL_APPS = (
@@ -39,6 +40,8 @@ LOCAL_APPS = (
     'bus_normativa.apps.BusNormativaConfig',
 )
 
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 # por Default agrega id automatico
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 

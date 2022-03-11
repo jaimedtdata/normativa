@@ -1,13 +1,15 @@
 from django.urls import path, re_path
 
 from .views_ajax import get_dni, RegisterCapAPIView, APIMemberView, RegisterExternalUsersAPIView
-from .views import RegisterMemberTemplateView
+from .views import RegisterMemberTemplateView, plan_list, plan_external_user
 
 urlpatterns = [
     #register member
     path('sign-up-user/', RegisterMemberTemplateView.as_view(),name='sign-up-user'),
-    
     path('dni/', get_dni, name='dni'),
+    path('plan_list/', plan_list, name='plan_list'),
+    path('plan_external_user/', plan_external_user, name='plan_external_user'),
+
 
     #api views
     path('api/cap/', RegisterCapAPIView.as_view(), name='api-cap'),

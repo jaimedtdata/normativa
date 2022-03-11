@@ -61,6 +61,7 @@
   "fields": {
     "membership_type": "PLPA",
     "price_month": "0.00",
+    "price_quarterly": "0.00",
     "price_year": "0.00",
     "benefits": [
       1,
@@ -80,6 +81,7 @@
   "fields": {
     "membership_type": "PNA",
     "price_month": "0.00",
+    "price_quarterly": "0.00",
     "price_year": "0.00",
     "benefits": [
       1
@@ -93,6 +95,7 @@
   "fields": {
     "membership_type": "PLPP",
     "price_month": "18.00",
+    "price_quarterly": "0.00",
     "price_year": "179.00",
     "benefits": [
       1,
@@ -111,6 +114,7 @@
   "fields": {
     "membership_type": "PLPPA",
     "price_month": "22.00",
+    "price_quarterly": "0.00",
     "price_year": "209.00",
     "benefits": [
       1,
@@ -131,6 +135,7 @@
   "fields": {
     "membership_type": "PPPA",
     "price_month": "0.00",
+    "price_quarterly": "0.00",
     "price_year": "0.00",
     "benefits": [
       1,
@@ -150,6 +155,7 @@
   "fields": {
     "membership_type": "PPPPA",
     "price_month": "22.00",
+    "price_quarterly": "0.00",
     "price_year": "209.00",
     "benefits": [
       1,
@@ -170,6 +176,7 @@
   "fields": {
     "membership_type": "PPPP",
     "price_month": "30.00",
+    "price_quarterly": "0.00",
     "price_year": "289.00",
     "benefits": [
       1,
@@ -376,13 +383,13 @@
     "price_year": "0.00",
     "payment_method": "V",
     "membership_type": "PNA",
-    "is_enabled": false,
-    "penalty_fee": true,
+    "is_enabled": true,
+    "penalty_fee": false,
     "has_tutition": true,
     "date_enrollment": "2022-03-04",
     "date_expired": "2022-03-04",
     "created": "2022-03-04T10:33:19.051",
-    "updated": "2022-03-07T10:54:39"
+    "updated": "2022-03-11T14:16:25.858"
   }
 }
 ]

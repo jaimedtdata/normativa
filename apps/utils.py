@@ -100,7 +100,7 @@ def register_cap_users(user):
                             person_type= obj.person_type, 
                             mobile= obj.mobile, 
                             phone= obj.phone, 
-                            email= user['email'], 
+                            email= obj.email, 
                             address= obj.address, 
                             profession= obj.profession, 
                             tuition= user['cap'], 
@@ -115,8 +115,9 @@ def register_cap_users(user):
             password = user['password1']
 
             #group = Group.objects.get(name='Gratuito')      
-            user = User.objects.create_user(member.tuition, member.email, password)
+            user = User.objects.create_user(member.tuition, obj.email, password)
             user.last_name = member.first_surname
+            user.first_name = member.second_surname
             #user.groups.add(group)
             user.save()
             #update member according to user created above

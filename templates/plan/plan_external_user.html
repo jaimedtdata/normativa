@@ -1,0 +1,167 @@
+
+{% comment %}
+{% load static %}
+  <link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'plan_list/css/style.css' %}" rel="stylesheet">
+    
+{% endcomment %}
+  
+
+ 
+<section id="pricing" class="pricing mt-3 mb-3">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+
+      <div class="col-lg-5 col-md-6 mt-4 mt-lg-0">
+        
+        <div class="container">
+          <div class="row d-flex justify-content-center mb-2 ">
+            <div class="col-lg-12 alert alert-info">
+                <h6 class="text-center ">Suscripciones - Pagos en Linea</h6>
+            </div>
+         </div>
+        </div>
+
+        <div class="external d-flex flex-column">
+          <span class="advanced">Advanced</span>
+          <h3>Plan Profesional </h3>
+          <h4><sup>S/</sup>
+            {% if pl_profesional %}
+              {{pl_profesional.price_month|floatformat}}
+            {% else %}
+              18
+            {% endif %}
+            
+            
+            <span> / mensual</span></h4>
+          <h4><sup>S/</sup>
+            {% if pl_profesional %}
+            {{pl_profesional.price_year|floatformat}}
+          {% else %}
+            179
+          {% endif %}
+            <span> / anual (20% descuento)</span></h4>
+          <ul>
+            <li><b>Beneficios:</b></li>
+            <i>
+              {% if pl_profesional %}
+                  {% for benefit in pl_profesional.benefits.all %}
+                    <li class="benefits">{{benefit}}</li>
+                  {% endfor %}
+              {% else %}
+              <li> Acceso total a las Normas </li>
+              <li> Acceso total al Foro</li>
+              <li> Acceso total a videos de cursos </li>
+              {% endif %}
+              
+            </i>
+
+                <br>
+              <li><b>Condiciones:</b></li>
+            
+            <i>
+              {% if pl_profesional.conditions %}
+                {% for condition in pl_profesional.conditions.all  %}
+                      <li class="benefits">{{condition}}</li>
+                {% endfor %}
+              {% else %}
+              <li>Cualquier Profesional o Persona que desee acceder</li>
+              
+              {% endif %}
+               
+            </i>
+          </ul>
+          <div class="btn-wrap mt-auto">
+            <a href="{% url 'checkout' %}" class="btn-buy">Suscribirme</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-md-6 mt-4 offset-lg-2 mt-lg-0 ">
+        <div class="container">
+          <div class="row d-flex justify-content-center mb-2 ">
+            <div class="col-lg-12 alert alert-info">
+                <h6 class="text-center">Suscripciones - Pagos Presenciales</h6>
+            </div>
+         </div>
+        </div>
+
+        <div class="external d-flex flex-column">
+          <span class="advanced">Advanced</span>
+          <h3>Plan Profesional </h3>
+          <h4><sup>S/</sup>
+            {% if pp_profesional %}
+              {{pp_profesional.price_month|floatformat}}
+            {% else %}
+              30
+            {% endif %}
+            
+            
+            <span> / mensual</span></h4>
+          <h4><sup>S/</sup>
+            {% if pp_profesional %}
+            {{pp_profesional.price_year|floatformat}}
+          {% else %}
+            289
+          {% endif %}
+            <span> / anual (20% descuento)</span></h4>
+          <ul>
+            <li><b>Beneficios:</b></li>
+            <i>
+              {% if pp_profesional %}
+                  {% for benefit in pp_profesional.benefits.all %}
+                    <li class="benefits">{{benefit}}</li>
+                  {% endfor %}
+              {% else %}
+              <li> Acceso total a las Normas </li>
+              <li> Acceso total al Foro</li>
+              <li> Acceso total a videos de cursos </li>
+              {% endif %}
+              
+            </i>
+
+                <br>
+              <li><b>Condiciones:</b></li>
+            
+            <i>
+              {% if pp_profesional.conditions %}
+                {% for condition in pp_profesional.conditions.all  %}
+                      <li class="benefits">{{condition}}</li>
+                {% endfor %}
+              {% else %}
+              <li>Cualquier Profesional o Persona que desee acceder</li>
+              
+              {% endif %}
+               
+            </i>
+          </ul>
+          <div class="btn-wrap mt-auto">
+            <a href="{% url 'checkout' %}" class="btn-buy">Suscribirme</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Pricing Section -->
+
+
+
+{% comment %}
+<script src=" {% static 'vendor4/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+  
+{% endcomment %}
+  
+
+
+  
+
+
+  
+
+

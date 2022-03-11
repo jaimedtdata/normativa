@@ -1,5 +1,7 @@
 {% extends 'base_nfr.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+{% load user_tags %}
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -14,40 +16,40 @@
       Preguntas Frecuentes  
     </h2>
 
-    <form class="form-group" method="GET" id="buscar_pregunta">
-    <div class="row">
-        {% csrf_token %}
+  <form class="form-group" method="get">    
+  <div class="row">
         <div class="col-3">
-          <select name="tipo_uso" class="language form-control" id="id_tipo_uso">
+          <select name="tipo_uso" class="form-control" id="{{ filter.form.id_for_tipo_uso }}">
+            <option value="0">TODOS</option>
             {% for tu in tipo_uso %}
-            <option value="{{tu.id}}">{{tu.area_name}}</option>
+            <option value="{{tu.order}}">{{tu.area_name}}</option>
           {% endfor %}
           </select>
         </div>
         <div class="col-3">
-          <input class="form-control" type="text" name="datetimes" id="datetimes"/>
+          <input class="form-control" type="text" name="datetimes" id="id_datetimes" autocomplete="nop" placeholder="--RANGO FECHAS--" value="{{request.GET.datetimes}}"/>
         </div>
         <div class="col-5">
-            <input type="text" name="title__icontains" class="form-control" placeholder="BUSCAR POR TITULO DE PREGUNTA" id="id_title__icontains">
+            <input type="text" name="content" class="form-control" placeholder="BUSCAR POR TITULO DE PREGUNTA" id="{{ filter.form.id_for_content }}" value="{{request.GET.content}}">
         </div>
         <div class="col-1 form-group" style="padding-left: 0.2px;">
           <button class="btn btn-warning btn-lg search_btn search_btn filter-btn" type="submit"> 
             <i class="fas fa-search"></i>  
           </button>
         </div>
-      </div>
+      </div> 
     </form>
     
-    {% if perms.normas.add_policies_usage %}
+    {% if request.user|has_group:'ESPECIALISTA' or perms.normas.add_policies_usage %}
       <a href="{% url 'admin:normas_policies_usage_changelist' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar pregunta</a> 
     {% endif %}
 
 
     
-    <div class="accordion mt-3" id="accordionExample">
+    <div class="accordion mt-3 " id="accordionExample">
       {% for p in preguntas %}
-      <div class="card mb-2">
-        <div class="card-header bg-info" id="headingOne">
+      <div class="card mb-2 shadow mb-5 bg-white rounded">
+        <div class="card-header bg-info " id="headingOne">
           <h2 class="mb-0">
             <button class="btn  btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{p.id}}" aria-expanded="true" aria-controls="collapse{{p.id}}">
               <b class="text-white">
@@ -77,21 +79,22 @@
 
 <script>
   $(document).ready(function() {
-    $('#datetimes').daterangepicker({
+    $('#id_datetimes').daterangepicker({
+      autoUpdateInput: false,
       locale: {
-          format: 'YYYY-MM-DD'
+          format: 'DD-MM-YYYY',
+          cancelLabel: 'Clear'
       }
     });
-    $("#buscar_pregunta").submit( function(e) {
-      e.preventDefault();
-      $.ajax({
-        url: $(this).attr('action'),
-        type: $(this).attr('method'),
-        data: $(this).serialize()
-      }).done(function(data) {
-        
-      });
+
+    $('#id_datetimes').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
     });
+
+    $('#id_datetimes').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+    
   })
 </script>
 

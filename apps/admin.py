@@ -5,11 +5,11 @@ from django.contrib.sessions.models import Session
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 from normas.models import Register_Normativa,Register_Palabraclave, Policies_usage
-from .models import Member
+from .models import Member, UsagePolicies
 
 class MemberAdmin(admin.ModelAdmin):
-    # list_display= ['names', 'first_surname' ,'identity','tuition', 'email', 'is_enabled', 'has_tutition' ,'penalty_fee']
     list_display= ['names', 'first_surname' ,'identity','tuition', 'email']
+    search_fields = ['names', 'first_surname' ,'identity','tuition', 'email']
 admin.site.register(Member,MemberAdmin)
 
 
@@ -25,9 +25,14 @@ class Register_PalabraclaveAdmin(admin.ModelAdmin):
 class SubNormativaAdmin(admin.ModelAdmin):
     list_display=('norma','norma_sub')
 
+class UsagePoliciesAdmin(admin.ModelAdmin):
+    list_display = ['title', 'order']
+
 admin.site.register(Register_Normativa,Register_NormativaAdmin)
 admin.site.register(Register_Palabraclave)
-admin.site.register(Policies_usage)
+admin.site.register(Policies_usage, )
+admin.site.register(UsagePolicies,UsagePoliciesAdmin )
+
 #
 class ListAdminMixin(object):
     def __init__(self, model, admin_site):
