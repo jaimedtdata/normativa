@@ -6,6 +6,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 from normas.serializer import keywords_serializer
 from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Subcategories_Normas
@@ -62,7 +63,8 @@ def registrar_normativa(request):
             objx, created = Register_Palabraclave.objects.get_or_create(name = pc.upper())
             objx.normativas.add(normativa)
 
-        return redirect('/normativas/')
+        messages.success(request, 'Normativa Creada')
+        return redirect("/normativas/")
 
 # Create your views here.
 def registrar_palabras_clave(request, normativa):
@@ -123,10 +125,14 @@ def actualizar_normativa(request, normativa):
         Register_Normativa.objects.filter(id=normativa).update(norma=norma,name_denom=name_deno,base_legal=base_legal,
         fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
 
+
+        messages.success(request, 'Normativa Editada')
+
         return redirect('/normativas/')
 
 def eliminar_normativa(request, normativa):
     Register_Normativa.objects.filter(id = normativa).delete()
+    messages.success(request, 'Normativa Eliminada')
     return redirect('/normativas/')
 
 
