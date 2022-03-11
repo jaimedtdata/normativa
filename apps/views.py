@@ -24,6 +24,7 @@ from django.contrib.auth.views import (LoginView, LogoutView,
     PasswordResetView, PasswordResetDoneView,)
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
+from normas.filters import PoliciesFilter
 from normas.models import Areas_Normas, Policies_usage
 from foro.models import Coments_foro
 from django.shortcuts import get_object_or_404
@@ -385,21 +386,27 @@ class LoginNuevo(LoginView):
 #@login_required
 def preguntas(request):
     tipo_uso = Areas_Normas.objects.order_by('area_name')
-    preguntas = Policies_usage.objects.all()
+    queryset = Policies_usage.objects.all()
+    filter = PoliciesFilter(request.GET, queryset=queryset)
 
-    if request.method == 'POST':
-        tu_id = request.POST.get('tipo_uso_id')
-        pregunta = request.POST.get('pregunta')
+    if filter.is_valid():
+            queryset = filter.qs
 
-        preguntas = Policies_usage.objects.filter(title__icontains = pregunta)
-        
     context = {
-                'preguntas': preguntas,
+                'preguntas': queryset,
                 'tipo_uso' : tipo_uso,
+                'filter' : filter,
                 }
 
     return render(request, 'preguntas.html', context)
+
+def filter_preguntas(request):
+    tipo_uso_id = request.GET.get('tipo_uso_id', 0)
+    pregunta = request.GET.get('pregunta', '')
     
+    preguntas = Policies_usage.objects.filter(title__icontains = pregunta)
+
+
 
 def password_reset(request):
     #cuestions = Policies_usage.objects.all()
