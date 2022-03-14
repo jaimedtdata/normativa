@@ -22,6 +22,7 @@ from apps.choices import (AREAS_CHOICES, PUESTOS_CHOICES,
                                SPECIALTIES_CHOICES)
 from django.contrib.auth.views import (LoginView, LogoutView, 
     PasswordResetView, PasswordResetDoneView,)
+from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
@@ -358,6 +359,10 @@ class RegisterMemberTemplateView(TemplateView):
 
         return context
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
 
 def users_register_erp(request):
     print('usuario: ',request.POST)
@@ -373,10 +378,6 @@ def signup(request):
     return render(request, 'sign-up.html')
 
 class Login(LoginView):
-    authentication_form = UserLoginForm
-    template_name = 'login/login-interactivo.html'
-
-class LoginNuevo(LoginView):
     authentication_form = UserLoginForm
     template_name = 'login/login-interactivo.html'
 
@@ -450,6 +451,12 @@ def checkout(request):
     plans = Plan.objects.all()
     context = {'plans': plans}
     return render(request, 'checkout/checkout.html', context)
+
+def checkoutCAP(request):
+    context = {
+        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+        }
+    return render(request, 'checkout/checkoutCAP.html', context)
 
 def plan_list(request):
     
