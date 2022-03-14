@@ -382,7 +382,30 @@ class Login(LoginView):
     template_name = 'login/login-interactivo.html'
 
         
+class SignUpClients(FormView):
+    template_name = 'checkout/register_form_cliente.html'
+    form_class = ExternalUserForm
+    success_url = reverse_lazy('checkout')
 
+    def form_valid(self, form):
+        cd = form.cleaned_data
+        print(cd)
+
+        # member = create_member_free(cd)
+        # password = cd['password']
+
+        # user = User.objects.create_user(member.tuition, member.email, password)
+        # user.last_name = member.first_surname
+        # user.save()
+        # #update member according to user created above
+        # m=Member.objects.get(id=member.id)
+        # m.user=user
+        # m.save()
+        
+        #token = UserToken(user_profile=member)
+        #send_confirm_account(self.request, token.get_confirm_link(), member.email)
+
+        return HttpResponseRedirect(reverse_lazy('checkout'))
 
 #@login_required
 def preguntas(request):
@@ -448,8 +471,10 @@ def preguntas_delete(request, pk):
     return redirect('/plan')
 
 def checkout(request):
-    plans = Plan.objects.all()
-    context = {'plans': plans}
+    context = {
+        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+        'pl_profesional': Membership.objects.get(membership_type="PLPP"),
+        }
     return render(request, 'checkout/checkout.html', context)
 
 def checkoutCAP(request):
@@ -457,6 +482,13 @@ def checkoutCAP(request):
         'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
         }
     return render(request, 'checkout/checkoutCAP.html', context)
+
+def success_suscription_cap(request):
+    return render(request, 'checkout/success-suscription.html')
+
+def success_payment_client(request):
+    return render(request, 'checkout/success_payment_cliente.html')
+
 
 def plan_list(request):
     
