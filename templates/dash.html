@@ -5,108 +5,97 @@
    <div class="content">
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="icon-big text-center">
-                                    <i class="fas fa-user-alt blue"></i>
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="detail text-center">
-                                    <p>Afiliados</p>
-                                    <span class="number">
-                                        {% if afiliados %}
-                                        {{afiliados}}
-                                        {% else %}
-                                            0
-                                        {% endif %}
-                                    </span>
-                                </div>
-                            </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-4 d-flex justify-content-center bg-info text-white ">
+                          <div class="align-self-sm-center">
+
+                            <i class="fas fa-user fa-3x"></i>
+                          </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body py-1">
+                          <h5 class="card-title">Afiliados</h5>
+                          <span class="number">
+                              {% if afiliados %}
+                              {{afiliados}}
+                              {% else %}
+                                  0
+                              {% endif %}
+                          </span>
                         </div>
-                        <div class="footer">
-                            <hr />
-                            <div class="stats">
-                                <i class="fas fa-redo-alt"></i> Updated cada 30 min.
-                            </div>
+                        <div class="card-footer">
+                            <small><i class="fas fa-redo-alt"></i> Updated cada 30 min.</small>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-4 d-flex justify-content-center  bg-success text-white">
+                          <div class="align-self-sm-center">
+
+                            <i class="olive fas fa-money-bill-alt fa-3x"></i>
+                          </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body py-1">
+                          <h5 class="card-title">Ingresos</h5>
+                          <span class="number">S/ 1,800.00</span>
+                        </div>
+                        <div class="card-footer">
+                            <small><i class="fas fa-calendar"></i> En el mes Actual</small>
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="icon-big text-center">
-                                    <i class="olive fas fa-money-bill-alt"></i>
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="detail text-center">
-                                    <p>Ingresos</p>
-                                    <span class="number">S/ 1,800.00</span>
-                                </div>
-                            </div>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-4 d-flex justify-content-center bg-secondary text-white ">
+                          <div class="align-self-sm-center">
+    
+                            <i class="olive violet fas fa-eye fa-3x"></i>
+                          </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body py-1">
+                          <h5 class="card-title">Visitas</h5>
+                          <span class="number">28,210</span>
                         </div>
-                        <div class="footer">
-                            <hr />
-                            <div class="stats">
-                                <i class="fas fa-calendar"></i> En el mes Actual
-                            </div>
+                        <div class="card-footer">
+                            <small><i class="fas fa-stopwatch"></i> En las Ultimas 24 Horas</small>
                         </div>
+                      </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="icon-big text-center">
-                                    <i class="violet fas fa-eye"></i>
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="detail text-center">
-                                    <p>Visitas</p>
-                                    <span class="number">28,210</span>
-                                </div>
-                            </div>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-4 d-flex justify-content-center bg-warning text-dark ">
+                          <div class="align-self-sm-center">
+    
+                            <i class="orange fas fa-envelope fa-3x"></i>
+                          </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body py-1">
+                          <h5 class="card-title">Suscripciones</h5>
+                          <span class="number">75</span>
                         </div>
-                        <div class="footer">
-                            <hr />
-                            <div class="stats">
-                                <i class="fas fa-stopwatch"></i> En las Ultimas 24 Horas
-                            </div>
+                        <div class="card-footer">
+                            <small><i class="fas fa-envelope-open-text"></i> En los ultimos 7 dias</small>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="icon-big text-center">
-                                    <i class="orange fas fa-envelope"></i>
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="detail text-center">
-                                    <p>Suscripciones</p>
-                                    <span class="number">75</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer">
-                            <hr />
-                            <div class="stats">
-                                <i class="fas fa-envelope-open-text"></i> En los ultimos 7 dias
-                            </div>
-                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -119,55 +108,45 @@
             <h5 class="card-header foro">Temas Normativos</h5>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card">
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="icon-big text-center">
-                                    <i class="fas fa-search blue"></i>
-                                    </div>
-                                </div>
-                                <div class="col-sm-8">
-                                    <div class="detail text-center">
-                                        <p>N° Búsquedas</p>
-                                        <span class="number">5,358</span>
-                                    </div>
-                                </div>
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                          <div class="col-md-4 d-flex justify-content-center bg-danger text-white ">
+                              <div class="align-self-sm-center">
+        
+                                <i class="fas fa-search blue fa-3x"></i>
+                              </div>
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body py-1">
+                              <h5 class="card-title">N° Búsquedas</h5>
+                              <span class="number">5,358</span>
                             </div>
-                            <div class="footer">
-                                <hr />
-                                <div class="stats">
-                                    <i class="fas fa-calendar"></i> En el mes Actual
-                                </div>
+                            <div class="card-footer">
+                                <small><i class="fas fa-calendar"></i> En el mes Actual</small>
                             </div>
+                          </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="icon-big text-center">
-                                                <span style="color: Tomato;">
-                                                <i class="fas fa-download"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="detail text-center">
-                                                <p>Nº Descargas</p>
-                                                <span class="number">8,475</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="footer">
-                                        <hr />
-                                        <div class="stats">
-                                            <i class="fas fa-calendar"></i> En el mes Actual
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                          <div class="col-md-4 d-flex justify-content-center bg-primary text-white ">
+                              <div class="align-self-sm-center">
+        
+                                <i class="fas fa-download fa-3x"></i>
+                              </div>
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body py-1">
+                              <h5 class="card-title">Nº Descargas</h5>
+                              <span class="number">8,475</span>
+                            </div>
+                            <div class="card-footer">
+                                <small><i class="fas fa-calendar"></i> En el mes Actual</small>
+                            </div>
+                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -212,55 +191,48 @@
         <h5 class="card-header foro">Foro</h5>
         <div class="row">
             <div class="col-md-6">
-                <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="icon-big text-center">
-                                            <i class="violet fas fa-swatchbook"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="detail text-center">
-                                            <p>Categorias</p>
-                                            <span class="number">352</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="fas fa-calendar"></i> En el mes Actual
-                                    </div>
-                                </div>
-                            </div>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-4 d-flex justify-content-center bg-warning text-white ">
+                          <div class="align-self-sm-center">
+    
+                            <i class="violet fas fa-swatchbook fa-3x"></i>
+                          </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body py-1">
+                          <h5 class="card-title">Categorias</h5>
+                          <span class="number">352</span>
+                        </div>
+                        <div class="card-footer">
+                            <small><i class="fas fa-calendar"></i> En el mes Actual</small>
+                        </div>
+                      </div>
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="icon-big text-center">
-                                            <i class="olive far fa-comments"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="detail text-center">
-                                            <p>Comentarios</p>
-                                            <span class="number">1,578</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="fas fa-calendar"></i> En el mes Actual
-                                    </div>
-                                </div>
-                            </div>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-4 d-flex justify-content-center bg-danger text-white ">
+                          <div class="align-self-sm-center">
+    
+                            <i class="olive far fa-comments fa-3x"></i>
+                          </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body py-1">
+                          <h5 class="card-title">Comentarios</h5>
+                          <span class="number">1,578</span>
+                        </div>
+                        <div class="card-footer">
+                            <small><i class="fas fa-calendar"></i> En el mes Actual</small>
+                        </div>
+                      </div>
+                    </div>
                 </div>
+
             </div>
         </div>
 

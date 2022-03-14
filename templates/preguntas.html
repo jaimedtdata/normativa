@@ -47,7 +47,7 @@
 
     
     <div class="accordion mt-3 " id="accordionExample">
-      {% for p in preguntas %}
+      {% for p in entity %}
       <div class="card mb-2 shadow mb-5 bg-white rounded">
         <div class="card-header bg-info " id="headingOne">
           <h2 class="mb-0">
@@ -70,6 +70,8 @@
     
   </section>
 </div>
+
+{% include 'partials/_paginator.html' %}
 
 {% endblock content %}
 

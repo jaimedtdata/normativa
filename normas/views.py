@@ -7,23 +7,27 @@ from django.shortcuts import redirect, render
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator
 from django.contrib import messages
+from normas.filters import NormativaFilter
 
 from normas.serializer import keywords_serializer
 from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Subcategories_Normas
 
 def index(request):
-    normativas = Register_Normativa.objects.all()
+    queryset = Register_Normativa.objects.all()
     page = request.GET.get('page', 1)
+    filter = NormativaFilter(request.GET, queryset=queryset)
 
     try:
-        paginator = Paginator(normativas, 5)
-        normativas = paginator.page(page)
+        queryset = filter.qs
+        paginator = Paginator(queryset, 5)
+        queryset = paginator.page(page)
     except:
         raise Http404
 
     context = {
-        'entity': normativas,
+        'entity': queryset,
         'paginator' : paginator,
+        'filter' : filter,
     }
 
     return render(request, 'normativa/index.html', context)

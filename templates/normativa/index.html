@@ -1,7 +1,6 @@
 {% extends 'base_nfr.html' %}
 {% load static %}
 
-
 {% block content %}
 <div class="container">
     <h1 class="text-center">Registro de Normativas</h1>
@@ -14,6 +13,19 @@
             </a>
         </div>
     </div>
+    <form  class="form-group mt-3" method="GET">
+       <div class="row">
+        <div class="col-5">
+            <input type="text" name="content" class="form-control" placeholder="BUSCAR POR NORMA, TITULO O BASE LEGAL" id="{{ filter.form.id_for_content }}" value="{{request.GET.content}}">
+        </div>
+        <div class="col-1 form-group" >
+            
+            <button type="submit" class="btn btn-info btn-lg" >
+                <i class="fas fa-search"></i>
+            </button>
+          </div>
+       </div>
+    </form>
     <br>
     <table class="table table-bordered">
         <thead>
