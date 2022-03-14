@@ -413,8 +413,7 @@ def preguntas(request):
     queryset = Policies_usage.objects.all()
     filter = PoliciesFilter(request.GET, queryset=queryset)
 
-    if filter.is_valid():
-            queryset = filter.qs
+    queryset = filter.qs
 
     context = {
                 'preguntas': queryset,
