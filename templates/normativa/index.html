@@ -30,7 +30,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Norma</td>
+                <td >Norma</td>
                 <td>Titulo</td>
                 <td>Base Legal</td>
                 <td>Tipo Uso</td>
@@ -44,9 +44,8 @@
                 {% for norma in entity %}
                 <tr>
                     <td>{{norma.norma}}
-                        <br>
                         {% if norma.es_vigente == False %}
-                            <span class="fst-italic fw-lighter fs-7 text-danger">*No vigente</span>
+                            <small class="fst-italic fw-lighter fs-7 text-danger">*No vigente</small>
                         {% endif %}
                     </td>
                     <td>{{norma.name_denom}} 
