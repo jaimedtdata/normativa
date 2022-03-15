@@ -1,0 +1,69 @@
+
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Colegio de Arquitectos del Perú</title>
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
+   <link rel="stylesheet" href="{% static 'vendor/bootstrap4/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'checkout/form-checkout.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'checkout/style.css' %}">
+</head>
+
+
+<body class="bg-light">
+
+
+        <div class="logo_container" style="background: #24387C;">
+					<span class="logo_helper"></span>
+					<a href="{% url 'login' %}">
+						<img src="{% static 'img/cap-logo.svg' %}" alt="Regional Lima " id="logo" data-height-percentage="47" data-actual-width="300" data-actual-height="85">
+					</a>
+		</div>
+
+        <!-- start breadcrum -->
+        
+      
+            
+        <section>
+            <nav>
+                <ol class="cd-multi-steps text-bottom count">
+                    <li class="{%  if request.path == '/sign-up-clients/' %} current {% else %} visited{% endif %}">
+                        <a class="text-muted" href="#0">Registro</a>
+                    </li>
+                    <li class="{%  if request.path == '/checkout/' %} current {% else %} visited {% endif %}" >
+                        <a class="text-muted" href="#0">Método de Pago</a>
+                    </li>
+                    <li class="{%  if request.path == '/success-payment-client/' %} current  {% endif %}" >
+                        <a class="text-muted" href="#0">Completado</a>
+                    </li>
+                    <!-- <li class="current" ><a href="#0">Pago</a></li> -->
+                </ol>
+            </nav>
+        </section>
+
+        <!-- end breadcrum -->
+       
+
+       
+       {% block content %}
+           
+       {% endblock content %}
+           
+
+
+      <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'register/js/results.js' %}"></script>
+
+
+</body>
+
+</html>
+
+
+
+

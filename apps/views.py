@@ -1,6 +1,7 @@
 import json
 import uuid
 import random
+from django.core.paginator import Paginator
 from datetime import datetime
 from django.forms import ValidationError
 from django.shortcuts import render, redirect
@@ -22,6 +23,7 @@ from apps.choices import (AREAS_CHOICES, PUESTOS_CHOICES,
                                SPECIALTIES_CHOICES)
 from django.contrib.auth.views import (LoginView, LogoutView, 
     PasswordResetView, PasswordResetDoneView,)
+from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
@@ -358,6 +360,10 @@ class RegisterMemberTemplateView(TemplateView):
 
         return context
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
 
 def users_register_erp(request):
     print('usuario: ',request.POST)
@@ -376,25 +382,49 @@ class Login(LoginView):
     authentication_form = UserLoginForm
     template_name = 'login/login-interactivo.html'
 
-class LoginNuevo(LoginView):
-    authentication_form = UserLoginForm
-    template_name = 'login/login-interactivo.html'
-
         
+class SignUpClients(FormView):
+    template_name = 'checkout/register_form_cliente.html'
+    form_class = ExternalUserForm
+    success_url = reverse_lazy('checkout')
 
+    def form_valid(self, form):
+        cd = form.cleaned_data
+        print(cd)
+
+        # member = create_member_free(cd)
+        # password = cd['password']
+
+        # user = User.objects.create_user(member.tuition, member.email, password)
+        # user.last_name = member.first_surname
+        # user.save()
+        # #update member according to user created above
+        # m=Member.objects.get(id=member.id)
+        # m.user=user
+        # m.save()
+        
+        #token = UserToken(user_profile=member)
+        #send_confirm_account(self.request, token.get_confirm_link(), member.email)
+
+        return HttpResponseRedirect(reverse_lazy('checkout'))
 
 #@login_required
 def preguntas(request):
     tipo_uso = Areas_Normas.objects.order_by('area_name')
+    page = request.GET.get('page', 1)
+
     queryset = Policies_usage.objects.all()
     filter = PoliciesFilter(request.GET, queryset=queryset)
 
     queryset = filter.qs
+    paginator = Paginator(queryset, 2)
+    queryset = paginator.page(page)
 
     context = {
-                'preguntas': queryset,
+                'entity': queryset,
                 'tipo_uso' : tipo_uso,
                 'filter' : filter,
+                'paginator' : paginator,
                 }
 
     return render(request, 'preguntas.html', context)
@@ -446,9 +476,24 @@ def preguntas_delete(request, pk):
     return redirect('/plan')
 
 def checkout(request):
-    plans = Plan.objects.all()
-    context = {'plans': plans}
+    context = {
+        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+        'pl_profesional': Membership.objects.get(membership_type="PLPP"),
+        }
     return render(request, 'checkout/checkout.html', context)
+
+def checkoutCAP(request):
+    context = {
+        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+        }
+    return render(request, 'checkout/checkoutCAP.html', context)
+
+def success_suscription_cap(request):
+    return render(request, 'checkout/success-suscription.html')
+
+def success_payment_client(request):
+    return render(request, 'checkout/success_payment_cliente.html')
+
 
 def plan_list(request):
     

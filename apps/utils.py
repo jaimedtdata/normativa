@@ -156,6 +156,8 @@ def register_cap_users(user):
             m=Member.objects.get(id=member.id)
             m.user=user
             m.save()
+            #token = UserToken(user_profile=member)
+            #send_confirm_account(self.request, token.get_confirm_link(), member.email)
             return member
 
 def register_external_user(user):

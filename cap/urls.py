@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid, 
-    comision, plan, plan_edit, plan_delete, carga_rules,checkout,preguntas,signup,
+    comision, plan, plan_edit, plan_delete, carga_rules,preguntas,signup,
 	entrevistas, charts,member, configs, works, foro_comentarios,
     password_reset,SignUpOthers,success_sign_up,
     #johao
@@ -12,7 +12,7 @@ from apps.views import busque_normativa,busqueda_clavenormativa,register_palabra
     #end
 from django.conf import settings
 
-
+from apps.views import logout_view
 
 urlpatterns = [
 
@@ -25,6 +25,7 @@ urlpatterns = [
     path('home/', dashboard, name='home'),
     path('db-admin/', admin.site.urls),
     path('success_sign_up/', success_sign_up, name='success_sign_up'),
+    path('logout/', logout_view, name='logout'),
     #path('sign-up/', signup, name='sign-up'),
     #path('normas/', include('apps.normas.urls',namespace='Normas')),
     #path('foro/', include('apps.foro.urls',namespace='Normas')),
@@ -43,7 +44,6 @@ urlpatterns = [
     path('password_reset/', password_reset, name='password_reset'),
     path('preguntas/', preguntas, name='preguntas'),
 
-    path('checkout/', checkout, name='checkout'),
 
     #johao
     path('search_normat/',busqueda_clavenormativa,name='search_normat'),
