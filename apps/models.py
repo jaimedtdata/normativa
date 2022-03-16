@@ -164,16 +164,30 @@ class Plan(models.Model):
     def __str__(self):
         return self.planame 
 
-class Control_payment(models.Model):
+class Order_payment(models.Model):
     
-    member = models.OneToOneField(
+    member = models.ForeignKey(
         Member, on_delete=models.CASCADE,
         help_text='Miembros', null=True, blank=True,
-        verbose_name='Miembros')
+        verbose_name='Miembros', related_name='payment_order')
+    names = models.CharField(max_length=50, blank=True,
+        help_text='Nombres O Razón Social',
+        verbose_name='Nombres')
+    first_surname = models.CharField(max_length=50, blank=True,
+        help_text='Apellido Paterno',
+        verbose_name='Apellido Paterno')
+    second_surname = models.CharField(max_length=50, blank=True,
+        help_text='Apellido Materno',
+        verbose_name='Apellido Materno')
+    email = models.EmailField(max_length=50, blank=True, null=True,
+        help_text='Correo Electrónico',
+        verbose_name='Email')
     id_plan = models.OneToOneField(
         Plan, on_delete=models.CASCADE,
         help_text='Plan Suscrito', null=True, blank=True,
-        verbose_name='Plan de Suscripcion')        
+        verbose_name='Plan de Suscripcion')
+    paid = models.BooleanField(default=False)
+    niubiz_id = models.CharField(max_length=150, blank=True)        
     pay_method = models.CharField(max_length=1,
         help_text='Metodo de Pago', choices=METODPAY_CHOICES,
         verbose_name='Metodo de Pago', blank=True)
@@ -181,19 +195,21 @@ class Control_payment(models.Model):
         help_text='Importe Pagado',
         verbose_name='Importe Pagado')  
     validity_date_start = models.DateField(
-        blank=False, null=False, auto_now_add=False,
-        help_text='Fecha',
-        verbose_name='Fecha Inicio')
+        blank=False, null=False,
+        help_text='Fecha Inicio membresia',
+        verbose_name='Fecha Inicio membresia')
     validity_date_finish = models.DateField(
-        blank=False, null=False, auto_now_add=False,
-        help_text='Fecha',
-        verbose_name='Fecha Fin')
-    register_date_time = models.DateTimeField(
-        blank=False, null=False, auto_now_add=True,
+        blank=False, null=False,
+        help_text='Fecha Fin membresia',
+        verbose_name='Fecha Fin membresia')
+    created= models.DateTimeField( auto_now_add=True,
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
+    updated= models.DateTimeField( auto_now=True,
+        help_text='Fecha de Modificacion',
+        verbose_name='Fecha de Modificacion')
     class Meta:
-        verbose_name_plural = 'Control de Pagos'
+        verbose_name_plural = 'Ordenes de Pagos'
 
 class UserToken(models.Model):
     token = models.UUIDField(primary_key=True, null=False, unique=True,

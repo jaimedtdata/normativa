@@ -114,11 +114,11 @@ def register_cap_users(user):
             print(member)
             password = user['password1']
 
-            #group = Group.objects.get(name='Gratuito')      
+            group = Group.objects.get(name='PARTICIPANTE')      
             user = User.objects.create_user(member.tuition, obj.email, password)
             user.last_name = member.first_surname
             user.first_name = member.second_surname
-            #user.groups.add(group)
+            user.groups.add(group)
             user.save()
             #update member according to user created above
             m=Member.objects.get(id=member.id)
