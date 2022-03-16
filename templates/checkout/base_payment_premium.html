@@ -32,13 +32,13 @@
         <section>
             <nav>
                 <ol class="cd-multi-steps text-bottom count">
-                    <li class="{%  if request.path == '/sign-up-clients/' %} current {% elif request.path == '/checkout/' %} visited {% elif request.path == '/success-payment-client/' %} visited {% endif %}">
+                    <li class="{%  if request.path == '/signup-premium-cap/' %} current {% elif request.path == '/checkout-premium-cap/' %} visited {% elif request.path == '/success-payment-cap/' %} visited {% endif %}">
                         <a class="text-muted" href="#0">Registro</a>
                     </li>
-                    <li class="{%  if request.path == '/checkout/' %} current {% elif request.path == '/sign-up-clients/' %} '' {% elif request.path == '/success-payment-client/' %} visited {% endif %}" >
+                    <li class="{%  if request.path == '/checkout-premium-cap/' %} current {% elif request.path == '/signup-premium-cap/' %} '' {% elif request.path == '/success-payment-cap/' %} visited {% endif %}" >
                         <a class="text-muted" href="#0">Método de Pago</a>
                     </li>
-                    <li class="{%  if request.path == '/success-payment-client/' %} current  {% endif %}" >
+                    <li class="{%  if request.path == '/success-payment-cap/' %} current  {% endif %}" >
                         <a class="text-muted" href="#0">Completado</a>
                     </li>
                     <!-- <li class="current" ><a href="#0">Pago</a></li> -->

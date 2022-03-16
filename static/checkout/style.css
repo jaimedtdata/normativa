@@ -162,7 +162,7 @@ Multi steps indicator
     position: absolute;
     content: '';
     height: 4px;
-    background: #edeff0;
+    background: #cad2da;
     /* reset style */
     margin: 0;
   }
@@ -234,7 +234,7 @@ Multi steps indicator
     height: 12px;
     width: 12px;
     border-radius: 50%;
-    background-color: #edeff0;
+    background-color: #9eadbb;
   }
   .cd-multi-steps.text-top li.visited > *::before,
   .cd-multi-steps.text-top li.current > *::before, .cd-multi-steps.text-bottom li.visited > *::before,

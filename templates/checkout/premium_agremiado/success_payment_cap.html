@@ -1,0 +1,26 @@
+{% extends 'checkout/base_payment_premium.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container ">
+    <div class="row">
+    
+      <div class="col-md-10 order-md-1 offset-1" >
+        <div class="card bg-light  mb-5">
+          <div class="card-body">
+              <h3>Has comprado el plan <b>Premium Agremiado</b> </h3>
+              <div>
+                  Para regresar a la plataforma por favor  
+                  <a href="{% url 'login' %}">Inicia sessión</a>.
+              </div>
+          </div>
+        </div>
+       
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
+       
+
+     

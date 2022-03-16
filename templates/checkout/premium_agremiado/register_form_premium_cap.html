@@ -1,0 +1,89 @@
+{% extends 'checkout/base_payment_premium.html' %}
+{% load static %}
+
+{% block content %}
+<link href="{% static 'plan_list/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> 
+<link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> 
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{% url 'checkout-premium-cap' %}" enctype="multipart/form-data" autocomplete="off" id="form-cap">
+                        {% csrf_token %}
+                        
+                        
+                        <div class="row mb-2">
+                            <div class="col-md-8 mt-3">
+                                <label class="text-muted lead"  >Correo Electrónico:</label>
+                                {{form.email}}
+                            </div>
+                            <span class="text-danger" id="error_id_formulario1-email"></span>
+                            <span class="text-success" id="success_id_formulario1-email"></span>
+                    
+                        </div>	
+                    
+                        <div class="row mb-2">
+                            <div class="col-md-4 ">
+                                <label class="text-muted lead" >Contraseña:</label>
+                                {{form.password1}}
+                            </div>
+                            <div class="col-md-4 ">
+                                <label class="text-muted lead" >Confirma tu Contraseña:</label>
+                                {{form.password2}}
+                            </div>
+                            <span class="text-danger" id="password_error_form1"></span>
+                            
+                        </div>
+                    
+                        <div class="row mt-3">
+                            <div class="form-group">
+                                <div class="form-check ml-3">
+                                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                  <label class="form-check-label text-success font-weight-bold" for="invalidCheck2">
+                                <!-- Button trigger modal -->
+                                    <a href="#exampleModalLong" data-toggle="modal" data-target="#exampleModalLong" class=" text-success font-weight-bold">
+                                        Aceptar los terminos y condiciones del codigo de ética
+                                    </a>
+                                  </label>
+                                </div>
+                              </div>
+                        </div>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                {% include 'register/modal.html' %}
+                            </div>
+                        
+                        <div class="d-flex justify-content-end">
+                            <a href="{% url 'login' %}" class="btn btn-danger mr-3 mt-3"> 
+                                Cancelar
+                            </a>
+                            <button class="btn btn-primary mt-3"> 
+                                Registrarme
+                            </button>
+                        </div>
+                    </form>	
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
+      <script src="{% static 'vendor/bootstrap4/js/bootstrap.min.js' %}"></script>
+<script src=" {% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+
+
+
+{{ExternalUserForm}}
+
+
+{% endblock content %}
+
+       
+
+     
