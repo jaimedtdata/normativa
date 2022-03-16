@@ -1,0 +1,14 @@
+QUITAR Uso/Categoria: 
+
+afregar columna RNE-Norma:
+mover dashboard
+
+----------------------
+tasks
+- Actualizar memebresia a los miembros CAP despues de pagar la membresia premium agremiado
+- FLUJO Plan Premium Agremiado
+    * Validar que el usuario sea miembro del CAP
+    * Validar formulario de registro
+- FLUJO PROFESIONAL
+    * CREAR usuario como inactivo hasta validar que el pago se hizo exitosamente 
+    * VALIDAR formulario de registro 

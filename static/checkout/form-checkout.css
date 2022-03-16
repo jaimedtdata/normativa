@@ -199,4 +199,30 @@ body {
 
   .plan{
     color: #c1a13f;
+    width: 150;
   }
+
+  .blue-shadow{
+    box-shadow: 5px 5px 5px  rgba(14, 184, 226, 0.2) ;
+    /* background-color: rgba(14, 184, 226, 0.2); */
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #2193b0;  /* fallback for old browsers */
+background: linear-gradient(to right, #f8f9fa, rgb(16 247 57 / 27%)) 
+
+
+  }
+
+  .radio-toolbar label {
+    display: inline-block;
+    background-color: #ddd;
+    padding: 4px 11px;
+    font-family: Arial;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+.radio-toolbar input[type="radio"]:checked {
+  background-color: #bbb;
+background: linear-gradient(to right, #f8f9fa, rgb(16 247 57 / 27%)) 
+
+}

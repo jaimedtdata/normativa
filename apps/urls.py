@@ -2,7 +2,8 @@ from django.urls import path, re_path
 
 from .views_ajax import get_dni, RegisterCapAPIView, APIMemberView, RegisterExternalUsersAPIView
 from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, checkout,
-                         checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client )
+                         checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client,
+                         SignUpPremiumCAP, checkout_premium_cap, success_payment_cap )
 
 urlpatterns = [
     #register member
@@ -15,6 +16,9 @@ urlpatterns = [
     path('success_suscription_cap/', success_suscription_cap, name='success_suscription_cap'),
     path('sign-up-clients/', SignUpClients.as_view(), name='sign-up-clients'),
     path('success-payment-client/', success_payment_client, name='success_payment_client'),
+    path('signup-premium-cap/', SignUpPremiumCAP.as_view(), name='signup-premium-cap'),
+    path('checkout-premium-cap/', checkout_premium_cap, name='checkout-premium-cap'),
+    path('success-payment-cap/', success_payment_cap, name='success_payment_cap'),
 
 
 
