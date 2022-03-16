@@ -32,6 +32,7 @@
     <div class="row">
         <div class="col-md-3 d-none" style="height:720px;" id="subnormas_caja">
           <div class="form-group">
+              <label for="">Tipo de norma:</label>
               <select class="form-control" name="subnormativas[]" multiple="multiple" style="height:100%;" id="select-norms">
                     {% for sn in subtipo_normas %}
                         {% if sn.order|length == 2 %}

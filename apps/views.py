@@ -1,6 +1,7 @@
 import json
 import uuid
 import random
+from django.core.paginator import Paginator
 from datetime import datetime
 from django.forms import ValidationError
 from django.shortcuts import render, redirect
@@ -466,15 +467,20 @@ def success_suscription_cap(request):
 #@login_required
 def preguntas(request):
     tipo_uso = Areas_Normas.objects.order_by('area_name')
+    page = request.GET.get('page', 1)
+
     queryset = Policies_usage.objects.all()
     filter = PoliciesFilter(request.GET, queryset=queryset)
 
     queryset = filter.qs
+    paginator = Paginator(queryset, 2)
+    queryset = paginator.page(page)
 
     context = {
-                'preguntas': queryset,
+                'entity': queryset,
                 'tipo_uso' : tipo_uso,
                 'filter' : filter,
+                'paginator' : paginator,
                 }
 
     return render(request, 'preguntas.html', context)
