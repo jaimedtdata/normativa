@@ -30,7 +30,13 @@
 				<div class="col-md-10">
 					<span class="msg m-0"><a class="text-secondary" href="{% url 'foro_comentarios' theme.tema_id %}">{{theme.tema.name_denom}}</a></span><br>
 					<span class="msg m-0">{{theme.coments}}</span><br>
-					<span class="msg text-secondary">{{theme.subcategories}}</span> <span class="msg">{{ theme.user }}</span><br>
+					<span class="msg text-secondary">{{theme.subcategories}}</span> <span class="msg">
+						{% if theme.user.user_membership %}
+						<span>{{theme.user.user_membership.names}} {{ theme.user.user_membership.first_surname.0 }} {{ theme.user.user_membership.second_surname.0 }}</span> 
+						{% else %}
+						<span>{{theme.user.username}}</span> 
+						{% endif %}	
+					</span><br>
 				</div>
 			</div>
 		</li>

@@ -5,10 +5,24 @@ mover dashboard
 
 ----------------------
 tasks
-- Actualizar memebresia a los miembros CAP despues de pagar la membresia premium agremiado
+- CREAR UN MODELO PARA GUARDAR LAS TRANSACCIONES
+
+- FLUJO PLAN AGREMIADO ACTUALIZAR A PREMIUM AGREMIADO
+    *Validar el pago de Niubiz
+    *Actualizar membresia a los miembros CAP despues de pagar la membresia premium agremiado
+    * GUARDAR la transaccion en el modelo Control_payment
+    
 - FLUJO Plan Premium Agremiado
-    * Validar que el usuario sea miembro del CAP
-    * Validar formulario de registro
+    *Validar el pago de Niubiz
+    *Validar formulario de registro que sea miembro del CAP y este habilitado
+    *Creacion de usuario en la vista 
+    * GUARDAR la transaccion en el modelo Control_payment
+
+
 - FLUJO PROFESIONAL
-    * CREAR usuario como inactivo hasta validar que el pago se hizo exitosamente 
-    * VALIDAR formulario de registro 
+    *Validar el pago de Niubiz
+    *Validar formulario de registro que no este registrado en el modelo miembro
+    * CREAR usuario en la vista como inactivo hasta validar que el pago se hizo exitosamente 
+    * GUARDAR la transaccion en el modelo Control_payment
+
+- Añadir al modelo miembro un role de participante

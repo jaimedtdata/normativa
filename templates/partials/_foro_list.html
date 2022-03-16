@@ -1,6 +1,15 @@
 {% for norma in normas %}
+{% block css %}
+<style>
 
+    a:hover {
+        text-decoration: none;
+    }
+
+</style>
+{% endblock %}
 {% if norma.es_foro %}
+<a href="{% url 'foro_comentarios' norma.id %}" target="_blank">
 <div class="card mb-3">
 	<div class="row g-0">
 	  <div class="col-md-2 bg-foro text-center bg-cap-1 text-white">
@@ -9,20 +18,19 @@
 	  </div>
 	  <div class="col-md-10">
 		<div class="card-body">
-		  	<a href="{% url 'foro_comentarios' norma.id %}" target="_blank">
 				<p class="text-dark"> {{ norma.norma }} - {{ norma.name_denom }} 
 					<span class="text-dark">
 						<i class="fa fa-link text-dark" aria-hidden="true"></i> 
 					</span>
 				</p> 
-			</a>
-			<p class="card-text">
-				<small class="text-muted">{{norma.fecha_publi}}</small>
-			</p>
+				<p class="card-text">
+					<small class="text-muted">{{norma.fecha_publi}}</small>
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
-</div>
+</a>
 {% endif %}
 
 {% endfor %}
