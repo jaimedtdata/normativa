@@ -113,9 +113,9 @@ def search_theme(request):
     area_id = request.GET.get('area_norma')
 
     if area_id == '0' :
-        themes = Register_Normativa.objects.filter(name_denom__icontains=theme )
+        themes = Register_Normativa.objects.filter(name_denom__icontains=theme).filter(es_foro = True)
     else :
-        themes = Register_Normativa.objects.filter(name_denom__icontains=theme ).filter(tipo_uso_id = area_id)
+        themes = Register_Normativa.objects.filter(name_denom__icontains=theme).filter(tipo_uso_id = area_id).filter(es_foro = True)
     
     themes = [ theme_serializer(theme) for theme in themes ]
 
@@ -126,5 +126,6 @@ def theme_serializer(themes):
             'name_denom' : themes.name_denom,  
             'tipo_uso' : themes.tipo_uso.area_name,
             'norma' : themes.norma,
-            'fecha_publi' : themes.fecha_publi
+            'fecha_publi' : themes.fecha_publi,
+            'es_foro' : themes.es_foro
             }
