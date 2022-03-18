@@ -182,6 +182,9 @@ class Order_payment(models.Model):
     email = models.EmailField(max_length=50, blank=True, null=True,
         help_text='Correo Electrónico',
         verbose_name='Email')
+    identity = models.CharField(max_length=11, blank=True,
+        help_text='DNI o RUC',
+        verbose_name='Documento de Identidad')
     id_plan = models.OneToOneField(
         Plan, on_delete=models.CASCADE,
         help_text='Plan Suscrito', null=True, blank=True,
@@ -206,10 +209,15 @@ class Order_payment(models.Model):
         help_text='Fecha de Registro',
         verbose_name='Fecha de Registro')
     updated= models.DateTimeField( auto_now=True,
-        help_text='Fecha de Modificacion',
-        verbose_name='Fecha de Modificacion')
+        help_text='Fecha de Modificacion del Registro',
+        verbose_name='Fecha de Modificacion del Registro')
     class Meta:
+        verbose_name = 'Ordenes de Pagos'
         verbose_name_plural = 'Ordenes de Pagos'
+        ordering = ['-created']
+    
+    def __str__(self):
+        return self.names
 
 class UserToken(models.Model):
     token = models.UUIDField(primary_key=True, null=False, unique=True,

@@ -31,6 +31,7 @@ DJANGO_APPS = (
     'rest_framework',
     'django_filters',
     'crispy_forms',
+    'corsheaders',
 )
 
 LOCAL_APPS = (
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'cap.urls'
@@ -79,6 +81,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cap.wsgi.application'
+
+
+CORS_ORIGIN_ALLOW_ALL = True    #permitir acceder desde todos los dominios
 
 DATABASES = {
     'default': {
@@ -137,6 +142,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+USERNAME_NIUBIZ = os.getenv('USERNAME_NIUBIZ')
+PASSWORD_NIUBIZ = os.getenv('PASSWORD_NIUBIZ')
+COMERCIAL_ID = os.getenv('COMERCIAL_ID')
 
 # # Space AWS
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')

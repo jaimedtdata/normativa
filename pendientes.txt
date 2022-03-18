@@ -11,12 +11,19 @@ tasks
     *Validar el pago de Niubiz
     *Actualizar membresia a los miembros CAP despues de pagar la membresia premium agremiado
     * GUARDAR la transaccion en el modelo Control_payment
+    * GUARDAR el codigo de transaccion de izipay y sus valores que devuelve en una nueva tablas
+    *Enviar el email al usuario
+    *Cuando venca la fecha de membresiaactualizar a plan premium
+
     
 - FLUJO Plan Premium Agremiado
     *Validar el pago de Niubiz
     *Validar formulario de registro que sea miembro del CAP y este habilitado
     *Creacion de usuario en la vista 
     * GUARDAR la transaccion en el modelo Control_payment
+    * GUARDAR el codigo de transaccion de izipay y sus valores que devuelve en una nueva tablas
+    *Enviar el email al usuario
+    *Cuando venca la fecha de membresiaactualizar a plan premium
 
 
 - FLUJO PROFESIONAL
@@ -24,5 +31,5 @@ tasks
     *Validar formulario de registro que no este registrado en el modelo miembro
     * CREAR usuario en la vista como inactivo hasta validar que el pago se hizo exitosamente 
     * GUARDAR la transaccion en el modelo Control_payment
+    *Enviar el email al usuario
 
-- Añadir al modelo miembro un role de participante
