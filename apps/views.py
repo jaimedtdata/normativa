@@ -32,7 +32,6 @@ from foro.models import Coments_foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector, SearchQuery
-
 # Johao #
 
 from bus_normativa.models import date_normativa

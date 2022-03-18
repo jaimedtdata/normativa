@@ -5,6 +5,8 @@ from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, 
                          checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client,
                          SignUpPremiumCAP, checkout_premium_cap, success_payment_cap )
 
+from .upload import SignedURLView
+
 urlpatterns = [
     #register member
     path('sign-up-user/', RegisterMemberTemplateView.as_view(),name='sign-up-user'),
@@ -19,8 +21,7 @@ urlpatterns = [
     path('signup-premium-cap/', SignUpPremiumCAP.as_view(), name='signup-premium-cap'),
     path('checkout-premium-cap/', checkout_premium_cap, name='checkout-premium-cap'),
     path('success-payment-cap/', success_payment_cap, name='success_payment_cap'),
-
-
+    path('signed-url/', SignedURLView.as_view(), name='signed-url'),
 
     #api views
     path('api/cap/', RegisterCapAPIView.as_view(), name='api-cap'),
