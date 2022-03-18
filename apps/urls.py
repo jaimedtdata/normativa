@@ -3,9 +3,7 @@ from django.urls import path, re_path
 from .views_ajax import get_dni, RegisterCapAPIView, APIMemberView, RegisterExternalUsersAPIView
 from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, checkout,
                          checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client,
-                         SignUpPremiumCAP, checkout_premium_cap, success_payment_cap )
-
-from .upload import SignedURLView
+                         SignUpPremiumCAP, checkout_premium_cap, success_payment_cap, SignedURLView )
 
 urlpatterns = [
     #register member
