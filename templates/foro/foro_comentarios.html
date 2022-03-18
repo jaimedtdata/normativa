@@ -70,7 +70,14 @@
                     <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
                   </span>
                   <span class="commenter-name" >
-                    <a style='color:black;' href="#">{{muni.user}}</a>
+                    <a style='color:black;' href="#">
+                      {% if muni.user.user_membership %}
+                      <span>{{muni.user.user_membership.names}} {{ muni.user.user_membership.first_surname.0 }} {{ muni.user.user_membership.second_surname.0 }}</span> 
+                      {% else %}
+                      <span>{{muni.user.username}}</span> 
+                      {% endif %}	
+                    
+                    </a>
                   </span>
                   <p class="comment-txt more">{{muni.coments}}</p>                    
                 </div>
