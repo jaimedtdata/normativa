@@ -47,7 +47,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="fecha_publi">Publicacion</label>
-                        <input type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}" required min="1900-01-01" max="{{fecha_hoy}}"/>
+                        <input id="id_fecha" type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}" required min="1900-01-01" max="{{fecha_hoy}}"/>
                     </div>
                 </div>
             </div>
@@ -122,6 +122,113 @@
 
 
 {% block js %}
+<script>
+    let submitting = false
+    let file = null
+
+    function setIsSubmitting(val) {
+        submitting = val
+    }
+
+    function setFile(val) {
+        file = val
+    }
+
+    _("id_file").addEventListener("change", event => {
+        setFile(event.target.files[0])
+    })
+
+    _("submitBtn").addEventListener("click", event => {
+        if (file != null && _('id_fecha') != undefined) {
+            handleSubmit(event)
+            _("submitBtn").disabled = true
+        }
+    })
+
+    const handleSubmit = async event => {
+
+        setIsSubmitting(true)
+
+        const signedUrl = await getSignedUrl()
+
+        try {
+            uploadFile(signedUrl)
+        }
+        catch (err) {
+            setIsSubmitting(false)
+            console.log(err)
+            alert('There was an error uploading your file.')
+            throw err
+        }
+
+        setIsSubmitting(false)
+    }
+
+    const getSignedUrl = async () => {
+        const body = {
+            fileName: file.name,
+            fileType: file.type,
+        }
+
+        const response = await fetch("{% url 'signed-url' %}", {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}"}
+        })
+        const { url } = await response.json()
+        return url
+    }
+
+    function _(el) {
+        return document.getElementById(el);
+    }
+
+    function uploadFile(signedUrl) {
+        var formdata = new FormData();
+        formdata.append("file", file);
+        var ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.addEventListener("error", errorHandler, false);
+        ajax.addEventListener("abort", abortHandler, false);
+        ajax.addEventListener("loadend", loadendHandler, false)
+        ajax.open("PUT", signedUrl);
+        ajax.setRequestHeader('Content-Type', file.type)
+        ajax.setRequestHeader('x-amz-acl', 'public-read')
+        ajax.send(formdata);
+    }
+
+    async function submitForm() {
+        _("fileForm").submit()
+    }
+
+    async function loadendHandler(event) {
+        _("submitBtn").disabled = false
+        await submitForm()
+    }
+
+    function progressHandler(event) {
+        var percent = Math.round((event.loaded / event.total) * 100);
+        _("progressBar").style.width = `${percent}%`;
+        _("progressBar").innerText = `${percent}%`;
+        _("status").innerHTML = percent + "% Subiendo.. espere un momento";
+    }
+
+    function completeHandler(event) {
+        _("status").innerHTML = event.target.responseText;
+        _("progressBar").style.width = 0;
+        _("progressBar").innerText = "0%";
+    }
+
+    function errorHandler(event) {
+        _("status").innerHTML = "Por favor espere";
+    }
+
+    function abortHandler(event) {
+        _("status").innerHTML = "Upload Aborted";
+    }
+
+</script>
 
     <script>
 
@@ -198,111 +305,4 @@
         }
 
     </script>
-
-<script>
-    let submitting = false
-    let file = null
-
-    function setIsSubmitting(val) {
-        submitting = val
-    }
-
-    function setFile(val) {
-        file = val
-    }
-
-    _("id_file").addEventListener("change", event => {
-        setFile(event.target.files[0])
-    })
-
-    _("submitBtn").addEventListener("click", event => {
-        if (file != null && _('id_fecha') != undefined) {
-            handleSubmit(event)
-            _("submitBtn").disabled = true
-        }
-    })
-
-    const handleSubmit = async event => {
-
-        setIsSubmitting(true)
-
-        const signedUrl = await getSignedUrl()
-
-        try {
-            uploadFile(signedUrl)
-        }
-        catch (err) {
-            setIsSubmitting(false)
-            console.log(err)
-            alert('There was an error uploading your file.')
-            throw err
-        }
-
-        setIsSubmitting(false)
-    }
-
-    const getSignedUrl = async () => {
-        const body = {
-            fileName: file.name,
-            fileType: file.type,
-        }
-
-        const response = await fetch("{% url 'signed-url' %}", {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}"}
-        })
-        const { url } = await response.json()
-        return url
-    }
-
-    function _(el) {
-        return document.getElementById(el);
-    }
-
-    function uploadFile(signedUrl) {
-        var formdata = new FormData();
-        formdata.append("file", file);
-        var ajax = new XMLHttpRequest();
-        ajax.upload.addEventListener("progress", progressHandler, false);
-        ajax.addEventListener("load", completeHandler, false);
-        ajax.addEventListener("error", errorHandler, false);
-        ajax.addEventListener("abort", abortHandler, false);
-        ajax.addEventListener("loadend", loadendHandler, false)
-        ajax.open("PUT", signedUrl);
-        ajax.setRequestHeader('Content-Type', file.type)
-        ajax.setRequestHeader('x-amz-acl', 'public-read')
-        ajax.send(formdata);
-    }
-
-    async function submitForm() {
-        _("fileForm").submit()
-    }
-
-    async function loadendHandler(event) {
-        _("submitBtn").disabled = false
-        await submitForm()
-    }
-
-    function progressHandler(event) {
-        var percent = Math.round((event.loaded / event.total) * 100);
-        _("progressBar").style.width = `${percent}%`;
-        _("progressBar").innerText = `${percent}%`;
-        _("status").innerHTML = percent + "% Subiendo.. espere un momento";
-    }
-
-    function completeHandler(event) {
-        _("status").innerHTML = event.target.responseText;
-        _("progressBar").style.width = 0;
-        _("progressBar").innerText = "0%";
-    }
-
-    function errorHandler(event) {
-        _("status").innerHTML = "Por favor espere";
-    }
-
-    function abortHandler(event) {
-        _("status").innerHTML = "Upload Aborted";
-    }
-</script>
 {% endblock %}
