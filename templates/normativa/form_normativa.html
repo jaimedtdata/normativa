@@ -49,7 +49,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="fecha_publi">Publicacion</label>
-                        <input type="date" name="fecha_publi" class="form-control" required  min="1900-01-01" max="{{fecha_hoy}}"/>
+                        <input id="id_fecha" type="date" name="fecha_publi" class="form-control" required  min="1900-01-01" max="{{fecha_hoy}}"/>
                     </div>
                 </div>
             </div>
@@ -151,8 +151,10 @@
     })
 
     _("submitBtn").addEventListener("click", event => {
-        handleSubmit(event)
-        _("submitBtn").disabled = true
+        if (file != null && _('id_fecha') != undefined) {
+            handleSubmit(event)
+            _("submitBtn").disabled = true
+        }
     })
 
     const handleSubmit = async event => {
@@ -221,7 +223,7 @@
         var percent = Math.round((event.loaded / event.total) * 100);
         _("progressBar").style.width = `${percent}%`;
         _("progressBar").innerText = `${percent}%`;
-        _("status").innerHTML = percent + "% uploaded... please wait";
+        _("status").innerHTML = percent + "% Subiendo.. espere un momento";
     }
 
     function completeHandler(event) {
@@ -231,7 +233,7 @@
     }
 
     function errorHandler(event) {
-        _("status").innerHTML = "Upload Failed";
+        _("status").innerHTML = "Por favor espere";
     }
 
     function abortHandler(event) {

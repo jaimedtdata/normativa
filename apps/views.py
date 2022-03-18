@@ -2,6 +2,8 @@ import json
 import uuid
 import boto3
 import random
+import datetime
+from django.utils import timezone
 from django.core.paginator import Paginator
 from datetime import datetime
 from django.forms import ValidationError
@@ -46,7 +48,9 @@ from .utils import create_member_free
 from .forms_register import MemberCapForm, ExternalUserForm
 
 from membership.models import Membership
-from apps.models import UsagePolicies
+from apps.models import UsagePolicies, Order_payment
+from apps.niubiz import get_security_token, create_session_token, require_transaccion_autorizacion
+from django.conf import settings
 
 def busqueda_clavenormativa(request):
     area_normas=Areas_Normas.objects.all()
@@ -457,14 +461,61 @@ def checkout_premium_cap(request):
 def success_payment_cap(request):
     return render(request, 'checkout/premium_agremiado/success_payment_cap.html')
 
-#Payment process CAP internal users that have free registration
+#Payment process CAP internal users that have free registration, upddate membership
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import requires_csrf_token
+
+
+#@requires_csrf_token
+@csrf_exempt
 def checkoutCAP(request):
+    COMERCIAL_ID = settings.COMERCIAL_ID
+    security_token = get_security_token()
+    token_session = create_session_token(security_token)
     context = {
         'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+        'token_security' : security_token,
+        'token_session' : token_session,
+        'comercial_id' : COMERCIAL_ID
         }
+
+    if request.method == 'POST':
+        cd = request.POST
+        token_transaccion = request.POST['transactionToken']
+        user=request.user.user_membership
+        print('checkout',cd)
+        print('token de transaccion',token_transaccion)
+        print(request.user)
+        print(request.user.user_membership.names)
+        print(request.user.user_membership.first_surname)
+
+        #if token_transaccion:
+            #guardar los datos de la trasaccion
+            # si no existe es porque fallo la tarjeta o el metodo de pago fue en efectivo.
+        require_transaccion_autorizacion(security_token, token_transaccion)
+        Order_payment.objects.create(
+            member= request.user.user_membership,
+            names=user.names,
+            first_surname=user.first_surname,
+            second_surname=user.second_surname,
+            email=user.email,
+            identity=user.identity,
+            pay_import = 30,
+            validity_date_start = timezone.now() ,
+            validity_date_finish = (timezone.now() + timezone.timedelta(days=30))
+        )
+
+        return redirect('success_suscription_cap')
+
     return render(request, 'checkout/premium_free/checkoutCAP.html', context)
 
+#@requires_csrf_token
+@csrf_exempt
 def success_suscription_cap(request):
+    if request.method == 'POST':
+        cd = request.POST
+        print('success',cd)
     return render(request, 'checkout/premium_free/success-suscription.html')
 
 #@login_required

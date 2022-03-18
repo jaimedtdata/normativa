@@ -31,6 +31,7 @@ DJANGO_APPS = (
     'rest_framework',
     'django_filters',
     'crispy_forms',
+    'corsheaders',
 )
 
 LOCAL_APPS = (
@@ -40,6 +41,7 @@ LOCAL_APPS = (
     'bus_normativa.apps.BusNormativaConfig',
 )
 
+CORS_ORIGIN_ALLOW_ALL = True
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -79,6 +82,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cap.wsgi.application'
+
+
+CORS_ORIGIN_ALLOW_ALL = True    #permitir acceder desde todos los dominios
 
 DATABASES = {
     'default': {
@@ -137,6 +143,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+USERNAME_NIUBIZ = os.getenv('USERNAME_NIUBIZ')
+PASSWORD_NIUBIZ = os.getenv('PASSWORD_NIUBIZ')
+COMERCIAL_ID = os.getenv('COMERCIAL_ID')
 
 # # Space AWS
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')

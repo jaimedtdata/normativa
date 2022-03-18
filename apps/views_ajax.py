@@ -105,3 +105,6 @@ class APIMemberView(APIView):
         serializer = ErpSerializer(members_cap, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
         
+# class SesionTokenAPIView(APIView):
+
+#     def post(self, request):
