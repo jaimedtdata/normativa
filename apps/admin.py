@@ -5,13 +5,18 @@ from django.contrib.sessions.models import Session
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 from normas.models import Register_Normativa,Register_Palabraclave, Policies_usage
-from .models import Member, UsagePolicies
+from .models import Member, UsagePolicies, Order_payment
 
 class MemberAdmin(admin.ModelAdmin):
     list_display= ['names', 'first_surname' ,'identity','tuition', 'email']
     search_fields = ['names', 'first_surname' ,'identity','tuition', 'email']
 admin.site.register(Member,MemberAdmin)
 
+class Order_paymentAdmin(admin.ModelAdmin):
+    list_display= ['names', 'first_surname', 'second_surname' , 'email','identity' ,'validity_date_start', 'validity_date_finish']
+    search_fields = ['names', 'first_surname', 'second_surname' , 'email', 'identity']
+    readonly_fields = ['created', 'updated']
+admin.site.register(Order_payment,Order_paymentAdmin)
 
 #johao
 class Register_NormativaAdmin(admin.ModelAdmin):
