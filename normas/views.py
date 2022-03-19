@@ -121,7 +121,7 @@ def actualizar_normativa(request, normativa):
 
         if file_pdf != None:
             fs = FileSystemStorage()
-            file_pdf.name = str(uuid.uuid4())
+            file_pdf.name = f'{normativa}-{file_pdf.name}'
             Register_Normativa.objects.get(id=normativa).document.delete()
             filename = fs.save('Document_normativa/' + file_pdf.name + '.pdf', file_pdf)
             file_pdf = filename

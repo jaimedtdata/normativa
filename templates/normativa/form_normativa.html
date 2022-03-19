@@ -121,7 +121,7 @@
             <div class="row">
                 <div class="col">
                    <button class="btn btn-primary btn-block" type="submit" id="submitBtn">
-                    <i class="fa-solid fa-floppy-disk"></i>
+                    <i id="icon-btn-save" class="fa-solid fa-floppy-disk"></i>
                     Guardar
                    </button>
                 </div>
@@ -154,6 +154,11 @@
         if (file != null && _('id_fecha') != undefined) {
             handleSubmit(event)
             _("submitBtn").disabled = true
+            _("submitBtn").innerHTML = /*html*/`<div class="spinner-border spinner-border-sm text-light" role="status">
+                                                <span class="sr-only">Loading...</span>                   
+                                                Guardar
+                                            </div>
+                                            `
         }
     })
 
@@ -212,10 +217,11 @@
 
     async function submitForm() {
         _("fileForm").submit()
+        _("submitBtn").disabled = false
+
     }
 
     async function loadendHandler(event) {
-        _("submitBtn").disabled = false
         await submitForm()
     }
 
