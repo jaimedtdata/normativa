@@ -123,7 +123,7 @@ def actualizar_normativa(request, normativa):
             fs = FileSystemStorage()
             file_pdf.name = f'{normativa}-{file_pdf.name}'
             Register_Normativa.objects.get(id=normativa).document.delete()
-            filename = fs.save('Document_normativa/' + file_pdf.name + '.pdf', file_pdf)
+            filename = fs.save('Document_normativa/' + file_pdf.name, file_pdf)
             file_pdf = filename
 
         Register_Normativa.objects.filter(id=normativa).update(norma=norma,name_denom=name_deno,base_legal=base_legal,
