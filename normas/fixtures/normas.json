@@ -1,0 +1,354 @@
+[
+{
+  "model": "normas.areas_normas",
+  "pk": 1,
+  "fields": {
+    "area_name": "1. VIVIENDA",
+    "order": "10",
+    "register_date_time": "2022-03-10T09:50:01.602",
+    "created": "2022-03-10T09:50:01.602",
+    "updated": "2022-03-10T09:50:01.602"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 2,
+  "fields": {
+    "area_name": "2. HOSPEDAJE",
+    "order": "20",
+    "register_date_time": "2022-03-10T09:50:12.072",
+    "created": "2022-03-10T09:50:12.072",
+    "updated": "2022-03-10T09:50:12.072"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 3,
+  "fields": {
+    "area_name": "3. EDUCACION",
+    "order": "30",
+    "register_date_time": "2022-03-10T09:50:19.294",
+    "created": "2022-03-10T09:50:19.294",
+    "updated": "2022-03-10T09:50:19.294"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 4,
+  "fields": {
+    "area_name": "4. SALUD",
+    "order": "40",
+    "register_date_time": "2022-03-10T09:50:24.611",
+    "created": "2022-03-10T09:50:24.611",
+    "updated": "2022-03-10T09:50:24.611"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 5,
+  "fields": {
+    "area_name": "5. INDUSTRIA",
+    "order": "50",
+    "register_date_time": "2022-03-10T09:50:30.547",
+    "created": "2022-03-10T09:50:30.547",
+    "updated": "2022-03-10T09:50:30.547"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 6,
+  "fields": {
+    "area_name": "6. COMERCIO",
+    "order": "60",
+    "register_date_time": "2022-03-10T09:50:36.996",
+    "created": "2022-03-10T09:50:36.996",
+    "updated": "2022-03-10T09:50:36.996"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 7,
+  "fields": {
+    "area_name": "6.1 RESTAURANTES",
+    "order": "601",
+    "register_date_time": "2022-03-10T09:51:02.985",
+    "created": "2022-03-10T09:51:02.985",
+    "updated": "2022-03-10T09:51:02.985"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 8,
+  "fields": {
+    "area_name": "6.2 INSTALACIONES",
+    "order": "602",
+    "register_date_time": "2022-03-10T09:51:11.302",
+    "created": "2022-03-10T09:51:11.302",
+    "updated": "2022-03-10T09:51:11.302"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 9,
+  "fields": {
+    "area_name": "1.1 GENERAL",
+    "order": "101",
+    "register_date_time": "2022-03-10T09:51:18.808",
+    "created": "2022-03-10T09:51:18.808",
+    "updated": "2022-03-10T09:51:18.808"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 10,
+  "fields": {
+    "area_name": "1.2 VIVIENDA DE INTERES SOCIAL",
+    "order": "102",
+    "register_date_time": "2022-03-10T09:51:37.217",
+    "created": "2022-03-10T09:51:37.217",
+    "updated": "2022-03-10T09:51:37.217"
+  }
+},
+{
+  "model": "normas.areas_normas",
+  "pk": 11,
+  "fields": {
+    "area_name": "1.3 FONDO MI VIVIENDA",
+    "order": "103",
+    "register_date_time": "2022-03-10T09:51:54.132",
+    "created": "2022-03-10T09:51:54.132",
+    "updated": "2022-03-10T09:51:54.132"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 1,
+  "fields": {
+    "subcategory_name": "1. RNE",
+    "register_date_time": "2022-02-23T09:05:01.668",
+    "order": "10",
+    "created": "2022-02-23T09:05:01.668",
+    "updated": "2022-02-23T09:45:03.857"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 2,
+  "fields": {
+    "subcategory_name": "1.1 RNE-ARQUITECTURA",
+    "register_date_time": "2022-02-23T09:41:27.328",
+    "order": "101",
+    "created": "2022-02-23T09:41:27.328",
+    "updated": "2022-02-23T09:57:31.644"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 3,
+  "fields": {
+    "subcategory_name": "1.1.1 TRANSVERSALES",
+    "register_date_time": "2022-02-23T09:41:55.788",
+    "order": "1011",
+    "created": "2022-02-23T09:41:55.788",
+    "updated": "2022-02-23T09:44:19.092"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 4,
+  "fields": {
+    "subcategory_name": "1.1.2 VIVIENDA",
+    "register_date_time": "2022-02-23T09:42:05.318",
+    "order": "1012",
+    "created": "2022-02-23T09:42:05.318",
+    "updated": "2022-02-23T09:44:29.229"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 5,
+  "fields": {
+    "subcategory_name": "1.2 ESPECIALIDADES RELACIONADAS",
+    "register_date_time": "2022-02-23T09:42:26.021",
+    "order": "102",
+    "created": "2022-02-23T09:42:26.021",
+    "updated": "2022-02-23T09:45:29.210"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 6,
+  "fields": {
+    "subcategory_name": "2.NORMAS SECTORIALES",
+    "register_date_time": "2022-02-23T09:42:40.753",
+    "order": "20",
+    "created": "2022-02-23T09:42:40.753",
+    "updated": "2022-02-23T09:45:12.751"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 7,
+  "fields": {
+    "subcategory_name": "2.1 GAS VIVIENDAS ENERGIA Y MINAS",
+    "register_date_time": "2022-02-23T09:42:55.086",
+    "order": "201",
+    "created": "2022-02-23T09:42:55.086",
+    "updated": "2022-02-23T09:45:51.394"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 8,
+  "fields": {
+    "subcategory_name": "2.2 RATDUS-Ministerio de Vivienda",
+    "register_date_time": "2022-02-23T09:43:05.920",
+    "order": "202",
+    "created": "2022-02-23T09:43:05.920",
+    "updated": "2022-02-23T09:46:01.573"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 9,
+  "fields": {
+    "subcategory_name": "2.3 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA",
+    "register_date_time": "2022-02-23T09:43:18.567",
+    "order": "203",
+    "created": "2022-02-23T09:43:18.567",
+    "updated": "2022-02-23T09:46:12.495"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 10,
+  "fields": {
+    "subcategory_name": "3.OPINIONES VINCULANTES",
+    "register_date_time": "2022-02-23T09:43:47.504",
+    "order": "30",
+    "created": "2022-02-23T09:43:47.504",
+    "updated": "2022-02-23T09:45:20.206"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 11,
+  "fields": {
+    "subcategory_name": "3.1 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA",
+    "register_date_time": "2022-02-23T09:47:30.680",
+    "order": "301",
+    "created": "2022-02-23T09:47:30.680",
+    "updated": "2022-02-23T09:47:30.680"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 12,
+  "fields": {
+    "subcategory_name": "4.REGLAMENTO COMENTADO",
+    "register_date_time": "2022-02-23T09:47:39.264",
+    "order": "40",
+    "created": "2022-02-23T09:47:39.264",
+    "updated": "2022-02-23T09:47:39.264"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 13,
+  "fields": {
+    "subcategory_name": "4.1 NORMA GRAFICA COMENTADA",
+    "register_date_time": "2022-02-23T09:47:55.565",
+    "order": "401",
+    "created": "2022-02-23T09:47:55.565",
+    "updated": "2022-02-23T09:47:55.565"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 14,
+  "fields": {
+    "subcategory_name": "4.2 CASUISTICA",
+    "register_date_time": "2022-02-23T09:48:07.027",
+    "order": "402",
+    "created": "2022-02-23T09:48:07.027",
+    "updated": "2022-02-23T09:48:07.027"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 15,
+  "fields": {
+    "subcategory_name": "4.2.1 APELACIONES RECONSIDERACIONES",
+    "register_date_time": "2022-02-23T09:48:14.541",
+    "order": "4021",
+    "created": "2022-02-23T09:48:14.541",
+    "updated": "2022-02-23T09:48:14.541"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 16,
+  "fields": {
+    "subcategory_name": "4.2.2 CONCLUSIONES DE CHARLAS(OPINION DE ASUNTOS TECNICOS )",
+    "register_date_time": "2022-02-23T09:48:29.521",
+    "order": "4022",
+    "created": "2022-02-23T09:48:29.521",
+    "updated": "2022-02-23T09:48:29.521"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 17,
+  "fields": {
+    "subcategory_name": "4.2.3 DIRECTIVAS CAP",
+    "register_date_time": "2022-02-23T09:48:36.642",
+    "order": "4023",
+    "created": "2022-02-23T09:48:36.642",
+    "updated": "2022-02-23T09:48:36.642"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 18,
+  "fields": {
+    "subcategory_name": "5.INDECOPI",
+    "register_date_time": "2022-02-23T09:48:48.838",
+    "order": "50",
+    "created": "2022-02-23T09:48:48.838",
+    "updated": "2022-02-23T09:48:48.838"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 19,
+  "fields": {
+    "subcategory_name": "6.NORMAS MUNICIPALES",
+    "register_date_time": "2022-02-23T09:48:57.138",
+    "order": "60",
+    "created": "2022-02-23T09:48:57.138",
+    "updated": "2022-02-23T09:48:57.138"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 20,
+  "fields": {
+    "subcategory_name": "6.1 NORMAS PROVINCIALES",
+    "register_date_time": "2022-02-23T09:49:05.241",
+    "order": "601",
+    "created": "2022-02-23T09:49:05.241",
+    "updated": "2022-02-23T09:49:05.241"
+  }
+},
+{
+  "model": "normas.subcategories_normas",
+  "pk": 21,
+  "fields": {
+    "subcategory_name": "6.2 NORMAS DISTRITALES",
+    "register_date_time": "2022-02-23T09:49:11.307",
+    "order": "602",
+    "created": "2022-02-23T09:49:11.307",
+    "updated": "2022-02-23T09:49:11.307"
+  }
+}
+]
