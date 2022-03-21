@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'qrh*e^+4h@0j1zi_hc2knz5mx4ifq5*#3k-+dvf=2u$9%j@t43'
 
-DEBUG = False
+DEBUG = True
 #DEBUG = False
 
 ALLOWED_HOSTS = ['*']
@@ -26,7 +26,6 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
-    'storages',
     'membership.apps.MembershipConfig',
     'rest_framework',
     'django_filters',
@@ -41,7 +40,6 @@ LOCAL_APPS = (
     'bus_normativa.apps.BusNormativaConfig',
 )
 
-CORS_ORIGIN_ALLOW_ALL = True
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -54,12 +52,12 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'cap.urls'
@@ -83,8 +81,37 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cap.wsgi.application'
 
+# CORS_ALLOWED_ORIGINS = [
+#     "https://apisandbox.vnforappstest.com",
+#     "https://static-content-qas.vnforapps.com",
+    
+# ]
 
 CORS_ORIGIN_ALLOW_ALL = True    #permitir acceder desde todos los dominios
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd4ot3mt28rcjob',
+#         'USER': 'djmdailubuffcs',
+#         'PASSWORD': '527d79120ffbcbba4dfd28b6a112541d902db70178ccdaf3468b547d6ac17cfc',
+#         'HOST': 'ec2-44-192-245-97.compute-1.amazonaws.com',
+#         'PORT': 5432,
+#     }
+# }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'bdnormativa',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': 5432,
+#     }
+# }
+
 
 DATABASES = {
     'default': {
@@ -133,6 +160,12 @@ USE_TZ = False
 
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 
+STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 #media
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
@@ -148,21 +181,35 @@ USERNAME_NIUBIZ = os.getenv('USERNAME_NIUBIZ')
 PASSWORD_NIUBIZ = os.getenv('PASSWORD_NIUBIZ')
 COMERCIAL_ID = os.getenv('COMERCIAL_ID')
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'jaimemarston@gmail.com'
+# EMAIL_HOST_PASSWORD = '42088985jrmm$$$'
+
+
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_SUBJECT_PREFIX = config('EMAIL_SUBJECT_PREFIX')
+# EMAIL_PORT = config('EMAIL_PORT', cast=int)
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+# EMAIL_USE_LOCALTIME = config('EMAIL_USE_LOCALTIME', cast=bool)
+
+
+
 # # Space AWS
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL')
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = os.getenv('AWS_LOCATION')
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL')
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = os.getenv('AWS_LOCATION')
 
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+# activar iframe
+# X_FRAME_OPTIONS = 'ALLOWALL'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 's3'),
-]
-
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']# Configure Django App for Heroku.
