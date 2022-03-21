@@ -139,7 +139,7 @@ def actualizar_normativa(request, normativa):
 class NormativaUpdateView(UpdateView):
     model = Register_Normativa
     fields = ['norma', 'name_denom', 'base_legal', 'fecha_publi', 'tipo_norma', 'tipo_uso', 'document', 'es_foro', 'es_vigente', 'descripcion']
-    template_name = 'normativa/edit_normativa'
+    template_name = 'normativa/edit_normativa.html'
 
     def get_success_url(self):
         return reverse("normativas")
