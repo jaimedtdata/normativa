@@ -1,6 +1,7 @@
 import requests
 import json
 from django.conf import settings
+from apps.models import NiubizTransaction
 
 merchantId = settings.COMERCIAL_ID
 url_test_security_token = 'https://apisandbox.vnforappstest.com/api.security/v1/security'
@@ -19,14 +20,13 @@ def get_security_token():
 
     return response.text
 
-def create_session_token(token_security):
+def create_session_token(token_security, price):
 
     payload = json.dumps({
     "channel": "web",
-    "amount": 22.00,
-    "recurrenceMaxAmount": 8.5,
+    "amount": price,
     "antifraud": {
-        "clientIp": "24.252.107.29",
+        #"clientIp": "24.252.107.29",
         "merchantDefineData": {
         "MDD15": "Valor MDD 15",
         "MDD20": "Valor MDD 20",
@@ -46,7 +46,9 @@ def create_session_token(token_security):
     #print(response.text)
     return token_session
 
-def require_transaccion_autorizacion(token_security, transacion_token):
+def require_transaccion_autorizacion(token_security, transacion_token, price, purchase_number):
+    #purchase_number (numero de pedido, debe ser unico y lo debe proporcionar el negocio)
+    #price
 
     payload = json.dumps({
             "channel": "web",
@@ -54,8 +56,8 @@ def require_transaccion_autorizacion(token_security, transacion_token):
             "countable": True,
             "order": {
                 "tokenId": transacion_token,
-                "purchaseNumber": "2020100901",
-                "amount": 22.00,
+                "purchaseNumber": purchase_number,
+                "amount": price,
                 "currency": "PEN"
             }
         })
@@ -66,8 +68,45 @@ def require_transaccion_autorizacion(token_security, transacion_token):
     }
 
     response = requests.request("POST", url_test_transaction_autorization, headers=headers, data=payload)
+    res = response.json()
 
-    print(response.text)
-    #res = response.json()
+    data = {
+        "ecoreTransactionUUID": res['header']['ecoreTransactionUUID'],
+        'channel': res['fulfillment']['channel'],
+        "signature": res['fulfillment']['signature'],
+        "tokenId": res['order']['tokenId'],
+        "purchaseNumber": res['order']['purchaseNumber'],
+        "amount": res['order']['amount'],
+        "installment": res['order']['installment'],
+        "currency": res['order']['currency'],
+        "authorizedAmount": res['order']['authorizedAmount'],
+        "authorizationCode": res['order']['authorizationCode'],
+        "traceNumber": res['order']['traceNumber'],
+        "transactionDate": res['order']['transactionDate'],
+        "card": res['dataMap']['CARD'],
+        "action_description": res['dataMap']['ACTION_DESCRIPTION'],
+        "brand": res['dataMap']['BRAND'],
+    }
+    
+    return data
 
-    return response
+def create_niubiz_transaction(data, orden):
+
+    NiubizTransaction.objects.create(
+        order_pyment = orden,
+        ecoreTransactionUUID = data['ecoreTransactionUUID'],
+        channel = data['channel'],
+        signature =  data['signature'],
+        tokenId = data['tokenId'],
+        purchaseNumber = data['purchaseNumber'],
+        amount = data['amount'],
+        installment = data['installment'],
+        currency =  data['currency'],
+        authorizedAmount =  data['authorizedAmount'],
+        authorizationCode = data['authorizationCode'],
+        traceNumber = data['traceNumber'],
+        #transactionDate =  res['order']['transactionDate'],
+        card = data['card'],
+        action_description = data['action_description'],
+        brand = data['brand'],
+    )

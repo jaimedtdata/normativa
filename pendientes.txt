@@ -13,7 +13,7 @@ tasks
     * GUARDAR la transaccion en el modelo Control_payment
     * GUARDAR el codigo de transaccion de izipay y sus valores que devuelve en una nueva tablas
     *Enviar el email al usuario
-    *Cuando venca la fecha de membresiaactualizar a plan premium
+    *Cuando venza la fecha de membresia actualizar a plan premium
 
     
 - FLUJO Plan Premium Agremiado

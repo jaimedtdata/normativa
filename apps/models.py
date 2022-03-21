@@ -185,10 +185,6 @@ class Order_payment(models.Model):
     identity = models.CharField(max_length=11, blank=True,
         help_text='DNI o RUC',
         verbose_name='Documento de Identidad')
-    id_plan = models.OneToOneField(
-        Plan, on_delete=models.CASCADE,
-        help_text='Plan Suscrito', null=True, blank=True,
-        verbose_name='Plan de Suscripcion')
     paid = models.BooleanField(default=False)
     niubiz_id = models.CharField(max_length=150, blank=True)        
     pay_method = models.CharField(max_length=1,
@@ -217,8 +213,33 @@ class Order_payment(models.Model):
         ordering = ['-created']
     
     def __str__(self):
-        return self.names
+        return f'{self.names} {self.first_surname} {self.second_surname}'
 
+class NiubizTransaction(models.Model):
+    order_pyment = models.OneToOneField(Order_payment, on_delete=models.CASCADE, null=True, blank=True, related_name="niubiz_transaction")
+    ecoreTransactionUUID = models.CharField(verbose_name="Identificador de la transaccion niubiz", 
+                                            blank=True, max_length=100)
+    channel = models.CharField(verbose_name="Canal de registro", blank=True, max_length=100)
+    signature = models.CharField(verbose_name="Codigo niubiz", blank=True, max_length=100)
+    tokenId = models.CharField(verbose_name="Token formulario niubiz", blank=True, max_length=100)
+    purchaseNumber = models.CharField(verbose_name="Numero de pedido", blank=True, max_length=100)
+    amount = models.CharField(verbose_name="Importe de la transaccion", blank=True, max_length=100)
+    installment = models.CharField(verbose_name="Numero de cuotas", blank=True, max_length=100)
+    currency = models.CharField(verbose_name="Moneda",blank=True, max_length=100)
+    authorizedAmount= models.CharField(verbose_name="Importe confirmado",blank=True, max_length=100)
+    authorizationCode = models.CharField(verbose_name="Codigo de autorización",blank=True, max_length=100)
+    traceNumber = models.CharField(verbose_name="Identificador de la orden de transaccion",blank=True, max_length=100)
+    #transactionDate = models.DateField(verbose_name="Fecha de la transacion",blank=True)
+    card = models.CharField(verbose_name="Numero de tarjeta",blank=True, max_length=16)
+    action_description = models.CharField(verbose_name="Descripcion de la transaccion",blank=True, max_length=100)
+    brand = models.CharField(verbose_name="Nombre de la tarjeta",blank=True, max_length=15)
+    
+    class Meta:
+        verbose_name= "Transaccion Niubiz"
+        verbose_name_plural = "Transaccion Niubiz"
+
+    def __str__(self):
+        return self.purchaseNumber
 class UserToken(models.Model):
     token = models.UUIDField(primary_key=True, null=False, unique=True,
         default=uuid.uuid4, editable=False)

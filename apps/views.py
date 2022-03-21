@@ -45,9 +45,11 @@ from .utils import create_member_free
 from .forms_register import MemberCapForm, ExternalUserForm
 
 from membership.models import Membership
-from apps.models import UsagePolicies, Order_payment
-from apps.niubiz import get_security_token, create_session_token, require_transaccion_autorizacion
+from apps.models import UsagePolicies, Order_payment, NiubizTransaction
+from apps.niubiz import get_security_token, create_session_token, require_transaccion_autorizacion, create_niubiz_transaction
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+
 
 def busqueda_clavenormativa(request):
     area_normas=Areas_Normas.objects.all()
@@ -392,6 +394,15 @@ class SignUpClients(FormView):
     form_class = ExternalUserForm
     success_url = reverse_lazy('checkout')
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        exist_codigo_etica=UsagePolicies.objects.filter(title__icontains="codigo de etica").exists()
+        if exist_codigo_etica:
+            codigo_etica=UsagePolicies.objects.get(title__icontains="codigo de etica")
+            context['codigo_etica'] = codigo_etica
+
+        return context
+
     def form_valid(self, form):
         cd = form.cleaned_data
         print(cd)
@@ -428,6 +439,15 @@ class SignUpPremiumCAP(FormView):
     form_class = ExternalUserForm
     success_url = reverse_lazy('checkout')
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        exist_codigo_etica=UsagePolicies.objects.filter(title__icontains="codigo de etica").exists()
+        if exist_codigo_etica:
+            codigo_etica=UsagePolicies.objects.get(title__icontains="codigo de etica")
+            context['codigo_etica'] = codigo_etica
+
+        return context
+
     def form_valid(self, form):
         cd = form.cleaned_data
         print(cd)
@@ -459,22 +479,30 @@ def success_payment_cap(request):
     return render(request, 'checkout/premium_agremiado/success_payment_cap.html')
 
 #Payment process CAP internal users that have free registration, upddate membership
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.csrf import requires_csrf_token
+def cap_choose_plan(request):
+    context={
+        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+    }
+    return render(request, 'checkout/premium_free/cap_choose_plan.html', context)
 
-
-#@requires_csrf_token
 @csrf_exempt
 def checkoutCAP(request):
+    plan_price = request.GET.get('plan_price')
+    print("esta es la request", plan_price)
+
     COMERCIAL_ID = settings.COMERCIAL_ID
+    price =  22.00
+    purchase_number = 2022 #numero de pedido
     security_token = get_security_token()
-    token_session = create_session_token(security_token)
+    token_session = create_session_token(security_token, price)
+    niubiz_id = None
     context = {
         'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
         'token_security' : security_token,
         'token_session' : token_session,
-        'comercial_id' : COMERCIAL_ID
+        'comercial_id' : COMERCIAL_ID,
+        'purchase_number': purchase_number,
+        'price' : price
         }
 
     if request.method == 'POST':
@@ -490,18 +518,25 @@ def checkoutCAP(request):
         #if token_transaccion:
             #guardar los datos de la trasaccion
             # si no existe es porque fallo la tarjeta o el metodo de pago fue en efectivo.
-        require_transaccion_autorizacion(security_token, token_transaccion)
-        Order_payment.objects.create(
+        transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
+        print("transacion exitosa", transaction_success)
+        niubiz = transaction_success['ecoreTransactionUUID']
+        orden=Order_payment(
             member= request.user.user_membership,
             names=user.names,
             first_surname=user.first_surname,
             second_surname=user.second_surname,
             email=user.email,
             identity=user.identity,
-            pay_import = 30,
+            paid = True,
+            niubiz_id= niubiz,
+            pay_import = price,
             validity_date_start = timezone.now() ,
             validity_date_finish = (timezone.now() + timezone.timedelta(days=30))
         )
+        orden.save()
+        #create transaction niubiz
+        create_niubiz_transaction(transaction_success, orden)
 
         return redirect('success_suscription_cap')
 
@@ -510,10 +545,22 @@ def checkoutCAP(request):
 #@requires_csrf_token
 @csrf_exempt
 def success_suscription_cap(request):
+    order = Order_payment.objects.filter(identity=request.user.user_membership.identity).last()
+    context = {
+        'order': order,
+    }
     if request.method == 'POST':
         cd = request.POST
         print('success',cd)
-    return render(request, 'checkout/premium_free/success-suscription.html')
+    return render(request, 'checkout/premium_free/success-suscription.html', context)
+
+def history_purchase(request):
+    user =  request.user.user_membership.identity
+    orders = Order_payment.objects.filter(identity=user)
+    context = {
+        'orders': orders,
+    }
+    return render(request, 'checkout/premium_free/history_purchase.html' , context)
 
 #@login_required
 def preguntas(request):

@@ -1,38 +1,63 @@
+{% extends 'checkout/base_payment_agremiado.html' %}
 
 {% load static %}
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Colegio de Arquitectos del Perú</title>
-    <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
-   <link rel="stylesheet" href="{% static 'vendor/bootstrap4/css/bootstrap.css' %}">
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'checkout/form-checkout.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'checkout/style.css' %}">
+    <script src="{% static 'vendor/jquery3/jquery.slim.min.js' %}" ></script>
+
 
     
-</head>
-<body class="bg-light">
+{% endblock css %}
 
-
-    <div class="logo_container" style="background: #24387C;">
-        <span class="logo_helper"></span>
-        <a href="{% url 'login' %}">
-          <img src="{% static 'img/cap-logo.svg' %}" alt="Regional Lima " id="logo" data-height-percentage="47" data-actual-width="300" data-actual-height="85">
-        </a>
-      </div>
-
-      <br>
+{% block body %}
+  
+  
     <div class="container ">
       <div class="row">
       
         <div class="col-md-10 order-md-1 offset-1" >
-          <div class="card bg-light  mb-5">
+          <div class="card  mb-5">
             <div class="card-body">
-                <h3>Has comprado el plan <b>Premium Agremiado</b> </h3>
+                <h3>{{order.names}}, Has comprado el plan <b>Premium Agremiado</b> </h3>
                 <div>
                     Para regresar a la plataforma por favor  
                     <a href="{% url 'home' %}">Vuelve al Home</a>.
                 </div>
+                <table class="table mt-2">
+                  <thead>
+                    <tr>
+                      <th scope="col">Resumen del Pedido</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Importe pagado</td>
+                      <td>{{order.pay_import}}</td>
+                    </tr>
+                    <tr>
+                      <td>Fecha Inicio de la membresia</td>
+                      <td>{{order.validity_date_start}}</td>
+                    </tr>
+                    <tr>
+                      <td>Fecha de fin de la membresia</td>
+                      <td>{{order.validity_date_finish}}</td>
+                    </tr>
+                    <tr>
+                      <td>Moneda</td>
+                      <td>{{order.niubiz_transaction.currency}}</td>
+                    </tr>
+                    <tr>
+                      <td>Método de pago</td>
+                      <td>{{order.niubiz_transaction.card}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                
             </div>
           </div>
          
@@ -41,12 +66,4 @@
       </div>
 
 
-      <script src="{% static 'bootstra5/js/bootstrap.bundle.js' %}"></script>
-
-</body>
-
-</html>
-
-
-
-
+{% endblock body %}

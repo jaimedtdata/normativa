@@ -1,0 +1,51 @@
+
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+
+{% block content %}
+
+            
+        <section>
+            <nav>
+                <ol class="cd-multi-steps text-bottom count">
+                    <li class="{%  if request.path == '/cap_choose_plan/' %} current {% elif request.path == '/checkout-cap/' %} visited {% elif request.path == '/success_suscription_cap/' %} visited {% endif %}">
+                        <a class="text-muted" href="#0">Plan</a>
+                    </li>
+                    <li class="{%  if request.path == '/checkout-cap/' %} current {% elif request.path == '/cap_choose_plan/' %} '' {% elif request.path == '/success_suscription_cap/' %} visited {% endif %}" >
+                        <a class="text-muted" href="#0">Método de Pago</a>
+                    </li>
+                    <li class="{%  if request.path == '/success_suscription_cap/' %} current  {% endif %}" >
+                        <a class="text-muted" href="#0">Completado</a>
+                    </li>
+                    <!-- <li class="current" ><a href="#0">Pago</a></li> -->
+                </ol>
+            </nav>
+        </section>
+
+        <!-- end breadcrum -->
+       
+       {% block body %}
+           
+       {% endblock body %}
+           
+
+       
+           
+{% endblock content %}
+           
+       {% block js %}
+            
+       {% endblock js %}
+           
+
+      <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
+
+
+</body>
+
+</html>
+
+
+
+

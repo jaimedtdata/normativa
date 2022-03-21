@@ -1,13 +1,8 @@
-
+{% extends 'checkout/base_payment_agremiado.html' %}
 {% load static %}
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Colegio de Arquitectos del Perú</title>
-    <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
-   <link rel="stylesheet" href="{% static 'vendor/bootstrap4/css/bootstrap.css' %}">
+
+
+{% block css %}
     <link rel="stylesheet" href="{% static 'checkout/form-checkout.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -15,74 +10,89 @@
     <script src="{% static 'vendor/jquery3/jquery.slim.min.js' %}" ></script>
 
 
-    
+
     {% comment %}
     <link rel="stylesheet" href="https://pocpaymentserve.s3.amazonaws.com/payform.min.css">
         
     {% endcomment %}
-
+    
+{% endblock css %}
     
 
-</head>
+{% block body %}
 
+    <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <a href="{% url 'home' %}">
+                    <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
 
-<body class="bg-light">
-
-
-        <div class="logo_container" style="background: #24387C;">
-					<span class="logo_helper"></span>
-					<a href="{% url 'login' %}">
-						<img src="{% static 'img/cap-logo.svg' %}" alt="Regional Lima " id="logo" data-height-percentage="47" data-actual-width="300" data-actual-height="85">
-					</a>
-		</div>
-
-       
-
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-lg-7 col-md-8 col-sm-12 offset-lg-2 ">
-
+        <div class="row mt-2">
+                <div class="col-lg-6 col-md-8 col-sm-12 offset-1  ">
+                    <div class="card-header d-flex justify-content-center">
+                        <div >
+                            <i class="text-muted"><b>Elige la membresia del: </b></i> 
+                            <h3 class=" " style="color: #c1a13f;">Plan Premium Agremiado</h3>
+    
+                        </div>
+                    </div>
+    
                     <div class="card mb-4 shadow">
+                        
+                        {% comment %}
                         <div class="card-body">
-                            <div >
-                                <i class="text-muted"><b>Elige la membresia del: </b></i> 
-                                <h4 class=" " style="color: #c1a13f;">Plan Premium Agremiado</h4>
-    
-                            </div>
-                              <hr>
+                            <form >
+                            <hr>
                             <div class="">
                                 <!-- <div class="description">
                                     <h4 class="plan ">Plan Premium Agremiado</h4>
                                 </div> -->
                                 
+                                <form >
+    
                                     <div class="form-check card card-body mb-3  d-flex justify-content-between ">
                                         <div class="pl-3" style="width: 50px;">
-                                            <input class="form-check-input" type="radio" name="radioCap" id="exampleRadios1" value="option1" checked>
+                                            <input class="form-check-input" type="radio" name="radioCap" id="month" value="{{pl_premium_agremiado.price_month}}" >
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <h3 class="price-card-color">S/ {{pl_premium_agremiado.price_month}}</h3> 
+                                            <div class="d-flex flex-row justify-content-center align-items-baseline">
+                                                <h5 class="simbol-price-card-color mr-2">S/ </h5>
+                                                <h3 class="price-card-color">{{pl_premium_agremiado.price_month}}</h3> 
+    
+                                            </div>
                                             <div>
                                                 <b class="text-muted ml-4"> / mensual</b>
                                             </div>
                                         </div>
                                     </div>
     
-                                    <div class="form-check card card-body mb-5  d-flex justify-content-between ">
+                                    <div class="form-check card card-body mb-3  d-flex justify-content-between ">
                                         <div class="pl-3" style="width: 50px;">
-                                            <input class="form-check-input" type="radio" name="radioCap" id="exampleRadios2" value="option1" >
+                                            <input class="form-check-input" type="radio" name="radioCap" id="anual" value="{{pl_premium_agremiado.price_year}}" >
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <h3 class="price-card-color">S/ {{pl_premium_agremiado.price_year}}</h3> 
+                                            <div class="d-flex flex-row justify-content-center align-items-baseline">
+                                                <h5 class="simbol-price-card-color mr-2">S/ </h5>
+                                                <h3 class="price-card-color">{{pl_premium_agremiado.price_year}}</h3> 
+                                            </div>
                                             <div>
                                                 <b class="text-muted ml-4"> / anual</b>
                                             </div>
                                         </div>
                                     </div>
-                                      
+                                    
                             </div>
+                         </form>
                         </div>
+                        {% endcomment %}
+                            
+                        
                         <div class="card-footer">
                             <div class="row d-flex justify-content-center">
+                                
                                 <!-- form niubiz -->
                                 <form action='{% url "checkout_cap" %}' method="post">
                                     {% csrf_token %}
@@ -90,8 +100,8 @@
                                     data-sessiontoken="{{token_session}}"
                                     data-channel="web"
                                     data-merchantid="{{comercial_id}}"
-                                    data-purchasenumber="2020100901"
-                                    data-amount=" 22.00"
+                                    data-purchasenumber="{{purchase_number}}"
+                                    data-amount="{{price}}"
                                     data-expirationminutes="20"
                                     data-timeouturl="about:blank"
                                     data-merchantlogo="{% static 'images/niubiz/cap_niubiz2.png' %}"
@@ -101,14 +111,11 @@
                                     
                                     </script>
                                 </form>
+                                <small class="text-muted text-center">*Despues del pago serás redireccionado a otra pagina, por favor espera a que concluya la operación.</small>
                             </div>
                         </div>
                     </div>
-                    
-                    
-
-                    
-
+    
                     {% comment %}
                     <div id="Checkout" class="inline">
                 
@@ -142,66 +149,87 @@
                             
                             <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit">
                                 <img src="{% static 'payform/lock.png' %}" alt="">
-        
+    
                                 <span class="align-middle">Pagar</span>
                             </button>
                         </form>
                     </div>
                     {% endcomment %}
-                     
                     
-                    {% comment %}
-                                
+            </div>
+            <div class="col-lg-5 col-md-2 col-sm-12">
+                <div class="card ">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><h2>Resumen del Pedido</h2></li>
+                                <li class="list-group-item">Plan mensual</li>
+                              </ul>
                         </div>
-                        <div class="col-lg-5 col-md-3 col-sm-12">
-                    {% endcomment %}
-                
-                    
+                        
+                    </div>
+                    <div class="card-footer">
+                        <div class="row d-flex justify-content-around">
+                            <h3>Total:</h3>
+                            <h3>s/ {{price}}</h3>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             
         </div>
-
         
+    </div>
+
+    {% comment %}
+        <form action='{% url "checkout_cap" %}' method='post'>
+            {% csrf_token %}
+            <script src='https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true'
+            data-sessiontoken='{{token_session}}'
+            data-channel='web'
+            data-merchantid='{{comercial_id}}'
         
+            data-merchantlogo= 'img/comercio.png'
+            data-formbuttoncolor='#D80000'
+            data-purchasenumber='123'
+            data-amount='10.5'
+            data-expirationminutes='5'
+            data-timeouturl = 'timeout.html'
+            ></script>
+        </form>
+    {% endcomment %}
 
-{% comment %}
-<form action='{% url "checkout_cap" %}' method='post'>
-    {% csrf_token %}
-    <script src='https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true'
-    data-sessiontoken='{{token_session}}'
-    data-channel='web'
-    data-merchantid='{{comercial_id}}'
-   
-    data-merchantlogo= 'img/comercio.png'
-    data-formbuttoncolor='#D80000'
-    data-purchasenumber='123'
-    data-amount='10.5'
-    data-expirationminutes='5'
-    data-timeouturl = 'timeout.html'
-    ></script>
-</form>
-{% endcomment %}
-    
-      <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
+{% endblock body %}
 
-     <script>
-         console.log('precio mensual','{{pl_premium_agremiado.price_month}}')
-         console.log('seguridad','{{token_security}}')
-         console.log('token de sesion','{{token_session}}')
 
-         var cap = document.querySelector('input[name="radioCap"]');
-         var valueCap = document.querySelector('input[name="radioCap"]').value;
-         cap.addEventListener('click', function(e){
-             console.log( 'valor radio:', valueCap)
+{% block js %}
+        <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
 
-         })
+        <script>
+            console.log('precio mensual','{{pl_premium_agremiado.price_month}}')
+            console.log('seguridad','{{token_security}}')
+            console.log('token de sesion','{{token_session}}')
 
-         
-     </script>
+            var cap = document.querySelector('input[name="radioCap"]');
+            var valueCap = document.querySelector('input[name="radioCap"]').value;
+            cap.addEventListener('click', function(e){
+                console.log( 'valor radio:', valueCap)
+                console.log(e.target.value)
+            })
 
-     
-     {% comment %}
+            if(document.getElementById('month').value){
+                console.log('mensual')
+            }
+            if(document.getElementById('anual').value){
+                console.log('anual')
+            }
+
+            
+        </script>
+
+
+        {% comment %}
         <script src="https://pocpaymentserve.s3.amazonaws.com/payform.min.js"></script>
         <script type="">
         var configuration = {
@@ -217,14 +245,10 @@
         };
         payform.setConfiguration(configuration);
         </script>
-     {% endcomment %}
-         
+        {% endcomment %}
+{% endblock js %}
     
 
-
-</body>
-
-</html>
 
 
 

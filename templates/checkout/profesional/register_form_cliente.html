@@ -77,6 +77,25 @@
                             <span class="text-danger" id="password_error_form2"></span>
                             
                         </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12 ">
+                                <div class="row mt-3">
+                                    <div class="form-group">
+                                        <div class="form-check ml-3">
+                                          <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                          <label class="form-check-label text-success font-weight-bold" for="invalidCheck2">
+                                        <!-- Button trigger modal -->
+                                            <a href="#exampleModalLong" data-toggle="modal" data-target="#exampleModalLong" class=" text-success font-weight-bold">
+                                                Aceptar los terminos y condiciones del codigo de ética
+                                            </a>
+                                          </label>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
                         
                         <div class="d-flex justify-content-end">
                             <a href="{% url 'login' %}" class="btn btn-danger mr-3 mt-3"> 
@@ -93,6 +112,12 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    {% include 'register/modal.html' %}
+</div>
+
+<script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
 
 {{ExternalUserForm}}
 

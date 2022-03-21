@@ -50,7 +50,7 @@
                         </span> 
                     </a>
                     <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                        <a href="{% url 'checkout_cap' %}" class="dropdown-item text-success font-weight-bolder">
+                        <a href="{% url 'cap_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
                             <i class="fas fa-list"></i>
                             Para acceder a todos nuestros beneficios actualiza tu plan aquí
                         </a>
@@ -98,6 +98,11 @@
                     <a href="{% url 'bus_provedor' %}" class="dropdown-item">
                         <i class="fa-solid fa-people-arrows-left-right"></i>
                         Busqueda por proveedor
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'history_purchase' %}" class="dropdown-item">
+                        <i class="fa-solid fa-bag-shopping"></i> 
+                        Historial de compras
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="{% url 'logout' %}" class="dropdown-item">

@@ -1,0 +1,59 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+
+
+{% block css %}
+    
+{% endblock css %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col">
+                <h1>Historial de compras</h1>
+            </div>
+        </div>
+        <div class="row">
+        {% if orders %}
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">#Pedido</th>
+                    <th scope="col">@Nombre</th>
+                    <th scope="col">Fecha inicio</th>
+                    <th scope="col">Fecha de termino</th>
+                    <th scope="col">Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for order in orders %}
+                    <tr>
+                        <th scope="row">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </th>
+                        <td>{{order.niubiz_id}}</td>
+                        <td>{{order.names}}</td>
+                        <td>{{order.validity_date_start}}</td>
+                        <td>{{order.validity_date_finish}}</td>
+                        <td>{{order.pay_import}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        {% else %}
+                  <h4 class="text-muted">No tienes ninguna compra aún.</h4>
+        {% endif %}
+        </div>
+    </div>
+
+
+
+    
+    
+    
+    
+
+{% endblock content %}
