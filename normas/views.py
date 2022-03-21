@@ -144,10 +144,9 @@ class NormativaUpdateView(UpdateView):
     def get_success_url(self):
         return reverse("normativas")
     
-    def get_context_data(self, **kwargs):
-        normativa = self.kwargs.get('normativa', 0)
+    def get_context_data(self, normativa):
         normativa = Register_Normativa.objects.get(pk = normativa),
-        context = super(NormativaUpdateView, self).get_context_data(**kwargs)
+        context = super(NormativaUpdateView, self).get_context_data(normativa)
         context.update({
             'normativa': normativa,
             'tipo_uso': Areas_Normas.objects.order_by('area_name'),
