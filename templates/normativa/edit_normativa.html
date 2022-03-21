@@ -30,31 +30,31 @@
             <div class="row">
                 <div class="col-6">
                     <label for="norma">Norma</label>
-                    <input type="text" class="form-control" name="norma" value="{{normativa.norma}}" required/>
+                    <input type="text" class="form-control" id="id_norma" name="norma" value="{{normativa.norma}}" required/>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="name_deno">Titulo</label>
-                        <input type="text" name="name_deno" class="form-control" value="{{normativa.name_denom}}" required/>
+                        <input type="text" name="name_denom" id="id_name_denom" class="form-control" value="{{normativa.name_denom}}" required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label for="base">Base Legal</label>
-                    <input type="text" name="base_legal" class="form-control" value="{{normativa.base_legal}}" required/>
+                    <input type="text" name="base_legal" id="id_base_legal" class="form-control" value="{{normativa.base_legal}}" required/>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="fecha_publi">Publicacion</label>
-                        <input id="id_fecha" type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}" required min="1900-01-01" max="{{fecha_hoy}}"/>
+                        <input id="id_fecha_publi" type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}" required min="1900-01-01" max="{{fecha_hoy}}"/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label> Tipo de Norma: </label>
-                    <select class="form-control" aria-label="Default select example" name="tip_norma" id="tipo_norma">
+                    <select class="form-control" aria-label="Default select example" name="tipo_norma" id="id_tipo_norma">
                                             {% for tipo_norma in tipo_normativa %}
                                                 <option value="{{tipo_norma.id}}">{{tipo_norma.subcategory_name}}</option>
                                             {% endfor %}
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-6">
                     <label> Tipo de Uso: </label>
-                    <select class="form-control" aria-label="Default select example" name="tip_uso" id="tipo_uso">
+                    <select class="form-control" aria-label="Default select example" name="tipo_uso" id="id_tipo_uso">
                                     {% for tipo_uso in tipo_uso %}
                                         <option value="{{tipo_uso.id}}">{{tipo_uso.area_name}}</option>
                                     {% endfor %}
@@ -74,13 +74,12 @@
                     <div class="form-group">
                         <label>Adjuntar Documento</label>
                         <br>
-                        
                         {% if normativa.document %}
-                                    <a class="text-dark" target="_blank" href="{{normativa.document.url}}">
-                                        <b> Esta Normativa tiene archivo (click para ver) </b>
-                                    </a>
+                            <a class="text-dark" target="_blank" href="{{normativa.document.url}}">
+                                <b> Esta Normativa tiene archivo (click para ver) </b>
+                            </a>
                         {% endif %}
-                        <input id="id_file" type="file" name="documento"/>
+                        <input id="id_document" type="file" name="document"/>
                     </div>
                     <div class="mt-3">
                         <div class="shadow w-full bg-gray-100">
@@ -94,14 +93,14 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="es_vigente" name="es_vigente">
-                            <label class="custom-control-label" for="es_vigente">Vigente</label>
+                            <input type="checkbox" class="custom-control-input" id="id_es_vigente" name="es_vigente">
+                            <label class="custom-control-label" for="id_es_vigente">Vigente</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="es_foro" name="es_foro">
-                            <label class="custom-control-label" for="es_foro">Foro</label>
+                            <input type="checkbox" class="custom-control-input" id="id_es_foro" name="es_foro">
+                            <label class="custom-control-label" for="id_es_foro">Foro</label>
                         </div>
                     </div>
                     
@@ -109,7 +108,7 @@
                 </div>
                 <div class="col-6">
                     <label>Descripción breve</label><br>
-                    <textarea class="form-control" rows="5" maxlength="200" name="descripcion">{{ normativa.descripcion }}</textarea>
+                    <textarea class="form-control" rows="5" maxlength="200" name="descripcion" id="id_descripcion">{{ normativa.descripcion }}</textarea>
                 </div>
             </div>
             <button class="btn btn-lg btn-primary float-right" type="submit" id="submitBtn" >Guardar Cambios</button>
@@ -132,12 +131,10 @@
 
         $(document).ready(function() {
 
-            
-
-            $('#tipo_norma').val('{{normativa.tipo_norma_id}}')    
-            $('#tipo_uso').val('{{normativa.tipo_uso_id}}')    
-            $('#es_foro').prop('checked',  '{{normativa.es_foro}}' == 'True' ? true : false )
-            $('#es_vigente').prop('checked',  '{{normativa.es_vigente}}' == 'True' ? true : false )
+            $('#id_tipo_norma').val('{{normativa.tipo_norma_id}}')    
+            $('#id_tipo_uso').val('{{normativa.tipo_uso_id}}')    
+            $('#id_es_foro').prop('checked',  '{{normativa.es_foro}}' == 'True' ? true : false )
+            $('#id_es_vigente').prop('checked',  '{{normativa.es_vigente}}' == 'True' ? true : false )
             
             $("#registrar_palabras").submit( function(e) {
                 e.preventDefault();
@@ -201,114 +198,114 @@
         }
 
         let submitting = false
-    let file = null
+        let file = null
 
-    function setIsSubmitting(val) {
-        submitting = val
-    }
-
-    function setFile(val) {
-        file = val
-    }
-
-    _("id_file").addEventListener("change", event => {
-        setFile(event.target.files[0])
-    })
-
-    _("submitBtn").addEventListener("click", event => {
-        if (file != null && _('id_fecha') != undefined) {
-            handleSubmit(event)
-            _("submitBtn").disabled = true
-            _("submitBtn").innerHTML = /*html*/`<div class="spinner-border spinner-border-sm text-light" role="status">
-                                                    <span class="sr-only">Loading...</span>                   
-                                                    </div>
-                                                Guardar
-                                                `
-        }
-    })
-
-    const handleSubmit = async event => {
-
-        setIsSubmitting(true)
-
-        const signedUrl = await getSignedUrl()
-
-        try {
-            uploadFile(signedUrl)
-        }
-        catch (err) {
-            setIsSubmitting(false)
-            console.log(err)
-            alert('There was an error uploading your file.')
-            throw err
+        function setIsSubmitting(val) {
+            submitting = val
         }
 
-        setIsSubmitting(false)
-    }
-
-    const getSignedUrl = async () => {
-        const body = {
-            fileName: file.name,
-            fileType: file.type,
+        function setFile(val) {
+            file = val
         }
 
-        const response = await fetch("{% url 'signed-url' %}", {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}"}
+        _("id_document").addEventListener("change", event => {
+            setFile(event.target.files[0])
         })
-        const { url } = await response.json()
-        return url
-    }
 
-    function _(el) {
-        return document.getElementById(el);
-    }
+        _("submitBtn").addEventListener("click", event => {
+            if (file != null && _('id_fecha') != undefined) {
+                handleSubmit(event)
+                _("submitBtn").disabled = true
+                _("submitBtn").innerHTML = /*html*/`<div class="spinner-border spinner-border-sm text-light" role="status">
+                                                        <span class="sr-only">Loading...</span>                   
+                                                        </div>
+                                                    Guardar
+                                                    `
+            }
+        })
 
-    function uploadFile(signedUrl) {
-        var formdata = new FormData();
-        formdata.append("file", file);
-        var ajax = new XMLHttpRequest();
-        ajax.upload.addEventListener("progress", progressHandler, false);
-        ajax.addEventListener("load", completeHandler, false);
-        ajax.addEventListener("error", errorHandler, false);
-        ajax.addEventListener("abort", abortHandler, false);
-        ajax.addEventListener("loadend", loadendHandler, false)
-        ajax.open("PUT", signedUrl);
-        ajax.setRequestHeader('Content-Type', file.type)
-        ajax.setRequestHeader('x-amz-acl', 'public-read')
-        ajax.send(formdata);
-    }
+        const handleSubmit = async event => {
 
-    async function submitForm() {
-        _("fileForm").submit()
-        _("submitBtn").disabled = false
-    }
+            setIsSubmitting(true)
 
-    async function loadendHandler(event) {
-        await submitForm()
-    }
+            const signedUrl = await getSignedUrl()
 
-    function progressHandler(event) {
-        var percent = Math.round((event.loaded / event.total) * 100);
-        _("progressBar").style.width = `${percent}%`;
-        _("progressBar").innerText = `${percent}%`;
-        _("status").innerHTML = percent + "% Subiendo.. espere un momento";
-    }
+            try {
+                uploadFile(signedUrl)
+            }
+            catch (err) {
+                setIsSubmitting(false)
+                console.log(err)
+                alert('There was an error uploading your file.')
+                throw err
+            }
 
-    function completeHandler(event) {
-        _("status").innerHTML = event.target.responseText;
-        _("progressBar").style.width = 0;
-        _("progressBar").innerText = "0%";
-    }
+            setIsSubmitting(false)
+        }
 
-    function errorHandler(event) {
-        _("status").innerHTML = "Por favor espere";
-    }
+        const getSignedUrl = async () => {
+            const body = {
+                fileName: file.name,
+                fileType: file.type,
+            }
 
-    function abortHandler(event) {
-        _("status").innerHTML = "Upload Aborted";
-    }
+            const response = await fetch("{% url 'signed-url' %}", {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}"}
+            })
+            const { url } = await response.json()
+            return url
+        }
+
+        function _(el) {
+            return document.getElementById(el);
+        }
+
+        function uploadFile(signedUrl) {
+            var formdata = new FormData();
+            formdata.append("file", file);
+            var ajax = new XMLHttpRequest();
+            ajax.upload.addEventListener("progress", progressHandler, false);
+            ajax.addEventListener("load", completeHandler, false);
+            ajax.addEventListener("error", errorHandler, false);
+            ajax.addEventListener("abort", abortHandler, false);
+            ajax.addEventListener("loadend", loadendHandler, false)
+            ajax.open("PUT", signedUrl);
+            ajax.setRequestHeader('Content-Type', file.type)
+            ajax.setRequestHeader('x-amz-acl', 'public-read')
+            ajax.send(formdata);
+        }
+
+        async function submitForm() {
+            _("fileForm").submit()
+            _("submitBtn").disabled = false
+        }
+
+        async function loadendHandler(event) {
+            await submitForm()
+        }
+
+        function progressHandler(event) {
+            var percent = Math.round((event.loaded / event.total) * 100);
+            _("progressBar").style.width = `${percent}%`;
+            _("progressBar").innerText = `${percent}%`;
+            _("status").innerHTML = percent + "% Subiendo.. espere un momento";
+        }
+
+        function completeHandler(event) {
+            _("status").innerHTML = event.target.responseText;
+            _("progressBar").style.width = 0;
+            _("progressBar").innerText = "0%";
+        }
+
+        function errorHandler(event) {
+            _("status").innerHTML = "Por favor espere";
+        }
+
+        function abortHandler(event) {
+            _("status").innerHTML = "Upload Aborted";
+        }
 
 
     </script>

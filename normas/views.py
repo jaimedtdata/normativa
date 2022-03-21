@@ -8,6 +8,8 @@ from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator
 from django.contrib import messages
 from normas.filters import NormativaFilter
+from django.views.generic.edit import UpdateView
+from django.urls import reverse
 
 from normas.serializer import keywords_serializer
 from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Subcategories_Normas
@@ -133,6 +135,29 @@ def actualizar_normativa(request, normativa):
         messages.success(request, 'Normativa Editada')
 
         return redirect('/normativas/')
+
+class NormativaUpdateView(UpdateView):
+    model = Register_Normativa
+    fields = ['norma', 'name_denom', 'base_legal', 'fecha_publi', 'tipo_norma', 'tipo_uso', 'document', 'es_foro', 'es_vigente', 'descripcion']
+    template_name = 'normativa/edit_normativa'
+
+    def get_success_url(self):
+        return reverse("normativas")
+    
+    def get_context_data(self, **kwargs):
+        normativa = self.kwargs.get('normativa', 0)
+        normativa = Register_Normativa.objects.get(pk = normativa),
+        context = super(NormativaUpdateView, self).get_context_data(**kwargs)
+        context.update({
+            'normativa': normativa,
+            'tipo_uso': Areas_Normas.objects.order_by('area_name'),
+            'tipo_normativa': Subcategories_Normas.objects.order_by('order'),
+            'palabras_clave' : Register_Palabraclave.objects.all(),
+            'palabras_claves_normativa' : normativa.keywords.all(),
+            'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
+        })
+        
+        return context
 
 def eliminar_normativa(request, normativa):
     Register_Normativa.objects.filter(id = normativa).delete()
