@@ -213,7 +213,7 @@
         })
 
         _("submitBtn").addEventListener("click", event => {
-            if (file != null && _('id_fecha') != undefined) {
+            if (file != null ) {
                 handleSubmit(event)
                 _("submitBtn").disabled = true
                 _("submitBtn").innerHTML = /*html*/`<div class="spinner-border spinner-border-sm text-light" role="status">
