@@ -142,6 +142,7 @@ class NormativaUpdateView(UpdateView):
     template_name = 'normativa/edit_normativa.html'
 
     def get_success_url(self):
+        messages.success(self, 'Normativa Editada')
         return reverse("index-normativas")
     
     def get_context_data(self, **kwargs):
