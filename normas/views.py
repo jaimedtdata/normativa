@@ -145,7 +145,7 @@ class NormativaUpdateView(UpdateView):
         return reverse("normativas")
     
     def get_context_data(self, **kwargs):
-        normativa = self.kwargs.get('pk', 0)
+        normativa = self.get_object().id
         normativa = Register_Normativa.objects.get(pk = normativa),
         context = super(NormativaUpdateView, self).get_context_data(**kwargs)
         context.update({
