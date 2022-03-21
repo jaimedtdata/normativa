@@ -146,7 +146,7 @@ class NormativaUpdateView(UpdateView):
     
     def get_context_data(self, **kwargs):
         normativa = self.get_object().id
-        normativa = Register_Normativa.objects.filter(pk = normativa),
+        normativa = Register_Normativa.objects.get(pk = normativa)
         context = super(NormativaUpdateView, self).get_context_data(**kwargs)
         context.update({
             'normativa': normativa,
