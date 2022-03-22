@@ -8,9 +8,17 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'checkout/style.css' %}">
     <script src="{% static 'vendor/jquery3/jquery.slim.min.js' %}" ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fanwood+Text&family=Roboto:wght@500&display=swap" rel="stylesheet">
 
-
-
+    <style>
+        .border-color{
+            border-style: solid;
+            border-color: green;
+            border-width: 2px;
+        }
+    </style>
     
 {% endblock css %}
     
@@ -21,77 +29,86 @@
     <div class="container">
 
         <div class="row mt-2">
-                <div class="col-lg-6 col-md-8 col-sm-12 offset-1  ">
-                    <div class="card-header d-flex justify-content-center">
-                        <div >
-                            <i class="text-muted"><b>Escoge tu plan: </b></i> 
-                            <h3 class=" " style="color: #c1a13f;">Plan Premium Agremiado</h3>
-    
+             <div class="col-lg-6 col-md-8 col-sm-12 offset-1  ">
+                <form action="{% url 'checkout_cap' %}">  
+                    <div class="card">
+
+                        <div class="card-header d-flex justify-content-center">
+                            <div >
+                                <i class="text-muted"><b>Escoge tu plan: </b></i> 
+                                <h3 class=" " style="color: #c1a13f;">Plan Premium Agremiado</h3>
+        
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="card-body">
+                            <hr>
+                            <div class="">
+                                <div id="box_month" class="form-check card border-color card-body mb-3 d-flex justify-content-between ">
+                                    <div class="pl-3" style="width: 50px;">
+                                        <input class="form-check-input" type="radio" name="plan_price" id="month" value="{{pl_premium_agremiado.price_month}}" checked>
+                                    </div>
+                                    <label for="month">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="d-flex flex-row justify-content-center align-items-baseline">
+                                                <h5 class="simbol-price-card-color mr-2">S/ </h5>
+                                                <h3 class="price-card-color">{{pl_premium_agremiado.price_month}}</h3> 
     
-                         </form>
-                    <form action="{% url 'checkout_cap' %}">
-                        <div class="card mb-4 shadow">
-                            <div class="card-body">
-                                <hr>
-                                <div class="">
-                                    <!-- <div class="description">
-                                        <h4 class="plan ">Plan Premium Agremiado</h4>
-                                    </div> -->
+                                            </div>
+                                            <div>
+                                                <b class="text-muted ml-4"> / mensual</b>
+                                            </div>
+                                        </div>
+                                    </label>
                                     
-                                    <form >
-        
-                                        <div class="form-check card card-body mb-3  d-flex justify-content-between ">
-                                            <div class="pl-3" style="width: 50px;">
-                                                <input class="form-check-input" type="radio" name="plan_price" id="month" value="{{pl_premium_agremiado.price_month}}" >
+                                </div>
+
+                                <div id="box_anual" class="form-check card card-body mb-3  d-flex justify-content-between ">
+                                    <div class="pl-3" style="width: 50px;">
+                                        <input class="form-check-input" type="radio" name="plan_price" id="anual" value="{{pl_premium_agremiado.price_year}}">
+                                    </div>
+                                    <label for="anual">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="d-flex flex-row justify-content-center align-items-baseline">
+                                                <h5 class="simbol-price-card-color mr-2">S/ </h5>
+                                                <h3 class="price-card-color">{{pl_premium_agremiado.price_year}}</h3> 
                                             </div>
-                                            <div class="d-flex justify-content-center">
-                                                <div class="d-flex flex-row justify-content-center align-items-baseline">
-                                                    <h5 class="simbol-price-card-color mr-2">S/ </h5>
-                                                    <h3 class="price-card-color">{{pl_premium_agremiado.price_month}}</h3> 
-        
-                                                </div>
-                                                <div>
-                                                    <b class="text-muted ml-4"> / mensual</b>
-                                                </div>
+                                            <div>
+                                                <b class="text-muted ml-4"> / anual</b>
                                             </div>
                                         </div>
-        
-                                        <div class="form-check card card-body mb-3  d-flex justify-content-between ">
-                                            <div class="pl-3" style="width: 50px;">
-                                                <input class="form-check-input" type="radio" name="plan_price" id="anual" value="{{pl_premium_agremiado.price_year}}" >
-                                            </div>
-                                            <div class="d-flex justify-content-center">
-                                                <div class="d-flex flex-row justify-content-center align-items-baseline">
-                                                    <h5 class="simbol-price-card-color mr-2">S/ </h5>
-                                                    <h3 class="price-card-color">{{pl_premium_agremiado.price_year}}</h3> 
-                                                </div>
-                                                <div>
-                                                    <b class="text-muted ml-4"> / anual</b>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="row d-flex justify-content-center">
-                                    <button class="btn btn-primary">Continuar</button>
-                                </div>
+                                    
                             </div>
                         </div>
-                    </form>
+
+                        <div class="card-footer">
+                            <div class="row d-flex justify-content-center">
+                                <button class="btn btn-primary">Continuar</button>
+                            </div>
+                        </div>
+                        
+                            
+                    </div>
+                </form>
+                    
+    
+                    
 
     
             </div>
             <div class="col-lg-5 col-md-2 col-sm-12">
-                <div class="card ">
+                <div class="card" style="font-family: 'Roboto', sans-serif;">
                     <div class="card-body">
                         <div class="d-flex justify-content-center align-items-center">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><h2>Resumen del Pedido</h2></li>
-                                <li style="color: #c1a13f;" class="list-group-item"><h4>Plan mensual</h4></li>
+                                <li class="list-group-item">
+                                    <h2>Resumen del Pedido</h2>
+                                </li>
+                                <li style="color: #c1a13f;" class="list-group-item">
+                                    <h4 id="plan_id">Plan mensual</h4>
+                                </li>
                               </ul>
                         </div>
                         
@@ -99,7 +116,7 @@
                     <div class="card-footer">
                         <div class="row d-flex justify-content-around">
                             <h3>Total:</h3>
-                            <div>22.00</div>
+                            <h4 id="price_id">S/{{pl_premium_agremiado.price_month}}</h4>
                         </div>
 
                     </div>
@@ -117,49 +134,40 @@
         <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
 
         <script>
-            console.log('precio mensual','{{pl_premium_agremiado.price_month}}')
-            console.log('seguridad','{{token_security}}')
-            console.log('token de sesion','{{token_session}}')
 
-            var cap = document.querySelector('input[name="plan_price"]');
-            var valueCap = document.querySelector('input[name="plan_price"]').value;
-            cap.addEventListener('click', function(e){
-                console.log( 'valor radio:', valueCap)
-                console.log(e.target.value)
-            })
+            let month = document.getElementById('month')
+           let anual = document.getElementById('anual')
+           let plan_id = document.getElementById('plan_id')
+           let price_id = document.getElementById('price_id')
+           let color_card = document.getElementById('color_card')
+           let box_month = document.getElementById('box_month')
+           let box_anual = document.getElementById('box_anual')
+           if(month == true){
+               console.log('precio del mes')
+           }
+           month.addEventListener('click', (e)=>{
+                if(month.checked == true){
+                    plan_id.innerHTML = "Plan Mensual"
+                    price_id.innerHTML = "{{pl_premium_agremiado.price_month}}"
+                    box_month.classList.add('border-color')
+                    box_anual.classList.remove('border-color')                
+                }
+           })
 
-            if(document.getElementById('month').value){
-                console.log('mensual')
-            }
-            if(document.getElementById('anual').value){
-                console.log('anual')
-            }
+           anual.addEventListener('click', (e)=>{
+                if(anual.checked == true){
+                    plan_id.innerHTML = "Plan Anual"
+                    price_id.innerHTML = "{{pl_premium_agremiado.price_year}}"
+                    box_anual.classList.add('border-color')
+                    box_month.classList.remove('border-color')
+                    
+                }
+           })
 
-            
+
         </script>
 
 
-        {% comment %}
-        <script src="https://pocpaymentserve.s3.amazonaws.com/payform.min.js"></script>
-        <script type="">
-        var configuration = {
-        callbackurl: 'paginaRespuesta',
-        sessionkey: '67cf73735f83590eabf1382ff49e5e08b261976326c6897cb764fd160a15a8ca',
-        channel: 'web',
-        merchantid: '341198210',
-        purchasenumber: '2020100901',
-        amount: '10.5',
-        language: 'es',
-        font: 'https://fonts.googleapis.com/css?family=Montserrat:400&display=swap',
-        recurrencemaxamount: '8.5'
-        };
-        payform.setConfiguration(configuration);
-        </script>
-        {% endcomment %}
+       
 {% endblock js %}
     
-
-
-
-
-
