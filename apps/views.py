@@ -478,21 +478,30 @@ def checkout_premium_cap(request):
 def success_payment_cap(request):
     return render(request, 'checkout/premium_agremiado/success_payment_cap.html')
 
-#Payment process CAP internal users that have free registration, upddate membership
+#########
+### start Payment process -  upddate membership to internal users that have free registration to Premium
+##########
 def cap_choose_plan(request):
     context={
         'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
     }
     return render(request, 'checkout/premium_free/cap_choose_plan.html', context)
 
+def add_plan_cap(request):
+    if request.method == 'POST':
+        cd = request.POST
+        #SAVE THE PRICE IN THE SESSION
+        r = request.session
+        r['plan_price']= cd['plan_price']
+    return redirect('checkout_cap')
+
 @csrf_exempt
 def checkoutCAP(request):
-    plan_price = request.GET.get('plan_price')
-    print("esta es la request", plan_price)
-
     COMERCIAL_ID = settings.COMERCIAL_ID
-    price =  22.00
-    purchase_number = 2022 #numero de pedido
+    #price =  22.00
+    price =  request.session.get('plan_price')
+    #purchase_number = 2022 #numero de pedido
+    purchase_number = request.user.username #numero de pedido
     security_token = get_security_token()
     token_session = create_session_token(security_token, price)
     niubiz_id = None
@@ -510,14 +519,7 @@ def checkoutCAP(request):
         token_transaccion = request.POST['transactionToken']
         user=request.user.user_membership
         print('checkout',cd)
-        print('token de transaccion',token_transaccion)
-        print(request.user)
-        print(request.user.user_membership.names)
-        print(request.user.user_membership.first_surname)
 
-        #if token_transaccion:
-            #guardar los datos de la trasaccion
-            # si no existe es porque fallo la tarjeta o el metodo de pago fue en efectivo.
         transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
         print("transacion exitosa", transaction_success)
         niubiz = transaction_success['ecoreTransactionUUID']
@@ -526,7 +528,7 @@ def checkoutCAP(request):
             names=user.names,
             first_surname=user.first_surname,
             second_surname=user.second_surname,
-            email=user.email,
+            email=request.POST['customerEmail'],
             identity=user.identity,
             paid = True,
             niubiz_id= niubiz,
@@ -537,6 +539,9 @@ def checkoutCAP(request):
         orden.save()
         #create transaction niubiz
         create_niubiz_transaction(transaction_success, orden)
+        #DELETE THE SESSION
+        del request.session['plan_price']
+        request.session.modified = True
 
         return redirect('success_suscription_cap')
 
@@ -545,13 +550,10 @@ def checkoutCAP(request):
 #@requires_csrf_token
 @csrf_exempt
 def success_suscription_cap(request):
-    order = Order_payment.objects.filter(identity=request.user.user_membership.identity).last()
+    order = Order_payment.objects.filter(identity=request.user.user_membership.identity).first()
     context = {
         'order': order,
     }
-    if request.method == 'POST':
-        cd = request.POST
-        print('success',cd)
     return render(request, 'checkout/premium_free/success-suscription.html', context)
 
 def history_purchase(request):
@@ -561,6 +563,10 @@ def history_purchase(request):
         'orders': orders,
     }
     return render(request, 'checkout/premium_free/history_purchase.html' , context)
+
+#########
+### end Payment process -  upddate membership to internal users that have free registration to Premium
+##########
 
 #@login_required
 def preguntas(request):

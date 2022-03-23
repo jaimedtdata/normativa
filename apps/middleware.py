@@ -23,7 +23,7 @@ class CheckMembership:
                 if orders_exists:
                     for order in orders:
                         if order.validity_date_finish > date.today():
-                            print('actualizar membresia')
+                            #print('actualizar membresia')
                             #actualizar membresia a Premium
                             premium_agremiado=Membership.objects.get(membership_type='PLPPA')
 

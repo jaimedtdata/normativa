@@ -34,8 +34,8 @@
                 <div class="col-lg-6 col-md-8 col-sm-12 offset-1  ">
                     <div class="card-header d-flex justify-content-center">
                         <div >
-                            <i class="text-muted"><b>Elige la membresia del: </b></i> 
-                            <h3 class=" " style="color: #c1a13f;">Plan Premium Agremiado</h3>
+                            <i class="text-muted" ><b>Formulario de pago : </b></i> 
+                            <!-- <h3 class=" " style="color: #c1a13f;">Plan Premium Agremiado</h3> -->
     
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                         <div class="d-flex justify-content-center align-items-center">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><h2>Resumen del Pedido</h2></li>
-                                <li class="list-group-item">Plan mensual</li>
+                                <!-- <li class="list-group-item">Plan mensual</li> -->
                               </ul>
                         </div>
                         
@@ -211,40 +211,13 @@
             console.log('seguridad','{{token_security}}')
             console.log('token de sesion','{{token_session}}')
 
-            var cap = document.querySelector('input[name="radioCap"]');
-            var valueCap = document.querySelector('input[name="radioCap"]').value;
-            cap.addEventListener('click', function(e){
-                console.log( 'valor radio:', valueCap)
-                console.log(e.target.value)
-            })
-
-            if(document.getElementById('month').value){
-                console.log('mensual')
-            }
-            if(document.getElementById('anual').value){
-                console.log('anual')
-            }
-
             
         </script>
 
 
         {% comment %}
         <script src="https://pocpaymentserve.s3.amazonaws.com/payform.min.js"></script>
-        <script type="">
-        var configuration = {
-        callbackurl: 'paginaRespuesta',
-        sessionkey: '67cf73735f83590eabf1382ff49e5e08b261976326c6897cb764fd160a15a8ca',
-        channel: 'web',
-        merchantid: '341198210',
-        purchasenumber: '2020100901',
-        amount: '10.5',
-        language: 'es',
-        font: 'https://fonts.googleapis.com/css?family=Montserrat:400&display=swap',
-        recurrencemaxamount: '8.5'
-        };
-        payform.setConfiguration(configuration);
-        </script>
+        
         {% endcomment %}
 {% endblock js %}
     

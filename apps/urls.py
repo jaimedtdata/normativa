@@ -4,7 +4,7 @@ from .views_ajax import get_dni, RegisterCapAPIView, APIMemberView, RegisterExte
 from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, checkout,
                          checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client,
                          SignUpPremiumCAP, checkout_premium_cap, success_payment_cap, history_purchase,
-                         cap_choose_plan )
+                         cap_choose_plan, add_plan_cap )
 
 urlpatterns = [
     #register member
@@ -12,8 +12,9 @@ urlpatterns = [
     path('dni/', get_dni, name='dni'),
     path('plan_list/', plan_list, name='plan_list'),
     path('plan_external_user/', plan_external_user, name='plan_external_user'),
-    #
+    #update agremiado to premium
     path('cap_choose_plan/', cap_choose_plan, name='cap_choose_plan'),
+    path('add_plan_cap/', add_plan_cap, name='add_plan_cap'),
     path('checkout-cap/', checkoutCAP, name='checkout_cap'),
     path('success_suscription_cap/', success_suscription_cap, name='success_suscription_cap'),
     #

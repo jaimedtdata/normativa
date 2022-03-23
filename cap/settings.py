@@ -182,6 +182,9 @@ USERNAME_NIUBIZ = os.getenv('USERNAME_NIUBIZ')
 PASSWORD_NIUBIZ = os.getenv('PASSWORD_NIUBIZ')
 COMERCIAL_ID = os.getenv('COMERCIAL_ID')
 
+CART_SESSION_ID = 'cart'
+
+
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_USE_TLS = True
 # EMAIL_HOST = 'smtp.gmail.com'
