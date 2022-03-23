@@ -25,6 +25,7 @@
                     <th scope="col">Fecha inicio</th>
                     <th scope="col">Fecha de termino</th>
                     <th scope="col">Precio</th>
+                    <th scope="col">Fecha de compra</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,7 @@
                         <td>{{order.validity_date_start}}</td>
                         <td>{{order.validity_date_finish}}</td>
                         <td>{{order.pay_import}}</td>
+                        <td>{{order.created}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

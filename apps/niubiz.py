@@ -1,7 +1,9 @@
 import requests
 import json
 from django.conf import settings
-from apps.models import NiubizTransaction
+from apps.models import NiubizTransaction, Order_payment
+import datetime
+from django.utils import timezone
 
 merchantId = settings.COMERCIAL_ID
 url_test_security_token = 'https://apisandbox.vnforappstest.com/api.security/v1/security'
@@ -90,6 +92,23 @@ def require_transaccion_autorizacion(token_security, transacion_token, price, pu
     
     return data
 
+def create_order_payment(user,email,niubiz_id, price):
+    orden=Order_payment(
+            member= user,
+            names=user.names,
+            first_surname=user.first_surname,
+            second_surname=user.second_surname,
+            email=email,
+            identity=user.identity,
+            paid = True,
+            niubiz_id= niubiz_id,
+            pay_import = price,
+            validity_date_start = timezone.now() ,
+            validity_date_finish = (timezone.now() + timezone.timedelta(days=30))
+        )
+    orden.save()
+    return orden
+
 def create_niubiz_transaction(data, orden):
 
     NiubizTransaction.objects.create(
@@ -110,3 +129,6 @@ def create_niubiz_transaction(data, orden):
         action_description = data['action_description'],
         brand = data['brand'],
     )
+
+
+

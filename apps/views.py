@@ -46,7 +46,7 @@ from .forms_register import MemberCapForm, ExternalUserForm
 
 from membership.models import Membership
 from apps.models import UsagePolicies, Order_payment, NiubizTransaction
-from apps.niubiz import get_security_token, create_session_token, require_transaccion_autorizacion, create_niubiz_transaction
+from apps.niubiz import get_security_token, create_session_token, require_transaccion_autorizacion, create_niubiz_transaction, create_order_payment
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from decimal import Decimal
@@ -511,7 +511,6 @@ def checkoutCAP(request):
     purchase_number = request.user.username #numero de pedido
     security_token = get_security_token()
     token_session = create_session_token(security_token, price)
-    niubiz_id = None
     context = {
         'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
         'token_security' : security_token,
@@ -524,27 +523,15 @@ def checkoutCAP(request):
 
     if request.method == 'POST':
         cd = request.POST
+        email=request.POST['customerEmail']
         token_transaccion = request.POST['transactionToken']
         user=request.user.user_membership
         print('checkout',cd)
 
         transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
         print("transacion exitosa", transaction_success)
-        niubiz = transaction_success['ecoreTransactionUUID']
-        orden=Order_payment(
-            member= request.user.user_membership,
-            names=user.names,
-            first_surname=user.first_surname,
-            second_surname=user.second_surname,
-            email=request.POST['customerEmail'],
-            identity=user.identity,
-            paid = True,
-            niubiz_id= niubiz,
-            pay_import = price,
-            validity_date_start = timezone.now() ,
-            validity_date_finish = (timezone.now() + timezone.timedelta(days=30))
-        )
-        orden.save()
+        niubiz_id = transaction_success['ecoreTransactionUUID']
+        orden = create_order_payment(user,email,niubiz_id, price)
         #create transaction niubiz
         create_niubiz_transaction(transaction_success, orden)
         #DELETE THE SESSION
