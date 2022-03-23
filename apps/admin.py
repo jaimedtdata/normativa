@@ -13,7 +13,7 @@ class MemberAdmin(admin.ModelAdmin):
 admin.site.register(Member,MemberAdmin)
 
 class Order_paymentAdmin(admin.ModelAdmin):
-    list_display= ['names', 'first_surname', 'second_surname' , 'email','identity' ,'validity_date_start', 'validity_date_finish']
+    list_display= ['names', 'first_surname', 'second_surname' , 'email','identity','created' ,'validity_date_start', 'validity_date_finish']
     search_fields = ['names', 'first_surname', 'second_surname' , 'email', 'identity']
     readonly_fields = ['created', 'updated']
 admin.site.register(Order_payment,Order_paymentAdmin)

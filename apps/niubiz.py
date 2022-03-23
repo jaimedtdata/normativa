@@ -92,22 +92,66 @@ def require_transaccion_autorizacion(token_security, transacion_token, price, pu
     
     return data
 
-def create_order_payment(user,email,niubiz_id, price):
-    orden=Order_payment(
-            member= user,
-            names=user.names,
-            first_surname=user.first_surname,
-            second_surname=user.second_surname,
-            email=email,
-            identity=user.identity,
-            paid = True,
-            niubiz_id= niubiz_id,
-            pay_import = price,
-            validity_date_start = timezone.now() ,
-            validity_date_finish = (timezone.now() + timezone.timedelta(days=30))
-        )
-    orden.save()
-    return orden
+def create_order_payment(user,email,niubiz_id, price, type_membership):
+    #check if not exist any order
+    exist_order = Order_payment.objects.filter(identity=user.identity).exists()
+    if not exist_order:
+        orden=Order_payment(
+                member= user,
+                names=user.names,
+                first_surname=user.first_surname,
+                second_surname=user.second_surname,
+                email=email,
+                identity=user.identity,
+                paid = True,
+                niubiz_id= niubiz_id,
+                pay_import = price,
+                validity_date_start = timezone.now() ,
+                validity_date_finish = (timezone.now() + timezone.timedelta(days=30))
+            )
+        orden.save()
+        return orden
+    else:
+    #if exist update dates
+    #get the last created date
+        last_order = Order_payment.objects.filter(identity=user.identity).latest('created')
+        created = last_order.created
+        date_start = last_order.validity_date_start
+        date_finish = last_order.validity_date_finish
+        
+        actual_day_of_purchase = timezone.now()
+
+        if type_membership == "Plan mensual":
+            if actual_day_of_purchase > date_finish:
+                validity_date_start = timezone.now()
+                validity_date_finish = (validity_date_start + timezone.timedelta(days=30))
+            else:
+                validity_date_start = date_finish
+                validity_date_finish = (date_finish + timezone.timedelta(days=30))
+        if type_membership == "Plan anual":
+            if actual_day_of_purchase > date_finish:
+                validity_date_start = timezone.now()
+                validity_date_finish = (validity_date_start + timezone.timedelta(days=365))
+            else:
+                validity_date_start = date_finish
+                validity_date_finish = (date_finish + timezone.timedelta(days=365))
+
+        orden=Order_payment(
+                member= user,
+                names=user.names,
+                first_surname=user.first_surname,
+                second_surname=user.second_surname,
+                email=email,
+                identity=user.identity,
+                paid = True,
+                niubiz_id= niubiz_id,
+                pay_import = price,
+                validity_date_start = validity_date_start ,
+                validity_date_finish = validity_date_finish
+            )
+        orden.save()
+        return orden
+
 
 def create_niubiz_transaction(data, orden):
 

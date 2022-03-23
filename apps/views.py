@@ -531,7 +531,7 @@ def checkoutCAP(request):
         transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
         print("transacion exitosa", transaction_success)
         niubiz_id = transaction_success['ecoreTransactionUUID']
-        orden = create_order_payment(user,email,niubiz_id, price)
+        orden = create_order_payment(user,email,niubiz_id, price, type_membership)
         #create transaction niubiz
         create_niubiz_transaction(transaction_success, orden)
         #DELETE THE SESSION

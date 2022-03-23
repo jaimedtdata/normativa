@@ -193,11 +193,11 @@ class Order_payment(models.Model):
     pay_import = models.DecimalField(max_digits = 10,decimal_places = 2,
         help_text='Importe Pagado',
         verbose_name='Importe Pagado')  
-    validity_date_start = models.DateField(
+    validity_date_start = models.DateTimeField(
         blank=False, null=False,
         help_text='Fecha Inicio membresia',
         verbose_name='Fecha Inicio membresia')
-    validity_date_finish = models.DateField(
+    validity_date_finish = models.DateTimeField(
         blank=False, null=False,
         help_text='Fecha Fin membresia',
         verbose_name='Fecha Fin membresia')
