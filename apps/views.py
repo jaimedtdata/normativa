@@ -49,6 +49,7 @@ from apps.models import UsagePolicies, Order_payment, NiubizTransaction
 from apps.niubiz import get_security_token, create_session_token, require_transaccion_autorizacion, create_niubiz_transaction
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from decimal import Decimal
 
 
 def busqueda_clavenormativa(request):
@@ -498,8 +499,14 @@ def add_plan_cap(request):
 @csrf_exempt
 def checkoutCAP(request):
     COMERCIAL_ID = settings.COMERCIAL_ID
+    type_membership = None
+    plppa=Membership.objects.get(membership_type="PLPPA")
     #price =  22.00
     price =  request.session.get('plan_price')
+    if plppa.price_month == Decimal(price):
+        type_membership = "Plan mensual"
+    if plppa.price_year == Decimal(price):
+        type_membership= "Plan anual"
     #purchase_number = 2022 #numero de pedido
     purchase_number = request.user.username #numero de pedido
     security_token = get_security_token()
@@ -511,7 +518,8 @@ def checkoutCAP(request):
         'token_session' : token_session,
         'comercial_id' : COMERCIAL_ID,
         'purchase_number': purchase_number,
-        'price' : price
+        'price' : price,
+        'type_membership':type_membership
         }
 
     if request.method == 'POST':
