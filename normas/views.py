@@ -1,8 +1,12 @@
 import json
 import uuid
+import boto3
+
 from datetime import datetime
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
+from django.conf import settings
+from django.views import generic
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -136,3 +140,22 @@ def get_all_palabras_clave_normativa(norma):
 
         return palabras
        
+class SignedURLView(generic.View):
+    def post(self, request, *args, **kwargs):
+        session = boto3.session.Session()
+        client = session.client(
+            "s3",
+            endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        )
+
+        url = client.generate_presigned_url(
+            ClientMethod="put_object",
+            Params={
+                "Bucket": settings.AWS_STORAGE_BUCKET_NAME,
+                "Key": f"normativa_files/{json.loads(request.body)['fileName']}",
+            },
+            ExpiresIn=300,
+        )
+        return JsonResponse({"url": url})
