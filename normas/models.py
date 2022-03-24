@@ -78,7 +78,7 @@ ESTADO_CHOICES = [
 
 UNIVERSO_CHOICES = [
     ('NE', 'Normativa Edificatoria'),
-    ('PA', 'Procedimineto Administrativo'),
+    ('PA', 'Procedimiento Administrativo'),
 ]
 
 class Register_Normativa(models.Model):

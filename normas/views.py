@@ -14,10 +14,12 @@ from normas.filters import NormativaFilter
 from django.views.generic.edit import UpdateView
 from django.urls import reverse
 from normas.forms import NormativaForm
+from django.contrib.auth.decorators import login_required
 
 from normas.serializer import keywords_serializer, subtipos_uso_serializer
 from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Subcategories_Normas, Subtipo_Normas
 
+@login_required
 def index(request):
     queryset = Register_Normativa.objects.all()
     page = request.GET.get('page', 1)
@@ -38,6 +40,7 @@ def index(request):
 
     return render(request, 'normativa/index.html', context)
 
+@login_required
 def registrar_normativa(request):
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
     sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
@@ -73,6 +76,7 @@ def registrar_normativa(request):
     return render(request, 'normativa/form_normativa.html', context)
 
 # Create your views here.
+@login_required
 def registrar_palabras_clave(request, normativa):
     if request.method=='POST':
         norma = Register_Normativa.objects.get(id = normativa)
@@ -118,6 +122,7 @@ class NormativaUpdateView(UpdateView):
         
         return context
 
+@login_required
 def eliminar_normativa(request, normativa):
     Register_Normativa.objects.filter(id = normativa).delete()
     messages.success(request, 'Normativa Eliminada')
@@ -125,6 +130,7 @@ def eliminar_normativa(request, normativa):
 
 
 # * VISTAS PARA PALABRAS CLAVE DE NORMATIVAS
+@login_required
 def eliminar_palabras_clave_normativa(request, normativa):
     norma = Register_Normativa.objects.get(id = normativa)
     pc = request.GET.get('palabra_clave_id')
@@ -134,12 +140,13 @@ def eliminar_palabras_clave_normativa(request, normativa):
 
     return HttpResponse(json.dumps(palabras, default=str), content_type="application/json")  
 
+@login_required
 def get_all_palabras_clave_normativa(norma):
         palabras_clave_normativa = norma.keywords.all()
         palabras = [ keywords_serializer(palabra) for palabra in palabras_clave_normativa ]
 
         return palabras
-       
+
 class SignedURLView(generic.View):
     def post(self, request, *args, **kwargs):
         session = boto3.session.Session()

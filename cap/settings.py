@@ -44,7 +44,7 @@ LOCAL_APPS = (
 CORS_ORIGIN_ALLOW_ALL = True
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
-
+LOGIN_URL = 'login'
 # por Default agrega id automatico
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
