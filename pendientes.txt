@@ -33,3 +33,15 @@ tasks
     * GUARDAR la transaccion en el modelo Control_payment
     *Enviar el email al usuario
 
+
+TIPOS DE PLANES:
+
+Cuando compra un plan actualizará a           ||||    cuando se venza
+
+1) Plan agremiado ---> Plan Premium Agremiado  ||||  Plan Premium Agremiado ----> Plan agremiado
+2) Plan Premium Agremiado                       |||| Plan Premium Agremiado  ----> Plan agremiado
+3) Plan Profesional                             ||||  pierde el acceso
+
+pago presencial
+4) Plan Premium Agremiado                       ||||  plan agremiado
+5) Plan Profesional                             |||| pierde acceso

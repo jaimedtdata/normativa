@@ -13,29 +13,35 @@ class CheckMembership:
         
         try:
             user = User.objects.get(username=request.user.username)
-            if user.user_membership:
-                print('usuario agremiado', user.user_membership)
+            type_membership = user.user_membership.membership.membership_type
+            #exclude super users
+            if type_membership=='PLPA' or type_membership=='PLPPA' :
+                print("usuario premium agremiado", type_membership=='PLPPA')
+                print("usuario agremiado",type_membership=='PLPA')
                 identity = user.user_membership.identity
                 member = Member.objects.get(identity=identity)
-                print("identidad del usuario", user)
                 orders_exists = Order_payment.objects.filter(identity=identity).exists()
-                orders = Order_payment.objects.filter(identity=identity)
                 if orders_exists:
-                    for order in orders:
-                        if order.validity_date_finish > date.today():
-                            #print('actualizar membresia')
-                            #actualizar membresia a Premium
-                            premium_agremiado=Membership.objects.get(membership_type='PLPPA')
-
-                            member.membership = premium_agremiado
-                            member.save()
-                            
+                    last_order = Order_payment.objects.filter(identity=identity).latest('created')
+                    day_finish_plan = last_order.validity_date_finish
+                    actual_day = timezone.now()
+                    if actual_day > day_finish_plan:
+                        # regresar a plan agremiado
+                        pl_agremiado=Membership.objects.get(membership_type='PLPA')
+                        member.membership = pl_agremiado
+                        member.save()
+                    else:
+                        #actualizar membresia a Premium
+                        premium_agremiado=Membership.objects.get(membership_type='PLPPA')
+                        member.membership = premium_agremiado
+                        member.save()
                 else:
+                    # regresar a plan agremiado
                     pl_agremiado=Membership.objects.get(membership_type='PLPA')
                     member.membership = pl_agremiado
                     member.save()
-                    #actualizar mebresia a Agremiado
-                    pass
+                        
+                            
         except:
             print('eres super user')
         

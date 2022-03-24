@@ -4,7 +4,7 @@ from .views_ajax import get_dni, RegisterCapAPIView, APIMemberView, RegisterExte
 from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, checkout,
                          checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client,
                          SignUpPremiumCAP, checkout_premium_cap, success_payment_cap, history_purchase,
-                         cap_choose_plan, add_plan_cap )
+                         cap_choose_plan, add_plan_cap, cap_cash_payment )
 
 urlpatterns = [
     #register member
@@ -17,6 +17,8 @@ urlpatterns = [
     path('add_plan_cap/', add_plan_cap, name='add_plan_cap'),
     path('checkout-cap/', checkoutCAP, name='checkout_cap'),
     path('success_suscription_cap/', success_suscription_cap, name='success_suscription_cap'),
+    path('cap_cash_payment/', cap_cash_payment, name='cap_cash_payment'),
+    
     #
     path('checkout/', checkout, name='checkout'),
     path('sign-up-clients/', SignUpClients.as_view(), name='sign-up-clients'),

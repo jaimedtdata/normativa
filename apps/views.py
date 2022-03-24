@@ -527,6 +527,9 @@ def checkoutCAP(request):
         token_transaccion = request.POST['transactionToken']
         user=request.user.user_membership
         print('checkout',cd)
+        if request.POST['channel'] == 'pagoefectivo':
+            url=request.POST['url']
+            return redirect('cap_cash_payment')
 
         transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
         print("transacion exitosa", transaction_success)
@@ -550,6 +553,11 @@ def success_suscription_cap(request):
         'order': order,
     }
     return render(request, 'checkout/premium_free/success-suscription.html', context)
+
+def cap_cash_payment(request):
+    print(request.GET)
+    print(request.POST)
+    return render(request, 'checkout/premium_free/success-pagoefectivo.html')
 
 def history_purchase(request):
     user =  request.user.user_membership.identity
