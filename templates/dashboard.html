@@ -26,90 +26,100 @@
         </h4>
     </div>
  
-    <div class="gContainer gPositionRelative gContenido">
-        <div class="gAlignCenter">
-            <hr class="gWidth100 gSeparator gSeparatorTrans gInlineBlock">
-            
-            <hr class="gSeparator gSeparatorTrans gSeparator20">
-            <div class="gRowTemp">
-                <a href="{% url 'norma_edificatoria' %}" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
-                    <div class="gWidth50 gHeight3 gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                    <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                        <img src="{% static 'images/img-propiedad-intelectual2.png' %}" class="gInlineBlock gWidth60 gMarginTop31">
+    <div class="row m-0 p-0">
+        <div class="col-lg-2 d-flex justify-content-around">
+            <img class="img-fluid" src="{% static 'banners/baner-login.png' %}" alt="">
+        </div>
+        <div class="col-lg ">
+            <div class="gContainer gPositionRelative gContenido">
+                <div class="gAlignCenter">
+                    <hr class="gWidth100 gSeparator gSeparatorTrans gInlineBlock">
+                    
+                    <hr class="gSeparator gSeparatorTrans gSeparator20">
+                    <div class="gRowTemp">
+                        <a href="{% url 'norma_edificatoria' %}" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+                            <div class="gWidth50 gHeight3 gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                                <img class="img-fluid mt-2 pl-1" src="{% static 'images/normativa_edificatoria.svg' %}" class="gInlineBlock gWidth60 gMarginTop31" width="85">
+                                
+                            </div>
+                            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                                NORMATIVA
+                                <br>
+                                EDIFICATORIA
+                            </h5></a>
                         
+                        <a href="{% url 'norma_urb' %}?norma=Reglamento Comentado&ne=4" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox3"> 
+                            <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                            
+                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                                <img class="img-fluid mt-4" src="{% static 'images/reglamento_comentado.svg' %}" class="gInlineBlock gWidth60 gMarginTop31" width="94">
+                            </div>
+                            
+                            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                                REGLAMENTO
+                                <br>
+                                COMENTADO
+                            </h5>
+                            </a>
+                        
+                        <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox4">
+                            <div class="gWidth50 gHeight3 gFondoCircleRojo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleRojo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                                <img class="img-fluid p-2 mt-4" src="{% static 'images/procedimiento.svg' %}" class="gInlineBlock gWidth65 gMarginTop31">
+                            </div>
+                            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                                PROCEDIMIENTOS Y
+                                <br>
+                                TRÁMITES DE LICENCIAS
+                            </h5></a>
                     </div>
-                    <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                        NORMATIVA
-                        <br>
-                        EDIFICATORIA
-                    </h5></a>
-                
-                <a href="#" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox3"> 
-                    <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                    <hr class="gSeparator gSeparatorTrans gSeparator20">
+                    <div class="gRowTemp">
+                        <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox5">
+                            <div class="gWidth50 gHeight3 gFondoCircleGris3 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                            <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris3 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                                <img class="img-fluid p-2" src="{% static 'images/fichas_tecnicas.svg' %}" class="gInlineBlock gMarginTop5" width="100">
+                            </div>
+                            
+                            <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">FICHAS TÉCNICAS<br>
+                                Y PROVEEDORES
+                                <br>
+                                </h5></a>
+                        <a href="{% url 'foro' %}" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
+                            <div class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                            <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                                    <img class="img-fluid mt-2" src="{% static 'images/foro_discusion.svg' %}" class="gInlineBlock gMarginTop5" width="67">
+                                
+                            </div>
+                            <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">FORO DE
+                                                                                                                        <br>
+                                                                                                                        DISCUSIÓN
+                                                                                                                        <br>
+                                                                                                                        </h5></a>
+                                                                                                                       
+        
+                        <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
+                            <div class="gWidth50 gHeight3 gFondoCircleGris gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                                <img  class="img-fluid" src="{% static 'images/cursos_linea.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
+                                
+                            </div>
+                            <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">CURSOS EN LÍNEA</h5></a>
+                                                                                            
+                    </div>
                     
-                    <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                        <img src="{% static 'images/img-people.png' %}" class="gInlineBlock gWidth60 gMarginTop31">
-                    </div>
-                    
-                    <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                        REGLAMENTO
-                        <br>
-                        COMENTADO
-                    </h5>
-                    </a>
-                
-                <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox4">
-                    <div class="gWidth50 gHeight3 gFondoCircleRojo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                    <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleRojo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                        <img src="{% static 'images/img-people2.png' %}" class="gInlineBlock gWidth65 gMarginTop31">
-                    </div>
-                    <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                        PROCEDIMIENTOS Y
-                        <br>
-                        TRÁMITES DE LICENCIAS
-                    </h5></a>
+                    <hr class="gSeparator gSeparatorTrans gSeparator20">
+                </div>
             </div>
-            <hr class="gSeparator gSeparatorTrans gSeparator20">
-            <div class="gRowTemp">
-                <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox5">
-                    <div class="gWidth50 gHeight3 gFondoCircleGris3 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                    <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris3 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                        <img src="{% static 'images/img-judicial.png' %}" class="gInlineBlock gMarginTop5" width="100">
-                    </div>
-                    
-                    <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">FICHAS TÉCNICAS<br>
-                        Y PROVEEDORES
-                        <br>
-                        </h5></a>
-                <a href="{% url 'foro' %}" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
-                    <div class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                    <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                            <img src="{% static 'images/img-arbitro.png' %}" class="gInlineBlock gMarginTop5" width="100">
-                        
-                    </div>
-                    <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">FORO DE
-                                                                                                                <br>
-                                                                                                                DISCUCIÓN
-                                                                                                                <br>
-                                                                                                                </h5></a>
-                                                                                                               
-
-                <a href="#" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
-                    <div class="gWidth50 gHeight3 gFondoCircleGris gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                    <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                        <img src="{% static 'images/img-tribunal.png' %}" class="gInlineBlock gWidth57 gMarginTop31">
-                        
-                    </div>
-                    <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">CURSOS EN LÍNEA</h5></a>
-                                                                                    
-            </div>
-            
-            <hr class="gSeparator gSeparatorTrans gSeparator20">
+        </div>
+        <div class="col-lg-2 d-flex justify-content-around">
+            <img class="img-fluid" src="{% static 'banners/baner-login.png' %}" alt="">
         </div>
     </div>
     <hr>
-    <div class="row m-5 text-center">
-        <div class="col-lg-4 clom-md-6 col-sm-12 d-flex justify-content-center">
+    <div class="row mx-5 mb-5 text-center">
+        <div class="col-lg clom-md-6 col-sm-6 col-6 d-flex justify-content-end mr-lg-5">
                 <a href="{% url 'plan_list' %}" class="text-danger font-weight-bold">
                     <i class="fa-solid fa-user-group fa-3x gInlineBlock gWidth65 gMarginTop31"></i>
                     <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
@@ -119,12 +129,7 @@
                     </h5>
                 </a>
         </div>
-        <div class="col-lg-4">
-            <a class="" href="{% url 'home' %}">
-                <img src="{% static 'img/logo_cap.png' %}"   class="d-inline-block align-top" alt="">
-            </a>
-        </div>
-        <div class="col-lg-4 clom-md-6 col-sm-12 d-flex justify-content-center">
+        <div class="col-lg clom-md-6 col-sm-6 col-6 d-flex justify-content-start  ml-lg-5">
                 <a href="{% url 'preguntas' %}" class="text-warning font-weight-bold" >
                     <i class="fa-solid fa-question fa-3x gInlineBlock gWidth65 gMarginTop31"></i>
                     <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">

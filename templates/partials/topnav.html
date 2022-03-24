@@ -9,7 +9,19 @@
     .bg-cap-1 {
         background-color: #c1a13f;
     }
+
+    .color-cap-1 {
+        color: #c1a13f;
+    }
+
+    .font-size-md {
+        font-size: 1.5rem;
+    }
     
+    .navbar-dark .navbar-nav .nav-link{
+        color: rgba(238, 191, 51, 0.9);
+    }
+
 </style>
 {% endblock %}
 
@@ -17,24 +29,24 @@
 
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-cap">
     <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="{% static 'img/cap-logo.svg' %}" width="200"  class="d-inline-block align-top" alt="">
+        <img src="{% static 'img/logo_cap3.png' %}" width="250px" class="d-inline-block align-top img-fluid" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+        <ul class="navbar-nav ml-lg-2 mr-auto my-2 my-lg-0 navbar-nav-scroll font-size-md" style="max-height: 100px;">
             <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+            <a class="nav-link text-link" aria-current="page" href="{% url 'home' %}">Inicio</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'norma_urb' %}">Busqueda de normas</a>
+            <a class="nav-link text-link" aria-current="page" href="{% url 'norma_urb' %}">Busqueda de normas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'foro' %}">Foro de Discución</a>
+                <a class="nav-link text-link" aria-current="page" href="{% url 'foro' %}">Foro de Discución</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'preguntas' %}">Preguntas Frecuentes</a>
+            <a class="nav-link text-link" aria-current="page" href="{% url 'preguntas' %}">Preguntas Frecuentes</a>
             </li>
         </ul>
         

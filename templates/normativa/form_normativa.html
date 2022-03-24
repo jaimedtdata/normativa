@@ -1,126 +1,321 @@
 {% extends 'base_nfr.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block css %}
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="text-center">Registrar Normativa</h1>
-        <br><br>
-        
-        {% if errors %}
-            <div class="alert alert-error">
-            <h4>Please fix the following errors</h4>
-            <ul>
-                {% for field in form %}
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                    <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
-                    {% endfor %}
-                {% endif %}
-                {% endfor %}
-            </ul>
-            {% if form.non_field_errors %}
-                {{ form.non_field_errors }}
-            {% endif %}
-            </div>
-        {% endif %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-2">
+            <a href="{% url 'home' %}">
+                <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
+            </a>
+        </div>
 
-        <form method='POST' action="{% url 'registrar-normativa' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-6">
-                    <label for="norma">Norma</label>
-                    <input type="text" class="form-control" name="norma" required/>
-                </div>
-                <div class="col-6">
-                        <div class="form-group">
-                            <label for="name_deno">Titulo</label>
-                            <input type="text" name="name_deno" class="form-control" required/>
-                        </div>
+        <div class="col-8">
+            <h1 class="gUppercase gFontWeight700">
+                Registrar Normativa
+            </h1>
+        </div>
+
+        <div class="col-2">
+            <a href="{% url 'index-normativas' %}">
+                <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <br><br>
+
+    {% if errors %}
+    <div class="alert alert-error">
+        <h4>Please fix the following errors</h4>
+        <ul>
+            {% for field in form %}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <form class="form mb-5" method='POST' id="fileForm" action="{% url 'registrar-normativa' %}" autocomplete="off" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.norma|as_crispy_field }}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <label for="base">Base Legal</label>
-                    <input type="text" name="base_legal" class="form-control" required/>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="fecha_publi">Publicacion</label>
-                        <input type="date" name="fecha_publi" class="form-control" required  min="1900-01-01" max="{{fecha_hoy}}"/>
-                    </div>
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.name_denom|as_crispy_field }}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <label> Tipo de Norma: </label>
-                    <select class="form-control" aria-label="Default select example" name="tip_norma" >
-                            {% for a in normativa %}
-                                <option value="{{a.id}}">{{a.subcategory_name}}</option>
-                            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.base_legal|as_crispy_field }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.fecha_publi|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label> Tipo de Uso: </label>
+                    <select class="form-control" aria-label="Default select example" name="tipo_uso" id="tipo_uso_id">
+                        {% for tipo in tipo_uso %}
+                        <option value="{{tipo.id}}">{{tipo.area_name}}</option>
+                        {% endfor %}
                     </select>
                 </div>
-                    <div class="col-6">
-                        <label> Tipo de Uso: </label>
-                        <select class="form-control" aria-label="Default select example" name="tip_uso">
-                            {% for tipo in tipo_uso %}
-                                <option value="{{tipo.id }}">{{tipo.area_name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Adjuntar Documento</label><br>
-                        <input type="file" name="documento"/>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="es_vigente" name="es_vigente">
-                            <label class="custom-control-label" for="es_vigente">Vigente</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="es_foro" name="es_foro">
-                            <label class="custom-control-label" for="es_foro">Foro</label>
+            <div class="col-6">
+                <div class="form-group">
+                    <label> Subtipo de Uso: </label>
+                    <select class="form-control" aria-label="Default select example" name="subtipo_uso" id="subtipo_uso_id">
+                        {% for subtipo in subtipo_uso %}
+                            <option value="{{subtipo.id}}">{{subtipo.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.tipo_norma|as_crispy_field }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.estado|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.document|as_crispy_field }}
+                </div>
+                <div class="my-2">
+                    <div class="w-full bg-gray-100">
+                        <div class="progress">
+                            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <label>Descripción breve</label><br>
-                    <textarea class="form-control" rows="5" maxlength="200" name="descripcion"></textarea>
+                <div class="my-2">
+                    <h3 id="status"></h3>
+                </div>
+
+                <div class="form-group">
+                    {{ form.universo|as_crispy_field }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.articulo|as_crispy_field }}
                 </div>
             </div>
-            <div class="form-group">
-                <label>
-                    Palabra Clave:
-                </label>
-                <select class="form-control select-tags" name="palabras_clave[]" multiple="multiple" style="width:100%;" id="select4">
-                    {% for pc in palabras_clave %}
-                        <option value="{{pc.name}}"> {{pc.name}} </option>
-                    {% endfor %}
-                </select>    
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.descripcion|as_crispy_field }}
+                </div>
+                <span id="max_characters" class="text-muted text-italic float-right">0/700</span>
             </div>
-            <br>
-            <div class="row">
-                <div class="col">
-                   <button class="btn btn-primary btn-block" type="submit">
-                    <i class="fa-solid fa-floppy-disk"></i>
+        </div>
+
+        <div class="form-group">
+            <label>
+                Palabra Clave:
+            </label>
+            <select class="form-control select-tags" name="palabras_clave[]" multiple="multiple" style="width:100%;"
+                id="select4">
+                {% for pc in palabras_clave %}
+                <option value="{{pc.name}}"> {{pc.name}} </option>
+                {% endfor %}
+            </select>
+            
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <button class="btn btn-primary btn-block" type="submit" id="submitBtn3">
+                    <i id="icon-btn-save" class="fa-solid fa-floppy-disk"></i>
                     Guardar
-                   </button>
-                </div>
+                </button>
             </div>
+        </div>
+    </form>
 
-        </form>
-
-    </div>
+</div>
 {% endblock %}
 
 
 {% block js %}
+<script>
+
+    // PARA CONTAR CARACTERES RESTANTES EN DESCRIPCION
+    const max_characters = document.getElementById('max_characters')
+    const ld = document.getElementById('id_descripcion')
+
+    ld.addEventListener('keyup', e => {
+        max_characters.innerHTML = `${ld.value.length}/700`
+    })
+
+    ld.addEventListener('keypress', e => {
+        max_characters.innerHTML = `${ld.value.length}/700`
+    })
+
+    // FUNCIONES PARA EL LISTADO DINAMICO
+    const tipos_uso = document.getElementById('tipo_uso_id')
+    const subtipos_uso = document.getElementById('subtipo_uso_id')
+    const subtipos_uso_json = {{ subtipos_uso_json|safe }}
+    
+    changeOptionsSubtipoUso()
+
+    tipos_uso.addEventListener('change', (e) => {
+
+        changeOptionsSubtipoUso()
+        
+    })
+
+    function changeOptionsSubtipoUso() {
+        var options_sbu = ``
+        subtipos_uso_json.forEach( sbu => {
+            if( sbu.tipo_uso_id == tipos_uso.value ) {
+                options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+            }            
+        })
+        subtipos_uso.innerHTML = options_sbu
+    }
+
+
+
+    // PARA GUARDAR EL ARCHIVO EN S3
+    let submitting = false
+    let file = null
+
+    function setIsSubmitting(val) {
+        submitting = val
+    }
+
+    function setFile(val) {
+        file = val
+    }
+
+    _("id_document").addEventListener("change", event => {
+        setFile(event.target.files[0])
+    })
+
+    _("submitBtn").addEventListener("click", event => {
+        if (file != null && _('id_fecha') != undefined) {
+            handleSubmit(event)
+            _("submitBtn").disabled = true
+            _("submitBtn").innerHTML = /*html*/`<div class="spinner-border spinner-border-sm text-light" role="status">
+                                                    <span class="sr-only">Loading...</span>                   
+                                                    </div>
+                                                Guardar
+                                                `
+        }
+    })
+
+    const handleSubmit = async event => {
+
+        setIsSubmitting(true)
+
+        const signedUrl = await getSignedUrl()
+
+        try {
+            uploadFile(signedUrl)
+        }
+        catch (err) {
+            setIsSubmitting(false)
+            console.log(err)
+            alert('There was an error uploading your file.')
+            throw err
+        }
+
+        setIsSubmitting(false)
+    }
+
+    const getSignedUrl = async () => {
+        const body = {
+            fileName: file.name,
+            fileType: file.type,
+        }
+
+        const response = await fetch("{% url 'signed-url' %}", {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
+        })
+        const { url } = await response.json()
+        return url
+    }
+
+    function _(el) {
+        return document.getElementById(el);
+    }
+
+    function uploadFile(signedUrl) {
+        var formdata = new FormData();
+        formdata.append("file", file);
+        var ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.addEventListener("error", errorHandler, false);
+        ajax.addEventListener("abort", abortHandler, false);
+        ajax.addEventListener("loadend", loadendHandler, false)
+        ajax.open("PUT", signedUrl);
+        ajax.setRequestHeader('Content-Type', file.type)
+        ajax.setRequestHeader('x-amz-acl', 'public-read')
+        ajax.send(formdata);
+    }
+
+    async function submitForm() {
+        _("fileForm").submit()
+        _("submitBtn").disabled = false
+
+    }
+
+    async function loadendHandler(event) {
+        await submitForm()
+    }
+
+    function progressHandler(event) {
+        var percent = Math.round((event.loaded / event.total) * 100);
+        _("progressBar").style.width = `${percent}%`;
+        _("progressBar").innerText = `${percent}%`;
+        _("status").innerHTML = percent + "% Subiendo.. espere un momento";
+    }
+
+    function completeHandler(event) {
+        _("status").innerHTML = event.target.responseText;
+        _("progressBar").style.width = 0;
+        _("progressBar").innerText = "0%";
+    }
+
+    function errorHandler(event) {
+        _("status").innerHTML = "Por favor espere";
+    }
+
+    function abortHandler(event) {
+        _("status").innerHTML = "Upload Aborted";
+    }
+
+</script>
 {% endblock %}

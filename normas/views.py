@@ -1,16 +1,22 @@
 import json
 import uuid
+import boto3
+
 from datetime import datetime
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
+from django.conf import settings
+from django.views import generic
 from django.shortcuts import redirect, render
-from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator
 from django.contrib import messages
 from normas.filters import NormativaFilter
+from django.views.generic.edit import UpdateView
+from django.urls import reverse
+from normas.forms import NormativaForm
 
-from normas.serializer import keywords_serializer
-from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Subcategories_Normas
+from normas.serializer import keywords_serializer, subtipos_uso_serializer
+from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Subcategories_Normas, Subtipo_Normas
 
 def index(request):
     queryset = Register_Normativa.objects.all()
@@ -32,43 +38,39 @@ def index(request):
 
     return render(request, 'normativa/index.html', context)
 
-def form_normativa(request):
-    normativa = Subcategories_Normas.objects.order_by('order')
-    tipo_uso=Areas_Normas.objects.order_by('area_name')
-    palabras_clave = Register_Palabraclave.objects.all()
+def registrar_normativa(request):
+    subtipo_usos = Subtipo_Normas.objects.order_by('order')
+    sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
+
     context = {
-            'normativa':normativa,
-            'tipo_uso':tipo_uso,
-            'palabras_clave' : palabras_clave,
-            'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
-        }
+        'form' : NormativaForm,
+        'normas': Subcategories_Normas.objects.order_by('order'),
+        'tipo_uso': Areas_Normas.objects.order_by('order'),
+        'subtipo_uso': subtipo_usos,
+        'palabras_clave' : Register_Palabraclave.objects.all(),
+        'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'), # para que ? xd
+        'subtipos_uso_json' : sbu,
+    }
+
+    if request.method=='POST':
+        form = NormativaForm(data = request.POST, files = request.FILES)
+        
+        if form.is_valid():
+            normativa = form.save()
+            pcs = request.POST.getlist('palabras_clave[]')
+
+            # AQUI AGREGO, TAL VEZ SE PUEDA USAR OTRO METODO IDK
+            for pc in pcs:
+                objx, created = Register_Palabraclave.objects.get_or_create(name = pc.upper())
+                objx.normativas.add(normativa)
+
+            messages.success(request, 'Normativa Creada')
+            return redirect("/normativas/")
+            
+        else :
+            context['form'] = form
         
     return render(request, 'normativa/form_normativa.html', context)
-
-def registrar_normativa(request):
-    if request.method=='POST':
-        norma=request.POST['norma']
-        name_deno=request.POST['name_deno']
-        base_legal=request.POST['base_legal']
-        fecha_publi=request.POST['fecha_publi']
-        tip_norma=request.POST['tip_norma']
-        tip_uso=request.POST['tip_uso']
-        file_pdf= request.FILES.get('documento', None)
-        es_foro = True if request.POST.get('es_foro', False) == 'on' else False
-        es_vigente = True if request.POST.get('es_vigente', False) == 'on' else False
-        descripcion = request.POST['descripcion']
-        pcs = request.POST.getlist('palabras_clave[]')
-
-        normativa = Register_Normativa.objects.create(norma=norma,name_denom=name_deno,base_legal=base_legal,
-                    fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
-
-        # AQUI AGREGO, TAL VEZ SE PUEDA USAR OTRO METODO IDK
-        for pc in pcs:
-            objx, created = Register_Palabraclave.objects.get_or_create(name = pc.upper())
-            objx.normativas.add(normativa)
-
-        messages.success(request, 'Normativa Creada')
-        return redirect("/normativas/")
 
 # Create your views here.
 def registrar_palabras_clave(request, normativa):
@@ -83,56 +85,38 @@ def registrar_palabras_clave(request, normativa):
 
         palabras = get_all_palabras_clave_normativa(norma)
 
-        return HttpResponse(json.dumps(palabras, default=str), content_type="application/json")  
+        return HttpResponse(json.dumps(palabras, default=str), content_type="application/json")
 
-def editar_normativa(request, normativa):
-    normativa=Register_Normativa.objects.get(pk = normativa)
-    tipo_uso=Areas_Normas.objects.order_by('area_name')
-    tipo_normativa=Subcategories_Normas.objects.order_by('order')
-    palabras_clave = Register_Palabraclave.objects.all()
-    palabras_claves_normativa = normativa.keywords.all()
+class NormativaUpdateView(UpdateView):
+    model = Register_Normativa
+    # fields = ['norma', 'name_denom', 'base_legal', 'fecha_publi', 'tipo_norma', 'tipo_uso', 'document', 'es_foro', 'es_vigente', 'descripcion']
+    template_name = 'normativa/edit_normativa.html'
+    form_class = NormativaForm
 
-    context = {
-        'normativa':normativa,
-        'tipo_uso':tipo_uso,
-        'tipo_normativa':tipo_normativa,
-        'palabras_clave' : palabras_clave,
-        'palabras_claves_normativa' : palabras_claves_normativa,
-        'fecha_hoy' : datetime.today().strftime('%Y-%m-%d')
-
-    }
-
-    return render(request,'normativa/edit_normativa.html',context)
-
-def actualizar_normativa(request, normativa):
-    if request.method=='POST':
-        norma=request.POST['norma']
-        name_deno=request.POST['name_deno']
-        base_legal=request.POST['base_legal']
-        fecha_publi=request.POST['fecha_publi']
-        tip_norma=request.POST['tip_norma']
-        tip_uso=request.POST['tip_uso']
-        es_foro = True if request.POST.get('es_foro', False) == 'on' else False
-        es_vigente = True if request.POST.get('es_vigente', False) == 'on' else False
-        descripcion = request.POST['descripcion']
-
+    def get_success_url(self):
+        messages.success(self.request, 'Normativa Editada')
+        return reverse("index-normativas")
+    
+    def get_context_data(self, **kwargs):
+        normativa = self.get_object().id
+        normativa = Register_Normativa.objects.get(pk = normativa)
         
-        file_pdf = request.FILES.get('documento', None)
-
-        if file_pdf != None:
-            fs = FileSystemStorage()
-            file_pdf.name = str(uuid.uuid4())
-            Register_Normativa.objects.get(id=normativa).document.delete()
-            filename = fs.save('Document_normativa/' + file_pdf.name + '.pdf', file_pdf)
-            file_pdf = filename
-
-        Register_Normativa.objects.filter(id=normativa).update(norma=norma,name_denom=name_deno,base_legal=base_legal,
-        fecha_publi=fecha_publi,tipo_norma_id=tip_norma,tipo_uso_id=tip_uso,document=file_pdf,es_foro=es_foro, es_vigente=es_vigente, descripcion=descripcion)
-
-
-        messages.success(request, 'Normativa Editada')
-
-        return redirect('/normativas/')
+        context = super(NormativaUpdateView, self).get_context_data(**kwargs)
+        subtipos_uso = Subtipo_Normas.objects.order_by('order')
+        sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipos_uso ]
+        
+        context.update({
+            'normativa': normativa,
+            'subtipo_uso':  subtipos_uso,
+            'subtipos_uso_json' : sbu,
+            'tipo_normativa': Subcategories_Normas.objects.order_by('order'),
+            'tipo_uso': Areas_Normas.objects.order_by('order'),
+            'palabras_clave' : Register_Palabraclave.objects.all(),
+            'palabras_claves_normativa' : normativa.keywords.all(),
+            'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'),
+        })
+        
+        return context
 
 def eliminar_normativa(request, normativa):
     Register_Normativa.objects.filter(id = normativa).delete()
@@ -156,3 +140,22 @@ def get_all_palabras_clave_normativa(norma):
 
         return palabras
        
+class SignedURLView(generic.View):
+    def post(self, request, *args, **kwargs):
+        session = boto3.session.Session()
+        client = session.client(
+            "s3",
+            endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        )
+
+        url = client.generate_presigned_url(
+            ClientMethod="put_object",
+            Params={
+                "Bucket": settings.AWS_STORAGE_BUCKET_NAME,
+                "Key": f"normativa_files/{json.loads(request.body)['fileName']}",
+            },
+            ExpiresIn=300,
+        )
+        return JsonResponse({"url": url})
