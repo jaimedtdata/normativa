@@ -66,6 +66,7 @@
     "benefits": [
       1,
       2,
+      3,
       4
     ],
     "conditions": [
@@ -140,6 +141,7 @@
     "benefits": [
       1,
       2,
+      3,
       4
     ],
     "conditions": [
@@ -383,13 +385,13 @@
     "price_year": "0.00",
     "payment_method": "V",
     "membership_type": "PNA",
-    "is_enabled": true,
-    "penalty_fee": false,
+    "is_enabled": false,
+    "penalty_fee": true,
     "has_tutition": true,
     "date_enrollment": "2022-03-04",
     "date_expired": "2022-03-04",
     "created": "2022-03-04T10:33:19.051",
-    "updated": "2022-03-11T14:16:25.858"
+    "updated": "2022-03-07T10:54:39"
   }
 }
 ]

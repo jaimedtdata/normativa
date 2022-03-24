@@ -58,11 +58,7 @@ class Subcategories_Normas(models.Model):
     
     subcategory_name = models.CharField(max_length=200, blank=False,
         help_text='Nombre de sub Categoria',
-        verbose_name='sub Categoria')      
-    register_date_time = models.DateTimeField(
-        blank=False, null=False, auto_now_add=True,
-        help_text='Fecha de Registro',
-        verbose_name='Fecha de Registro')
+        verbose_name='sub Categoria')
     order = models.CharField(max_length=10, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                      blank=True, null=True)
