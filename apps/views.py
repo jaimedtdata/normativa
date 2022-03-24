@@ -389,7 +389,9 @@ class Login(LoginView):
     authentication_form = UserLoginForm
     template_name = 'login/login-interactivo.html'
 
-#Payment process clients external plan list form         
+#####
+#### start Payment process clients external plan list form
+######         
 class SignUpClients(FormView):
     template_name = 'checkout/profesional/register_form_cliente.html'
     form_class = ExternalUserForm
@@ -433,6 +435,10 @@ def checkout(request):
 
 def success_payment_client(request):
     return render(request, 'checkout/profesional/success_payment_cliente.html')
+
+#####
+#### end Payment process clients external plan list form
+######    
 
 #Payment process CAP external plan list form 
 class SignUpPremiumCAP(FormView):

@@ -19,12 +19,12 @@ urlpatterns = [
     path('success_suscription_cap/', success_suscription_cap, name='success_suscription_cap'),
     path('cap_cash_payment/', cap_cash_payment, name='cap_cash_payment'),
     
-    #
+    # clients
     path('checkout/', checkout, name='checkout'),
     path('sign-up-clients/', SignUpClients.as_view(), name='sign-up-clients'),
     path('success-payment-client/', success_payment_client, name='success_payment_client'),
     path('signup-premium-cap/', SignUpPremiumCAP.as_view(), name='signup-premium-cap'),
-    #
+    # Premium agremiado
     path('checkout-premium-cap/', checkout_premium_cap, name='checkout-premium-cap'),
     path('success-payment-cap/', success_payment_cap, name='success_payment_cap'),
     path('history-purchase/', history_purchase, name='history_purchase'),

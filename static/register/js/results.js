@@ -6,6 +6,8 @@ var capForm = document.getElementById('form-cap')
 var externalForm = document.getElementById('form-external')
 var dniInput = document.getElementById('dni-input')
 var spinnerDni = document.getElementById('spinner-dni')
+var spinnerformcap = document.getElementById('spinnerformcap')
+var btnCap = document.getElementById('btn-cap')
 
 var urlDni = '/dni/'
 var base_url = window.location.origin;
@@ -64,6 +66,8 @@ var base_url = window.location.origin;
 
                        capForm.addEventListener('submit', (e)=>{
                             e.preventDefault()
+                            spinnerformcap.innerHTML = `<div style="display: block;" class="spinner-border text-muted"></div>`
+
                             RegisterUserCap(cap, user_data)
                        })
 
@@ -139,10 +143,13 @@ const RegisterUserCap = (cap, user_data)=>{
             //show errors in the each field
             if (data.data.non_field_errors){
                 document.getElementById('password_error_form1').innerHTML=  `<ul><li>${data.data.non_field_errors}</li></ul>`
+
+                spinnerformcap.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
             }
 
             if (data.error){
                 document.getElementById('error_id_formulario1-email').innerHTML=  `<ul><li>${data.data.email}</li></ul>`
+                spinnerformcap.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
                 if(data.data.email === undefined){
                     document.getElementById('error_id_formulario1-email').classList.add('form-hide')
                     document.getElementById('success_id_formulario1-email').innerHTML=  'correcto'
@@ -211,7 +218,7 @@ const RegisterExternalUser = ()=>{
     fetch(urlExternalUser, optionsExternal)
         .then(resp=> resp.json())
         .then(data =>{
-
+            
             //show errors in the each field
             if (data.data.non_field_errors){
                 document.getElementById('password_error_form2').innerHTML=  `<ul><li>${data.data.non_field_errors}</li></ul>`
@@ -259,3 +266,6 @@ const RegisterExternalUser = ()=>{
 }
 
 
+function spinner(){
+    spinnerformcap.innerHTML = `<div style="display: block;" class="spinner-border text-muted"></div>`
+}

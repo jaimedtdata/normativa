@@ -13,6 +13,10 @@ from .serializers import MemberCAPSerializer
 from .utils import register_cap_users, register_external_user
 from .serializers import ErpSerializer, MemberExternalSerializer
 
+from apps.models import UserToken
+from apps.email import send_confirm_account
+
+
 
 
 def get_dni(request):
@@ -70,7 +74,9 @@ class RegisterCapAPIView(APIView):
         serializer = MemberCAPSerializer(data=request.data)
         if serializer.is_valid():
             cd = serializer.validated_data
-            register_cap_users(cd)
+            member = register_cap_users(cd)
+            token = UserToken(user_profile=member)
+            send_confirm_account(self.request, token.get_confirm_link(), member.email)
             data = {
                 'email': serializer.data['email'],
             }
