@@ -41,6 +41,17 @@ def index(request):
     return render(request, 'normativa/index.html', context)
 
 @login_required
+def ver_pdf(request, normativa):
+    normativa = Register_Normativa.objects.get(id = normativa)
+    if normativa.document:
+        context = {
+            'normativa': normativa
+        }
+
+        return render(request, 'normativa/ver_pdf_normativa.html', context)
+
+
+@login_required
 def registrar_normativa(request):
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
     sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]

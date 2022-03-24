@@ -214,6 +214,6 @@ CART_SESSION_ID = 'cart'
 # AWS_LOCATION = os.getenv('AWS_LOCATION')
 
 # activar iframe
-# X_FRAME_OPTIONS = 'ALLOWALL'
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 # XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']# Configure Django App for Heroku.
