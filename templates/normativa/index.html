@@ -7,7 +7,7 @@
     <br>
     <div class="row">
         <div class="col">
-            <a href="{% url 'crear-normativa' %}" class="btn btn-primary text-white" style="background-color:#24387C;">
+            <a href="{% url 'registrar-normativa' %}" class="btn btn-primary text-white" style="background-color:#24387C;">
                 <i class="fas fa-plus"></i>
                 Agregar nueva
             </a>
@@ -30,10 +30,13 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <td>T. Norma</td>
+                <td>T. Uso</td>
+                <td>Sub. Uso</td>
                 <td >Norma</td>
                 <td>Titulo</td>
                 <td>Base Legal</td>
-                <td>Tipo Uso</td>
+                <td>Articulado</td>
                 <td>Documento</td>
                 <td>Publicacion</td>
                 <td>Observacion</td>
@@ -43,16 +46,22 @@
             {% if entity %}
                 {% for norma in entity %}
                 <tr>
+                    
+                    <td>{{norma.tipo_norma}}</td>
+                    <td>{{norma.subtipo_uso.tipo_uso}}</td>
+                    <td>{{norma.subtipo_uso}}</td>
                     <td>{{norma.norma}}
-                        {% if norma.es_vigente == False %}
+                        {% if norma.estado == 'NV' %}
                             <small class="fst-italic fw-lighter fs-7 text-danger">*No vigente</small>
+                        {% elif norma.estado == 'DP' %}
+                            <small class="fst-italic fw-lighter fs-7 text-danger">*Derogado Parcialmente</small>
                         {% endif %}
                     </td>
                     <td>{{norma.name_denom}} 
                         
                     </td>
                     <td>{{norma.base_legal}}</td>
-                    <td>{{norma.tipo_uso}}</td>
+                    <td>{{norma.articulo}}</td>
                     <td class="text-center">
                         {% if norma.document %}
                             <a target="_blank" href="{{norma.document.url}}">

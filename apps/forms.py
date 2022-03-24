@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Plan, Member
-from foro.models import Coments_foro
+from foro.models import Comentario_Foro
 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -292,7 +292,7 @@ class SignUpForm(ExternalRegisterForm):
 class CommentForm(forms.ModelForm):
 
     class Meta:
-          model = Coments_foro
+          model = Comentario_Foro
           fields = '__all__'
           widgets = {
                 'coments': forms.TextInput(attrs=FORM_CONTROL),

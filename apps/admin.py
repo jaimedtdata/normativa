@@ -20,9 +20,9 @@ admin.site.register(Order_payment,Order_paymentAdmin)
 
 #johao
 class Register_NormativaAdmin(admin.ModelAdmin):
-    list_display=('id','norma','name_denom','base_legal','fecha_publi','tipo_norma','tipo_uso','document')
+    list_display=('id','norma','name_denom','base_legal','fecha_publi','tipo_norma','subtipo_uso','document')
     #readonly_fields = ['created', 'updated']    
-    list_filter = ['es_vigente', 'created', 'name_denom']
+    list_filter = ['estado', 'created', 'name_denom']
 
 class Register_PalabraclaveAdmin(admin.ModelAdmin):
     list_display=('id','name','normativa')

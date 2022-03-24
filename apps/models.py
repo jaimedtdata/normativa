@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+
+from foro.models import Foro
 from .choices import *
 from django.contrib import admin
 from django.utils.html import format_html
@@ -7,7 +9,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse,reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from membership.models import Membership
-from normas.models import Register_Normativa
 
 
 def upload_file(instance, filename):
@@ -101,7 +102,7 @@ class Member(models.Model):
     membership = models.ForeignKey(Membership, related_name='user_membership', 
                                         on_delete=models.SET_NULL,blank=True, null=True)
     
-    suscripcion_foro = models.ManyToManyField(Register_Normativa, related_name="suscripcion_foro", blank=True) 
+    suscripcion_foro = models.ManyToManyField(Foro, related_name="suscripcion_foro", blank=True) 
     
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion')
     updated = models.DateTimeField(auto_now=True, verbose_name='Fecha de actualización')

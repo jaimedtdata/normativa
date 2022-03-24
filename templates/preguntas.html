@@ -40,8 +40,8 @@
       </div> 
     </form>
     
-    {% if request.user|has_group:'ESPECIALISTA' or perms.normas.add_policies_usage %}
-      <a href="{% url 'admin:normas_policies_usage_changelist' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar pregunta</a> 
+    {% if request.user|has_group:'ESPECIALISTA' or perms.normas.add_policies_usage and request.user.is_staff %}
+      <a href="{% url 'admin:normas_policies_usage_add' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar pregunta</a> 
     {% endif %}
 
 

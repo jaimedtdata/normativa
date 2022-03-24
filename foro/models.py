@@ -1,12 +1,5 @@
 from django.db import models
-from django.contrib import admin
-from django.apps import apps
-#from .models import (Location_Normas)
-from django.contrib.sessions.models import Session
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
-
-from normas.models import Register_Normativa
 # Create your models here.
 
 """
@@ -15,23 +8,31 @@ from normas.models import Register_Normativa
 
 """
 
-class Coments_foro(models.Model):
-    
-    tema = models.ForeignKey(Register_Normativa, on_delete=models.CASCADE, null=True, default=None)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+class Foro(models.Model):
+    nombre = models.CharField(max_length=200, blank=False, verbose_name='Nombre del foro')
+    descripcion = models.TextField()
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
 
-    coments = models.CharField(max_length=200, blank=False,
-        help_text='comentario',
-        verbose_name='comentario')
+    class Meta:
+        verbose_name_plural = 'Foro'
+
+    def __str__(self):
+        return self.nombre
+
+class Comentario_Foro(models.Model):
+    foro = models.ForeignKey(Foro, on_delete=models.CASCADE, null=True, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comentario = models.CharField(max_length=200, blank=False, verbose_name='Comentario')
 
     likes = models.PositiveSmallIntegerField(default=0,help_text='Likes', verbose_name='Likes')
     dislikes = models.PositiveSmallIntegerField(default=0,help_text='Dislikes', verbose_name='Dislikes')
     
-    register_date_time = models.DateTimeField(
-        blank=False, null=False, auto_now_add=True,
-        help_text='Fecha de Registro',
-        verbose_name='Fecha de Registro')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+
     class Meta:
         verbose_name_plural = 'Comentarios'
+
     def __str__(self):
-        return self.coments  
+        return self.comentario  

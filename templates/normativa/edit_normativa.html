@@ -1,5 +1,6 @@
 {% extends 'base_nfr.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     
@@ -22,67 +23,80 @@
                     <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
                 </a>
             </div>
-            <div class="col-1"></div>
         </div>
         <br><br>
         <form  id="fileForm" method='POST' enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
                 <div class="col-6">
-                    <label for="norma">Norma</label>
-                    <input type="text" class="form-control" id="id_norma" name="norma" value="{{normativa.norma}}" required/>
+                    <div class="form-group">
+                        {{ form.norma|as_crispy_field }}
+                    </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="name_deno">Titulo</label>
-                        <input type="text" name="name_denom" id="id_name_denom" class="form-control" value="{{normativa.name_denom}}" required/>
+                        {{ form.name_denom|as_crispy_field }}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <label for="base">Base Legal</label>
-                    <input type="text" name="base_legal" id="id_base_legal" class="form-control" value="{{normativa.base_legal}}" required/>
+                    <div class="form-group">
+                        {{ form.base_legal|as_crispy_field }}
+                    </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="fecha_publi">Publicacion</label>
-                        <input id="id_fecha_publi" type="date" name="fecha_publi" class="form-control" value="{{normativa.fecha_publi|date:"Y-m-d"}}" required min="1900-01-01" max="{{fecha_hoy}}"/>
+                        {{ form.fecha_publi|as_crispy_field }}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <label> Tipo de Norma: </label>
-                    <select class="form-control" aria-label="Default select example" name="tipo_norma" id="id_tipo_norma">
-                                            {% for tipo_norma in tipo_normativa %}
-                                                <option value="{{tipo_norma.id}}">{{tipo_norma.subcategory_name}}</option>
-                                            {% endfor %}
-                                    </select>
+                    <div class="form-group">
+                        <label> Tipo de Uso: </label>
+                        <select class="form-control" aria-label="Default select example" name="tipo_uso" id="tipo_uso_id">
+                            {% for tipo in tipo_uso %}
+                            <option value="{{tipo.id}}">{{tipo.area_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                 <div class="col-6">
-                    <label> Tipo de Uso: </label>
-                    <select class="form-control" aria-label="Default select example" name="tipo_uso" id="id_tipo_uso">
-                                    {% for tipo_uso in tipo_uso %}
-                                        <option value="{{tipo_uso.id}}">{{tipo_uso.area_name}}</option>
-                                    {% endfor %}
-                                </select>
+                    <div class="form-group">
+                        <label> Subtipo de Uso: </label>
+                        <select class="form-control" aria-label="Default select example" name="subtipo_uso" id="subtipo_uso_id">
+                            {% for subtipo in subtipo_uso %}
+                                <option value="{{subtipo.id}}">{{subtipo.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form.tipo_norma|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form.estado|as_crispy_field }}
+                    </div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-6">
                     <div class="form-group">
-                        <label>Adjuntar Documento</label>
-                        <br>
+                        {{ form.document|as_crispy_field }}
                         {% if normativa.document %}
                             <a class="text-dark" target="_blank" href="{{normativa.document.url}}">
                                 <b> Esta Normativa tiene archivo (click para ver) </b>
                             </a>
                         {% endif %}
-                        <input id="id_document" type="file" name="document"/>
                     </div>
-                    <div class="mt-3">
-                        <div class="shadow w-full bg-gray-100">
+                    <div class="mb-3">
+                        <div class="w-full bg-gray-100">
                             <div class="progress">
                                 <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                               </div>
@@ -92,26 +106,22 @@
                         <h3 id="status"></h3>
                     </div>
                     <div class="form-group">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="id_es_vigente" name="es_vigente">
-                            <label class="custom-control-label" for="id_es_vigente">Vigente</label>
-                        </div>
+                        {{ form.universo|as_crispy_field }}
                     </div>
                     <div class="form-group">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="id_es_foro" name="es_foro">
-                            <label class="custom-control-label" for="id_es_foro">Foro</label>
-                        </div>
+                        {{ form.articulo|as_crispy_field }}
                     </div>
                     
                     
                 </div>
-                <div class="col-6">
-                    <label>Descripción breve</label><br>
-                    <textarea class="form-control" rows="5" maxlength="200" name="descripcion" id="id_descripcion">{% if normativa.descripcion %} {{normativa.descripcion}} {% endif %}</textarea>
+                <div class="col-6 ">
+                    <div class="form-group ">
+                        {{ form.descripcion|as_crispy_field }}
+                    </div>
+                    <span id="max_characters" class="text-muted text-italic float-right">0/700</span>
                 </div>
             </div>
-            <button class="btn btn-lg btn-primary float-right" type="submit" id="submitBtn3" >Guardar Cambios</button>
+            <button class="btn btn-lg btn-primary float-right mt-2" type="submit" id="submitBtn3" >Guardar Cambios</button>
         </form>
         <h2 class="text-center mt-5"> Editar Palabras Clave</h2>
         {% include '../partials/_palabras_clave.html' %}
@@ -127,7 +137,45 @@
 
     <script>
 
+        const max_characters = document.getElementById('max_characters')
+        const ld = document.getElementById('id_descripcion')
+
+        ld.addEventListener('keyup', e => {
+            max_characters.innerHTML = `${ld.value.length}/700`
+        })
+
+        ld.addEventListener('keypress', e => {
+            max_characters.innerHTML = `${ld.value.length}/700`
+        })
+
+        // FUNCIONES PARA EL LISTADO DINAMICO
+        const tipos_uso = document.getElementById('tipo_uso_id')
+        const subtipos_uso = document.getElementById('subtipo_uso_id')
+        const subtipos_uso_json = {{ subtipos_uso_json|safe }}
         
+        
+        tipos_uso.value = "{{normativa.subtipo_uso.tipo_uso_id}}" 
+        
+        changeOptionsSubtipoUso()
+        
+
+        subtipos_uso.value = "{{normativa.subtipo_uso_id}}" 
+
+        tipos_uso.addEventListener('change', (e) => {
+
+            changeOptionsSubtipoUso()
+            
+        })
+
+        function changeOptionsSubtipoUso() {
+            var options_sbu = ``
+            subtipos_uso_json.forEach( sbu => {
+                if( sbu.tipo_uso_id == tipos_uso.value ) {
+                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+                }            
+            })
+            subtipos_uso.innerHTML = options_sbu
+        }
 
         $(document).ready(function() {
 

@@ -11,17 +11,7 @@
         <div class="col-md-7">
             <form method="GET" action="{% url 'search' %}" id="buscar_tema">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class="form-control" name="area_norma">
-                                <option value="0"> TODOS </option>
-                                {% for an in area_normas %}
-                                    <option value={{an.id}}> {{an.area_name}} </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Buscar por titulo" name="tema">
                             <span class="input-group-append">
@@ -39,12 +29,15 @@
     		<h5 style="color:#c1a13f;">Últimos Comentarios</h5>
     	</div>
     </div>
+    {% if request.user|has_group:'ESPECIALISTA' or perms.foro.add_foro and request.user.is_staff %}
+      <a href="{% url 'admin:foro_foro_add' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar Foro </a> 
+    {% endif %}
     <div class="row">
     	<div class="col-md-9" id="temas">
-    		{% include '../partials/_foro_list.html' %}
+    		{% include './partials/_foro_list.html' %}
     	</div>
     	<div  class="col-md-3">
-    		{% include '../partials/_themes_list.html' with last_themes=last_themes %}
+    		{% include './partials/_comentarios_list.html' with last_comentarios=last_comentarios %}
     	</div>
     </div>
 </div>

@@ -33,8 +33,8 @@ from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
-from normas.models import Areas_Normas, Policies_usage
-from foro.models import Coments_foro
+from normas.models import Areas_Normas, Policies_usage, Subtipo_Normas
+from foro.models import Comentario_Foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector, SearchQuery
@@ -42,7 +42,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery
 
 from bus_normativa.models import date_normativa
 from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
-from normas.serializer import normas_serializer
+from normas.serializer import normas_serializer, subtipos_uso_serializer, tipos_uso_serializer
 
 from .utils import create_member_free
 from .forms_register import MemberCapForm, ExternalUserForm
@@ -171,21 +171,32 @@ def update_clave(request,codigo):
         pala_clave=pala_clave.upper()
         Register_Palabraclave.objects.filter(id=codigo).update(name=pala_clave)
         return redirect('dateregister_norm')
-        #return redirect('form_normativas')
-# end Registrando Palabra clave
-#
+
 def norma_edificatoria(request):
     return render(request,'normativa/normatividad_edificatoria.html',None)
     
 def norma_datos(request):
-    norma_date = Register_Normativa.objects.order_by('norma')
-    subtipo_normas = Subcategories_Normas.objects.order_by('order')
+    norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso.tipo_uso').order_by('subtipo_uso').order_by('norma')
+    subcategories_normas = Subcategories_Normas.objects.order_by('order')
     area_normas = Areas_Normas.objects.order_by('area_name')
     palabras_clave = Register_Palabraclave.objects.all()
+    subtipo_usos = Subtipo_Normas.objects.order_by('order')
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
+    sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
+    tu = [ tipos_uso_serializer(tu) for tu in area_normas ]
 
-    context={'norma_date':norma_date, 'subtipo_normas':subtipo_normas, 'normas' : json.dumps(normas), 'area_normas' : area_normas, 'palabras_clave' : palabras_clave}
+
+    context={
+            'norma_date':norma_date,
+            'subcategories_normas':subcategories_normas, 
+            'area_normas' : area_normas, 
+            'palabras_clave' : palabras_clave,
+            'subtipo_usos' : subtipo_usos,
+            'normas' : json.dumps(normas),
+            'sbu' : json.dumps(sbu),
+            'tu' : json.dumps(tu),
+            }
     return render(request,'normativa/norma_urb_edit.html',context)
 
 # FILTRAR NORMATIVAS DE EDIFICACIONES
@@ -695,13 +706,13 @@ def foro_comentarios(request):
     if request.method == "POST":
         comentario = request.POST.get('comentario')
         print ('POSTBOTON',comentario)
-        b = Coments_foro(themas=f_id,user=request.user, coments=comentario)
+        b = Comentario_Foro(themas=f_id,user=request.user, coments=comentario)
         print ('POSTBBB',b)
         b.save()
         
 
     #print("request",f_id)
-    comentarios = Coments_foro.objects.filter(user=1 ,themas=f_id)
+    comentarios = Comentario_Foro.objects.filter(user=1 ,themas=f_id)
     number_coments = comentarios.count()
     
     context = {
@@ -715,7 +726,7 @@ def foro_comentarios(request):
 
 # def comentarios_save(request, pk=None):
     
-#     post = get_object_or_404(Coments_foro, pk=pk)
+#     post = get_object_or_404(Comentario_Foro, pk=pk)
    
 #     if request.method == "POST":
 #         form = CommentForm(request.POST, instance=post)
