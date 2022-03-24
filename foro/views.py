@@ -10,7 +10,9 @@ from .models import Comentario_Foro, Foro
 from normas.models import Areas_Normas, Register_Normativa
 from apps.models import Member, UserToken
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def foro(request):
 
     context = {
@@ -22,6 +24,7 @@ def foro(request):
 
 
 # VISTA Y REGISTO DE COMENTARIOS DE FORO
+@login_required
 def foro_comentarios(request, foro_id):
 
     foro = Foro.objects.get(id = foro_id)
@@ -49,6 +52,7 @@ def foro_comentarios(request, foro_id):
 
     return render(request, 'foro/foro_comentarios.html', context)
 
+@login_required
 def borrar_comentario_foro(request, foro_id, comentario_id):
     if request.method == "POST":
         comentario = Comentario_Foro.objects.filter(id = comentario_id)
@@ -58,6 +62,7 @@ def borrar_comentario_foro(request, foro_id, comentario_id):
 
 
 # SUSCRIPCION Y DESUSCRIPCION DE FORO POR PARTE DE LOS USUARIOS PARTICIPANTES
+@login_required
 def foro_suscripcion(request, foro_id):
 
     if request.method == "POST":
@@ -82,6 +87,7 @@ def foro_suscripcion(request, foro_id):
 
 
 # PETICION AJAX EN LA PAGINA PRINCIPAL DE FORO
+@login_required
 def buscar_foro(request):
     foro = request.GET.get('foro')
 

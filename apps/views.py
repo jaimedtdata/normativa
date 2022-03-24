@@ -172,9 +172,11 @@ def update_clave(request,codigo):
         Register_Palabraclave.objects.filter(id=codigo).update(name=pala_clave)
         return redirect('dateregister_norm')
 
+@login_required
 def norma_edificatoria(request):
     return render(request,'normativa/normatividad_edificatoria.html',None)
-    
+
+@login_required
 def norma_datos(request):
     norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso.tipo_uso').order_by('subtipo_uso').order_by('norma')
     subcategories_normas = Subcategories_Normas.objects.order_by('order')
@@ -582,7 +584,7 @@ def history_purchase(request):
 ### end Payment process -  upddate membership to internal users that have free registration to Premium
 ##########
 
-#@login_required
+@login_required
 def preguntas(request):
     tipo_uso = Areas_Normas.objects.order_by('area_name')
     page = request.GET.get('page', 1)
@@ -603,6 +605,7 @@ def preguntas(request):
 
     return render(request, 'preguntas.html', context)
 
+@login_required
 def filter_preguntas(request):
     tipo_uso_id = request.GET.get('tipo_uso_id', 0)
     pregunta = request.GET.get('pregunta', '')
