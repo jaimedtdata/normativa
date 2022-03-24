@@ -159,6 +159,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_LOCATION = os.getenv('AWS_LOCATION')
 
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+# activar iframe
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 's3'),

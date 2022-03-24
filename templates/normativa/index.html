@@ -64,7 +64,7 @@
                     <td>{{norma.articulo}}</td>
                     <td class="text-center">
                         {% if norma.document %}
-                            <a target="_blank" href="{{norma.document.url}}">
+                            <a target="_blank" href="{% url 'ver-pdf' norma.id %}">
                                 <i class="fa fa-file-pdf fa-2x text-danger mr-1" aria-hidden="true"></i>
                             </a>
                         {% else %}
