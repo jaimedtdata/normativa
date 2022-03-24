@@ -200,6 +200,11 @@
                 options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
             }            
         })
+
+        if (options_sbu.length == 0) {
+            options_sbu += /*html*/`<option class="text-wrap" value selected>---SIN SUBTIPOS, SELECCIONE OTRO TIPO DE USO---</option>`
+        }
+
         subtipos_uso.innerHTML = options_sbu
     }
 
