@@ -10,7 +10,7 @@ from django.shortcuts import render
 from .models import Member
 from membership.models import APIMember
 from .serializers import MemberCAPSerializer
-from .utils import register_cap_users, register_external_user
+from .utils import register_cap_users, register_client_user
 from .serializers import ErpSerializer, MemberExternalSerializer
 
 from apps.models import UserToken
@@ -92,7 +92,7 @@ class RegisterExternalUsersAPIView(APIView):
         serializer = MemberExternalSerializer(data=request.data)
         if serializer.is_valid():
             cd = serializer.validated_data
-            register_external_user(cd)
+            register_client_user(cd)
             data = {
                 'names': serializer.data['names'],
                 'identity': serializer.data['identity'],

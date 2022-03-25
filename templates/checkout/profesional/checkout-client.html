@@ -1,0 +1,103 @@
+{% extends 'checkout/base_payment_client.html' %}
+{% load static %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'checkout/form-checkout.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'checkout/style.css' %}">
+    <script src="{% static 'vendor/jquery3/jquery.slim.min.js' %}" ></script>
+{% endblock css %}
+    
+
+{% block content %}
+
+
+<div class="container">
+    
+
+    <div class="row mt-2">
+            <div class="col-lg-6 col-md-8 col-sm-12 offset-1  ">
+                <div class="card-header d-flex justify-content-center">
+                    <div >
+                        <i class="text-muted" ><b>Formulario de pago : </b></i> 
+                        <!-- <h3 class=" " style="color: #c1a13f;">Plan Premium Agremiado</h3> -->
+
+                    </div>
+                </div>
+
+                <div class="card mb-4 shadow">
+                    
+                    <div class="card-footer">
+                        <div class="row d-flex justify-content-center">
+                            
+                            <!-- form niubiz -->
+                            <form action='{% url "checkout_client" %}' method="post">
+                                {% csrf_token %}
+                                <script type="text/javascript" src="https://static-content-qas.vnforapps.com/v2/js/checkout.js"
+                                data-sessiontoken="{{token_session}}"
+                                data-channel="web"
+                                data-merchantid="{{comercial_id}}"
+                                data-purchasenumber="{{purchase_number}}"
+                                data-amount="{{price}}"
+                                data-expirationminutes="20"
+                                data-timeouturl="about:blank"
+                                data-merchantlogo="{% static 'images/niubiz/cap_niubiz2.png' %}"
+                                data-merchantname="COMERCIO 1"
+                                data-formbuttoncolor="#000000"
+                                >
+                                
+                                </script>
+                            </form>
+                            <small class="text-muted text-center">*Despues del pago serás redireccionado a otra pagina, por favor espera a que concluya la operación.</small>
+                        </div>
+                    </div>
+                </div>
+
+                
+        </div>
+        <div class="col-lg-5 col-md-2 col-sm-12">
+            <div class="card ">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><h2>Resumen del Pedido</h2></li>
+                            <li class="list-group-item"><h5><i>{{type_membership}}</i></h5></li>
+                          </ul>
+                    </div>
+                    
+                </div>
+                <div class="card-footer">
+                    <div class="row d-flex justify-content-around">
+                        <h3>Total:</h3>
+                        <h3>s/ {{price}}</h3>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+
+
+
+{% endblock content %}
+
+       
+
+{% block js %}
+    <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
+
+            
+    {% comment %}               
+    {% endcomment %}
+    <script>
+        console.log('seguridad','{{token_security}}')
+        console.log('token de sesion','{{token_session}}')
+    </script>
+
+{% endblock js %}
+    

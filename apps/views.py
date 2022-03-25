@@ -41,7 +41,7 @@ from bus_normativa.models import date_normativa
 from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
 from normas.serializer import normas_serializer
 
-from .utils import create_member_free
+from .utils import create_member_free, register_client_user
 from .forms_register import MemberCapForm, ExternalUserForm
 
 from membership.models import Membership
@@ -351,6 +351,8 @@ class SignUpFormView(FormView):
     #     return super(SignUpOthers, self).form_invalid(form)
 
 class RegisterMemberTemplateView(TemplateView):
+    """ Template View to sign up cap users  """
+
     template_name = 'register/sign-up-user.html'
 
     def get_context_data(self, **kwargs):
@@ -390,15 +392,15 @@ class Login(LoginView):
     template_name = 'login/login-interactivo.html'
 
 #####
-#### start Payment process clients external plan list form
+#### start Payment process clients external PROFESIONAL PLAN list form
 ######         
 class SignUpClients(FormView):
     template_name = 'checkout/profesional/register_form_cliente.html'
     form_class = ExternalUserForm
-    success_url = reverse_lazy('checkout')
+    success_url = reverse_lazy('client_choose_plan')
 
-    def get_context_data(self):
-        context = super().get_context_data()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         exist_codigo_etica=UsagePolicies.objects.filter(title__icontains="codigo de etica").exists()
         if exist_codigo_etica:
             codigo_etica=UsagePolicies.objects.get(title__icontains="codigo de etica")
@@ -409,38 +411,110 @@ class SignUpClients(FormView):
     def form_valid(self, form):
         cd = form.cleaned_data
         print(cd)
-
-        # member = create_member_free(cd)
-        # password = cd['password']
-
-        # user = User.objects.create_user(member.tuition, member.email, password)
-        # user.last_name = member.first_surname
-        # user.save()
-        # #update member according to user created above
-        # m=Member.objects.get(id=member.id)
-        # m.user=user
-        # m.save()
+        member = register_client_user(cd)
+        self.request.session['user_identity']= cd['identity']
         
-        #token = UserToken(user_profile=member)
-        #send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        token = UserToken(user_profile=member)
+        send_confirm_account(self.request, token.get_confirm_link(), member.email)
 
-        return HttpResponseRedirect(reverse_lazy('checkout'))
+        return HttpResponseRedirect(reverse_lazy('client_choose_plan'))
 
-def checkout(request):
-    context = {
-        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+
+def client_choose_plan(request):
+    context={
         'pl_profesional': Membership.objects.get(membership_type="PLPP"),
-        }
-    return render(request, 'checkout/profesional/checkout.html', context)
+    }
+    return render(request, 'checkout/profesional/client_choose_plan.html', context)
 
+def add_plan_client(request):
+    if request.method == 'POST':
+        cd = request.POST
+        #SAVE THE PRICE IN THE SESSION
+        r = request.session
+        r['plan_price_client']= cd['plan_price_client']
+    return redirect('checkout_client')
+
+@csrf_exempt
+def checkoutClient(request):
+    COMERCIAL_ID = settings.COMERCIAL_ID
+    type_membership = None
+    plpp=Membership.objects.get(membership_type="PLPP")
+    #price =  22.00
+    price =  request.session.get('plan_price_client')
+    try:
+        member = Member.objects.get(identity=request.session.get('user_identity'))
+    except:
+        member=request.user.user_membership
+
+    if plpp.price_month == Decimal(price):
+        type_membership = "Plan mensual"
+    if plpp.price_year == Decimal(price):
+        type_membership= "Plan anual"
+    purchase_number = 2022 #numero de pedido
+    #purchase_number = request.user.username #numero de pedido
+    security_token = get_security_token()
+    token_session = create_session_token(security_token, price)
+    context = {
+        'pl_profesional': Membership.objects.get(membership_type="PLPP"),
+        'token_security' : security_token,
+        'token_session' : token_session,
+        'comercial_id' : COMERCIAL_ID,
+        'purchase_number': purchase_number,
+        'price' : price,
+        'type_membership':type_membership
+        }
+
+    if request.method == 'POST':
+        cd = request.POST
+        email=request.POST['customerEmail']
+        token_transaccion = request.POST['transactionToken']
+        #user=request.user.user_membership
+        user=member
+        print('checkout',cd)
+        if request.POST['channel'] == 'pagoefectivo':
+            url=request.POST['url']
+            return redirect('client_cash_payment')
+
+        transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
+        print("transacion exitosa", transaction_success)
+        niubiz_id = transaction_success['ecoreTransactionUUID']
+        orden = create_order_payment(user,email,niubiz_id, price, type_membership)
+        #create transaction niubiz
+        create_niubiz_transaction(transaction_success, orden)
+        #DELETE THE SESSION
+        
+
+        return redirect('success_payment_client')
+
+    return render(request, 'checkout/profesional/checkout-client.html', context)
+
+@csrf_exempt
 def success_payment_client(request):
-    return render(request, 'checkout/profesional/success_payment_cliente.html')
+    try:
+        order = Order_payment.objects.filter(identity=request.session.get('user_identity')).first()
+        order = Order_payment.objects.filter(identity=request.user.user_membership.identity).first()
+    except:
+        pass
+    
+    context = {
+        'order': order,
+    }
+    #del request.session['plan_price_client']
+    #del request.session['user_identity']
+    #request.session.modified = True
+    return render(request, 'checkout/profesional/success_payment_cliente.html', context)
+
+def client_cash_payment(request):
+    return render(request, 'checkout/profesional/pago-efectivo-client.html')
 
 #####
-#### end Payment process clients external plan list form
+#### END Payment process clients external PROFESIONAL PLAN list form
 ######    
 
-#Payment process CAP external plan list form 
+
+######################
+#### START Payment process PLAN PREMIUM CAP
+################
 class SignUpPremiumCAP(FormView):
     template_name = 'checkout/premium_agremiado/register_form_premium_cap.html'
     form_class = ExternalUserForm
@@ -458,7 +532,7 @@ class SignUpPremiumCAP(FormView):
     def form_valid(self, form):
         cd = form.cleaned_data
         print(cd)
-
+    
         # member = create_member_free(cd)
         # password = cd['password']
 
@@ -485,8 +559,13 @@ def checkout_premium_cap(request):
 def success_payment_cap(request):
     return render(request, 'checkout/premium_agremiado/success_payment_cap.html')
 
+######################
+#### END Payment process PLAN PREMIUM CAP
+################
+
+
 #########
-### start Payment process -  upddate membership to internal users that have free registration to Premium
+### start Payment process -  PLAN AGREMIADO TO PREMIUM
 ##########
 def cap_choose_plan(request):
     context={
@@ -565,6 +644,10 @@ def cap_cash_payment(request):
     print(request.POST)
     return render(request, 'checkout/premium_free/success-pagoefectivo.html')
 
+#########
+### end Payment process -  PLAN AGREMIADO TO PREMIUM
+##########
+
 def history_purchase(request):
     user =  request.user.user_membership.identity
     orders = Order_payment.objects.filter(identity=user)
@@ -573,9 +656,7 @@ def history_purchase(request):
     }
     return render(request, 'checkout/premium_free/history_purchase.html' , context)
 
-#########
-### end Payment process -  upddate membership to internal users that have free registration to Premium
-##########
+
 
 #@login_required
 def preguntas(request):

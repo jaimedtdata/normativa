@@ -1,0 +1,40 @@
+{% extends 'checkout/base_payment_client.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'checkout/form-checkout.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'checkout/style.css' %}">
+    <script src="{% static 'vendor/jquery3/jquery.slim.min.js' %}" ></script>
+
+
+    
+{% endblock css %}
+
+{% block content %}
+  
+  
+    <div class="container ">
+      <div class="row">
+      
+        <div class="col-md-10 order-md-1 offset-1" >
+          <div class="card  mb-5">
+            <div class="card-body">
+              <div class="d-flex flex-column  align-items-center">
+                <h3 class="text-secondary">Gracias por suscribirte, Estaremos a la espera del Pago</h3>
+              </div>
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-success" href="{% url 'login' %}">Ir al Inicio</a>
+                </div>
+                
+            </div>
+          </div>
+         
+          </div>
+        </div>
+      </div>
+
+
+{% endblock content %}

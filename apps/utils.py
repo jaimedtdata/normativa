@@ -160,8 +160,8 @@ def register_cap_users(user):
             #send_confirm_account(self.request, token.get_confirm_link(), member.email)
             return member
 
-def register_external_user(user):
-    membership_noagremiado = Membership.objects.get(membership_type='PNA')
+def register_client_user(user):
+    membership_profesional = Membership.objects.get(membership_type='PLPP')
     member, created = Member.objects.get_or_create(
                             names= user['names'],
                             first_surname= user['first_surname'], 
@@ -172,15 +172,15 @@ def register_external_user(user):
                             email= user['email'], 
                             address= user['address'], 
                             tuition= user['identity'], 
-                            membership= membership_noagremiado
+                            membership= membership_profesional
                             )
     print('====================================')
     print(member.names)
     password = user['password1']
-    #group = Group.objects.get(name='Gratuito')      
+    group = Group.objects.get(name='PARTICIPANTE')            
     user = User.objects.create_user(member.tuition, member.email, password)
     user.last_name = member.first_surname
-    #user.groups.add(group)
+    user.groups.add(group)
     user.save()
     #update member according to user created above
     m=Member.objects.get(id=member.id)

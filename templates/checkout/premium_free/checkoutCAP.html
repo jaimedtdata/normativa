@@ -206,13 +206,14 @@
 {% block js %}
         <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
 
+        
+        {% comment %}               
         <script>
-            console.log('precio mensual','{{pl_premium_agremiado.price_month}}')
             console.log('seguridad','{{token_security}}')
             console.log('token de sesion','{{token_session}}')
-
             
         </script>
+        {% endcomment %}
 
 
         {% comment %}

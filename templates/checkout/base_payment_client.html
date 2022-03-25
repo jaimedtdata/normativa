@@ -15,6 +15,11 @@
 </head>
 
 
+{% block css %}
+    
+{% endblock css %}
+    
+
 <body class="bg-light">
 
 
@@ -32,10 +37,13 @@
         <section>
             <nav>
                 <ol class="cd-multi-steps text-bottom count">
-                    <li class="{%  if request.path == '/sign-up-clients/' %} current {% elif request.path == '/checkout/' %} visited {% elif request.path == '/success-payment-client/' %} visited {% endif %}">
+                    <li class="{%  if request.path == '/sign-up-clients/' %} current {%  elif request.path == '/client_choose_plan/' %} visited  {% elif request.path == '/checkout-client/' %} visited {% elif request.path == '/success-payment-client/' %} visited {% endif %} ">
                         <a class="text-muted" href="#0">Registro</a>
                     </li>
-                    <li class="{%  if request.path == '/checkout/' %} current {% elif request.path == '/sign-up-clients/' %} '' {% elif request.path == '/success-payment-client/' %} visited {% endif %}" >
+                    <li class="{%  if request.path == '/client_choose_plan/' %} current  {%  elif request.path == '/checkout-client/' %} visited {%  elif request.path == '/success-payment-client/' %} visited {% endif %}">
+                        <a class="text-muted" href="#0">Elegir Plan</a>
+                    </li>
+                    <li class="{%  if request.path == '/checkout-client/' %} current {%  elif request.path == '/success-payment-client/' %} visited {% endif %}" >
                         <a class="text-muted" href="#0">Método de Pago</a>
                     </li>
                     <li class="{%  if request.path == '/success-payment-client/' %} current  {% endif %}" >
