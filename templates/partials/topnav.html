@@ -62,7 +62,7 @@
                         </span> 
                     </a>
                     <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                        
+                        <!-- membership DEPEND OF context_processors -->
                         {% if membership == 'Pago en Linea - Plan Agremiado' %}
                             <a href="{% url 'cap_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
                                 <i class="fas fa-list"></i>
@@ -76,7 +76,7 @@
                         {% elif membership == 'Pago en Linea - Plan Profesional' %}
                             <a href="{% url 'client_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
                                 <i class="fas fa-list"></i>
-                                Volver a compra aquí
+                                Renueva tu plan aquí
                             </a>
                         {% endif %}
                     </div>

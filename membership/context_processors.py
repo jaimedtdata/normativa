@@ -1,14 +1,6 @@
 from apps.models import Member
 
 def membership_type(request):
-    # try:
-    #     type_membership = Member.objects.get(tuition=request.user.username).membership
-    #     print(type_membership)
-
-    #     return {'membership':type_membership}
-    # except:
-    #     return {}
-    ##########
 
     try:
         type_membership = Member.objects.get(tuition=request.user.username).membership.membership_type
