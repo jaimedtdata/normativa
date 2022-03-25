@@ -6,13 +6,12 @@
 <link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> 
 <link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet"> 
 
-
 <div class="container">
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{% url 'checkout-premium-cap' %}" enctype="multipart/form-data" autocomplete="off" id="form-cap">
+                    <form method="POST" enctype="multipart/form-data id="form-cap">
                         {% csrf_token %}
                         
                         
@@ -20,16 +19,25 @@
                             <div class="col-md-8 mt-3">
                                 <label class="text-muted lead"  >Correo Electrónico:</label>
                                 {{form.email}}
+
+                                <span class="text-danger field-error text-md">
+                                    {{ form.email.errors }}
+    
+                                </span>
                             </div>
                             <span class="text-danger" id="error_id_formulario1-email"></span>
                             <span class="text-success" id="success_id_formulario1-email"></span>
-                    
+                            
                         </div>	
                     
                         <div class="row mb-2">
                             <div class="col-md-4 ">
                                 <label class="text-muted lead" >Contraseña:</label>
                                 {{form.password1}}
+                                <span class="text-danger field-error text-md">
+                                    {{ form.password1.errors }}
+    
+                                </span>
                             </div>
                             <div class="col-md-4 ">
                                 <label class="text-muted lead" >Confirma tu Contraseña:</label>

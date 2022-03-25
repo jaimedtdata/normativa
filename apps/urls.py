@@ -27,8 +27,8 @@ urlpatterns = [
     path('checkout-client/', checkoutClient, name='checkout_client'),
     path('success-payment-client/', success_payment_client, name='success_payment_client'),
     path('client-cash-payment/', client_cash_payment, name='client_cash_payment'),
-    path('signup-premium-cap/', SignUpPremiumCAP.as_view(), name='signup-premium-cap'),
     # Premium agremiado
+    path('signup-premium-cap/', SignUpPremiumCAP.as_view(), name='signup-premium-cap'),
     path('checkout-premium-cap/', checkout_premium_cap, name='checkout-premium-cap'),
     path('success-payment-cap/', success_payment_cap, name='success_payment_cap'),
     path('history-purchase/', history_purchase, name='history_purchase'),

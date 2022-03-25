@@ -42,7 +42,7 @@ from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,R
 from normas.serializer import normas_serializer
 
 from .utils import create_member_free, register_client_user
-from .forms_register import MemberCapForm, ExternalUserForm
+from .forms_register import MemberCapForm, ExternalUserForm, MemberPremiumCapForm
 
 from membership.models import Membership
 from apps.models import UsagePolicies, Order_payment, NiubizTransaction
@@ -495,7 +495,7 @@ def success_payment_client(request):
         order = Order_payment.objects.filter(identity=request.user.user_membership.identity).first()
     except:
         pass
-    
+
     context = {
         'order': order,
     }
@@ -517,37 +517,28 @@ def client_cash_payment(request):
 ################
 class SignUpPremiumCAP(FormView):
     template_name = 'checkout/premium_agremiado/register_form_premium_cap.html'
-    form_class = ExternalUserForm
-    success_url = reverse_lazy('checkout')
+    form_class = MemberPremiumCapForm
+    success_url = reverse_lazy('checkout-premium-cap')
 
-    def get_context_data(self):
-        context = super().get_context_data()
-        exist_codigo_etica=UsagePolicies.objects.filter(title__icontains="codigo de etica").exists()
-        if exist_codigo_etica:
-            codigo_etica=UsagePolicies.objects.get(title__icontains="codigo de etica")
-            context['codigo_etica'] = codigo_etica
+    # def get_context_data(self):
+    #     context = super().get_context_data()
+    #     exist_codigo_etica=UsagePolicies.objects.filter(title__icontains="codigo de etica").exists()
+    #     if exist_codigo_etica:
+    #         codigo_etica=UsagePolicies.objects.get(title__icontains="codigo de etica")
+    #         context['codigo_etica'] = codigo_etica
 
-        return context
+    #     return context
 
     def form_valid(self, form):
         cd = form.cleaned_data
         print(cd)
     
-        # member = create_member_free(cd)
-        # password = cd['password']
-
-        # user = User.objects.create_user(member.tuition, member.email, password)
-        # user.last_name = member.first_surname
-        # user.save()
-        # #update member according to user created above
-        # m=Member.objects.get(id=member.id)
-        # m.user=user
-        # m.save()
-        
-        #token = UserToken(user_profile=member)
-        #send_confirm_account(self.request, token.get_confirm_link(), member.email)
-
-        return HttpResponseRedirect(reverse_lazy('checkout'))
+        return HttpResponseRedirect(reverse_lazy('checkout-premium-cap'))
+    
+    # def form_invalid(self, form):
+    #     print('INGRESO A INNVALIDO!',self,form)
+    #     messages.error(self.request, 'Por favor, corrija los errores')
+    #     return super().form_invalid(form)
 
 def checkout_premium_cap(request):
     context = {
