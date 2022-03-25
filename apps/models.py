@@ -100,6 +100,7 @@ class Member(models.Model):
     has_tutition = models.BooleanField(default=False, verbose_name='¿Es colegiado?')
     membership = models.ForeignKey(Membership, related_name='user_membership', 
                                         on_delete=models.SET_NULL,blank=True, null=True)
+    is_client = models.BooleanField(default=False, verbose_name='¿Es cliente?')
     
     suscripcion_foro = models.ManyToManyField(Register_Normativa, related_name="suscripcion_foro", blank=True) 
     

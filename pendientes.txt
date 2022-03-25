@@ -49,14 +49,18 @@ PENDIENTES:
     - Flujo Renovar plan del usuario Agremiado (TERMINADO)
     - Flujo Renovar plan del usuario Premium Agremiado (no)
     - Flujo Renovar plan del usuario Profesional (TERMINADO)
-2) verificar si el usuario profesional ha pagado ,cuando el pago es a traves del link pago efectivo (No)
-3) Verificar que el usuario del plan profesional haya pagado y 
-    no quede a mitad del proceso sin haber pagado. (No)
-4) Perder acceso en el usuario Profesional cuando vence su membresia. (No)
 
-6) PAGO PRESENCIAL - PLAN PROFESIONAL 
-    - Tienen que enviarnos el usuario en la api
+2) plan Profesional
+    - verificar si el usuario profesional ha pagado ,cuando el pago es a traves del link pago efectivo (No)
+    - Verificar que el usuario del plan profesional haya pagado y 
+        no quede a mitad del proceso sin haber pagado. (No)
+    - Restringi acceso si solo se registró y no pagó. (No)
+   - Perder acceso en el usuario Profesional cuando vence su membresia[middleware].  (No)
+
+3) PAGO PRESENCIAL - PLAN PROFESIONAL 
+    - Tienen que enviarnos el tipo de usuario en la api (usuario cap o is_client)
+    - Tienen que enviar el precio y tipo de plan que pagaron
     - Definir que los campos obligatorios
     - Validar las reglas para acceder mediante el formulario de DNI
 
-7) ApI PARA ENVIAR INFORMACION DE PAGOS AL RP
+4) ApI PARA ENVIAR INFORMACION DE PAGOS AL RP

@@ -97,6 +97,7 @@ class APIMember(models.Model):
     is_enabled = models.BooleanField(default=False, verbose_name='¿Esta habilitado?')
     penalty_fee = models.BooleanField(default=False, verbose_name='¿Tiene multas?')
     has_tutition = models.BooleanField(default=False, verbose_name='¿Es colegiado?')
+    is_client = models.BooleanField(default=False, verbose_name='¿Es cliente?')
     
     date_enrollment = models.DateField(verbose_name='fecha de inscripcion', blank=True, null=True)
     date_expired = models.DateField(verbose_name='fecha de caducidad', blank=True, null=True)

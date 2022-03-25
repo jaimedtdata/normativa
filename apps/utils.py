@@ -82,6 +82,7 @@ def create_member_free(user):
 def register_cap_users(user):
     membership_agremiado = Membership.objects.get(membership_type='PLPA')
     membership_noagremiado = Membership.objects.get(membership_type='PNA')
+    membership_plan_profesional_pp = Membership.objects.get(membership_type='PPPP')
 
     cap_num=user['cap']
     is_member = APIMember.objects.filter(cap_num=cap_num).exists()
@@ -126,7 +127,7 @@ def register_cap_users(user):
             m.save()
             return member
         else:
-            #users that not are abled to free account PLPA
+            # Profesional users that paid in CAP office - plan Profesional pago presencial
             member, created=Member.objects.get_or_create(
                             names= obj.name_user,
                             first_surname= obj.first_surname, 
@@ -140,7 +141,7 @@ def register_cap_users(user):
                             profession= obj.profession, 
                             tuition= user['cap'], 
                             secret_code= obj.secret_code,
-                            membership= membership_noagremiado,
+                            membership= membership_plan_profesional_pp,
                             is_enabled= False,
                             penalty_fee= True,
                             has_tutition= False
