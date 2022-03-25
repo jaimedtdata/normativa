@@ -9,8 +9,8 @@
   
       <div class="row">
         <div class="col-md-10">
-          <h5 class="card-title">Normativa: {{norma.name_denom}}</h5>               
-          <p class="card-text">Denominación: {{norma.norma}}</p>
+          <h5 class="card-title">foro: {{foro.nombre}}</h5>               
+          <p class="card-text">Descripción: {{foro.descripcion}}</p>
         </div>
         {% if request.user.user_membership.user_id == request.user.id %}
 
@@ -36,7 +36,7 @@
             
 </div>
         
-<div class="container">
+<div class="container mb-5">
   <div class="row">
     <div class="col-12">
       <div class="comments">
@@ -79,10 +79,14 @@
                     
                     </a>
                   </span>
-                  <p class="comment-txt more">{{muni.coments}}</p>                    
+                  <p class="comment-txt more">
+                    {{muni.comentario}}
+                    <small class="font-italic text-muted float-right">{{ muni.created }}</small>
+                  </p>   
+                                
                 </div>
               
-                <form method="POST" action="{% url 'borrar-comentario' norma.id muni.id %}">
+                <form method="POST" action="{% url 'borrar-comentario' foro.id muni.id %}">
                   {% csrf_token %}
                   
                   {% if request.user|has_group:'ESPECIALISTA' %}
@@ -164,7 +168,7 @@
       border-radius: 0;
       width: 100%;
       padding: 0;
-      font-weight: normal;
+      font-weight: forol;
   }
   .comments .add-comment input:focus {
       border-color: #03a9f4;
@@ -183,7 +187,7 @@
       float: right;
   }
   .comments .commenter-name .comment-time {
-      font-weight: normal;
+      font-weight: forol;
       margin-left: 8px;
       font-size: 15px;
   }
@@ -265,7 +269,7 @@
   function sendAjax(state, html) {
     $.ajax({
       method: 'POST',
-      url: "{% url 'foro-suscripcion' norma.id %}",
+      url: "{% url 'foro-suscripcion' foro.id %}",
       data: {
         csrfmiddlewaretoken: '{{ csrf_token }}',
         state : state,

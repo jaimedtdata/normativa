@@ -47,8 +47,6 @@ input[type="button"].gBotonXSmall, input[type="submit"].gBotonXSmall, .gBotonXSm
 
 .gBotonFull { display: block; width: 100% !important; }
 
-.gContainer { width: 1013px;/*920*/ margin: 0 auto; }
-
 .gNav { display: inline-block; vertical-align: top; }
 
 .gNav li { display: inline-block; vertical-align: middle; }
