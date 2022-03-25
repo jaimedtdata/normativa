@@ -96,6 +96,15 @@ def create_order_payment(user,email,niubiz_id, price, type_membership):
     #check if not exist any order
     exist_order = Order_payment.objects.filter(identity=user.identity).exists()
     if not exist_order:
+
+        if type_membership == "Plan mensual":
+            validity_date_start = timezone.now()
+            validity_date_finish = (validity_date_start + timezone.timedelta(days=30))
+            
+        if type_membership == "Plan anual":
+            validity_date_start = timezone.now()
+            validity_date_finish = (validity_date_start + timezone.timedelta(days=365))
+
         orden=Order_payment(
                 member= user,
                 names=user.names,
@@ -106,8 +115,8 @@ def create_order_payment(user,email,niubiz_id, price, type_membership):
                 paid = True,
                 niubiz_id= niubiz_id,
                 pay_import = price,
-                validity_date_start = timezone.now() ,
-                validity_date_finish = (timezone.now() + timezone.timedelta(days=30))
+                validity_date_start = validity_date_start ,
+                validity_date_finish = validity_date_finish
             )
         orden.save()
         return orden

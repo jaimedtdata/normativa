@@ -45,3 +45,7 @@ Cuando compra un plan actualizará a           ||||    cuando se venza
 pago presencial
 4) Plan Premium Agremiado                       ||||  plan agremiado
 5) Plan Profesional                             |||| pierde acceso
+
+
+1)Renovar plan segun el tipo de usuario 
+2) verificar si el usuario profesional ha pagado ,cuando el pago es a traves del link pago efectivo

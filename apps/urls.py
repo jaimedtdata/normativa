@@ -1,10 +1,11 @@
 from django.urls import path, re_path
 
 from .views_ajax import get_dni, RegisterCapAPIView, APIMemberView, RegisterExternalUsersAPIView
-from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, checkout,
+from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, checkoutClient,
                          checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client,
                          SignUpPremiumCAP, checkout_premium_cap, success_payment_cap, history_purchase,
-                         cap_choose_plan, add_plan_cap, cap_cash_payment )
+                         cap_choose_plan, add_plan_cap, cap_cash_payment, add_plan_client, 
+                         client_choose_plan, client_cash_payment )
 
 urlpatterns = [
     #register member
@@ -19,12 +20,15 @@ urlpatterns = [
     path('success_suscription_cap/', success_suscription_cap, name='success_suscription_cap'),
     path('cap_cash_payment/', cap_cash_payment, name='cap_cash_payment'),
     
-    #
-    path('checkout/', checkout, name='checkout'),
+    # clients (PROFESIONAL PLAN)
     path('sign-up-clients/', SignUpClients.as_view(), name='sign-up-clients'),
+    path('client_choose_plan/', client_choose_plan, name='client_choose_plan'),
+    path('add-plan-client/', add_plan_client, name='add_plan_client'),
+    path('checkout-client/', checkoutClient, name='checkout_client'),
     path('success-payment-client/', success_payment_client, name='success_payment_client'),
+    path('client-cash-payment/', client_cash_payment, name='client_cash_payment'),
     path('signup-premium-cap/', SignUpPremiumCAP.as_view(), name='signup-premium-cap'),
-    #
+    # Premium agremiado
     path('checkout-premium-cap/', checkout_premium_cap, name='checkout-premium-cap'),
     path('success-payment-cap/', success_payment_cap, name='success_payment_cap'),
     path('history-purchase/', history_purchase, name='history_purchase'),

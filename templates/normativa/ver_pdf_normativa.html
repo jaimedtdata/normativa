@@ -19,8 +19,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js" integrity="sha512-lHibs5XrZL9hXP3Dhr/d2xJgPy91f2mhVAasrSbMkbmoTSm2Kz8DuSWszBLUg31v+BM6tSiHSqT72xwjaNvl0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+url = "{{normativa.document.url}}"
+console.log(url)
+url = url.replace('&amp;', '&')
+console.log(url)
 
-renderPdfByUrl("{{normativa.document.url}}")
+renderPdfByUrl(url)
 
 function renderPdfByUrl(url) {
     var currPage = 1; 

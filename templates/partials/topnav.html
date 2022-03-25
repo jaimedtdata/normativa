@@ -62,10 +62,23 @@
                         </span> 
                     </a>
                     <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                        <a href="{% url 'cap_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
-                            <i class="fas fa-list"></i>
-                            Para acceder a todos nuestros beneficios actualiza tu plan aquí
-                        </a>
+                        
+                        {% if membership == 'Pago en Linea - Plan Agremiado' %}
+                            <a href="{% url 'cap_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
+                                <i class="fas fa-list"></i>
+                                Para acceder a todos nuestros beneficios actualiza tu plan aquí
+                            </a>
+                        {% elif membership == 'Pago en Linea - Plan Premium Agremiado' %}
+                            <a href="{% url 'cap_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
+                                <i class="fas fa-list"></i>
+                                Para acceder a todos nuestros beneficios actualiza tu plan aquí
+                            </a>
+                        {% elif membership == 'Pago en Linea - Plan Profesional' %}
+                            <a href="{% url 'client_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
+                                <i class="fas fa-list"></i>
+                                Volver a compra aquí
+                            </a>
+                        {% endif %}
                     </div>
                 </li>  
             {% endif %}

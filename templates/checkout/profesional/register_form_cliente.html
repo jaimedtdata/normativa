@@ -1,14 +1,21 @@
-{% extends 'checkout/base_payment.html' %}
+{% extends 'checkout/base_payment_client.html' %}
 {% load static %}
 
 {% block content %}
+
+
+{% comment %}
+    {{ form.errors }}
+{% endcomment %}
+    
+
 
 <div class="container mt-5">
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" autocomplete="off" id="form-external">
+                    <form method="POST" enctype="multipart/form-data" id="form-external">
                         {% csrf_token %}
                         
                         <div class="row mb-2">
@@ -27,8 +34,12 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-4 ">
-                                <label class="text-muted lead" >DNI:</label>
+                                <label class="text-muted lead" >Documento de Identidad:</label>
                                 {{form.identity}}
+                                <span class="text-danger field-error text-md">
+                                    {{ form.identity.errors }}
+    
+                                </span>
                             </div>
                             
                     
@@ -37,6 +48,10 @@
                                 {{form.mobile}}
                                 <span class="text-danger" id="error_id_formulario2-mobile"></span>
                                 <span class="text-success" id="success_id_formulario2-mobile"></span>
+                                <span class="text-danger field-error text-md">
+                                    {{ form.mobile.errors }}
+    
+                                </span>
                             </div>
                         
                             <div class="col-md-4 ">
@@ -53,7 +68,10 @@
                                 {{form.email}}
                             <span class="text-danger" id="error_id_formulario2-email"></span>
                             <span class="text-success" id="success_id_formulario2-email"></span>
-                    
+                            <span class="text-danger field-error text-md">
+                                {{ form.email.errors }}
+
+                            </span>
                             </div>
                                 
                                 
@@ -69,6 +87,9 @@
                             <div class="col-md-4 ">
                                 <label class="text-muted lead" >Contraseña:</label>
                                 {{form.password1}}
+                                <span class="text-danger field-error text-md">
+                                    {{ form.password1.errors }}
+                                </span>
                             </div>
                             <div class="col-md-4 ">
                                 <label class="text-muted lead" >Confirma tu Contraseña:</label>
