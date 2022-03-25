@@ -16,7 +16,11 @@
 
 
 {% block css %}
-    
+    <style>
+        .hide-register{
+            display: none;
+        }
+    </style>
 {% endblock css %}
     
 
@@ -37,7 +41,9 @@
         <section>
             <nav>
                 <ol class="cd-multi-steps text-bottom count">
-                    <li class="{%  if request.path == '/sign-up-clients/' %} current {%  elif request.path == '/client_choose_plan/' %} visited  {% elif request.path == '/checkout-client/' %} visited {% elif request.path == '/success-payment-client/' %} visited {% endif %} ">
+                    
+                    <li {% if request.user.is_authenticated %} style="display:none;" {%endif %}
+                    class="{%  if request.path == '/sign-up-clients/' %} current {%  elif request.path == '/client_choose_plan/' %} visited  {% elif request.path == '/checkout-client/' %} visited {% elif request.path == '/success-payment-client/' %} visited {% endif %} ">
                         <a class="text-muted" href="#0">Registro</a>
                     </li>
                     <li class="{%  if request.path == '/client_choose_plan/' %} current  {%  elif request.path == '/checkout-client/' %} visited {%  elif request.path == '/success-payment-client/' %} visited {% endif %}">
