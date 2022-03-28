@@ -48,6 +48,10 @@
         <div class="col-lg" id="right">
           <div class="row">
               <div class="col-md-8 offset-md-2">
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        Los filtros no son obligatorios
+                    </div>
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
@@ -195,7 +199,7 @@
     var titulo = params.norma
     
     if(params.norma == null) {
-        var titulo = 'Plataforma de Normas'
+        var titulo = 'NORMATIVA EDIFICATORIA'
         $('#subnormas_caja').removeClass('d-none')
         $('#right').removeClass('col-lg')    
         $('#right').addClass('col-lg-9')    
