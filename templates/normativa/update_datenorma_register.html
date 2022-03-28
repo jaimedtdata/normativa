@@ -68,7 +68,7 @@
                     Tipo Normativa:<select class="form-select" aria-label="Default select example" name="tip_norma">
                                             <option selected>{{normativa.tipo_norma}}</option>
                                             {% for tipo_norma in tipo_normativa %}
-                                                <option value="{{a.subcategory_name}}">{{tipo_norma.subcategory_name}}</option>
+                                                <option value="{{a.name}}">{{tipo_norma.name}}</option>
                                             {% endfor %}
                                     </select>
                 </div>
@@ -76,7 +76,7 @@
                     Tipo de Uso:<select class="form-select" aria-label="Default select example" name="tip_uso">
                                     <option selected>{{normativa.tipo_uso}}</option>
                                     {% for tipo_uso in tipo_uso %}
-                                        <option value="{{tipo_uso.id}}">{{tipo_uso.area_name}}</option>
+                                        <option value="{{tipo_uso.id}}">{{tipo_uso.name}}</option>
                                     {% endfor %}
                                 </select>
                 </div>

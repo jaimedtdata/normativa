@@ -77,36 +77,38 @@
                     <label> Tipo de Uso: </label>
                     <select class="form-control" aria-label="Default select example" name="tipo_uso" id="tipo_uso_id">
                         {% for tipo in tipo_uso %}
-                        <option value="{{tipo.id}}">{{tipo.area_name}}</option>
+                        <option value="{{tipo.id}}">{{tipo.name}}</option>
                         {% endfor %}
                     </select>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label> Subtipo de Uso: </label>
-                    <select class="form-control" aria-label="Default select example" name="subtipo_uso" id="subtipo_uso_id">
-                        {% for subtipo in subtipo_uso %}
-                            <option value="{{subtipo.id}}">{{subtipo.name}}</option>
-                        {% endfor %}
-                    </select>
+                    {{ form.subtipo_uso|as_crispy_field }}
+
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    {{ form.tipo_norma|as_crispy_field }}
+                    <label> Universo de Norma: </label>
+                    <select class="form-control" aria-label="Default select example" name="universo" id="id_universo">
+                            {% for un in universo_norma %}
+                            <option value="{{un.id}}">{{un.name}}</option>
+                            {% endfor %}
+                    </select>
                 </div>
             </div>
+            <div class="col-6">
+                {{ form.tipo_norma|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <div class="form-group">
                     {{ form.estado|as_crispy_field }}
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
                 <div class="form-group">
                     {{ form.document|as_crispy_field }}
                 </div>
@@ -123,9 +125,6 @@
                     <h3 id="status"></h3>
                 </div>
 
-                <div class="form-group">
-                    {{ form.universo|as_crispy_field }}
-                </div>
 
                 <div class="form-group">
                     {{ form.articulo|as_crispy_field }}
@@ -182,15 +181,26 @@
 
     // FUNCIONES PARA EL LISTADO DINAMICO
     const tipos_uso = document.getElementById('tipo_uso_id')
-    const subtipos_uso = document.getElementById('subtipo_uso_id')
+    const subtipos_uso = document.getElementById('id_subtipo_uso')
     const subtipos_uso_json = {{ subtipos_uso_json|safe }}
     
+    const universo = document.getElementById('id_universo')
+    const tipo_norma = document.getElementById('id_tipo_norma')
+    const tipo_normas_json = {{ tipo_normas_json|safe }}
+    
     changeOptionsSubtipoUso()
+    changeOptionsTipoNorma()
 
     tipos_uso.addEventListener('change', (e) => {
 
         changeOptionsSubtipoUso()
         
+    })
+
+    universo.addEventListener('change', (e) => {
+
+        changeOptionsTipoNorma()
+
     })
 
     function changeOptionsSubtipoUso() {
@@ -202,10 +212,25 @@
         })
 
         if (options_sbu.length == 0) {
-            options_sbu += /*html*/`<option class="text-wrap" value selected>---SIN SUBTIPOS, SELECCIONE OTRO TIPO DE USO---</option>`
+            options_sbu += /*html*/`<option class="text-wrap" value selected disabled>---SIN SUBTIPOS, SELECCIONE OTRO TIPO DE USO---</option>`
         }
 
         subtipos_uso.innerHTML = options_sbu
+    }
+
+    function changeOptionsTipoNorma() {
+        var options_tn = ``
+        tipo_normas_json.forEach( tn => {
+            if( tn.universo_id == universo.value ) {
+                options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
+            }            
+        })
+
+        if (options_tn.length == 0) {
+            options_tn += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPO DE NORMA, SELECCIONE OTRO UNIVERSO---</option>`
+        }
+
+        tipo_norma.innerHTML = options_tn
     }
 
 

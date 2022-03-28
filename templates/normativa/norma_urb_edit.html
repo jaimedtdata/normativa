@@ -36,9 +36,9 @@
               <select class="form-control" name="subnormativas[]" multiple="multiple" style="height:100%;" id="select-norms">
                     {% for sn in subcategories_normas %}
                         {% if sn.order|length == 2 %}
-                            <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.subcategory_name}} </option>
+                            <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.name}} </option>
                         {% else %}
-                            <option class="text-wrap" value="{{sn.id}}">{{sn.subcategory_name}} </option>
+                            <option class="text-wrap" value="{{sn.id}}">{{sn.name}} </option>
                         {% endif %}
                     {% endfor %}
               </select>
@@ -48,6 +48,10 @@
         <div class="col-lg" id="right">
           <div class="row">
               <div class="col-md-8 offset-md-2">
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        Los filtros no son obligatorios
+                    </div>
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
@@ -55,7 +59,7 @@
                                 <select class="form-control" id="area-normas">
                                     <option class="text-wrap" value="0">TODOS</option>
                                     {% for an in area_normas %}
-                                    <option class="text-wrap" value="{{an.id}}">{{an.area_name}} </option>
+                                    <option class="text-wrap" value="{{an.id}}">{{an.name}} </option>
                                     {% endfor %}
                                 </select> 
                             </div>
@@ -195,7 +199,7 @@
     var titulo = params.norma
     
     if(params.norma == null) {
-        var titulo = 'Plataforma de Normas'
+        var titulo = 'NORMATIVA EDIFICATORIA'
         $('#subnormas_caja').removeClass('d-none')
         $('#right').removeClass('col-lg')    
         $('#right').addClass('col-lg-9')    

@@ -16,8 +16,8 @@ from django.urls import reverse
 from normas.forms import NormativaForm
 from django.contrib.auth.decorators import login_required
 
-from normas.serializer import keywords_serializer, subtipos_uso_serializer
-from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Subcategories_Normas, Subtipo_Normas
+from normas.serializer import keywords_serializer, subtipos_uso_serializer, tipo_norma_serializer
+from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Tipo_Normas, Subtipo_Normas, Universo_Normas
 
 @login_required
 def index(request):
@@ -56,14 +56,19 @@ def registrar_normativa(request):
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
     sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
 
+    tipo_normas = Tipo_Normas.objects.order_by('order')
+    tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
+
     context = {
         'form' : NormativaForm,
-        'normas': Subcategories_Normas.objects.order_by('order'),
         'tipo_uso': Areas_Normas.objects.order_by('order'),
         'subtipo_uso': subtipo_usos,
+        'universo_norma': Universo_Normas.objects.all(),
+        'tipo_norma': tipo_normas, 
         'palabras_clave' : Register_Palabraclave.objects.all(),
         'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'), # para que ? xd
         'subtipos_uso_json' : sbu,
+        'tipo_normas_json': tn,
     }
 
     if request.method=='POST':
@@ -119,16 +124,22 @@ class NormativaUpdateView(UpdateView):
         context = super(NormativaUpdateView, self).get_context_data(**kwargs)
         subtipos_uso = Subtipo_Normas.objects.order_by('order')
         sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipos_uso ]
+
+        tipo_normas = Tipo_Normas.objects.order_by('order')
+        tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
         
         context.update({
             'normativa': normativa,
             'subtipo_uso':  subtipos_uso,
             'subtipos_uso_json' : sbu,
-            'tipo_normativa': Subcategories_Normas.objects.order_by('order'),
+            'tipo_norma': tipo_normas, 
+            'universo_norma': Universo_Normas.objects.all(),
             'tipo_uso': Areas_Normas.objects.order_by('order'),
             'palabras_clave' : Register_Palabraclave.objects.all(),
             'palabras_claves_normativa' : normativa.keywords.all(),
             'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'),
+            'tipo_normas_json': tn,
+
         })
         
         return context

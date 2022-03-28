@@ -32,6 +32,7 @@ DJANGO_APPS = (
     'django_filters',
     'crispy_forms',
     'corsheaders',
+    'import_export',
 )
 
 LOCAL_APPS = (

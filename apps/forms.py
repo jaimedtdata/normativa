@@ -9,8 +9,6 @@ from django.contrib.auth.forms import UserCreationForm
 USER_CONTROL = {'class': 'form-control', 'placeholder':'Ingrese CAP o email'}
 PASSWORD_CONTROL = {'class': 'form-control', 'placeholder':'Contraseña', 'type':'password'}
 
-
-
 FORM_CONTROL = {'class': 'form-control'}
 SELECT2_CONTROL = {'class': 'form-control select2', 'style':'width:100% !important;'}
 
@@ -403,7 +401,7 @@ class RulesForm(forms.Form):
 
     # Tipo Normativa
     #Error
-    #SECTIONS_CHOICES =  list(Subcategories_Normas.objects.values_list('id', 'subcategory_name'))
+    #SECTIONS_CHOICES =  list(Tipo_Normas.objects.values_list('id', 'name'))
     
     # Uso Categoria
     #RULES_TYPES =  list(Categories_Normas.objects.values_list('id', 'category_name'))
