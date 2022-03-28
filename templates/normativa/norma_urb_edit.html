@@ -36,9 +36,9 @@
               <select class="form-control" name="subnormativas[]" multiple="multiple" style="height:100%;" id="select-norms">
                     {% for sn in subcategories_normas %}
                         {% if sn.order|length == 2 %}
-                            <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.subcategory_name}} </option>
+                            <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.name}} </option>
                         {% else %}
-                            <option class="text-wrap" value="{{sn.id}}">{{sn.subcategory_name}} </option>
+                            <option class="text-wrap" value="{{sn.id}}">{{sn.name}} </option>
                         {% endif %}
                     {% endfor %}
               </select>
@@ -55,7 +55,7 @@
                                 <select class="form-control" id="area-normas">
                                     <option class="text-wrap" value="0">TODOS</option>
                                     {% for an in area_normas %}
-                                    <option class="text-wrap" value="{{an.id}}">{{an.area_name}} </option>
+                                    <option class="text-wrap" value="{{an.id}}">{{an.name}} </option>
                                     {% endfor %}
                                 </select> 
                             </div>

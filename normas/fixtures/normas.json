@@ -3,7 +3,7 @@
     "model": "normas.areas_normas",
     "pk": 1,
     "fields": {
-    "area_name": "1. VIVIENDA",
+    "name": "1. VIVIENDA",
     "order": "10",
     "created": "2022-03-10T09:50:01.602",
     "updated": "2022-03-10T09:50:01.602"
@@ -13,7 +13,7 @@
     "model": "normas.areas_normas",
     "pk": 2,
     "fields": {
-    "area_name": "2. HOSPEDAJE",
+    "name": "2. HOSPEDAJE",
     "order": "20",
     "created": "2022-03-10T09:50:12.072",
     "updated": "2022-03-10T09:50:12.072"
@@ -23,7 +23,7 @@
     "model": "normas.areas_normas",
     "pk": 3,
     "fields": {
-    "area_name": "3. EDUCACION",
+    "name": "3. EDUCACION",
     "order": "30",
     "created": "2022-03-10T09:50:19.294",
     "updated": "2022-03-10T09:50:19.294"
@@ -33,7 +33,7 @@
     "model": "normas.areas_normas",
     "pk": 4,
     "fields": {
-    "area_name": "4. SALUD",
+    "name": "4. SALUD",
     "order": "40",
     "created": "2022-03-10T09:50:24.611",
     "updated": "2022-03-10T09:50:24.611"
@@ -43,7 +43,7 @@
     "model": "normas.areas_normas",
     "pk": 5,
     "fields": {
-    "area_name": "5. INDUSTRIA",
+    "name": "5. INDUSTRIA",
     "order": "50",
     "created": "2022-03-10T09:50:30.547",
     "updated": "2022-03-10T09:50:30.547"
@@ -53,7 +53,7 @@
     "model": "normas.areas_normas",
     "pk": 6,
     "fields": {
-    "area_name": "6. COMERCIO",
+    "name": "6. COMERCIO",
     "order": "60",
     "created": "2022-03-10T09:50:36.996",
     "updated": "2022-03-10T09:50:36.996"
@@ -115,451 +115,514 @@
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.universo_normas",
     "pk": 1,
     "fields": {
-    "subcategory_name": "1. RNE- Reglamento Nacional de Edificaciones",
-    "order": "10",
+    "name": "NORMATIVA EDIFICATORIA",
     "created": "2022-02-23T09:05:01.668",
     "updated": "2022-03-17T09:51:47.297"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.universo_normas",
     "pk": 2,
     "fields": {
-    "subcategory_name": "1.1 RNE-ARQUITECTURA",
+    "name": "PROCEDIMIENTO ADMINISTRATIVO",
+    "created": "2022-02-23T09:05:01.668",
+    "updated": "2022-03-17T09:51:47.297"
+    }
+},
+{
+    "model": "normas.tipo_normas",
+    "pk": 1,
+    "fields": {
+    "name": "1. RNE- Reglamento Nacional de Edificaciones",
+    "order": "10",
+    "universo": 1,
+    "created": "2022-02-23T09:05:01.668",
+    "updated": "2022-03-17T09:51:47.297"
+    }
+},
+{
+    "model": "normas.tipo_normas",
+    "pk": 2,
+    "fields": {
+    "name": "1.1 RNE-ARQUITECTURA",
     "order": "101",
+    "universo": 1,
     "created": "2022-02-23T09:41:27.328",
     "updated": "2022-02-23T09:57:31.644"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 3,
     "fields": {
-    "subcategory_name": "1.1.1 RNE-ARQUITECTURA-TIPO DE USO",
+    "name": "1.1.1 RNE-ARQUITECTURA-TIPO DE USO",
     "order": "1011",
+    "universo": 1,
     "created": "2022-02-23T09:41:55.788",
     "updated": "2022-03-17T09:54:42.093"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 4,
     "fields": {
-    "subcategory_name": "1.1.2 RNE-ARQUITECTURA-TRANSVERSALES",
+    "name": "1.1.2 RNE-ARQUITECTURA-TRANSVERSALES",
     "order": "1012",
+    "universo": 1,
     "created": "2022-02-23T09:42:05.318",
     "updated": "2022-03-17T09:59:35.571"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 5,
     "fields": {
-    "subcategory_name": "1.2 RNE-ESPECIALIDADES RELACIONADAS",
+    "name": "1.2 RNE-ESPECIALIDADES RELACIONADAS",
     "order": "102",
+    "universo": 1,
     "created": "2022-02-23T09:42:26.021",
     "updated": "2022-03-17T10:01:14.192"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 6,
     "fields": {
-    "subcategory_name": "2.NORMAS SECTORIALES",
+    "name": "2.NORMAS SECTORIALES",
     "order": "20",
+    "universo": 1,
     "created": "2022-02-23T09:42:40.753",
     "updated": "2022-02-23T09:45:12.751"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 7,
     "fields": {
-    "subcategory_name": "2.1 LEYES O DECRETOS LEGISLATIVOS",
+    "name": "2.1 LEYES O DECRETOS LEGISLATIVOS",
     "order": "201",
+    "universo": 1,
     "created": "2022-02-23T09:42:55.086",
     "updated": "2022-03-17T10:04:52.781"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 8,
     "fields": {
-    "subcategory_name": "2.2 PRESIDENCIA DEL CONSEJO DE MINISTROS-PCM",
+    "name": "2.2 PRESIDENCIA DEL CONSEJO DE MINISTROS-PCM",
     "order": "202",
+    "universo": 1,
     "created": "2022-02-23T09:43:05.920",
     "updated": "2022-03-17T10:06:17.697"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 9,
     "fields": {
-    "subcategory_name": "2.3 MINISTERIO DE VIVIENDA-MVCS",
+    "name": "2.3 MINISTERIO DE VIVIENDA-MVCS",
     "order": "203",
+    "universo": 1,
     "created": "2022-02-23T09:43:18.567",
     "updated": "2022-03-17T10:15:42.789"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 10,
     "fields": {
-    "subcategory_name": "3.OPINIONES VINCULANTES",
+    "name": "3.OPINIONES VINCULANTES",
     "order": "30",
+    "universo": 1,
     "created": "2022-02-23T09:43:47.504",
     "updated": "2022-02-23T09:45:20.206"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 11,
     "fields": {
-    "subcategory_name": "3.1 PROCEDIMIENTOS ADMINISTRATIVOS",
+    "name": "3.1 PROCEDIMIENTOS ADMINISTRATIVOS",
     "order": "301",
+    "universo": 1,
     "created": "2022-02-23T09:47:30.680",
     "updated": "2022-03-17T10:36:43.731"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 12,
     "fields": {
-    "subcategory_name": "4.REGLAMENTO COMENTADO",
+    "name": "4.REGLAMENTO COMENTADO",
     "order": "40",
+    "universo": 1,
     "created": "2022-02-23T09:47:39.264",
     "updated": "2022-02-23T09:47:39.264"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 13,
     "fields": {
-    "subcategory_name": "4.1 NORMA GRAFICA COMENTADA",
+    "name": "4.1 NORMA GRAFICA COMENTADA",
     "order": "401",
+    "universo": 1,
     "created": "2022-02-23T09:47:55.565",
     "updated": "2022-03-17T10:43:35.889"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 14,
     "fields": {
-    "subcategory_name": "4.2 CASUISTICA",
+    "name": "4.2 CASUISTICA",
     "order": "402",
+    "universo": 1,
     "created": "2022-02-23T09:48:07.027",
     "updated": "2022-02-23T09:48:07.027"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 15,
     "fields": {
-    "subcategory_name": "4.2.1 APELACIONES RECONSIDERACIONES",
+    "name": "4.2.1 APELACIONES RECONSIDERACIONES",
     "order": "4021",
+    "universo": 1,
     "created": "2022-02-23T09:48:14.541",
     "updated": "2022-02-23T09:48:14.541"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 16,
     "fields": {
-    "subcategory_name": "4.2.2 CONCLUSIONES DE CHARLAS(OPINION EXPERTA )",
+    "name": "4.2.2 CONCLUSIONES DE CHARLAS(OPINION EXPERTA )",
     "order": "4022",
+    "universo": 1,
     "created": "2022-02-23T09:48:29.521",
     "updated": "2022-03-17T10:49:50.043"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 17,
     "fields": {
-    "subcategory_name": "4.2.3 DIRECTIVAS CAP",
+    "name": "4.2.3 DIRECTIVAS CAP",
     "order": "4023",
+    "universo": 1,
     "created": "2022-02-23T09:48:36.642",
     "updated": "2022-02-23T09:48:36.642"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 18,
     "fields": {
-    "subcategory_name": "5.INDECOPI",
+    "name": "5.INDECOPI",
     "order": "50",
+    "universo": 1,
     "created": "2022-02-23T09:48:48.838",
     "updated": "2022-02-23T09:48:48.838"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 19,
     "fields": {
-    "subcategory_name": "6.NORMAS MUNICIPALES",
+    "name": "6.NORMAS MUNICIPALES",
     "order": "60",
+    "universo": 1,
     "created": "2022-02-23T09:48:57.138",
     "updated": "2022-02-23T09:48:57.138"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 20,
     "fields": {
-    "subcategory_name": "6.1 NORMAS MUNICIPALES PROVINCIALES",
+    "name": "6.1 NORMAS MUNICIPALES PROVINCIALES",
     "order": "601",
+    "universo": 1,
     "created": "2022-02-23T09:49:05.241",
     "updated": "2022-03-17T10:50:44.643"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 21,
     "fields": {
-    "subcategory_name": "6.2 NORMAS MUNICIPALES DISTRITALES",
+    "name": "6.2 NORMAS MUNICIPALES DISTRITALES",
     "order": "602",
+    "universo": 1,
     "created": "2022-02-23T09:49:11.307",
     "updated": "2022-03-17T10:51:29.624"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 22,
     "fields": {
-    "subcategory_name": "2.4 MINISTERIO DE SALUD-MINSA",
+    "name": "2.4 MINISTERIO DE SALUD-MINSA",
     "order": "204",
+    "universo": 1,
     "created": "2022-03-17T10:16:29.546",
     "updated": "2022-03-17T10:16:29.546"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 23,
     "fields": {
-    "subcategory_name": "2.5 MINISTERIO DE EDUCACION-MINEDU",
+    "name": "2.5 MINISTERIO DE EDUCACION-MINEDU",
     "order": "205",
+    "universo": 1,
     "created": "2022-03-17T10:18:43.871",
     "updated": "2022-03-17T10:18:43.871"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 24,
     "fields": {
-    "subcategory_name": "2.6 MINISTERIO DE CULTURA -MINCUL",
+    "name": "2.6 MINISTERIO DE CULTURA -MINCUL",
     "order": "206",
+    "universo": 1,
     "created": "2022-03-17T10:19:38.335",
     "updated": "2022-03-17T10:19:38.335"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 25,
     "fields": {
-    "subcategory_name": "2.7 MINISTERIO DE ENERGIA Y MINAS-MINEN",
+    "name": "2.7 MINISTERIO DE ENERGIA Y MINAS-MINEN",
     "order": "207",
+    "universo": 1,
     "created": "2022-03-17T10:20:23.615",
     "updated": "2022-03-17T10:20:23.615"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 26,
     "fields": {
-    "subcategory_name": "2.8 MINISTERIO DEL AMBIENTE-MINAM",
+    "name": "2.8 MINISTERIO DEL AMBIENTE-MINAM",
     "order": "208",
+    "universo": 1,
     "created": "2022-03-17T10:21:01.550",
     "updated": "2022-03-17T10:21:01.550"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 27,
     "fields": {
-    "subcategory_name": "2.9 MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES-MIMP",
+    "name": "2.9 MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES-MIMP",
     "order": "209",
+    "universo": 1,
     "created": "2022-03-17T10:22:15.050",
     "updated": "2022-03-17T10:22:15.050"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 28,
     "fields": {
-    "subcategory_name": "2.10 MINISTERIO DE COMERCIO EXTERIOR Y TURISMO-MINCETUR",
+    "name": "2.10 MINISTERIO DE COMERCIO EXTERIOR Y TURISMO-MINCETUR",
     "order": "210",
+    "universo": 1,
     "created": "2022-03-17T10:23:08.113",
     "updated": "2022-03-17T10:23:08.113"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 29,
     "fields": {
-    "subcategory_name": "2.11 MINISTERIO DE JUSTICIA-MINJUSDH",
+    "name": "2.11 MINISTERIO DE JUSTICIA-MINJUSDH",
     "order": "211",
+    "universo": 1,
     "created": "2022-03-17T10:23:41.644",
     "updated": "2022-03-17T10:23:41.644"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 30,
     "fields": {
-    "subcategory_name": "2.12 ORGANISMO SUPERVISOR DE LA INVERSIÓN EN ENERGÍA  Y MINERIA-OSINERGMIN",
+    "name": "2.12 ORGANISMO SUPERVISOR DE LA INVERSIÓN EN ENERGÍA  Y MINERIA-OSINERGMIN",
     "order": "212",
+    "universo": 1,
     "created": "2022-03-17T10:26:31.658",
     "updated": "2022-03-17T10:26:31.658"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 31,
     "fields": {
-    "subcategory_name": "2.13 ORGANISMO DE FORMALIZACIÓN DE LA PROPIEDAD INFORMAL-COFOPRI",
+    "name": "2.13 ORGANISMO DE FORMALIZACIÓN DE LA PROPIEDAD INFORMAL-COFOPRI",
     "order": "213",
+    "universo": 1,
     "created": "2022-03-17T10:27:48.365",
     "updated": "2022-03-17T10:27:48.365"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 32,
     "fields": {
-    "subcategory_name": "2.14 SUPERINTENDENCIA NACIONAL DE REGISTROS PUBLICOS-SUNARP",
+    "name": "2.14 SUPERINTENDENCIA NACIONAL DE REGISTROS PUBLICOS-SUNARP",
     "order": "214",
+    "universo": 1,
     "created": "2022-03-17T10:28:39.525",
     "updated": "2022-03-17T10:28:39.525"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 33,
     "fields": {
-    "subcategory_name": "2.15 SISTEMA NACIONAL DE CATASTRO INTEGRADO-SNCP",
+    "name": "2.15 SISTEMA NACIONAL DE CATASTRO INTEGRADO-SNCP",
     "order": "215",
+    "universo": 1,
     "created": "2022-03-17T10:29:20.483",
     "updated": "2022-03-17T10:29:20.483"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 34,
     "fields": {
-    "subcategory_name": "2.16 OTROS",
+    "name": "2.16 OTROS",
     "order": "216",
+    "universo": 1,
     "created": "2022-03-17T10:31:03.214",
     "updated": "2022-03-17T10:31:03.214"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 35,
     "fields": {
-    "subcategory_name": "3.2 VIVIENDAS DE INTERÉS SOCIAL-VIS",
+    "name": "3.2 VIVIENDAS DE INTERÉS SOCIAL-VIS",
     "order": "302",
+    "universo": 1,
     "created": "2022-03-17T10:37:22.299",
     "updated": "2022-03-17T10:37:22.299"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 36,
     "fields": {
-    "subcategory_name": "3.3 REGLAMENTO NACIONAL DE EDIFICACIONES-RNE",
+    "name": "3.3 REGLAMENTO NACIONAL DE EDIFICACIONES-RNE",
     "order": "303",
+    "universo": 1,
     "created": "2022-03-17T10:38:26.111",
     "updated": "2022-03-17T10:38:26.111"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 37,
     "fields": {
-    "subcategory_name": "3.4 EDIFICACIONES",
+    "name": "3.4 EDIFICACIONES",
     "order": "304",
+    "universo": 1,
     "created": "2022-03-17T10:39:10.603",
     "updated": "2022-03-17T10:39:10.603"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 38,
     "fields": {
-    "subcategory_name": "HABILITACIONES URBANAS",
+    "name": "HABILITACIONES URBANAS",
     "order": "305",
+    "universo": 1,
     "created": "2022-03-17T10:39:59.774",
     "updated": "2022-03-17T10:39:59.774"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 39,
     "fields": {
-    "subcategory_name": "3.6 SEGURIDAD",
+    "name": "3.6 SEGURIDAD",
     "order": "306",
+    "universo": 1,
     "created": "2022-03-17T10:40:21.784",
     "updated": "2022-03-17T10:40:21.784"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 40,
     "fields": {
-    "subcategory_name": "3.7 IMPACTO VIAL",
+    "name": "3.7 IMPACTO VIAL",
     "order": "307",
+    "universo": 1,
     "created": "2022-03-17T10:40:44.436",
     "updated": "2022-03-17T10:40:44.436"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 41,
     "fields": {
-    "subcategory_name": "3.8 IMPACTO AMBIENTAL",
+    "name": "3.8 IMPACTO AMBIENTAL",
     "order": "308",
+    "universo": 1,
     "created": "2022-03-17T10:41:16.886",
     "updated": "2022-03-17T10:41:16.886"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 42,
     "fields": {
-    "subcategory_name": "3.9 COMISIONES TÉCNICAS",
+    "name": "3.9 COMISIONES TÉCNICAS",
     "order": "309",
+    "universo": 1,
     "created": "2022-03-17T10:42:02.230",
     "updated": "2022-03-17T10:42:02.230"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 43,
     "fields": {
-    "subcategory_name": "3.10 REVISORES URBANOS",
+    "name": "3.10 REVISORES URBANOS",
     "order": "310",
+    "universo": 1,
     "created": "2022-03-17T10:42:24.477",
     "updated": "2022-03-17T10:42:24.477"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 44,
     "fields": {
-    "subcategory_name": "3.11 OTROS",
+    "name": "3.11 OTROS",
     "order": "311",
+    "universo": 1,
     "created": "2022-03-17T10:42:47.821",
     "updated": "2022-03-17T10:42:47.821"
     }
 },
 {
-    "model": "normas.subcategories_normas",
+    "model": "normas.tipo_normas",
     "pk": 45,
     "fields": {
-    "subcategory_name": "7. PREGUNTAS FRECUENTES",
+    "name": "7. PREGUNTAS FRECUENTES",
     "order": "70",
+    "universo": 1,
     "created": "2022-03-17T10:51:56.503",
     "updated": "2022-03-17T10:51:56.503"
     }
@@ -575,7 +638,7 @@
     "tipo_norma": 4,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_R.M.061-2021-VIVIENDA_Modif.NormaA.070-Comercio_11.02.2021.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "None",
     "created": "2022-03-16T16:27:08.076",
@@ -593,7 +656,7 @@
     "tipo_norma": 4,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_A.120_ACCESIBILIDAD_UNIVERSAL_EN_EDIFICACIONES_R.M.N072-2019-VIVIENDA_02..pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "Antes \"Accesibilidad para personas con discapacidad\"",
     "created": "2022-03-16T16:40:44.059",
@@ -611,7 +674,7 @@
     "tipo_norma": 4,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_09.11.2012_4.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "La R.M. 061-2021-VIVIENDA Derogó el Capítulo VIII Comercio, de la Norma Técnica A.130, La norma Comercio A.070 ya incluye seguridad.",
     "created": "2022-03-16T16:57:41.030",
@@ -629,7 +692,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_EM.030_R.M.232-2020-VIVIENDA_MODIFICAN__VENTILACION_23.09.2020.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-16T17:13:58.098",
@@ -647,7 +710,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_E.M.040_INST.GAS_R.M._N341-2018-VIVIENDA_07.10.2018.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "Explica las distancias que debe cumplir los tanques de Gas (GLP) a ductos, equipos y otras edificaciones.",
     "created": "2022-03-16T17:23:14.772",
@@ -665,7 +728,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_EM.050_INSTALACIONES_DE_CLIMATIZACIÓN.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "Instalaciones Climatización",
     "created": "2022-03-16T22:16:16.835",
@@ -683,7 +746,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_EM.060_CHIMENEAS_Y_HOGARES_D.S.011-2006-VIVIENDA_11.06.2006.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-16T22:25:42.705",
@@ -701,7 +764,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 1,
     "document": "Document_normativa/EM070-fe-de-errata-rm-no-084-2019-VIVIENDA.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-16T22:37:12.703",
@@ -719,7 +782,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_EM070-fe-de-errata-R.M.084-2019-VIVIENDA_24.03.2019.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-16T22:39:29.404",
@@ -737,7 +800,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 1,
     "document": "Document_normativa/EM070-fe-de-errata-rm-no-084-2019-VIVIENDA_1.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-16T22:41:59.548",
@@ -755,7 +818,7 @@
     "tipo_norma": 6,
     "subtipo_uso": 1,
     "document": "Document_normativa/R.M.N822-2018-MINSA_NTS.N142-MINSA-2018-DIGESA_NormaSanitariRestaurantes_08.0.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-17T10:47:01.612",
@@ -773,7 +836,7 @@
     "tipo_norma": 6,
     "subtipo_uso": 1,
     "document": "Document_normativa/D.S_006_2013_AutorizacionesSectoriales_Clasificacion_Lic.Funcionam.10.01.2013.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "Únicamente para Categorización y/o recategorización de Restaurantes, que deseen categoría de 1 a 5 tenedores y calificación de restaurante turístico.",
     "created": "2022-03-17T11:13:12.313",
@@ -791,7 +854,7 @@
     "tipo_norma": 6,
     "subtipo_uso": 1,
     "document": "Document_normativa/LEY_29896_LACTARIO_2012.07.2012.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-17T11:21:14.300",
@@ -809,7 +872,7 @@
     "tipo_norma": 6,
     "subtipo_uso": 1,
     "document": "Document_normativa/D.S.N009_2017_MINCETUR_Modifica_D.S.025-2004-MINCETUR_31.07.2017.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-17T11:30:46.801",
@@ -827,7 +890,7 @@
     "tipo_norma": 6,
     "subtipo_uso": 1,
     "document": "Document_normativa/D.S.N009_2017_MINCETUR_Modifica_D.S.025-2004-MINCETUR_31.07.2017_1.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-17T11:38:18.972",
@@ -845,7 +908,7 @@
     "tipo_norma": 6,
     "subtipo_uso": 1,
     "document": "Document_normativa/D.S.011-2019-MINCETUR-Categorización_y_calificac._Turística_restaurante.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "Es voluntaria, se utiliza para obtener una categorización.",
     "created": "2022-03-17T11:57:49.724",
@@ -863,7 +926,7 @@
     "tipo_norma": 1,
     "subtipo_uso": 1,
     "document": "Document_normativa/DS_001_2016_MIMP_Reglam.Lactarios_09.02.2016.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-17T12:08:21.893",
@@ -881,7 +944,7 @@
     "tipo_norma": 1,
     "subtipo_uso": 1,
     "document": "Document_normativa/D.S.023-2021-MIMP_Reglam.LactariosLey29896_26.07.2021.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-17T12:10:38.312",
@@ -899,7 +962,6 @@
     "tipo_norma": 18,
     "subtipo_uso": 1,
     "document": "Document_normativa/RESOL.723-2017-INDECOPI_BARRERA_BUROCRATICA_ILEGAL_22.12.2017.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "Declara Barrera Burocrática Carente de Razonabilidad al indice de usos Ord. 920 y 1012 de la Municipalidad Metropolitana de Lima, Restaurante Central en Miraflores, por no sustentar la no compatiblida",
     "created": "2022-03-17T12:38:42.239",
@@ -917,7 +979,6 @@
     "tipo_norma": 21,
     "subtipo_uso": 1,
     "document": "Document_normativa/ORD.523-MSI_RIN_Reglam.IntegradoNormativoSanIsidro_12.07.2020.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "VerIndices operacionales: NORMA SI-02 NORMATIVA DE NIVELES OPERACIONALES Y ESTÁNDARES DE CALIDAD,TÍTULO IV ESTÁNDARES DE CALIDAD, Artículo 20°.- Restaurantes, página 62.",
     "created": "2022-03-17T12:44:00.723",
@@ -935,7 +996,6 @@
     "tipo_norma": 2,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_A.020-VIVIENDA_R.M.Nº_188-2021-VIVIENDA_-_Modif.N.T._A.020_Vivienda_del_R.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-18T15:18:10.789",
@@ -953,7 +1013,6 @@
     "tipo_norma": 2,
     "subtipo_uso": 4,
     "document": "Document_normativa/ejemplo.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "Anexo Ábaco excell aplicación de la Norma A.020 distancias de Pozos de Luz.",
     "created": "2022-03-18T15:26:20.903",
@@ -971,7 +1030,6 @@
     "tipo_norma": 4,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_A.010_Resol.Minist._Nº_191-2021-VIVIENDA-_A.010_Condiciones_Generales_de_.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-18T15:35:25.340",
@@ -989,7 +1047,6 @@
     "tipo_norma": 10,
     "subtipo_uso": 1,
     "document": "Document_normativa/ITL_N_012-2019-RESTAURANTE_O_INDUSTRIA_OFICIO_Nro.336_10.04.2019_4.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "(consumidor directo) de Edificación industrial (consumidor indirecto).",
     "created": "2022-03-21T08:34:52.253",
@@ -1007,7 +1064,6 @@
     "tipo_norma": 6,
     "subtipo_uso": 1,
     "document": "Document_normativa/D.S.007-2003-SA_REGLAM.PISCINAS_03.04.2006.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "Para los casos de restaurantes que cuenten con piscinas",
     "created": "2022-03-21T08:47:06.975",
@@ -1025,7 +1081,6 @@
     "tipo_norma": 18,
     "subtipo_uso": 1,
     "document": "Document_normativa/RESOL.723-2017-INDECOPI_BARRERA_BUROCRATICA_ILEGAL_22.12.2017_2.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "Declara Barrera Burocrática Carente de Razonabilidad al indice de usos Ord. 920 y 1012 de la Municipalidad Metropolitana de Lima, Restaurante Central en Miraflores, por no sustentar la no compatiblida",
     "created": "2022-03-21T09:13:43.339",
@@ -1043,7 +1098,6 @@
     "tipo_norma": 2,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_R.M.061-2021-VIVIENDA_Modif.NormaA.070-Comercio_11.02.2021_6.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-21T14:26:13.842",
@@ -1061,7 +1115,6 @@
     "tipo_norma": 3,
     "subtipo_uso": 1,
     "document": "Document_normativa/RNE_R.M.061-2021-VIVIENDA_Modif.NormaA.070-Comercio_11.02.2021_7.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-21T14:49:36.501",
@@ -1079,7 +1132,6 @@
     "tipo_norma": 4,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_A.120_RM-072-2019-VIVIENDA_AccesibilidadUniversal_02.03.2020.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "( antes \"Accesibilidad para personas con discapacidad\")",
     "created": "2022-03-23T12:32:22.769",
@@ -1097,7 +1149,6 @@
     "tipo_norma": 4,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_A.130_REQUISITOS_DE_SEGURIDAD__DS_N_017-2012.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "Consta de dos ediciones: El Capitulo I al X, del año 2006 se complementa con los Capítulos. XI al XII del año 2012. El capítulo VIII de la Norma A.130 ha sido derogado por la R.M. 061-2021-VIVIENDA qu",
     "created": "2022-03-23T12:39:53.736",
@@ -1115,7 +1166,6 @@
     "tipo_norma": 4,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_A.130_REQUISITOS_DE_SEGURIDAD__DS_N_017-2012.pdf",
-    "universo": "NE",
     "estado": "NV",
     "descripcion": "Consta de dos ediciones: El Capitulo I al X, del año 2006 se complementa con los Capítulos. XI al XII del año 2012. El capítulo VIII de la Norma A.130 ha sido derogado por la R.M. 061-2021-VIVIENDA qu",
     "created": "2022-03-23T14:23:50.402",
@@ -1133,7 +1183,7 @@
     "tipo_norma": 4,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_G.040_R.M.029-2021-VIVIENDA_DEFINICIONES_RNE_29.01.2021.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-23T15:05:33.512",
@@ -1151,7 +1201,7 @@
     "tipo_norma": 4,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_GE.020_D.S.011-2006-VIVIENDA_COMPONENTES_Y_CARACTERISTICAS_DE_LOS_PROYECT.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-23T15:15:43.225",
@@ -1169,7 +1219,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_E.030_DiseñoSismoresistente_R.V.M._N355-2018-VIVIENDA_07.12.2018.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-23T16:25:00.456",
@@ -1187,7 +1237,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_E.030_Modif.NT.E.030_Dis.SismoResistente_R.V.M.N043-2019-VIVIENDA_12.02.2.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-23T16:30:56.420",
@@ -1205,7 +1255,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 4,
     "document": "Document_normativa/IGP_ACELEROGRAFOS_EspecificacionesTécnicas_2020pdf.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": null,
     "created": "2022-03-23T16:39:38.684",
@@ -1223,7 +1273,7 @@
     "tipo_norma": 1,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_E.031_AislamientoSismico_D.S.N030-2019-VIVIENDA_06.11.2019.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "",
     "created": "2022-03-23T16:46:07.612",
@@ -1241,7 +1291,7 @@
     "tipo_norma": 1,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_EM.030_Instalac.Ventilacion_R.M.232-2020-VIVIENDA_23.09.2020_1.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "",
     "created": "2022-03-23T16:49:35.740",
@@ -1259,7 +1309,7 @@
     "tipo_norma": 5,
     "subtipo_uso": 4,
     "document": "Document_normativa/RNE_E.M.040_INST.GAS_R.M._N341-2018-VIVIENDA_07.10.2018_6.pdf",
-    "universo": "NE",
+    
     "estado": "NV",
     "descripcion": "",
     "created": "2022-03-23T16:56:05.173",
@@ -3676,34 +3726,6 @@
     "updated": "2022-03-23T16:40:34.235",
     "normativas": [
         54
-    ]
-    }
-},
-{
-    "model": "normas.policies_usage",
-    "pk": 1,
-    "fields": {
-    "title": "¿Qué necesito para construir mi casa?",
-    "message": "El terreno. Conocer las dimensiones, el tipo de suelo y las restricciones que puede tener un predio son condicionantes para el proyecto, conocerlas es un punto que puedes usar a tu favor. \r\n\r\nEl proyecto. Realizado por un Profesional de la Construcción son los documentos técnicos donde se plasma la distribución de los espacios, las dimensiones y cualidades.\r\n\r\nEl presupuesto y la planeaciòn. Es vital que antes de comenzar planees junto con el arquitecto cómo se va a desarrollar la obra y planearla en etapas, con ello podrás organizarte en gastos y compra de materiales, una buena planeación se traduce en tranquilidad y ahorro.\r\n\r\nLos tramites. Pueden sonar sencillo, pero necesitas tener en regla algunos papeles como:\r\n\r\nCertificado de Uso del Suelo.\r\n\r\nConstancia de alineamiento y/o número oficial.\r\n\r\nSolicitud de Licencia de Construcción.",
-    "validity_date_start": "2022-03-10",
-    "validity_date_finish": "2022-03-10",
-    "register_date_time": "2022-03-10T12:37:40.439",
-    "tipo_uso": [
-        1
-    ]
-    }
-},
-{
-    "model": "normas.policies_usage",
-    "pk": 2,
-    "fields": {
-    "title": "¿Qué tramites necesito para construir mi casa?",
-    "message": "Varía de acuerdo con los m2 proyectados (menor o mayor a 50m2) y con la profundidad de excavación (mayor a 1.50m), el no cumplirlo te expone a fuertes multas. Incluso a la suspensión o clausura de la obra.\r\n\r\nLicencia de Construcción:\r\n\r\nMemoria de cálculo. Es el documento donde se presenta a detalle los cálculos que sirvieron de base para el diseño estructural de tu proyecto.\r\n\r\nMecánica de suelos. Es el estudio que se hace para determinar las propiedades del terreno; necesario para definir el tipo y condiciones de cimentación para construir.\r\n\r\nActa de asamblea de condominios. Copia simple y legible del Acta de Asamblea del Condominio, debidamente constituida e inscrita ante el Registro Público de la Propiedad y Comercio, donde se aprueben los trabajos a realizar. Solo aplica para fincas o predios que se encuentren bajo Régimen en Condominio.\r\n\r\nIdentificación Oficial del responsable. El Arquitecto que llevara a cabo la obra.\r\n\r\nDictamen de Trazo, Usos y Destinos. Es el documento que permite certificar los usos de suelo permitidos en el predio, y las normas de urbanización y edificación. El costo oscila entre $600-700. Y aplica siempre que no sea vivienda Unifamiliar.\r\n\r\nCertificado de Libertad de gravamen. Deberá ser presentado con una antigüedad no mayor a tres meses, acreditando que el inmueble se encuentra sin limitaciones de dominio o gravámenes.\r\n\r\nProyecto Arquitectónico. Planos de proyecto arquitectónico y estructural a escala 1:100 firmados por el propietario, así como por el Director Responsable de Proyecto u Obra. (1 juego para revisión inicial y 4 para conformación final del expediente). Además de un CD con la información del Proyecto.\r\n\r\nCopia simple y legible del comprobante de pago del impuesto predial actualizado o Certificado de no adeudo, expedido por la Tesorería Municipal.\r\n\r\nCopia simple y legible de escrituras o documento que acredite la legal posesión del inmueble.\r\n\r\nCertificado de alineamiento y numero oficial. Este documento sólo será requerido en los siguientes casos: predios irregulares o de origen ejidal, inmuebles en que escritura no indique construcción o número oficial, demoliciones y/u obras nuevas",
-    "validity_date_start": "2022-03-10",
-    "validity_date_finish": "2022-03-10",
-    "register_date_time": "2022-03-10T12:38:18.097",
-    "tipo_uso": [
-        1
     ]
     }
 }

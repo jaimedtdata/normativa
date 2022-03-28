@@ -38,7 +38,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery
 # Johao #
 
 from bus_normativa.models import date_normativa
-from normas.models import Subcategories_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
+from normas.models import Tipo_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
 from normas.serializer import normas_serializer, subtipos_uso_serializer, tipos_uso_serializer
 
 from .utils import create_member_free, register_client_user
@@ -60,7 +60,7 @@ def busqueda_clavenormativa(request):
         item_area_normas.append(
             {
                 'id':i.id,
-                'name':i.area_name
+                'name':i.name
             }
         )
     context={
@@ -72,7 +72,7 @@ def busque_normativa(request):
     if request.method=='POST':
         pal_clave=request.POST['pal_clave'].upper()
         norma_tipo_uso=request.POST['tipo_uso'].upper()
-        area_normas=Areas_Normas.objects.order_by('area_name')
+        area_normas=Areas_Normas.objects.order_by('name')
         normas= None
         #normas = Register_Normativa.objects.filter(keywords__name__search=pal_clave).order_by('tipo_norma__order')
         
@@ -89,7 +89,7 @@ def busque_normativa(request):
 
         else:
             normas = Register_Normativa.objects.filter(
-                    tipo_uso__area_name=norma_tipo_uso
+                    tipo_uso__name=norma_tipo_uso
                     ).annotate(search = SearchVector('keywords__name', 'norma','name_denom',
                                  'base_legal', config='Spanish')
                                 ).filter(search=SearchQuery( pal_clave, config='Spanish')).order_by('tipo_norma__order')
@@ -105,7 +105,7 @@ def busque_normativa(request):
         normas_results = []
         for n in normas:
             row ={
-                'tipo_norma': n.tipo_norma.subcategory_name,
+                'tipo_norma': n.tipo_norma.name,
                 'norma': n.norma,
                 'name_denom': n.name_denom,
                 'base_legal': n.base_legal,
@@ -179,8 +179,8 @@ def norma_edificatoria(request):
 @login_required
 def norma_datos(request):
     norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso.tipo_uso').order_by('subtipo_uso').order_by('norma')
-    subcategories_normas = Subcategories_Normas.objects.order_by('order')
-    area_normas = Areas_Normas.objects.order_by('area_name')
+    tipo_normas = Tipo_Normas.objects.order_by('order')
+    area_normas = Areas_Normas.objects.order_by('name')
     palabras_clave = Register_Palabraclave.objects.all()
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
 
@@ -191,7 +191,7 @@ def norma_datos(request):
 
     context={
             'norma_date':norma_date,
-            'subcategories_normas':subcategories_normas, 
+            'subcategories_normas':tipo_normas, 
             'area_normas' : area_normas, 
             'palabras_clave' : palabras_clave,
             'subtipo_usos' : subtipo_usos,
@@ -251,14 +251,14 @@ def busq_palclave_prov(request):
 
 # def get_rules(pk):
 #     #rpta_normas = Master_Normas.objects.all()
-#     rpta_normas = Master_Normas.objects.filter(area_name=pk)
+#     rpta_normas = Master_Normas.objects.filter(name=pk)
 #     rules = []
 #     for i in rpta_normas:
 #             rules.append(
 #                 {
 #                     'n': i.id,
 #                     'section': i.category_name,
-#                     'rule_type': i.subcategory_name,
+#                     'rule_type': i.name,
 #                     'locations': i.location_name,
 #                     'norm': i.norma_rne,
 #                     'denom': i.norma_name,
@@ -673,7 +673,7 @@ def history_purchase(request):
 
 @login_required
 def preguntas(request):
-    tipo_uso = Areas_Normas.objects.order_by('area_name')
+    tipo_uso = Areas_Normas.objects.order_by('name')
     page = request.GET.get('page', 1)
 
     queryset = Policies_usage.objects.all()

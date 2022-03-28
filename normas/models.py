@@ -5,9 +5,6 @@ from django.utils.html import format_html
 from django.contrib.auth.models import User
 # Create your models here.
 
-
-
-
 def upload_file(instance, filename):
     ext = filename.split('.')[-1]
     return 'pdf/{}'.format(instance.file)
@@ -20,12 +17,9 @@ def upload_photos(instance, filename):
     ext = filename.split('.')[-1]
     return 'photos/{}.{}'.format(instance.identity, ext)
 
-
-
-
 class Areas_Normas(models.Model):
     
-    area_name = models.CharField(max_length=200, blank=False, help_text='Nombre de Categoria', verbose_name='Nombre de la Categoria')      
+    name = models.CharField(max_length=200, blank=False, help_text='Nombre de Categoria', verbose_name='Nombre de la Categoria')      
     order = models.CharField(max_length=10, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                      blank=True, null=True)
@@ -36,7 +30,7 @@ class Areas_Normas(models.Model):
         verbose_name_plural = 'Tipo de Uso'
 
     def __str__(self):
-        return self.area_name
+        return self.name
 
 class Subtipo_Normas(models.Model):
 
@@ -54,21 +48,36 @@ class Subtipo_Normas(models.Model):
     def __str__(self):
         return self.name
 
-class Subcategories_Normas(models.Model):
-    
-    subcategory_name = models.CharField(max_length=200, blank=False,
-        help_text='Nombre de sub Categoria',
-        verbose_name='sub Categoria')
-    order = models.CharField(max_length=10, blank=True)
+class Universo_Normas(models.Model):
+    name = models.CharField(max_length=150, blank=False, verbose_name="Nombre de universo")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                      blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
                                      blank=True, null=True)
 
     class Meta:
-        verbose_name_plural = 'Subtipo De Normativa'
+        verbose_name_plural = 'Universo de Norma'
+
     def __str__(self):
-        return self.subcategory_name    
+        return self.name
+
+class Tipo_Normas(models.Model):
+    
+    name = models.CharField(max_length=200, blank=False,
+        help_text='Nombre de Tipo de norma',
+        verbose_name='Tipo norma')
+    order = models.CharField(max_length=10, blank=True)
+    universo = models.ForeignKey(Universo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Universo Norma')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Tipo de Norma'
+
+    def __str__(self):
+        return self.name    
 
 ESTADO_CHOICES = [
     ('VI', 'Vigente'),
@@ -86,11 +95,11 @@ class Register_Normativa(models.Model):
     name_denom = models.TextField(blank=False,null=False,verbose_name='Denominacion')
     base_legal=models.CharField(blank=False,null=False,max_length=200,verbose_name='Base Legal')
     fecha_publi = models.DateField(blank=False,null=False,verbose_name='Publicacion')
-    tipo_norma = models.ForeignKey(Subcategories_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo de Norma')
+    tipo_norma = models.ForeignKey(Tipo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo de Norma')
     # tipo_uso = models.ForeignKey(Areas_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo Uso')
     subtipo_uso = models.ForeignKey(Subtipo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Subtipo de uso')
     document = models.FileField(upload_to='Document_normativa',verbose_name='Documentos',null=True,editable=True)
-    universo = models.CharField(choices=UNIVERSO_CHOICES, blank=False, max_length=150, default='NE')
+    # universo = models.CharField(choices=UNIVERSO_CHOICES, blank=False, max_length=150, default='NE')
     estado = models.CharField(choices=ESTADO_CHOICES, blank=False, max_length=150, default='VI')
     #es_foro = models.BooleanField(default=False, verbose_name='Es un foro')
     descripcion = models.CharField(blank=True,null=True,max_length=200,verbose_name='Descripcion')
@@ -127,6 +136,10 @@ class Register_Palabraclave(models.Model):
 class Policies_usage(models.Model):
     tipo_uso = models.ManyToManyField(Areas_Normas,verbose_name='Tipo de uso',
                                         related_name='preguntas', blank=True)
+    subtipo_uso = models.ManyToManyField(Subtipo_Normas,verbose_name='Subtipo de uso',
+                                        related_name='preguntas', blank=True)        
+    universo = models.ManyToManyField(Universo_Normas,verbose_name='Universo de norma',
+                                        related_name='preguntas', blank=True)                                         
     title = models.CharField(max_length=200, blank=False,
         help_text='Titulo de Consulta',
         verbose_name='Titulo de Consulta')      
