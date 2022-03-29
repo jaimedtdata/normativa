@@ -62,11 +62,11 @@ def registrar_normativa(request):
     context = {
         'form' : NormativaForm,
         'tipo_uso': Areas_Normas.objects.order_by('order'),
-        'subtipo_uso': subtipo_usos,
         'universo_norma': Universo_Normas.objects.all(),
-        'tipo_norma': tipo_normas, 
         'palabras_clave' : Register_Palabraclave.objects.all(),
         'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'), # para que ? xd
+        'tipo_norma': tipo_normas, 
+        'subtipo_uso': subtipo_usos,
         'subtipos_uso_json' : sbu,
         'tipo_normas_json': tn,
     }
@@ -127,6 +127,8 @@ class NormativaUpdateView(UpdateView):
 
         tipo_normas = Tipo_Normas.objects.order_by('order')
         tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
+
+        tnn = [x.tipo_uso_id for x in normativa.subtipo_uso.all()]
         
         context.update({
             'normativa': normativa,
@@ -139,6 +141,7 @@ class NormativaUpdateView(UpdateView):
             'palabras_claves_normativa' : normativa.keywords.all(),
             'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'),
             'tipo_normas_json': tn,
+            'tnn' : json.dumps(tnn)
 
         })
         

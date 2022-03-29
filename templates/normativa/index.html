@@ -31,8 +31,7 @@
         <thead>
             <tr>
                 <td>T. Norma</td>
-                <td>T. Uso</td>
-                <td>Sub. Uso</td>
+                <td>T. Uso - St Uso</td>
                 <td >Norma</td>
                 <td>Titulo</td>
                 <td>Base Legal</td>
@@ -46,11 +45,14 @@
             {% if entity %}
                 {% for norma in entity %}
                 <tr>
-                    
                     <td>{{norma.tipo_norma}}</td>
-                    <td>{{norma.subtipo_uso.tipo_uso}}</td>
-                    <td>{{norma.subtipo_uso}}</td>
-                    <td>{{norma.norma}}
+                    <td>
+                    {% for stu in norma.subtipo_uso.all %}
+                        {{ stu.tipo_uso }} - {{ stu.name}} 
+                        <hr style="background-color:  black;">
+                    {% endfor %}
+                    </td>
+                        <td>{{norma.norma}}
                         {% if norma.estado == 'NV' %}
                             <small class="fst-italic fw-lighter fs-7 text-danger">*No vigente</small>
                         {% elif norma.estado == 'DP' %}
@@ -83,6 +85,10 @@
                         </a>
                     </td>
                 </tr>
+                {% empty %}
+                    <tr>
+                        <td>NADA</td>
+                    </tr>
                 {% endfor %}
             {% endif %}
         </tbody>
