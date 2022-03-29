@@ -9,7 +9,7 @@
 {% block content %}
 
 <div class="px-2">
-    <div class="row text-center" >
+    <div class="row text-center p-0 m-0" >
         <div class="col-2">
             <a href="{% url 'home' %}">
                 <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
@@ -29,12 +29,12 @@
     </div>
     <br><br>
     
-    <div class="row">
-        <div class="col-md-3 d-none" style="height:720px;" id="subnormas_caja">
+    <div class="row p-0 m-0">
+        <div class="col-lg-3 d-none" style="height:720px;" id="subnormas_caja">
           <div class="form-group">
               <label for="">Tipo de norma:</label>
               <select class="form-control" name="subnormativas[]" multiple="multiple" style="height:100%;" id="select-norms">
-                    {% for sn in subtipo_normas %}
+                    {% for sn in subcategories_normas %}
                         {% if sn.order|length == 2 %}
                             <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.subcategory_name}} </option>
                         {% else %}
@@ -45,22 +45,32 @@
           </div>
         </div>
         
-        <div class="col-sm">
+        <div class="col-lg" id="right">
           <div class="row">
               <div class="col-md-8 offset-md-2">
                     <div class="row">
                         <div class="col-md">
-                        <div class="form-group">
-                            <label for=""> Tipo de uso: </label>
-                            <select class="form-control" id="area-normas">
-                                <option class="text-wrap" value="0">TODOS</option>
-                                {% for an in area_normas %}
-                                <option class="text-wrap" value="{{an.order}}">{{an.area_name}} </option>
-                                {% endfor %}
-                            </select> 
-                        </select> 
-                            </select> 
+                            <div class="form-group">
+                                <label for=""> Tipo de uso: </label>
+                                <select class="form-control" id="area-normas">
+                                    <option class="text-wrap" value="0">TODOS</option>
+                                    {% for an in area_normas %}
+                                    <option class="text-wrap" value="{{an.id}}">{{an.area_name}} </option>
+                                    {% endfor %}
+                                </select> 
+                            </div>
                         </div>
+                        
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for=""> Subtipo de uso: </label>
+                                <select class="form-control" id="subtipo_usos">
+                                    <option class="text-wrap" value="0">TODOS</option>
+                                    {% for sbu in subtipo_usos %}
+                                        <option class="text-wrap" value="{{sbu.id}}">{{sbu.name}} </option>
+                                    {% endfor %}
+                                </select> 
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -71,7 +81,9 @@
         
                                     <select class="form-control select-tags" name="palabras_clave[]" multiple="multiple" style="width:100%; height:100%;" id="keywords" >
                                         {% for pc in palabras_clave %}
-                                            <option value="{{pc.id}}"> {{pc.name}} </option>
+                                            {% if pc.normativas.exists %}
+                                                <option value="{{pc.id}}"> {{pc.name}} </option>
+                                            {% endif %}
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -89,7 +101,7 @@
                         </div>
             
                         <div class="col-md-4  ">
-                            <input class="form-control text-sm text-center" type="text" name="datetimes" id="datetimes"/>
+                            <input class="form-control text-sm text-center" style="font-size: 1rem;" type="text" name="datetimes" id="datetimes"/>
                         </div>
                     </div>
               </div>
@@ -98,38 +110,42 @@
           <div class="row">
 
               {% if norma_date %}
-              <div class="col">
-                <table class="table table-bordered datatable" id="normas-tabla">
+              <div class="col table-responsive">
+                <table class="table table-bordered  datatable" id="normas-tabla">
                     <thead class="thead-dark">
                         <tr class="text-center">
-                            <th style="width:20%">Norma</th>
-                            <th style="width:40%">Titulo</th>
-                            <th style="width:20%">Base Legal</th>
-                            <th style="width:10%">Tipo Uso</th>
-                            <th style="width:7%">Documento</th>
-                            <th style="width:13%">Publicacion</th>
+                            <th>T. Norma</th>
+                            <th>T. Uso</th>
+                            <th>Sub. Uso</th>
+                            <th>Norma</th>
+                            <th>Titulo</th>
+                            <th>Descripción</th>
+                            <th>Base Legal</th>
+                            <th>Articulado</th>
+                            <th>Documento</th>
+                            <th>Publicacion</th>
                         </tr>
                     </thead>
                     <tbody id="normas_edificatorias">
                         {% for norma in norma_date %}
                         <tr>
-                            <td>
-                                {{norma.norma}}
-                            </td>
+                            <td>{{norma.tipo_norma}}</td>
+                            <td>{{norma.subtipo_uso.tipo_uso}}</td>
+                            <td>{{norma.subtipo_uso}}</td>
+                            <td>{{norma.norma}}</td>
                             <td>{{norma.name_denom}}
-                                {% if norma.es_vigente == False %}
-                                    <span class="fst-italic fw-lighter fs-7 text-center text-danger">*No vigente</span>
-                                {% endif %}
-      
+                                - {{ norma.estado }}
+                            </td>
+                            <td>
                                 {% if norma.descripcion %}
-                                    <p class="mt-3 "> <span class="fw-bold">Descripción:</span><small> {{norma.descripcion}}.</small>  </p>
+                                    <p class="mt-3 "> <bold class="fw-bold">Descripción:</bold><small> {{norma.descripcion}}.</small>  </p>
                                 {% endif %}
                             </td>
                             <td>{{norma.base_legal}}</td>
-                            <td>{{norma.tipo_uso}}</td>
+                            <td>{{norma.articulo}}</td>
                             <td class="text-center">
                                 {% if norma.document %}
-                                    <a target="_blank" href="{{norma.document.url}}">
+                                    <a target="_blank" href="{% url 'ver-pdf' norma.id %}">
                                         <svg xmlns="http://www.w3.org/2000/svg" style="color:black;position:relative;"width="28" height="28" fill="currentColor" class="bi bi-file-pdf" viewBox="0 0 16 16">
                                             <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
                                             <path d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.701 19.701 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.716 5.716 0 0 1-.911-.95 11.642 11.642 0 0 0-1.997.406 11.311 11.311 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.27.27 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.647 12.647 0 0 1 1.01-.193 11.666 11.666 0 0 1-.51-.858 20.741 20.741 0 0 1-.5 1.05zm2.446.45c.15.162.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.881 3.881 0 0 0-.612-.053zM8.078 5.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
@@ -171,20 +187,18 @@
 
 <script>
 
-
-
     const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
     });
     // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
     var ne = params.ne; // "some_value"
-
-    
     var titulo = params.norma
     
     if(params.norma == null) {
-        var titulo = 'Reglamento Nacional de Normas'
-        $('#subnormas_caja').removeClass('d-none')    
+        var titulo = 'Plataforma de Normas'
+        $('#subnormas_caja').removeClass('d-none')
+        $('#right').removeClass('col-lg')    
+        $('#right').addClass('col-lg-9')    
     }
 
     document.getElementById('titulo').innerHTML = titulo
@@ -196,18 +210,25 @@
     });
     
     const normas = {{ normas|safe }}
+    const subtipos_uso_json = {{ sbu|safe }}
+
+    console.log(subtipos_uso_json)
+    const tipos_uso_json = {{ tu|safe }}
+
     var uac = normas;
     var subnormativas = $("#select-norms").val(),
         search = $("#filter-input").val()
-        order = $("#area-normas").val(),
+        tu_id = $("#area-normas").val(),
+        sbu_id = $('#subtipo_usos').val(),
         date_range = undefined
         keywords = $("#keywords").val()
         date_range = undefined;
 
     var normas_tabla = $('#normas-tabla').DataTable({
         searching: false,
-        ordering:  false,
+        ordering:  true,
         lengthChange: false,
+        responsive: true,
     })
 
     //console.log(normas)
@@ -222,7 +243,7 @@
     });
 
     $("#select-norms").val(subnormativas)
-    execFilters()
+    execFilters() // PRIMERA EJECUCIÓN
 
     $("#select-norms").change(function(){
         subnormativas = $("#select-norms").val()
@@ -235,10 +256,34 @@
         execFilters()  
     })
 
+    // 
     $("#area-normas").change(function(){
+        tu_id = $("#area-normas").val()
+
+        var options_sbu = `<option class="text-wrap" value="0">TODOS</option>`
         
-        order = $("#area-normas").val()
+        if( tu_id != 0 ) {
+            subtipos_uso_json.forEach( sbu => {
+                if( sbu.tipo_uso_id == tu_id ) {
+                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+                }            
+            })
+
+            
+        } else {
+            subtipos_uso_json.forEach( sbu => {
+                options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>` 
+            })
+        }
+
+        $("#subtipo_usos").html(options_sbu)
+        sbu_id = $("#subtipo_usos").val()
         execFilters()  
+    })
+
+    $("#subtipo_usos").change(function(){
+        sbu_id = $("#subtipo_usos").val()
+        execFilters()
     })
 
     $('#datetimes').change(function(){
@@ -287,11 +332,22 @@
         
     }
 
-    function getTipoUsoNormativas(order)
+    function getTipoUsoNormativas(tu_id)
     {
-        if (order != 0) {
+        if (tu_id != 0) {
             return uac.filter(n => {
-                return n.order.includes(order, 0)
+                return n.tipo_uso_id == tu_id
+            })
+        } else {
+            return uac
+        }
+    }
+
+    function getSubTipoUsoNormativas(sbu_id)
+    {
+        if (sbu_id != 0) {
+            return uac.filter(n => {
+                return n.subtipo_uso_id == sbu_id
             })
         } else {
             return uac
@@ -336,7 +392,8 @@
     {
         uac = getNormativas(subnormativas)
         uac = getSearchNormativas(search)
-        uac = getTipoUsoNormativas(order)
+        uac = getTipoUsoNormativas(tu_id)
+        uac = getSubTipoUsoNormativas(sbu_id)
         uac = getNormasPorKeywords(keywords)
         uac = getNormasPorFechas(date_range)
 
@@ -346,7 +403,8 @@
 
         normas_tabla = $('#normas-tabla').DataTable({
             searching: false,
-            ordering:  false,
+            ordering:  true,
+
             lengthChange: false,
         })
         
@@ -361,7 +419,10 @@
         resultado.forEach((r) => {
             html += /*html*/
                     `<tr >
-                        <td style="width:20%">
+                        <td>${r.tipo_norma}</td>
+                        <td>${r.tipo_uso}</td>
+                        <td>${r.subtipo_uso}</td>
+                        <td >
                             ${r.norma}`;
                         
             if (r.es_vigente) {
@@ -371,27 +432,29 @@
             }
 
             html +=/*html*/
-                `</td style="width:40%">
+                `</td>
                     <td>
-                        ${r.name_denom}
-                        `
-                        
-                        if (r.descripcion) {
+                        ${r.name_denom}`
+                        if (r.estado == 'NV') {
                             html += /*html*/`
-                                <p class="mt-3 "> <span class="fw-bold">Descripción:</span><small> ${r.descripcion}.</small>  </p>
+                            <small class="fst-italic fw-lighter fs-7 text-danger">*No Vigente</small>
                             `
+                        } else if (r.estado == 'DP') {
+                            html += /*html*/` <small class="fst-italic fw-lighter fs-7 text-danger">*Derogado Parcialmente</small>`
                         }
                         
-                        html +=/*html*/`
+                html += /*html*/`
                     </td>
-                    <td style="width:20%">${r.base_legal}</td>
-                    <td style="width:10%">${r.tipo_uso}</td>
-                    <td class="text-center" style="width:7%">
+                    
+                    <td >${r.descripcion}</td>
+                    <td >${r.base_legal}</td>
+                    <td >${r.articulo}</td>
+                    <td class="text-center">
                         `
                         
                         if (r.document) {
                             html += /*html*/`
-                                <a target="_blank" href="${r.document}">
+                                <a target="_blank" href="/normativas/${r.id}/ver-pdf">
                                     <i class="fa fa-file-pdf fa-2x text-danger mr-1" aria-hidden="true"></i>
                                 </a>
 
@@ -403,7 +466,7 @@
                         
                         html += /*html*/`
                     </td>
-                    <td style="width:13%">
+                    <td >
                         ${r.fecha_publi}
                     </td>
                 </tr>`

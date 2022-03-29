@@ -1,0 +1,23 @@
+{% load static %}
+
+<ul class="list-group">
+	{% for c in last_comentarios %}
+		<li class="list-group-item">
+			<div class="row">
+				<div class="col-md-2">
+						<img width="30" class="mt-2" src="{% static 'img/avatar1.png' %}">
+				</div>
+				<div class="col-md-10">
+					<span class="msg m-0"><a class="text-secondary" href="{% url 'foro_comentarios' c.foro_id %}">{{c.foro.nombre}}</a></span><br>
+					<span class="msg m-0">{{c.comentario}}</span><br>
+						{% if theme.user.user_membership %}
+						<small class="font-italic text-muted float-right">{{c.user.user_membership.names}} {{ c.user.user_membership.first_surname.0 }} {{ c.user.user_membership.second_surname.0 }}</small> 
+						{% else %}
+						<small class="font-italic text-muted float-right">{{c.user.username}}</small> 
+						{% endif %}	
+					</span><br>
+				</div>
+			</div>
+		</li>
+	{% endfor %}
+</ul>
