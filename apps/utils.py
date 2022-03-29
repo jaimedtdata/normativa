@@ -82,6 +82,7 @@ def create_member_free(user):
 def register_cap_users(user):
     membership_agremiado = Membership.objects.get(membership_type='PLPA')
     membership_noagremiado = Membership.objects.get(membership_type='PNA')
+    membership_plan_profesional_pp = Membership.objects.get(membership_type='PPPP')
 
     cap_num=user['cap']
     is_member = APIMember.objects.filter(cap_num=cap_num).exists()
@@ -126,7 +127,7 @@ def register_cap_users(user):
             m.save()
             return member
         else:
-            #users that not are abled to free account PLPA
+            # Profesional users that paid in CAP office - plan Profesional pago presencial
             member, created=Member.objects.get_or_create(
                             names= obj.name_user,
                             first_surname= obj.first_surname, 
@@ -140,7 +141,7 @@ def register_cap_users(user):
                             profession= obj.profession, 
                             tuition= user['cap'], 
                             secret_code= obj.secret_code,
-                            membership= membership_noagremiado,
+                            membership= membership_plan_profesional_pp,
                             is_enabled= False,
                             penalty_fee= True,
                             has_tutition= False
@@ -187,3 +188,48 @@ def register_client_user(user):
     m.user=user
     m.save()
     return member
+
+def register_client_premium(user):
+    #Pago en Linea - Plan Premium Agremiado
+    membership_premium = Membership.objects.get(membership_type='PLPPA')
+
+    email=user['email']
+    is_member = APIMember.objects.filter(email=email).exists()
+
+    if is_member:
+        obj = APIMember.objects.get(email=user['email'])
+        is_enabled = obj.is_enabled
+        penalty_fee = obj.penalty_fee
+        if is_enabled and not penalty_fee:
+            #users able to free account acording to ERP
+            member, created = Member.objects.get_or_create(
+                            names= obj.name_user,
+                            first_surname= obj.first_surname, 
+                            second_surname= obj.second_surname, 
+                            identity= obj.identity, 
+                            person_type= obj.person_type, 
+                            mobile= obj.mobile, 
+                            phone= obj.phone, 
+                            email= email, 
+                            address= obj.address, 
+                            profession= obj.profession, 
+                            tuition= obj.cap_num, 
+                            secret_code= obj.secret_code,
+                            membership= membership_premium,
+                            is_enabled= True,
+                            penalty_fee= False,
+                            has_tutition= True
+                            )
+
+            password = user['password1']
+            group = Group.objects.get(name='PARTICIPANTE')      
+            user = User.objects.create_user(member.tuition, obj.email, password)
+            user.last_name = member.first_surname
+            user.first_name = member.second_surname
+            user.groups.add(group)
+            user.save()
+            #update member according to user created above
+            m=Member.objects.get(id=member.id)
+            m.user=user
+            m.save()
+            return member

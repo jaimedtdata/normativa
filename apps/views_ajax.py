@@ -43,10 +43,11 @@ def get_dni(request):
             if userERP:
                 user=APIMember.objects.get(identity=dni)
                 #when user meet the conditions
-                if user.has_tutition and user.is_enabled and not user.penalty_fee:
+                if user.has_tutition and user.is_enabled and not user.penalty_fee or user.is_client:
                     data = {
                         'msg' : 'Estas en el ERP, solo confirma algunos datos',
                         'cap' : user.cap_num,
+                        'client' : user.is_client,
                         'names': user.name_user,
                     }
                     return JsonResponse({'data': data})
