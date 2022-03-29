@@ -29,7 +29,7 @@ from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
-from normas.models import Areas_Normas, Policies_usage, Subtipo_Normas
+from normas.models import Areas_Normas, Policies_usage, Subtipo_Normas, Universo_Normas
 from foro.models import Comentario_Foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -178,11 +178,12 @@ def norma_edificatoria(request):
 
 @login_required
 def norma_datos(request):
-    norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso.tipo_uso').order_by('subtipo_uso').order_by('norma')
+    norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso').order_by('norma')
     tipo_normas = Tipo_Normas.objects.order_by('order')
     area_normas = Areas_Normas.objects.order_by('name')
     palabras_clave = Register_Palabraclave.objects.all()
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
+    topico = Universo_Normas.objects.all()
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
     sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
@@ -198,8 +199,17 @@ def norma_datos(request):
             'normas' : json.dumps(normas),
             'sbu' : json.dumps(sbu),
             'tu' : json.dumps(tu),
+            'topico' : topico,
             }
     return render(request,'normativa/norma_urb_edit.html',context)
+
+@login_required
+def reglamento_comentado(request):
+    return render(request,'normativa/reglamento_comentado.html',None)
+
+@login_required
+def procedimientos_tramites(request):
+    return render(request,'normativa/procedimientos_tramites.html',None)
 
 # FILTRAR NORMATIVAS DE EDIFICACIONES
 def filter_normativa_edificatoria(request):
