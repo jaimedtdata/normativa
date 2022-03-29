@@ -4,8 +4,7 @@ afregar columna RNE-Norma:
 mover dashboard
 
 ----------------------
-tasks
-- CREAR UN MODELO PARA GUARDAR LAS TRANSACCIONES
+PROCESO DE LA PASARELA DE pAGOS
 
 - FLUJO PLAN AGREMIADO ACTUALIZAR A PREMIUM AGREMIADO
     *Validar el pago de Niubiz
@@ -35,7 +34,6 @@ tasks
 
 
 TIPOS DE PLANES:
-
 Cuando compra un plan actualizará a           ||||    cuando se venza
 
 1) Plan agremiado ---> Plan Premium Agremiado  ||||  Plan Premium Agremiado ----> Plan agremiado
@@ -46,6 +44,26 @@ pago presencial
 4) Plan Premium Agremiado                       ||||  plan agremiado
 5) Plan Profesional                             |||| pierde acceso
 
+PENDIENTES:
+1)Renovar Planes
+    - Flujo Renovar plan del usuario Agremiado (TERMINADO)
+    - Flujo Renovar plan del usuario Premium Agremiado (TERMINADO)
+    - Flujo Renovar plan del usuario Profesional (TERMINADO)
 
-1)Renovar plan segun el tipo de usuario 
-2) verificar si el usuario profesional ha pagado ,cuando el pago es a traves del link pago efectivo
+2) plan Profesional
+    - verificar si el usuario profesional ha pagado ,cuando el pago es a traves del link pago efectivo (TERMINADO)
+    - Verificar que el usuario del plan profesional haya pagado y 
+        no quede a mitad del proceso sin haber pagado. (No)
+    - Restringi acceso si solo se registró y no pagó. (No)
+   - Perder acceso en el usuario Profesional cuando vence su membresia[middleware].  (No)
+   - PERMITIRLE PAGAR
+
+3) PAGO PRESENCIAL - PLAN PROFESIONAL 
+    - Tienen que enviarnos el tipo de usuario en la api (usuario cap o is_client)
+    - Tienen que enviar el precio y tipo de plan que pagaron
+    - Definir que los campos obligatorios
+    - Validar las reglas para acceder mediante el formulario de DNI(TERMINAOD)
+
+4) ApI PARA ENVIAR INFORMACION DE PAGOS AL RP
+
+5) Renovacion del paln profesional

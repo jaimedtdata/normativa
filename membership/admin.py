@@ -18,7 +18,7 @@ class MemberConditionsAdmin(admin.ModelAdmin):
 
 @admin.register(APIMember)
 class APIMemberAdmin(admin.ModelAdmin):
-    list_display= ['name_user','first_surname','second_surname' ,'cap_num', 'identity', 
+    list_display= ['name_user','first_surname','second_surname' ,'cap_num', 'identity', 'is_client',
                     'is_enabled', 'penalty_fee', 'has_tutition',
                     'email','profession','address']
     #list_editable = ['is_enabled', 'penalty_fee', 'has_tutition']

@@ -51,7 +51,7 @@ var base_url = window.location.origin;
                     // 2 cases for users that are in ERP but still not have account in this system
                 
                         //when user meet the conditions
-                    if (user_data.cap){
+                    if (user_data.cap || user_data.client){
                         console.log(user_data.msg);
                         const cap = user_data.cap
                         // blockCap = document.getElementById('block-cap')
