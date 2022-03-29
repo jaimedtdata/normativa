@@ -59,7 +59,7 @@ class MemberPremiumCapForm(forms.Form):
             exists_user = APIMember.objects.filter(email=email).exists()
             if exists_user :
                 api_user = APIMember.objects.filter(email=email)[0]
-                if api_user.has_tutition and api_user.is_enabled and not api_user.penalty_fee:
+                if not api_user.has_tutition or not api_user.is_enabled or api_user.penalty_fee:
                     raise forms.ValidationError(f"Estimado(a) {api_user.name_user} , No puedes acceder debido a que tienes alguna multa o no te encuentras habilitado, para mayor informacion por favor comunicate con el C.A.P.")
             else:
                 raise forms.ValidationError('No eres un usuario agremiado, debes escoger un plan profesional para poder registrarte.')

@@ -47,11 +47,11 @@ pago presencial
 PENDIENTES:
 1)Renovar Planes
     - Flujo Renovar plan del usuario Agremiado (TERMINADO)
-    - Flujo Renovar plan del usuario Premium Agremiado (no)
+    - Flujo Renovar plan del usuario Premium Agremiado (TERMINADO)
     - Flujo Renovar plan del usuario Profesional (TERMINADO)
 
 2) plan Profesional
-    - verificar si el usuario profesional ha pagado ,cuando el pago es a traves del link pago efectivo (No)
+    - verificar si el usuario profesional ha pagado ,cuando el pago es a traves del link pago efectivo (TERMINADO)
     - Verificar que el usuario del plan profesional haya pagado y 
         no quede a mitad del proceso sin haber pagado. (No)
     - Restringi acceso si solo se registró y no pagó. (No)

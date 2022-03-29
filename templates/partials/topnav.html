@@ -59,7 +59,7 @@
                         {% elif membership == 'Pago en Linea - Plan Premium Agremiado' %}
                             <a href="{% url 'cap_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
                                 <i class="fas fa-list"></i>
-                                Para acceder a todos nuestros beneficios actualiza tu plan aquí
+                                Renueva tu plan aquí
                             </a>
                         {% elif membership == 'Pago en Linea - Plan Profesional' %}
                             <a href="{% url 'client_choose_plan' %}" class="dropdown-item text-success font-weight-bolder">
@@ -67,6 +67,11 @@
                                 Renueva tu plan aquí
                             </a>
                         {% elif membership == 'Pagos Presenciales - Plan Profesional' %}
+                        <a href="#" class="dropdown-item text-success font-weight-bolder">
+                            <i class="fas fa-list"></i>
+                            Renueva tu plan acercandote a las oficionas del C.A.P.
+                        </a>
+                        {% elif membership == 'Pagos Presenciales - Plan Premium Agremiadoo' %}
                         <a href="#" class="dropdown-item text-success font-weight-bolder">
                             <i class="fas fa-list"></i>
                             Renueva tu plan acercandote a las oficionas del C.A.P.

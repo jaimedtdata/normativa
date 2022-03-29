@@ -15,12 +15,12 @@ class CheckMembership:
             user = User.objects.get(username=request.user.username)
             type_membership = user.user_membership.membership.membership_type
             #exclude super users
+            print("usuario premium agremiado", type_membership=='PLPPA')
+            print("usuario agremiado",type_membership=='PLPA')
+            identity = user.user_membership.identity
+            member = Member.objects.get(identity=identity)
+            orders_exists = Order_payment.objects.filter(identity=identity).exists()
             if type_membership=='PLPA' or type_membership=='PLPPA' :
-                print("usuario premium agremiado", type_membership=='PLPPA')
-                print("usuario agremiado",type_membership=='PLPA')
-                identity = user.user_membership.identity
-                member = Member.objects.get(identity=identity)
-                orders_exists = Order_payment.objects.filter(identity=identity).exists()
                 if orders_exists:
                     last_order = Order_payment.objects.filter(identity=identity).latest('created')
                     day_finish_plan = last_order.validity_date_finish
@@ -43,7 +43,7 @@ class CheckMembership:
                         
                             
         except:
-            print('eres super user')
+            print('eres super user U otro tipo de usuario ')
         
                      
         # Code to be executed for each request before
