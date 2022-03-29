@@ -127,6 +127,15 @@
         "model": "normas.universo_normas",
         "pk": 2,
         "fields": {
+            "name": "REGLAMENTO COMENTADO",
+            "created": "2022-02-23T09:05:01.668",
+            "updated": "2022-03-17T09:51:47.297"
+        }
+    },
+    {
+        "model": "normas.universo_normas",
+        "pk": 3,
+        "fields": {
             "name": "PROCEDIMIENTO ADMINISTRATIVO",
             "created": "2022-02-23T09:05:01.668",
             "updated": "2022-03-17T09:51:47.297"
@@ -628,6 +637,33 @@
         }
     },
     {
+        "model": "normas.estado_normas",
+        "pk": 1,
+        "fields": {
+            "name": "VIGENTE",
+            "created": "2022-03-29T09:01:10.043",
+            "updated": "2022-03-29T09:01:10.043"
+        }
+    },
+    {
+        "model": "normas.estado_normas",
+        "pk": 2,
+        "fields": {
+            "name": "NO VIGENTE",
+            "created": "2022-03-29T09:01:14.569",
+            "updated": "2022-03-29T09:01:14.569"
+        }
+    },
+    {
+        "model": "normas.estado_normas",
+        "pk": 3,
+        "fields": {
+            "name": "DEROGADO PARCIALMENTE",
+            "created": "2022-03-29T09:01:23.676",
+            "updated": "2022-03-29T09:01:23.676"
+        }
+    },
+    {
         "model": "normas.register_normativa",
         "pk": 2,
         "fields": {
@@ -636,10 +672,12 @@
             "base_legal": "R.M. N°061-2021-VIVIENDA",
             "fecha_publi": "2021-02-11",
             "tipo_norma": 4,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_R.M.061-2021-VIVIENDA_Modif.NormaA.070-Comercio_11.02.2021.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "None",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T16:27:08.076",
             "updated": "2022-03-22T15:22:34.890"
         }
@@ -653,10 +691,12 @@
             "base_legal": "R.M.N° 079-2019 -VIVIENDA",
             "fecha_publi": "2019-03-09",
             "tipo_norma": 4,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_A.120_ACCESIBILIDAD_UNIVERSAL_EN_EDIFICACIONES_R.M.N072-2019-VIVIENDA_02..pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Antes \"Accesibilidad para personas con discapacidad\"",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T16:40:44.059",
             "updated": "2022-03-22T15:32:06.569"
         }
@@ -670,10 +710,12 @@
             "base_legal": "D.S. N° 017-2012-VIVIENDA",
             "fecha_publi": "2012-11-09",
             "tipo_norma": 4,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_A.130_REQUISITOS_DE_SEGURIDAD_DS_N_017-2012_09.11.2012_4.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "La R.M. 061-2021-VIVIENDA Derogó el Capítulo VIII Comercio, de la Norma Técnica A.130, La norma Comercio A.070 ya incluye seguridad.",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T16:57:41.030",
             "updated": "2022-03-22T15:37:52.517"
         }
@@ -687,12 +729,14 @@
             "base_legal": "R.M. N° 232-2020-VIVIENDA",
             "fecha_publi": "2020-09-23",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_EM.030_R.M.232-2020-VIVIENDA_MODIFICAN__VENTILACION_23.09.2020.pdf",
-            "estado": "NV",
-            "descripcion": null,
+            "estado": 2,
+            "descripcion": "",
+            "propiedad": "PU",
+            "articulo": "",
             "created": "2022-03-16T17:13:58.098",
-            "updated": "2022-03-22T15:47:56.116"
+            "updated": "2022-03-28T15:47:08.229"
         }
     },
     {
@@ -704,10 +748,12 @@
             "base_legal": "R.M. N° 341-2018-VIVIENDA",
             "fecha_publi": "2018-10-07",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_E.M.040_INST.GAS_R.M._N341-2018-VIVIENDA_07.10.2018.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Explica las distancias que debe cumplir los tanques de Gas (GLP) a ductos, equipos y otras edificaciones.",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T17:23:14.772",
             "updated": "2022-03-22T15:59:39.067"
         }
@@ -721,10 +767,12 @@
             "base_legal": "D.S. N° 011-2006-VIVIENDA",
             "fecha_publi": "2006-06-11",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_EM.050_INSTALACIONES_DE_CLIMATIZACIÓN.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Instalaciones Climatización",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T22:16:16.835",
             "updated": "2022-03-22T16:10:41.899"
         }
@@ -738,10 +786,12 @@
             "base_legal": "D.S. N° 011-2006-VIVIENDA",
             "fecha_publi": "2006-06-11",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_EM.060_CHIMENEAS_Y_HOGARES_D.S.011-2006-VIVIENDA_11.06.2006.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T22:25:42.705",
             "updated": "2022-03-22T16:12:42.891"
         }
@@ -755,10 +805,12 @@
             "base_legal": "R.M. N° 084-2019-VIVIENDA",
             "fecha_publi": "2019-03-12",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/EM070-fe-de-errata-rm-no-084-2019-VIVIENDA.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T22:37:12.703",
             "updated": "2022-03-22T16:21:33.739"
         }
@@ -772,10 +824,12 @@
             "base_legal": "FÉ ERRATAS R.M. N° 084-2019-VIVIENDA",
             "fecha_publi": "2019-03-24",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_EM070-fe-de-errata-R.M.084-2019-VIVIENDA_24.03.2019.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T22:39:29.404",
             "updated": "2022-03-22T16:21:08.684"
         }
@@ -789,10 +843,12 @@
             "base_legal": "ANEXO R.M. N° 084-2019-VIVIENDA",
             "fecha_publi": "2019-03-12",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/EM070-fe-de-errata-rm-no-084-2019-VIVIENDA_1.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-16T22:41:59.548",
             "updated": "2022-03-22T16:23:51.012"
         }
@@ -806,10 +862,12 @@
             "base_legal": "R.M.822-2018-MINSA",
             "fecha_publi": "2018-09-08",
             "tipo_norma": 6,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/R.M.N822-2018-MINSA_NTS.N142-MINSA-2018-DIGESA_NormaSanitariRestaurantes_08.0.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T10:47:01.612",
             "updated": "2022-03-22T16:35:09.782"
         }
@@ -823,10 +881,12 @@
             "base_legal": "D.S.006-2013-PCM",
             "fecha_publi": "2013-01-10",
             "tipo_norma": 6,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/D.S_006_2013_AutorizacionesSectoriales_Clasificacion_Lic.Funcionam.10.01.2013.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Únicamente para Categorización y/o recategorización de Restaurantes, que deseen categoría de 1 a 5 tenedores y calificación de restaurante turístico.",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T11:13:12.313",
             "updated": "2022-03-22T16:53:00.388"
         }
@@ -840,10 +900,12 @@
             "base_legal": "LEY N° 29896",
             "fecha_publi": "2012-07-07",
             "tipo_norma": 6,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/LEY_29896_LACTARIO_2012.07.2012.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T11:21:14.300",
             "updated": "2022-03-22T16:46:49.854"
         }
@@ -857,10 +919,12 @@
             "base_legal": "D.S.025-2004-MINCETUR",
             "fecha_publi": "2004-11-09",
             "tipo_norma": 6,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/D.S.N009_2017_MINCETUR_Modifica_D.S.025-2004-MINCETUR_31.07.2017.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T11:30:46.801",
             "updated": "2022-03-22T16:29:39.259"
         }
@@ -874,10 +938,12 @@
             "base_legal": "D.S.009-2017-MINCETUR",
             "fecha_publi": "2017-07-31",
             "tipo_norma": 6,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/D.S.N009_2017_MINCETUR_Modifica_D.S.025-2004-MINCETUR_31.07.2017_1.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T11:38:18.972",
             "updated": "2022-03-22T16:32:51.338"
         }
@@ -891,10 +957,12 @@
             "base_legal": "D.S.011-2019-MINCETUR",
             "fecha_publi": "2019-11-24",
             "tipo_norma": 6,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/D.S.011-2019-MINCETUR-Categorización_y_calificac._Turística_restaurante.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Es voluntaria, se utiliza para obtener una categorización.",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T11:57:49.724",
             "updated": "2022-03-22T16:39:05.939"
         }
@@ -908,10 +976,12 @@
             "base_legal": "D.S. N° 001-2016-MIMP",
             "fecha_publi": "2016-02-09",
             "tipo_norma": 1,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/DS_001_2016_MIMP_Reglam.Lactarios_09.02.2016.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T12:08:21.893",
             "updated": "2022-03-22T16:48:10.906"
         }
@@ -925,10 +995,12 @@
             "base_legal": "D.S.N° 023-2021-MIMP",
             "fecha_publi": "2021-07-26",
             "tipo_norma": 1,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/D.S.023-2021-MIMP_Reglam.LactariosLey29896_26.07.2021.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T12:10:38.312",
             "updated": "2022-03-22T16:49:32.344"
         }
@@ -942,10 +1014,12 @@
             "base_legal": "RESOL.723-2017-INDECOPI",
             "fecha_publi": "2017-12-22",
             "tipo_norma": 18,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RESOL.723-2017-INDECOPI_BARRERA_BUROCRATICA_ILEGAL_22.12.2017.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Declara Barrera Burocrática Carente de Razonabilidad al indice de usos Ord. 920 y 1012 de la Municipalidad Metropolitana de Lima, Restaurante Central en Miraflores, por no sustentar la no compatiblida",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T12:38:42.239",
             "updated": "2022-03-22T16:56:13.685"
         }
@@ -959,10 +1033,12 @@
             "base_legal": "ORD.523-MSI_RIN_Reglam.IntegradoNormativoSanIsidro",
             "fecha_publi": "2020-07-20",
             "tipo_norma": 21,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/ORD.523-MSI_RIN_Reglam.IntegradoNormativoSanIsidro_12.07.2020.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "VerIndices operacionales: NORMA SI-02 NORMATIVA DE NIVELES OPERACIONALES Y ESTÁNDARES DE CALIDAD,TÍTULO IV ESTÁNDARES DE CALIDAD, Artículo 20°.- Restaurantes, página 62.",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-17T12:44:00.723",
             "updated": "2022-03-21T12:50:45.212"
         }
@@ -976,10 +1052,12 @@
             "base_legal": "R.M.N° 188-2021-Vivienda",
             "fecha_publi": "2021-07-07",
             "tipo_norma": 2,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_A.020-VIVIENDA_R.M.Nº_188-2021-VIVIENDA_-_Modif.N.T._A.020_Vivienda_del_R.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-18T15:18:10.789",
             "updated": "2022-03-23T12:01:20.950"
         }
@@ -993,10 +1071,12 @@
             "base_legal": "Ábaco Excell A.020 del RNE",
             "fecha_publi": "2021-07-07",
             "tipo_norma": 2,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/ejemplo.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Anexo Ábaco excell aplicación de la Norma A.020 distancias de Pozos de Luz.",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-18T15:26:20.903",
             "updated": "2022-03-23T12:06:31.157"
         }
@@ -1010,10 +1090,12 @@
             "base_legal": "R.M. N° 191-2021-Vivienda",
             "fecha_publi": "2021-07-08",
             "tipo_norma": 4,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_A.010_Resol.Minist._Nº_191-2021-VIVIENDA-_A.010_Condiciones_Generales_de_.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-18T15:35:25.340",
             "updated": "2022-03-23T12:27:15.395"
         }
@@ -1027,10 +1109,12 @@
             "base_legal": "ITL N° 012-2019-VIVIENDA/VMVU-DGPRVU-DV-JJLL-AMBR",
             "fecha_publi": "2019-04-08",
             "tipo_norma": 10,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/ITL_N_012-2019-RESTAURANTE_O_INDUSTRIA_OFICIO_Nro.336_10.04.2019_4.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "(consumidor directo) de Edificación industrial (consumidor indirecto).",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-21T08:34:52.253",
             "updated": "2022-03-22T16:55:17.693"
         }
@@ -1044,10 +1128,12 @@
             "base_legal": "D.S.007-2003-SA",
             "fecha_publi": "2003-04-03",
             "tipo_norma": 6,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/D.S.007-2003-SA_REGLAM.PISCINAS_03.04.2006.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Para los casos de restaurantes que cuenten con piscinas",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-21T08:47:06.975",
             "updated": "2022-03-21T14:08:02.707"
         }
@@ -1061,10 +1147,12 @@
             "base_legal": "RESOL.723-2017-INDECOPI",
             "fecha_publi": "2017-12-22",
             "tipo_norma": 18,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RESOL.723-2017-INDECOPI_BARRERA_BUROCRATICA_ILEGAL_22.12.2017_2.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Declara Barrera Burocrática Carente de Razonabilidad al indice de usos Ord. 920 y 1012 de la Municipalidad Metropolitana de Lima, Restaurante Central en Miraflores, por no sustentar la no compatiblida",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-21T09:13:43.339",
             "updated": "2022-03-22T16:56:40.808"
         }
@@ -1078,10 +1166,12 @@
             "base_legal": "R.M. N°061-2021-VIVIENDA",
             "fecha_publi": "2021-02-11",
             "tipo_norma": 2,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_R.M.061-2021-VIVIENDA_Modif.NormaA.070-Comercio_11.02.2021_6.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-21T14:26:13.842",
             "updated": "2022-03-22T11:18:00.198"
         }
@@ -1095,10 +1185,12 @@
             "base_legal": "R.M. N°061-2021-VIVIENDA",
             "fecha_publi": "2021-02-11",
             "tipo_norma": 3,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_R.M.061-2021-VIVIENDA_Modif.NormaA.070-Comercio_11.02.2021_7.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-21T14:49:36.501",
             "updated": "2022-03-23T11:55:27.806"
         }
@@ -1112,10 +1204,12 @@
             "base_legal": "R.M.N° 072-2019 -Vivienda",
             "fecha_publi": "2019-03-02",
             "tipo_norma": 4,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_A.120_RM-072-2019-VIVIENDA_AccesibilidadUniversal_02.03.2020.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "( antes \"Accesibilidad para personas con discapacidad\")",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T12:32:22.769",
             "updated": "2022-03-23T12:37:10.270"
         }
@@ -1129,10 +1223,12 @@
             "base_legal": "D.S. N° 011-2006-Vivienda",
             "fecha_publi": "2006-05-08",
             "tipo_norma": 4,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_A.130_REQUISITOS_DE_SEGURIDAD__DS_N_017-2012.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Consta de dos ediciones: El Capitulo I al X, del año 2006 se complementa con los Capítulos. XI al XII del año 2012. El capítulo VIII de la Norma A.130 ha sido derogado por la R.M. 061-2021-VIVIENDA qu",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T12:39:53.736",
             "updated": "2022-03-23T14:29:20.587"
         }
@@ -1146,10 +1242,12 @@
             "base_legal": "D.S. N° 017-2012-Vivienda",
             "fecha_publi": "2012-11-09",
             "tipo_norma": 4,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_A.130_REQUISITOS_DE_SEGURIDAD__DS_N_017-2012.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "Consta de dos ediciones: El Capitulo I al X, del año 2006 se complementa con los Capítulos. XI al XII del año 2012. El capítulo VIII de la Norma A.130 ha sido derogado por la R.M. 061-2021-VIVIENDA qu",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T14:23:50.402",
             "updated": "2022-03-23T14:34:01.688"
         }
@@ -1163,10 +1261,12 @@
             "base_legal": "R.M. N° 029-2021-Vivienda",
             "fecha_publi": "2021-01-29",
             "tipo_norma": 4,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_G.040_R.M.029-2021-VIVIENDA_DEFINICIONES_RNE_29.01.2021.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T15:05:33.512",
             "updated": "2022-03-23T15:13:06.530"
         }
@@ -1180,10 +1280,12 @@
             "base_legal": "D.S. N° 011-2006-Vivienda",
             "fecha_publi": "2006-06-09",
             "tipo_norma": 4,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_GE.020_D.S.011-2006-VIVIENDA_COMPONENTES_Y_CARACTERISTICAS_DE_LOS_PROYECT.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T15:15:43.225",
             "updated": "2022-03-23T16:16:40.829"
         }
@@ -1197,10 +1299,12 @@
             "base_legal": "R.M. N° 355-2018-VIVIENDA",
             "fecha_publi": "2018-12-07",
             "tipo_norma": 5,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_E.030_DiseñoSismoresistente_R.V.M._N355-2018-VIVIENDA_07.12.2018.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T16:25:00.456",
             "updated": "2022-03-23T16:28:58.391"
         }
@@ -1214,10 +1318,12 @@
             "base_legal": "R.M. N° 043-2019-VIVIENDA",
             "fecha_publi": "2019-02-12",
             "tipo_norma": 5,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_E.030_Modif.NT.E.030_Dis.SismoResistente_R.V.M.N043-2019-VIVIENDA_12.02.2.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T16:30:56.420",
             "updated": "2022-03-23T16:31:48.655"
         }
@@ -1231,10 +1337,12 @@
             "base_legal": "Especificaciones Acelerógrafos -IGP",
             "fecha_publi": "2020-09-23",
             "tipo_norma": 5,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/IGP_ACELEROGRAFOS_EspecificacionesTécnicas_2020pdf.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": null,
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T16:39:38.684",
             "updated": "2022-03-23T16:40:38.956"
         }
@@ -1248,10 +1356,12 @@
             "base_legal": "D.S. N°030-2019-VIVIENDA",
             "fecha_publi": "2019-11-06",
             "tipo_norma": 1,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_E.031_AislamientoSismico_D.S.N030-2019-VIVIENDA_06.11.2019.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T16:46:07.612",
             "updated": "2022-03-23T16:46:07.612"
         }
@@ -1265,10 +1375,12 @@
             "base_legal": "R.M. N° 232-2020-VIVIENDA",
             "fecha_publi": "2020-09-23",
             "tipo_norma": 1,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_EM.030_Instalac.Ventilacion_R.M.232-2020-VIVIENDA_23.09.2020_1.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T16:49:35.740",
             "updated": "2022-03-23T16:49:35.740"
         }
@@ -1282,10 +1394,12 @@
             "base_legal": "R.M. N° 341-2018-VIVIENDA",
             "fecha_publi": "2018-10-07",
             "tipo_norma": 5,
-            "subtipo_uso": 4,
+            "subtipo_uso": [4],
             "document": "Document_normativa/RNE_E.M.040_INST.GAS_R.M._N341-2018-VIVIENDA_07.10.2018_6.pdf",
-            "estado": "NV",
+            "estado": 2,
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-23T16:56:05.173",
             "updated": "2022-03-23T16:56:05.173"
         }
@@ -1299,10 +1413,12 @@
             "base_legal": "D.S. N° 011-2006-Vivienda",
             "fecha_publi": "2006-06-11",
             "tipo_norma": 5,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/RNE_EM.050_InstalacionesDeClimatización_INSTALACIONES_DE_CLIMATIZACIÓN.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-24T12:08:47.804",
             "updated": "2022-03-24T16:25:27.378"
         }
@@ -1316,10 +1432,12 @@
             "base_legal": "R.M. N° 084-2019-VIVIENDA",
             "fecha_publi": "2019-03-12",
             "tipo_norma": 5,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/RNE_EM.070_R.M.084-2019-VIVIENDA_TRANSPORTE_VERTICAL_12.03.2019.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-24T12:24:33.935",
             "updated": "2022-03-24T16:26:00.378"
         }
@@ -1333,10 +1451,12 @@
             "base_legal": "FÉ ERRATAS R.M. N° 084-2019-VIVIENDA",
             "fecha_publi": "2019-03-24",
             "tipo_norma": 5,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/RNE_EM_070-FeDeErrata_R.M.N084-2019-VIVIENDA_24.03.2019.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-24T12:29:40.176",
             "updated": "2022-03-24T16:24:47.218"
         }
@@ -1350,10 +1470,12 @@
             "base_legal": "R.M. N° 084-2019-VIVIENDA",
             "fecha_publi": "2019-03-12",
             "tipo_norma": 5,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/EM.070-HOJA-CALCULO_ASCENSOR_RESIDENCIAL.xls",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-24T12:52:13.727",
             "updated": "2022-03-24T16:24:01.096"
         }
@@ -1367,10 +1489,12 @@
             "base_legal": "D. S. N° 27-94-EM",
             "fecha_publi": "1994-05-17",
             "tipo_norma": 6,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/D.S.027-94-EM_GASLicuadoPetroleo_reglaseguinstalaciones_19.05.1994.PDF",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-24T16:12:44.801",
             "updated": "2022-03-24T16:26:16.246"
         }
@@ -1384,10 +1508,12 @@
             "base_legal": "D. S. N° 029-2013-EM",
             "fecha_publi": "2013-08-01",
             "tipo_norma": 6,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/D.S._N029-2013-EM_DisposicionesMasificaciónGasNatural_01.08.2013.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-24T16:30:58.662",
             "updated": "2022-03-24T16:37:50.434"
         }
@@ -1401,10 +1527,12 @@
             "base_legal": "D.S. Nº 022-2016-VIVIENDA",
             "fecha_publi": "2016-12-24",
             "tipo_norma": 9,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/D.S.N022-2016-VIVIENDA_RATDUS_ReglamentoDeAcondicionamientoTerritorial_24.12..pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-25T08:46:08.815",
             "updated": "2022-03-25T10:24:52.872"
         }
@@ -1418,10 +1546,12 @@
             "base_legal": "D.L. N°1037",
             "fecha_publi": "2008-06-25",
             "tipo_norma": 9,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/D.L1037_DecretoLegislativoPromueveInversiónPrivadaViviendasInterésSocial_25.0.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-25T08:58:04.194",
             "updated": "2022-03-25T10:34:03.407"
         }
@@ -1435,10 +1565,12 @@
             "base_legal": "D.S. Nº 010-2018-VIVIENDA   (DEROGA EL D.S.  Nº 013-2013-VIVIENDA)",
             "fecha_publi": "2018-07-11",
             "tipo_norma": 9,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/DS_N010-2018-VIVIENDA_ReglamentoEspecialLicenciasHUyEdificaciones_11.07.2018.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-25T09:03:44.203",
             "updated": "2022-03-25T10:47:45.086"
         }
@@ -1452,10 +1584,12 @@
             "base_legal": "D.S. Nº  002-2020-VIVIENDA",
             "fecha_publi": "2020-01-22",
             "tipo_norma": 9,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/DS_N002-2020-VIVIENDA_ModificaD.S.012-2019-VIV._22.01.2020.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-25T09:25:25.222",
             "updated": "2022-03-25T10:47:10.371"
         }
@@ -1469,10 +1603,12 @@
             "base_legal": "D.S. Nº 012-2019-VIVIENDA",
             "fecha_publi": "2019-03-19",
             "tipo_norma": 9,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/DS_N012-2019-VIVIENDA_Modifica_DS.010-2018-VIVIENDA_19.03.2019.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-25T09:43:55.205",
             "updated": "2022-03-25T10:46:56.406"
         }
@@ -1486,10 +1622,12 @@
             "base_legal": "D.L. N° 1469",
             "fecha_publi": "2020-04-24",
             "tipo_norma": 9,
-            "subtipo_uso": 3,
+            "subtipo_uso": [3],
             "document": "Document_normativa/D.L.1469_MODIF.LEY_29090_IncorporaVISenRNE_24.04.2020.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-25T10:13:01.177",
             "updated": "2022-03-25T10:51:26.039"
         }
@@ -1503,10 +1641,12 @@
             "base_legal": "R.M. N°061-2021-VIVIENDA",
             "fecha_publi": "2021-02-11",
             "tipo_norma": 3,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_R.M.061-2021-VIVIENDA_Modif.NormaA.070-Comercio_11.02.2021.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-25T14:17:30.833",
             "updated": "2022-03-25T14:22:41.700"
         }
@@ -1520,10 +1660,11 @@
             "base_legal": "D.S. N° 191-2021-VIVIENDA",
             "fecha_publi": "2021-07-08",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_A.010_Resol.Minist._Nº_191-2021-VIVIENDA_Condiciones_Generales_de_Diseño_.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
             "articulo": "",
             "created": "2022-03-25T14:59:20.597",
             "updated": "2022-03-25T15:04:05.490"
@@ -1538,10 +1679,12 @@
             "base_legal": "R.M.N° 072-2019 -VIVIENDA",
             "fecha_publi": "2019-03-02",
             "tipo_norma": 4,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_A.120_RM-072-2019-VIVIENDA_AccesibilidadUniversal_02.03.2020_1.pdf",
             "estado": "VI",
             "descripcion": "( antes \"Accesibilidad para personas con discapacidad\")",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-25T15:14:15.100",
             "updated": "2022-03-28T09:38:26.412"
         }
@@ -1555,10 +1698,12 @@
             "base_legal": "R.M.N° 072-2019 -VIVIENDA",
             "fecha_publi": "2019-03-02",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_A.120_RM-072-2019-VIVIENDA_AccesibilidadUniversal_02.03.2020_2.pdf",
             "estado": "VI",
             "descripcion": "( antes \"Accesibilidad para personas con discapacidad\")",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-28T09:22:12.422",
             "updated": "2022-03-28T09:32:59.657"
         }
@@ -1572,10 +1717,12 @@
             "base_legal": "D.S. N° 017-2012-VIVIENDA",
             "fecha_publi": "2012-11-09",
             "tipo_norma": 5,
-            "subtipo_uso": 5,
+            "subtipo_uso": [5],
             "document": "Document_normativa/RNE_A.130_REQUISITOS_DE_SEGURIDAD__DS_N_017-2012.pdf",
             "estado": "VI",
             "descripcion": "La R.M. 061-2021-VIVIENDA Derogó el Capítulo VIII Comercio, de la Norma Técnica A.130, La norma Comercio A.070 ya incluye seguridad.",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-28T09:31:58.077",
             "updated": "2022-03-28T09:31:58.077"
         }
@@ -1589,10 +1736,12 @@
             "base_legal": "R.M. N° 355-2018-VIVIENDA",
             "fecha_publi": "2018-12-07",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_E.030_DiseñoSismoresistente_R.V.M._N355-2018-VIVIENDA_07.12.2018.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-28T09:44:06.043",
             "updated": "2022-03-28T09:44:06.043"
         }
@@ -1606,10 +1755,12 @@
             "base_legal": "R.M. N° 043-2019-VIVIENDA",
             "fecha_publi": "2019-02-12",
             "tipo_norma": 5,
-            "subtipo_uso": 5,
+            "subtipo_uso": [5],
             "document": "Document_normativa/RNE_E.030_Modif.NT.E.030_Dis.SismoResistente_R.V.M.N043-2019-VIVIENDA_12.02.2.pdf",
             "estado": "VI",
             "descripcion": "",
+            "propiedad": "PU",
+            "articulo": null,
             "created": "2022-03-28T09:47:06.290",
             "updated": "2022-03-28T09:47:06.290"
         }
@@ -1623,12 +1774,90 @@
             "base_legal": "D.S. N°030-2019-VIVIENDA",
             "fecha_publi": "2019-11-06",
             "tipo_norma": 5,
-            "subtipo_uso": 1,
+            "subtipo_uso": [1],
             "document": "Document_normativa/RNE_E.031_AislamientoSismico_D.S.N030-2019-VIVIENDA_06.11.2019.pdf",
             "estado": "VI",
             "descripcion": "6-nov-19",
+            "propiedad": "PU",
+            "articulo": "",
             "created": "2022-03-28T10:33:58.775",
-            "updated": "2022-03-28T10:33:58.775"
+            "updated": "2022-03-28T15:42:42.236"
+        }
+    },
+    {
+        "model": "normas.register_normativa",
+        "pk": 78,
+        "fields": {
+            "norma": "E.M.030",
+            "name_denom": "Instalaciones de Ventilación del Reglamento Nacional de Edificaciones.",
+            "base_legal": "R.M. N° 232-2020-VIVIENDA",
+            "fecha_publi": "2020-09-23",
+            "tipo_norma": 5,
+            "subtipo_uso": [3],
+            "document": "Document_normativa/RNE_EM.030_Instalac.Ventilacion_R.M.232-2020-VIVIENDA_23.09.2020.pdf",
+            "estado": "VI",
+            "descripcion": "",
+            "propiedad": "PU",
+            "articulo": "None",
+            "created": "2022-03-28T15:46:24.654",
+            "updated": "2022-03-28T15:46:24.654"
+        }
+    },
+    {
+        "model": "normas.register_normativa",
+        "pk": 79,
+        "fields": {
+            "norma": "E.M.040",
+            "name_denom": "E.M.040 Instalaciones de Gas Natural, Gas Licuado y Sistemas Duales",
+            "base_legal": "R.M. N° 341-2018-VIVIENDA",
+            "fecha_publi": "2018-10-07",
+            "tipo_norma": 5,
+            "subtipo_uso": [1],
+            "document": "Document_normativa/RNE_E.M.040_INST.GAS_R.M._N341-2018-VIVIENDA_07.10.2018.pdf",
+            "estado": "VI",
+            "descripcion": "",
+            "propiedad": "PU",
+            "articulo": "None",
+            "created": "2022-03-28T15:53:26.567",
+            "updated": "2022-03-28T16:05:44.941"
+        }
+    },
+    {
+        "model": "normas.register_normativa",
+        "pk": 80,
+        "fields": {
+            "norma": "E.M. 050",
+            "name_denom": "Instalaciones Climatización",
+            "base_legal": "D.S. N° 011-2006-Vivienda",
+            "fecha_publi": "2006-06-11",
+            "tipo_norma": 5,
+            "subtipo_uso": [3],
+            "document": "Document_normativa/RNE_EM.050_InstalacionesDeClimatización_INSTALACIONES_DE_CLIMATIZACIÓN.pdf",
+            "estado": "VI",
+            "descripcion": "Tanques EstacionariosRNE_EM.050_InstalacionesDeClimatización_INSTALACIONES DE CLIMATIZACIÓN",
+            "propiedad": "PU",
+            "articulo": "None",
+            "created": "2022-03-28T16:11:36.837",
+            "updated": "2022-03-28T16:11:36.837"
+        }
+    },
+    {
+        "model": "normas.register_normativa",
+        "pk": 81,
+        "fields": {
+            "norma": "A.120",
+            "name_denom": "Norma Gráfica Accesibilidad Universal en Edificaciones",
+            "base_legal": "R.M. N° 072-2019-VIVIENDA",
+            "fecha_publi": "2019-03-02",
+            "tipo_norma": 12,
+            "subtipo_uso": [1],
+            "document": "Document_normativa/Norma-A120_CON_GRAFICOS_R.M.072-2019_02.03.2019.pdf",
+            "estado": "VI",
+            "descripcion": "Norma A.120 Accesibilidad Universal en Edificaciones con gráficos.",
+            "propiedad": "PU",
+            "articulo": "",
+            "created": "2022-03-28T17:37:59.755",
+            "updated": "2022-03-28T17:37:59.755"
         }
     },
     {
@@ -1650,7 +1879,8 @@
             "updated": "2022-03-16T16:42:44.929",
             "normativas": [
                 4,
-                47
+                47,
+                81
             ]
         }
     },
@@ -1675,8 +1905,8 @@
             "created": "2022-03-16T16:43:46.699",
             "updated": "2022-03-16T16:43:46.699",
             "normativas": [
-                50,
-                47
+                47,
+                50
             ]
         }
     },
@@ -1688,8 +1918,10 @@
             "created": "2022-03-16T16:46:56.451",
             "updated": "2022-03-16T16:46:56.451",
             "normativas": [
+                2,
+                4,
                 5,
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -1704,9 +1936,7 @@
                 20,
                 21,
                 24,
-                4,
-                2,
-                8
+                7
             ]
         }
     },
@@ -1734,7 +1964,8 @@
             "created": "2022-03-16T17:27:05.124",
             "updated": "2022-03-16T17:27:05.124",
             "normativas": [
-                7,
+                4,
+                8,
                 9,
                 10,
                 11,
@@ -1748,11 +1979,10 @@
                 20,
                 21,
                 24,
-                4,
-                8,
-                46,
+                70,
                 45,
-                70
+                46,
+                7
             ]
         }
     },
@@ -1767,7 +1997,6 @@
                 2,
                 4,
                 5,
-                7,
                 8,
                 9,
                 10,
@@ -1783,9 +2012,10 @@
                 20,
                 21,
                 24,
+                70,
                 45,
                 46,
-                70
+                7
             ]
         }
     },
@@ -1797,9 +2027,9 @@
             "created": "2022-03-18T15:18:10.794",
             "updated": "2022-03-18T15:18:10.794",
             "normativas": [
+                36,
                 37,
                 43,
-                36,
                 67
             ]
         }
@@ -1839,7 +2069,6 @@
                 2,
                 4,
                 5,
-                7,
                 8,
                 9,
                 10,
@@ -1857,7 +2086,8 @@
                 23,
                 24,
                 42,
-                45
+                45,
+                7
             ]
         }
     },
@@ -1869,9 +2099,9 @@
             "created": "2022-03-18T15:57:08.419",
             "updated": "2022-03-18T15:57:08.419",
             "normativas": [
-                5,
+                2,
                 4,
-                2
+                5
             ]
         }
     },
@@ -1908,9 +2138,9 @@
             "created": "2022-03-21T09:31:52.995",
             "updated": "2022-03-21T09:31:52.996",
             "normativas": [
-                5,
+                2,
                 4,
-                2
+                5
             ]
         }
     },
@@ -1922,8 +2152,10 @@
             "created": "2022-03-21T09:32:42.697",
             "updated": "2022-03-21T09:32:42.697",
             "normativas": [
+                2,
+                4,
                 5,
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -1938,10 +2170,8 @@
                 20,
                 21,
                 24,
-                4,
-                2,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -1963,8 +2193,10 @@
             "created": "2022-03-21T09:33:10.433",
             "updated": "2022-03-21T09:33:10.433",
             "normativas": [
+                2,
+                4,
                 5,
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -1979,10 +2211,8 @@
                 20,
                 21,
                 24,
-                4,
-                2,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -1994,8 +2224,10 @@
             "created": "2022-03-21T09:33:24.324",
             "updated": "2022-03-21T09:33:24.324",
             "normativas": [
+                2,
+                4,
                 5,
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -2010,10 +2242,8 @@
                 20,
                 21,
                 24,
-                4,
-                2,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -2025,8 +2255,10 @@
             "created": "2022-03-21T09:34:56.673",
             "updated": "2022-03-21T09:34:56.673",
             "normativas": [
+                2,
+                4,
                 5,
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -2041,10 +2273,8 @@
                 20,
                 21,
                 24,
-                4,
-                2,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -2056,8 +2286,10 @@
             "created": "2022-03-21T09:38:02.807",
             "updated": "2022-03-21T09:38:02.807",
             "normativas": [
+                2,
+                4,
                 5,
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -2072,10 +2304,8 @@
                 20,
                 21,
                 24,
-                4,
-                2,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -2087,8 +2317,10 @@
             "created": "2022-03-21T09:38:33.363",
             "updated": "2022-03-21T09:38:33.363",
             "normativas": [
+                2,
+                4,
                 5,
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -2103,10 +2335,8 @@
                 20,
                 21,
                 24,
-                4,
-                2,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -2118,8 +2348,10 @@
             "created": "2022-03-21T09:41:21.867",
             "updated": "2022-03-21T09:41:21.867",
             "normativas": [
+                2,
+                4,
                 5,
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -2134,10 +2366,8 @@
                 20,
                 21,
                 24,
-                4,
-                2,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -2152,7 +2382,6 @@
                 2,
                 4,
                 5,
-                7,
                 8,
                 9,
                 10,
@@ -2169,7 +2398,8 @@
                 21,
                 24,
                 43,
-                45
+                45,
+                7
             ]
         }
     },
@@ -2191,7 +2421,7 @@
             "created": "2022-03-21T10:36:19.292",
             "updated": "2022-03-21T10:36:19.292",
             "normativas": [
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -2206,8 +2436,8 @@
                 20,
                 21,
                 24,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -2219,7 +2449,7 @@
             "created": "2022-03-21T10:40:12.247",
             "updated": "2022-03-21T10:40:12.247",
             "normativas": [
-                7,
+                8,
                 9,
                 10,
                 11,
@@ -2234,8 +2464,8 @@
                 20,
                 21,
                 24,
-                8,
-                45
+                45,
+                7
             ]
         }
     },
@@ -2331,8 +2561,8 @@
             "created": "2022-03-21T14:26:13.849",
             "updated": "2022-03-21T14:26:13.849",
             "normativas": [
-                45,
-                70
+                70,
+                45
             ]
         }
     },
@@ -2356,8 +2586,8 @@
             "created": "2022-03-21T15:01:49.234",
             "updated": "2022-03-21T15:01:49.235",
             "normativas": [
-                46,
-                70
+                70,
+                46
             ]
         }
     },
@@ -2381,8 +2611,8 @@
             "created": "2022-03-21T15:06:33.836",
             "updated": "2022-03-21T15:06:33.836",
             "normativas": [
-                46,
-                70
+                70,
+                46
             ]
         }
     },
@@ -2406,8 +2636,8 @@
             "created": "2022-03-21T15:08:23.558",
             "updated": "2022-03-21T15:08:23.558",
             "normativas": [
-                46,
-                70
+                70,
+                46
             ]
         }
     },
@@ -2453,8 +2683,8 @@
             "created": "2022-03-21T15:10:31.845",
             "updated": "2022-03-21T15:10:31.845",
             "normativas": [
-                46,
-                70
+                70,
+                46
             ]
         }
     },
@@ -2478,8 +2708,8 @@
             "created": "2022-03-21T15:13:25.340",
             "updated": "2022-03-21T15:13:25.340",
             "normativas": [
-                46,
-                70
+                70,
+                46
             ]
         }
     },
@@ -2515,8 +2745,8 @@
             "created": "2022-03-21T16:30:49.445",
             "updated": "2022-03-21T16:30:49.445",
             "normativas": [
-                46,
-                70
+                70,
+                46
             ]
         }
     },
@@ -2659,10 +2889,10 @@
             "created": "2022-03-22T10:42:56.758",
             "updated": "2022-03-22T10:42:56.758",
             "normativas": [
-                5,
                 2,
-                49,
-                48
+                5,
+                48,
+                49
             ]
         }
     },
@@ -2710,11 +2940,11 @@
             "created": "2022-03-22T11:36:10.637",
             "updated": "2022-03-22T11:36:10.637",
             "normativas": [
-                7,
-                9,
                 2,
+                9,
                 38,
-                58
+                58,
+                7
             ]
         }
     },
@@ -2738,12 +2968,12 @@
             "created": "2022-03-22T15:28:22.385",
             "updated": "2022-03-22T15:28:22.385",
             "normativas": [
+                4,
                 11,
                 12,
                 13,
-                4,
-                60,
-                47
+                47,
+                60
             ]
         }
     },
@@ -2795,8 +3025,8 @@
             "updated": "2022-03-22T15:33:54.621",
             "normativas": [
                 5,
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -2809,9 +3039,9 @@
             "updated": "2022-03-22T15:34:01.994",
             "normativas": [
                 5,
-                51,
+                48,
                 49,
-                48
+                51
             ]
         }
     },
@@ -2824,8 +3054,8 @@
             "updated": "2022-03-22T15:34:23.743",
             "normativas": [
                 5,
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -2838,8 +3068,8 @@
             "updated": "2022-03-22T15:34:45.218",
             "normativas": [
                 5,
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -2852,8 +3082,8 @@
             "updated": "2022-03-22T15:35:01.793",
             "normativas": [
                 5,
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -2866,8 +3096,8 @@
             "updated": "2022-03-22T15:35:16.470",
             "normativas": [
                 5,
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -2917,9 +3147,9 @@
             "created": "2022-03-22T15:45:54.310",
             "updated": "2022-03-22T15:45:54.310",
             "normativas": [
-                7,
                 10,
-                38
+                38,
+                7
             ]
         }
     },
@@ -2990,7 +3220,8 @@
             "updated": "2022-03-22T15:56:46.022",
             "normativas": [
                 8,
-                62
+                62,
+                79
             ]
         }
     },
@@ -3410,8 +3641,8 @@
                 64,
                 65,
                 66,
-                69,
-                68
+                68,
+                69
             ]
         }
     },
@@ -3426,8 +3657,8 @@
                 36,
                 65,
                 66,
-                69,
-                68
+                68,
+                69
             ]
         }
     },
@@ -3441,11 +3672,11 @@
             "normativas": [
                 36,
                 64,
-                67,
                 65,
                 66,
-                69,
-                68
+                67,
+                68,
+                69
             ]
         }
     },
@@ -3472,10 +3703,10 @@
             "normativas": [
                 36,
                 64,
-                67,
                 65,
-                69,
-                68
+                67,
+                68,
+                69
             ]
         }
     },
@@ -3487,10 +3718,10 @@
             "created": "2022-03-23T11:59:57.849",
             "updated": "2022-03-23T11:59:57.849",
             "normativas": [
-                37,
                 36,
-                69,
-                68
+                37,
+                68,
+                69
             ]
         }
     },
@@ -3502,11 +3733,11 @@
             "created": "2022-03-23T12:00:39.898",
             "updated": "2022-03-23T12:00:39.898",
             "normativas": [
-                37,
                 36,
+                37,
                 64,
-                67,
-                66
+                66,
+                67
             ]
         }
     },
@@ -3588,8 +3819,8 @@
             "updated": "2022-03-23T12:06:25.612",
             "normativas": [
                 37,
-                67,
-                65
+                65,
+                67
             ]
         }
     },
@@ -3685,9 +3916,9 @@
             "created": "2022-03-23T12:44:21.175",
             "updated": "2022-03-23T12:44:21.175",
             "normativas": [
-                50,
+                48,
                 49,
-                48
+                50
             ]
         }
     },
@@ -3699,8 +3930,8 @@
             "created": "2022-03-23T12:45:02.702",
             "updated": "2022-03-23T12:45:02.702",
             "normativas": [
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -3712,8 +3943,8 @@
             "created": "2022-03-23T12:45:43.925",
             "updated": "2022-03-23T12:45:43.925",
             "normativas": [
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -3737,8 +3968,8 @@
             "created": "2022-03-23T12:47:38.981",
             "updated": "2022-03-23T12:47:38.981",
             "normativas": [
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -3750,8 +3981,8 @@
             "created": "2022-03-23T14:27:23.463",
             "updated": "2022-03-23T14:27:23.463",
             "normativas": [
-                49,
-                48
+                48,
+                49
             ]
         }
     },
@@ -3838,8 +4069,8 @@
             "updated": "2022-03-23T15:09:13.833",
             "normativas": [
                 50,
-                67,
                 66,
+                67,
                 68
             ]
         }
@@ -4130,8 +4361,8 @@
             "created": "2022-03-24T12:26:23.734",
             "updated": "2022-03-24T12:26:23.734",
             "normativas": [
-                60,
-                59
+                59,
+                60
             ]
         }
     },
@@ -4466,8 +4697,8 @@
             "created": "2022-03-25T09:03:44.208",
             "updated": "2022-03-25T09:03:44.208",
             "normativas": [
-                67,
                 66,
+                67,
                 68
             ]
         }
@@ -4701,10 +4932,10 @@
             "updated": "2022-03-25T10:20:34.672",
             "normativas": [
                 64,
-                67,
                 65,
-                69,
-                68
+                67,
+                68,
+                69
             ]
         }
     },
@@ -4731,8 +4962,8 @@
             "updated": "2022-03-25T10:22:23.377",
             "normativas": [
                 64,
-                67,
-                65
+                65,
+                67
             ]
         }
     },
@@ -4923,6 +5154,138 @@
         }
     },
     {
+        "model": "normas.register_palabraclave",
+        "pk": 241,
+        "fields": {
+            "name": "Gas en comercio",
+            "created": "2022-03-28T15:54:15.128",
+            "updated": "2022-03-28T15:54:15.128",
+            "normativas": [
+                79
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 242,
+        "fields": {
+            "name": "Tanques de gas GLP",
+            "created": "2022-03-28T16:02:36.219",
+            "updated": "2022-03-28T16:02:36.219",
+            "normativas": [
+                79
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 243,
+        "fields": {
+            "name": "Distancia de seguridas de gas",
+            "created": "2022-03-28T16:02:36.224",
+            "updated": "2022-03-28T16:02:36.224",
+            "normativas": [
+                79
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 244,
+        "fields": {
+            "name": "Instacione de gas licuado de petróleo",
+            "created": "2022-03-28T16:02:36.229",
+            "updated": "2022-03-28T16:02:36.229",
+            "normativas": [
+                79
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 245,
+        "fields": {
+            "name": "RESTAURANTES",
+            "created": "2022-03-28T16:11:36.842",
+            "updated": "2022-03-28T16:11:36.842",
+            "normativas": [
+                80
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 246,
+        "fields": {
+            "name": "CLIMATIZACIÓN",
+            "created": "2022-03-28T16:11:36.849",
+            "updated": "2022-03-28T16:11:36.849",
+            "normativas": [
+                80
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 247,
+        "fields": {
+            "name": "ENFRIAMIENTO",
+            "created": "2022-03-28T16:11:36.853",
+            "updated": "2022-03-28T16:11:36.853",
+            "normativas": [
+                80
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 248,
+        "fields": {
+            "name": "TEMPERATURA",
+            "created": "2022-03-28T16:11:36.857",
+            "updated": "2022-03-28T16:11:36.858",
+            "normativas": [
+                80
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 249,
+        "fields": {
+            "name": "HUMEDAD",
+            "created": "2022-03-28T16:11:36.863",
+            "updated": "2022-03-28T16:11:36.863",
+            "normativas": [
+                80
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 250,
+        "fields": {
+            "name": "ACCESIBILIDAD",
+            "created": "2022-03-28T17:37:59.760",
+            "updated": "2022-03-28T17:37:59.760",
+            "normativas": [
+                81
+            ]
+        }
+    },
+    {
+        "model": "normas.register_palabraclave",
+        "pk": 251,
+        "fields": {
+            "name": "Discapacitado",
+            "created": "2022-03-28T17:39:32.277",
+            "updated": "2022-03-28T17:39:32.277",
+            "normativas": [
+                81
+            ]
+        }
+    },
+    {
         "model": "normas.policies_usage",
         "pk": 1,
         "fields": {
@@ -4933,7 +5296,9 @@
             "register_date_time": "2022-03-10T12:37:40.439",
             "tipo_uso": [
                 1
-            ]
+            ],
+            "subtipo_uso": [],
+            "universo": []
         }
     },
     {
@@ -4947,7 +5312,9 @@
             "register_date_time": "2022-03-10T12:38:18.097",
             "tipo_uso": [
                 1
-            ]
+            ],
+            "subtipo_uso": [],
+            "universo": []
         }
     }
 ]

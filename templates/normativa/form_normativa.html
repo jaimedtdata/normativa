@@ -75,7 +75,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label> Tipo de Uso: </label>
-                    <select class="form-control" aria-label="Default select example" name="tipo_uso" id="tipo_uso_id">
+                    <select class="form-control select-multiple" multiple="multiple" aria-label="Default select example" name="tipo_uso" id="tipo_uso_id" style="width: 100%;">
                         {% for tipo in tipo_uso %}
                         <option value="{{tipo.id}}">{{tipo.name}}</option>
                         {% endfor %}
@@ -92,7 +92,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label> Universo de Norma: </label>
+                    <label> Topico principal de Norma: </label>
                     <select class="form-control" aria-label="Default select example" name="universo" id="id_universo">
                             {% for un in universo_norma %}
                             <option value="{{un.id}}">{{un.name}}</option>
@@ -106,6 +106,9 @@
         </div>
         <div class="row">
             <div class="col-6">
+                <div class="form-group">
+                    {{ form.propiedad|as_crispy_field }}
+                </div>
                 <div class="form-group">
                     {{ form.estado|as_crispy_field }}
                 </div>
@@ -180,7 +183,7 @@
     })
 
     // FUNCIONES PARA EL LISTADO DINAMICO
-    const tipos_uso = document.getElementById('tipo_uso_id')
+    const tipos_uso = $('#tipo_uso_id')
     const subtipos_uso = document.getElementById('id_subtipo_uso')
     const subtipos_uso_json = {{ subtipos_uso_json|safe }}
     
@@ -190,30 +193,35 @@
     
     changeOptionsSubtipoUso()
     changeOptionsTipoNorma()
+    
 
-    tipos_uso.addEventListener('change', (e) => {
-
-        changeOptionsSubtipoUso()
-        
-    })
+    $(document).ready(function() {
+        $('#tipo_uso_id').on('select2:select', function() {
+            changeOptionsSubtipoUso()
+        })
+        $('#tipo_uso_id').on('select2:unselect', function() {
+            changeOptionsSubtipoUso()
+        })
+    });
 
     universo.addEventListener('change', (e) => {
-
         changeOptionsTipoNorma()
-
     })
 
     function changeOptionsSubtipoUso() {
         var options_sbu = ``
+        var tipos = tipos_uso.val()
+        
         subtipos_uso_json.forEach( sbu => {
-            if( sbu.tipo_uso_id == tipos_uso.value ) {
-                options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
-            }            
-        })
+                if( tipos.includes((sbu.tipo_uso_id).toString()) ) {
+                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+                }
+            })
+        
 
-        if (options_sbu.length == 0) {
-            options_sbu += /*html*/`<option class="text-wrap" value selected disabled>---SIN SUBTIPOS, SELECCIONE OTRO TIPO DE USO---</option>`
-        }
+        // if (options_sbu.length == 0) {
+        //     options_sbu += /*html*/`<option class="text-wrap" value selected disabled>---SIN SUBTIPOS, SELECCIONE OTRO TIPO DE USO---</option>`
+        // }
 
         subtipos_uso.innerHTML = options_sbu
     }

@@ -29,7 +29,7 @@ from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
-from normas.models import Areas_Normas, Policies_usage, Subtipo_Normas
+from normas.models import Areas_Normas, Policies_usage, Subtipo_Normas, Universo_Normas
 from foro.models import Comentario_Foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -41,10 +41,10 @@ from bus_normativa.models import date_normativa
 from normas.models import Tipo_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
 from normas.serializer import normas_serializer, subtipos_uso_serializer, tipos_uso_serializer
 
-from .utils import create_member_free, register_client_user
-from .forms_register import MemberCapForm, ExternalUserForm
+from .utils import create_member_free, register_client_user, register_client_premium
+from .forms_register import MemberCapForm, ExternalUserForm, MemberPremiumCapForm
 
-from membership.models import Membership
+from membership.models import Membership, APIMember
 from apps.models import UsagePolicies, Order_payment, NiubizTransaction
 from apps.niubiz import get_security_token, create_session_token, require_transaccion_autorizacion, create_niubiz_transaction, create_order_payment
 from django.conf import settings
@@ -178,11 +178,12 @@ def norma_edificatoria(request):
 
 @login_required
 def norma_datos(request):
-    norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso.tipo_uso').order_by('subtipo_uso').order_by('norma')
+    norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso').order_by('norma')
     tipo_normas = Tipo_Normas.objects.order_by('order')
     area_normas = Areas_Normas.objects.order_by('name')
     palabras_clave = Register_Palabraclave.objects.all()
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
+    topico = Universo_Normas.objects.all()
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
     sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
@@ -198,8 +199,17 @@ def norma_datos(request):
             'normas' : json.dumps(normas),
             'sbu' : json.dumps(sbu),
             'tu' : json.dumps(tu),
+            'topico' : topico,
             }
     return render(request,'normativa/norma_urb_edit.html',context)
+
+@login_required
+def reglamento_comentado(request):
+    return render(request,'normativa/reglamento_comentado.html',None)
+
+@login_required
+def procedimientos_tramites(request):
+    return render(request,'normativa/procedimientos_tramites.html',None)
 
 # FILTRAR NORMATIVAS DE EDIFICACIONES
 def filter_normativa_edificatoria(request):
@@ -463,8 +473,8 @@ def checkoutClient(request):
         type_membership = "Plan mensual"
     if plpp.price_year == Decimal(price):
         type_membership= "Plan anual"
-    purchase_number = 2022 #numero de pedido
-    #purchase_number = request.user.username #numero de pedido
+    #purchase_number = 2022 #numero de pedido
+    purchase_number = member.identity
     security_token = get_security_token()
     token_session = create_session_token(security_token, price)
     context = {
@@ -508,7 +518,7 @@ def success_payment_client(request):
         order = Order_payment.objects.filter(identity=request.user.user_membership.identity).first()
     except:
         pass
-    
+
     context = {
         'order': order,
     }
@@ -530,11 +540,11 @@ def client_cash_payment(request):
 ################
 class SignUpPremiumCAP(FormView):
     template_name = 'checkout/premium_agremiado/register_form_premium_cap.html'
-    form_class = ExternalUserForm
-    success_url = reverse_lazy('checkout')
+    form_class = MemberPremiumCapForm
+    success_url = reverse_lazy('checkout-premium-cap')
 
-    def get_context_data(self):
-        context = super().get_context_data()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         exist_codigo_etica=UsagePolicies.objects.filter(title__icontains="codigo de etica").exists()
         if exist_codigo_etica:
             codigo_etica=UsagePolicies.objects.get(title__icontains="codigo de etica")
@@ -544,33 +554,103 @@ class SignUpPremiumCAP(FormView):
 
     def form_valid(self, form):
         cd = form.cleaned_data
-        print(cd)
+        member = register_client_premium(cd)
+        api_user = APIMember.objects.get(email=cd['email'])
+        self.request.session['user_identity']= api_user.identity
+        print('api_user identity:',api_user.identity)
+        token = UserToken(user_profile=member)
+        send_confirm_account(self.request, token.get_confirm_link(), member.email)
     
-        # member = create_member_free(cd)
-        # password = cd['password']
+        return HttpResponseRedirect(reverse_lazy('premium_choose_plan'))
+        #return HttpResponseRedirect(reverse_lazy('client_choose_plan'))
 
-        # user = User.objects.create_user(member.tuition, member.email, password)
-        # user.last_name = member.first_surname
-        # user.save()
-        # #update member according to user created above
-        # m=Member.objects.get(id=member.id)
-        # m.user=user
-        # m.save()
-        
-        #token = UserToken(user_profile=member)
-        #send_confirm_account(self.request, token.get_confirm_link(), member.email)
+def premium_choose_plan(request):
+    context={
+        'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
+    }
+    return render(request, 'checkout/premium_agremiado/premium_choose_plan.html', context)
 
-        return HttpResponseRedirect(reverse_lazy('checkout'))
+def add_plan_premium(request):
+    if request.method == 'POST':
+        cd = request.POST
+        #SAVE THE PRICE IN THE SESSION
+        r = request.session
+        r['plan_price']= cd['plan_price']
+    return redirect('checkout-premium-cap')
 
+@csrf_exempt
 def checkout_premium_cap(request):
+    COMERCIAL_ID = settings.COMERCIAL_ID
+    type_membership = None
+    plppa=Membership.objects.get(membership_type="PLPPA")
+    #price =  22.00
+    price =  request.session.get('plan_price')
+    try:
+        member = Member.objects.get(identity=request.session.get('user_identity'))
+    except:
+        member=request.user.user_membership
+
+    if plppa.price_month == Decimal(price):
+        type_membership = "Plan mensual"
+    if plppa.price_year == Decimal(price):
+        type_membership= "Plan anual"
+    #purchase_number = 2022 #numero de pedido
+    purchase_number = member.identity #numero de pedido
+    security_token = get_security_token()
+    token_session = create_session_token(security_token, price)
+
     context = {
         'pl_premium_agremiado': Membership.objects.get(membership_type="PLPPA"),
-        'pl_profesional': Membership.objects.get(membership_type="PLPP"),
+        'token_security' : security_token,
+        'token_session' : token_session,
+        'comercial_id' : COMERCIAL_ID,
+        'purchase_number': purchase_number,
+        'price' : price,
+        'type_membership':type_membership    
         }
+
+    if request.method == 'POST':
+        cd = request.POST
+        email=request.POST['customerEmail']
+        token_transaccion = request.POST['transactionToken']
+        #user=request.user.user_membership
+        user=member
+        print('checkout',cd)
+        if request.POST['channel'] == 'pagoefectivo':
+            url=request.POST['url']
+            return redirect('client_cash_payment')
+
+        transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
+        print("transacion exitosa", transaction_success)
+        niubiz_id = transaction_success['ecoreTransactionUUID']
+        orden = create_order_payment(user,email,niubiz_id, price, type_membership)
+        #create transaction niubiz
+        create_niubiz_transaction(transaction_success, orden)
+        #DELETE THE SESSION
+        
+
+        return redirect('success_payment_cap')
+
+
     return render(request, 'checkout/premium_agremiado/checkout_premium_cap.html', context)
 
+@csrf_exempt
 def success_payment_cap(request):
-    return render(request, 'checkout/premium_agremiado/success_payment_cap.html')
+
+    try:
+        order = Order_payment.objects.filter(identity=request.session.get('user_identity')).first()
+        order = Order_payment.objects.filter(identity=request.user.user_membership.identity).first()
+    except:
+        pass
+
+    context = {
+        'order': order,
+    }
+    print(order)
+    #del request.session['plan_price_client']
+    #del request.session['user_identity']
+    #request.session.modified = True
+    return render(request, 'checkout/premium_agremiado/success_payment_cap.html', context)
 
 ######################
 #### END Payment process PLAN PREMIUM CAP

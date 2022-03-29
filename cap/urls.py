@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from apps.views import ( SignUpFormView ,Login, dashboard,home , index, liquid, 
-    comision, plan, plan_edit, plan_delete, carga_rules,preguntas,signup,
+    comision, plan, plan_edit, plan_delete, carga_rules,preguntas, procedimientos_tramites, reglamento_comentado,signup,
 	entrevistas, charts,member, configs, works, foro_comentarios,
     password_reset,SignUpOthers,success_sign_up,
     #johao
@@ -58,6 +58,8 @@ urlpatterns = [
     #
     path('norma_edificatoria/',norma_edificatoria,name='norma_edificatoria'),
     path('norma_urb',norma_datos,name='norma_urb'),
+    path('reglamento_comentado/',reglamento_comentado,name='reglamento_comentado'),
+    path('procedimientos_tramites/',procedimientos_tramites,name='procedimientos_tramites'),
     path('filter-normativa-edificatoria/',filter_normativa_edificatoria,name='filter-normativa-edificatoria'),
     path('norma_tecuso/',normas_tecnicauso,name='norma_tecuso'),
     path('bus_provedor/',busqueda_provedor,name='bus_provedor'),

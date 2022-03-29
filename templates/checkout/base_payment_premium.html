@@ -21,21 +21,24 @@
         <div class="logo_container" style="background: #24387C;">
 					<span class="logo_helper"></span>
 					<a href="{% url 'login' %}">
-						<img src="{% static 'img/cap-logo.svg' %}" alt="Regional Lima " id="logo" data-height-percentage="47" data-actual-width="300" data-actual-height="85">
+						<img src="{% static 'img/logo_cap.svg' %}" alt="Regional Lima " id="logo" data-height-percentage="47" data-actual-width="300" data-actual-height="85">
 					</a>
 		</div>
 
         <!-- start breadcrum -->
-        
-      
-            
+       
         <section>
             <nav>
                 <ol class="cd-multi-steps text-bottom count">
-                    <li class="{%  if request.path == '/signup-premium-cap/' %} current {% elif request.path == '/checkout-premium-cap/' %} visited {% elif request.path == '/success-payment-cap/' %} visited {% endif %}">
+                    
+                    <li {% if request.user.is_authenticated %} style="display:none;" {%endif %}
+                    class="{%  if request.path == '/signup-premium-cap/' %} current {%  elif request.path == '/premium-choose-plan/' %} visited  {% elif request.path == '/checkout-premium-cap/' %} visited {% elif request.path == '/success-payment-cap/' %} visited {% endif %} ">
                         <a class="text-muted" href="#0">Registro</a>
                     </li>
-                    <li class="{%  if request.path == '/checkout-premium-cap/' %} current {% elif request.path == '/signup-premium-cap/' %} '' {% elif request.path == '/success-payment-cap/' %} visited {% endif %}" >
+                    <li class="{% if request.path == '/premium-choose-plan/' %} hey current  {%  elif request.path == '/checkout-premium-cap/' %} visited {%  elif request.path == '/success-payment-cap/' %} visited {% endif %}">
+                        <a class="text-muted" href="#0">Elegir Plan</a>
+                    </li>
+                    <li class="{%  if request.path == '/checkout-premium-cap/' %} current {%  elif request.path == '/success-payment-cap/' %} visited {% endif %}" >
                         <a class="text-muted" href="#0">Método de Pago</a>
                     </li>
                     <li class="{%  if request.path == '/success-payment-cap/' %} current  {% endif %}" >
@@ -45,9 +48,7 @@
                 </ol>
             </nav>
         </section>
-
         <!-- end breadcrum -->
-       
 
        
        {% block content %}
@@ -56,12 +57,14 @@
            
         
         {% block js %}
-            
+        
         {% endblock js %}
-            
+        <script src="{% static 'vendor/jquery3/jquery.slim.min.js' %}" ></script>
+        
+        <script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
 
 
-      <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.js' %}"></script>
 
 
 </body>
