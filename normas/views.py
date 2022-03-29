@@ -165,7 +165,6 @@ def eliminar_palabras_clave_normativa(request, normativa):
 
     return HttpResponse(json.dumps(palabras, default=str), content_type="application/json")  
 
-@login_required
 def get_all_palabras_clave_normativa(norma):
         palabras_clave_normativa = norma.keywords.all()
         palabras = [ keywords_serializer(palabra) for palabra in palabras_clave_normativa ]

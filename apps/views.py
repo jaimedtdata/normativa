@@ -39,7 +39,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery
 
 from bus_normativa.models import date_normativa
 from normas.models import Tipo_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
-from normas.serializer import normas_serializer, subtipos_uso_serializer, tipos_uso_serializer
+from normas.serializer import normas_serializer, subtipos_uso_serializer, tipo_norma_serializer, tipos_uso_serializer
 
 from .utils import create_member_free, register_client_user, register_client_premium
 from .forms_register import MemberCapForm, ExternalUserForm, MemberPremiumCapForm
@@ -186,6 +186,7 @@ def norma_datos(request):
     topico = Universo_Normas.objects.all()
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
+    tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
     sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
     tu = [ tipos_uso_serializer(tu) for tu in area_normas ]
 
@@ -200,6 +201,7 @@ def norma_datos(request):
             'sbu' : json.dumps(sbu),
             'tu' : json.dumps(tu),
             'topico' : topico,
+            'tn' : tn
             }
     return render(request,'normativa/norma_urb_edit.html',context)
 

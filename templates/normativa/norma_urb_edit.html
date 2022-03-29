@@ -33,7 +33,7 @@
         <div class="col-lg-3 d-none" style="height:720px;" id="subnormas_caja">
             <div class="form group">
                 <label for="">Topico:</label>
-                <select class="form-control p-0" name="" id="topico" style="font-size: .8rem;">
+                <select class="form-control p-0" name="" id="topico" style="font-size: .9rem;">
                     {% for t in topico %}
                         <option value="{{t.id}}">{{t.name}}</option>
                     {% endfor %}
@@ -126,9 +126,9 @@
                 <table class="table table-bordered  datatable" id="normas-tabla">
                     <thead class="thead-dark">
                         <tr class="text-center">
-                            <th>T. Norma</th>
-                            <th>T. Uso</th>
-                            <th>Sub. Uso</th>
+                            <th>Tipo de Norma</th>
+                            <th>Tipo de Uso</th>
+                            <th>Subtipo de Uso</th>
                             <th>Norma</th>
                             <th>Titulo</th>
                             <th>Descripción</th>
@@ -223,18 +223,20 @@
     
     const normas = {{ normas|safe }}
     const subtipos_uso_json = {{ sbu|safe }}
-
-    console.log(subtipos_uso_json)
     const tipos_uso_json = {{ tu|safe }}
+    const tipos_norma_json = {{ tn|safe }}
 
     var uac = normas;
-    var subnormativas = $("#select-norms").val(),
+    var topico = $("#topico").val(),
+        subnormativas = $("#select-norms").val(),
         search = $("#filter-input").val()
         tu_id = $("#area-normas").val(),
         sbu_id = $('#subtipo_usos').val(),
         date_range = undefined
         keywords = $("#keywords").val()
-        date_range = undefined;
+        date_range = undefined,
+        tipo_uso_option = '',
+        subtipo_uso_option = '';
 
     var normas_tabla = $('#normas-tabla').DataTable({
         searching: false,
@@ -244,7 +246,6 @@
     })
 
     //console.log(normas)
-
 
     $("#select-norms option").each(function()
     {
@@ -256,6 +257,8 @@
 
     $("#select-norms").val(subnormativas)
     execFilters() // PRIMERA EJECUCIÓN
+
+
 
     $("#select-norms").change(function(){
         subnormativas = $("#select-norms").val()
@@ -289,19 +292,44 @@
         }
 
         $("#subtipo_usos").html(options_sbu)
+        tipo_uso_option = $("#area-normas option:selected").text()
         sbu_id = $("#subtipo_usos").val()
         execFilters()  
     })
 
+    $("#topico").change(function(){
+        topico = $("#topico").val()
+
+        var options_tn = ``
+        if( topico != 0 ) {
+            tipos_norma_json.forEach( tn => {
+                if( tn.topico_id == topico ) {
+                    if ( tn.order.length == 2) {
+                        options_tn += /*html*/`<option class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
+                    }
+                    else {
+                        options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
+                    }
+                }            
+            })
+
+            
+        }
+
+        $("#select-norms").html(options_tn)
+        subnormativas = $("#select-norms").val()
+    })
+
     $("#subtipo_usos").change(function(){
         sbu_id = $("#subtipo_usos").val()
+        subtipo_uso_option = $("#subtipo_usos option:selected").text()
         execFilters()
     })
 
     $('#datetimes').change(function(){
         date_range = $('#datetimes').data('daterangepicker')
         execFilters()
-    }) 
+    })
 
     $("#keywords").change(function(){
         keywords = $("#keywords").val()
@@ -348,7 +376,7 @@
     {
         if (tu_id != 0) {
             return uac.filter(n => {
-                return n.tipo_uso_id == tu_id
+                return n.tipos_uso_id.includes(parseInt(tu_id))
             })
         } else {
             return uac
@@ -359,7 +387,7 @@
     {
         if (sbu_id != 0) {
             return uac.filter(n => {
-                return n.subtipo_uso_id == sbu_id
+                return n.subtipos_uso_id.includes(parseInt(sbu_id))
             })
         } else {
             return uac
@@ -432,8 +460,8 @@
             html += /*html*/
                     `<tr >
                         <td>${r.tipo_norma}</td>
-                        <td>${r.tipo_uso}</td>
-                        <td>${r.subtipo_uso}</td>
+                        <td>${subtipo_uso_option}</td>
+                        <td>${tipo_uso_option}</td>
                         <td >
                             ${r.norma}`;
                         
