@@ -37,7 +37,7 @@ def tipo_norma_serializer(tn):
         'id' : tn.id,
         'name' : tn.name,
         'order' : tn.order,
-        'universo_id' : tn.universo_id,
+        'topico_id' : tn.universo_id,
     }
 
 def tipos_uso_serializer(tu): #mama
