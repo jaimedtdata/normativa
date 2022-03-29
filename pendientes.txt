@@ -65,3 +65,5 @@ PENDIENTES:
     - Validar las reglas para acceder mediante el formulario de DNI(TERMINAOD)
 
 4) ApI PARA ENVIAR INFORMACION DE PAGOS AL RP
+
+5) Renovacion del paln profesional

@@ -1,0 +1,15 @@
+[
+{
+  "model": "apps.usagepolicies",
+  "pk": 5,
+  "fields": {
+    "title": "Codigo de etica",
+    "order": 0,
+    "description": "- Tratar a las personas con las que se comunica con respeto y cortesía, siendo de aplicación el Código de Ética del Colegio de Arquitectos del Perú, debiéndose en tal sentido mantener un elevado respeto por los otros arquitectos, sus obras y realizaciones, aun manteniendo su libertad de opinión crítica relativa a las obras, pero emitiéndola solamente en un marco de respeto a las personas, y sin que interfieran con el derecho a una legitima competencia.\r\n- Obrar con la mayor prudencia cuando tenga que emitir conceptos sobre la actuación profesional de sus colegas.\r\n- No se deben realizar actos ni emitir opiniones que mellen el prestigio y la imagen de sus colegas, o difamar o denigrar a colegas o contribuir en forma directa o indirecta a ello, con motivo de su actuación profesional.",
+    "validity_date_start": "2022-03-11",
+    "validity_date_finish": "2022-03-11",
+    "register_date_time": "2022-03-11T14:32:51.061",
+    "member_policies": []
+  }
+}
+]
