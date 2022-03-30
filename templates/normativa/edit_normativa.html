@@ -207,7 +207,7 @@
         function changeOptionsTipoNorma() {
             var options_tn = ``
             tipo_normas_json.forEach( tn => {
-                if( tn.universo_id == universo.value ) {
+                if( tn.topico_id == universo.value ) {
                     options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
                 }            
             })

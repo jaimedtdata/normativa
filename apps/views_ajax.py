@@ -31,10 +31,15 @@ def get_dni(request):
         dni=request.POST.get('dni')
         member=Member.objects.filter(identity=dni).exists()
         if member:
+            m_user = Member.objects.get(identity=dni)
+            #keep user id in the session 
+            if not m_user.user.is_active:
+                request.session['user_identity']= dni
             #when user exits in Member Model
             data = {
                 'msg' : 'Tu dni ya existe, puedes iniciar sesion',
                 'dni':dni,
+                'activo': m_user.user.is_active
             }
             return JsonResponse({'data':data})
         else:
