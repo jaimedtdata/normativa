@@ -205,16 +205,20 @@
     // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
     var ne = params.ne; // "some_value"
     var titulo = params.norma;
+    var t = params.t;
+
+    $('#topico').val(t)
+
     
     if(params.norma == null) {
-        var titulo = 'NORMATIVA EDIFICATORIA'
+        titulo = $('#topico option:selected').text()
         $('#subnormas_caja').removeClass('d-none')
         $('#right').removeClass('col-lg')    
         $('#right').addClass('col-lg-9')    
     }
-
+    
     document.getElementById('titulo').innerHTML = titulo
-
+    
     $('#datetimes').daterangepicker({
         locale: {
             format: 'YYYY-MM-DD'
@@ -225,37 +229,37 @@
     const subtipos_uso_json = {{ sbu|safe }}
     const tipos_uso_json = {{ tu|safe }}
     const tipos_norma_json = {{ tn|safe }}
-
+    
     var uac = normas;
     var topico = $("#topico").val(),
-        subnormativas = $("#select-norms").val(),
-        search = $("#filter-input").val()
-        tu_id = $("#area-normas").val(),
-        sbu_id = $('#subtipo_usos').val(),
-        date_range = undefined
-        keywords = $("#keywords").val()
-        date_range = undefined,
-        tipo_uso_option = '',
-        subtipo_uso_option = '';
-
+    subnormativas = $("#select-norms").val(),
+    search = $("#filter-input").val()
+    tu_id = $("#area-normas").val(),
+    sbu_id = $('#subtipo_usos').val(),
+    date_range = undefined
+    keywords = $("#keywords").val()
+    date_range = undefined,
+    tipo_uso_option = '',
+    subtipo_uso_option = '';
+    
     var normas_tabla = $('#normas-tabla').DataTable({
         searching: false,
         ordering:  true,
         lengthChange: false,
         responsive: true,
     })
-
+    
     //console.log(normas)
+    
+    topicoNorma()
 
     $("#select-norms option").each(function()
     {
-        if(ne == $(this).text().substring(0,1))
-        {
-            subnormativas.push($(this).val())
-        }
+        subnormativas.push($(this).val())
     });
 
     $("#select-norms").val(subnormativas)
+    
     execFilters() // PRIMERA EJECUCIÓN
 
 
@@ -317,7 +321,6 @@
         }
 
         $("#select-norms").html(options_tn)
-        subnormativas = $("#select-norms").val()
     })
 
     $("#subtipo_usos").change(function(){
@@ -428,6 +431,30 @@
         
     }
 
+    function topicoNorma()
+    {
+        topico = $("#topico").val()
+
+        var options_tn = ``
+        if( topico != 0 ) {
+            tipos_norma_json.forEach( tn => {
+                if( tn.topico_id == topico ) {
+                    if ( tn.order.length == 2) {
+                        options_tn += /*html*/`<option class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
+                    }
+                    else {
+                        options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
+                    }
+                }            
+            })
+
+            
+        }
+
+        $("#select-norms").html(options_tn)
+        subnormativas = $("#select-norms").val()
+    }
+
     function execFilters()
     {
         uac = getNormativas(subnormativas)
@@ -460,8 +487,8 @@
             html += /*html*/
                     `<tr >
                         <td>${r.tipo_norma}</td>
-                        <td>${subtipo_uso_option}</td>
-                        <td>${tipo_uso_option}</td>
+                        <td>${r.tipos_uso}</td>
+                        <td>${r.subtipos_uso}</td>
                         <td >
                             ${r.norma}`;
                         
