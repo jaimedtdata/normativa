@@ -1,0 +1,99 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf_viewer.min.css" integrity="sha512-5cOE2Zw/F4SlIUHR/xLTyFLSAR0ezXsra+8azx47gJyQCilATjazEE2hLQmMY7xeAv/RxxZhs8w8zEL7dTsvnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">{{ normativa.norma }} - {{ normativa.name_denom }}</h1>
+<div class="row p-0 mx-0 my-3">
+    <div class="col-md-10 offset-md-1 shadow border border-dark d-flex justify-content-center">
+        <div class="overflow-auto" id="document" style="height: 700px;">
+            <div class="mt-5" id="spinner">
+                <div class="text-center align-middle">
+                    <h1 class="display-4">Cargando Documento</h1>
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <h4 class="font-weight-light" >Por favor, espere</h4>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js" integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js" integrity="sha512-lHibs5XrZL9hXP3Dhr/d2xJgPy91f2mhVAasrSbMkbmoTSm2Kz8DuSWszBLUg31v+BM6tSiHSqT72xwjaNvl0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+url = "{{normativa.document.url}}"
+url = url.replaceAll('&amp;', '&')
+
+renderPdfByUrl(url)
+
+function renderPdfByUrl(url) {
+    var currPage = 1; 
+    var numPages = 0;
+    var thePDF = null;
+    var documento = document.getElementById('document')
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js';
+    //This is where you start
+    var loadingTask = pdfjsLib.getDocument(url);
+    
+    loadingTask.promise.then(function(pdf) {
+
+        //Set PDFJS global object (so we can easily access in our page functions
+        thePDF = pdf;
+
+        //How many pages it has
+        numPages = pdf.numPages;
+
+        //Start with first page
+        pdf.getPage(1).then(handlePages);
+
+    })
+
+
+    function handlePages(page) {
+        //This gives us the page's dimensions at full scale
+        var viewport = page.getViewport({scale: 1.5});
+
+        //We'll create a canvas for each page to draw it on
+        var canvas = document.createElement("canvas");
+        canvas.style.display = "block";
+        var context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        //Draw it on the canvas
+        page.render({
+            canvasContext: context,
+            viewport: viewport
+        });
+
+        //Add it to the web page
+        documento.appendChild(canvas);
+
+        //Move to next page
+        currPage++;
+        if (thePDF !== null && currPage <= numPages) {
+            thePDF.getPage(currPage).then(handlePages);
+        }
+
+        
+        
+        if(currPage > numPages) {
+            document.getElementById('spinner').remove()
+        }
+    }
+}
+
+
+</script>
+
+{% endblock %}
+

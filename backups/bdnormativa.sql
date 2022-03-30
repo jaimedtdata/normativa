@@ -72,8 +72,8 @@ Norma Ref:', '2021-05-19', '2022-06-17', '2022-03-02 08:37:52.245367-05');
 -- Data for Name: normas_areas_normas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.normas_areas_normas (id, area_name, register_date_time, created, updated) VALUES (1, 'VIVIENDA', '2022-02-23 09:04:41.996554-05', '2022-02-23 09:04:41.996568-05', '2022-02-23 09:04:41.996572-05');
-INSERT INTO public.normas_areas_normas (id, area_name, register_date_time, created, updated) VALUES (3, 'RESTAURANTES', '2022-02-23 18:03:24.311788-05', '2022-02-23 18:03:24.311808-05', '2022-02-23 18:03:24.311815-05');
+INSERT INTO public.normas_areas_normas (id, name, register_date_time, created, updated) VALUES (1, 'VIVIENDA', '2022-02-23 09:04:41.996554-05', '2022-02-23 09:04:41.996568-05', '2022-02-23 09:04:41.996572-05');
+INSERT INTO public.normas_areas_normas (id, name, register_date_time, created, updated) VALUES (3, 'RESTAURANTES', '2022-02-23 18:03:24.311788-05', '2022-02-23 18:03:24.311808-05', '2022-02-23 18:03:24.311815-05');
 
 
 --
@@ -82,27 +82,27 @@ INSERT INTO public.normas_areas_normas (id, area_name, register_date_time, creat
 -- Data for Name: normas_subcategories_normas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (3, '1.1.1 TRANSVERSALES', '2022-02-23 09:41:55.788627-05', '2022-02-23 09:41:55.788642-05', '1011', '2022-02-23 09:44:19.09291-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (4, '1.1.2 VIVIENDA', '2022-02-23 09:42:05.318492-05', '2022-02-23 09:42:05.318508-05', '1012', '2022-02-23 09:44:29.229835-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (1, '1. RNE', '2022-02-23 09:05:01.668184-05', '2022-02-23 09:05:01.6682-05', '10', '2022-02-23 09:45:03.857217-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (6, '2.NORMAS SECTORIALES', '2022-02-23 09:42:40.75365-05', '2022-02-23 09:42:40.753672-05', '20', '2022-02-23 09:45:12.751351-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (10, '3.OPINIONES VINCULANTES', '2022-02-23 09:43:47.504592-05', '2022-02-23 09:43:47.504608-05', '30', '2022-02-23 09:45:20.206555-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (5, '1.2 ESPECIALIDADES RELACIONADAS', '2022-02-23 09:42:26.021685-05', '2022-02-23 09:42:26.021702-05', '102', '2022-02-23 09:45:29.210054-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (7, '2.1 GAS VIVIENDAS ENERGIA Y MINAS', '2022-02-23 09:42:55.086064-05', '2022-02-23 09:42:55.08608-05', '201', '2022-02-23 09:45:51.39454-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (8, '2.2 RATDUS-Ministerio de Vivienda', '2022-02-23 09:43:05.920911-05', '2022-02-23 09:43:05.920929-05', '202', '2022-02-23 09:46:01.573184-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (9, '2.3 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA', '2022-02-23 09:43:18.567792-05', '2022-02-23 09:43:18.567807-05', '203', '2022-02-23 09:46:12.495256-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (11, '3.1 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA', '2022-02-23 09:47:30.6806-05', '2022-02-23 09:47:30.680616-05', '301', '2022-02-23 09:47:30.68062-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (12, '4.REGLAMENTO COMENTADO', '2022-02-23 09:47:39.264026-05', '2022-02-23 09:47:39.264041-05', '40', '2022-02-23 09:47:39.264046-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (13, '4.1 NORMA GRAFICA COMENTADA', '2022-02-23 09:47:55.565945-05', '2022-02-23 09:47:55.565961-05', '401', '2022-02-23 09:47:55.565965-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (14, '4.2 CASUISTICA', '2022-02-23 09:48:07.027824-05', '2022-02-23 09:48:07.02784-05', '402', '2022-02-23 09:48:07.027845-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (15, '4.2.1 APELACIONES RECONSIDERACIONES', '2022-02-23 09:48:14.541377-05', '2022-02-23 09:48:14.541393-05', '4021', '2022-02-23 09:48:14.541397-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (16, '4.2.2 CONCLUSIONES DE CHARLAS(OPINION DE ASUNTOS TECNICOS )', '2022-02-23 09:48:29.521568-05', '2022-02-23 09:48:29.521584-05', '4022', '2022-02-23 09:48:29.521589-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (17, '4.2.3 DIRECTIVAS CAP', '2022-02-23 09:48:36.642629-05', '2022-02-23 09:48:36.642645-05', '4023', '2022-02-23 09:48:36.642649-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (18, '5.INDECOPI', '2022-02-23 09:48:48.838397-05', '2022-02-23 09:48:48.838413-05', '50', '2022-02-23 09:48:48.838418-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (19, '6.NORMAS MUNICIPALES', '2022-02-23 09:48:57.13884-05', '2022-02-23 09:48:57.138856-05', '60', '2022-02-23 09:48:57.13886-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (20, '6.1 NORMAS PROVINCIALES', '2022-02-23 09:49:05.241542-05', '2022-02-23 09:49:05.241558-05', '601', '2022-02-23 09:49:05.241563-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (21, '6.2 NORMAS DISTRITALES', '2022-02-23 09:49:11.307929-05', '2022-02-23 09:49:11.307944-05', '602', '2022-02-23 09:49:11.307948-05');
-INSERT INTO public.normas_subcategories_normas (id, subcategory_name, register_date_time, created, "order", updated) VALUES (2, '1.1 RNE-ARQUITECTURA', '2022-02-23 09:41:27.328401-05', '2022-02-23 09:41:27.328416-05', '101', '2022-02-23 09:57:31.644659-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (3, '1.1.1 TRANSVERSALES', '2022-02-23 09:41:55.788627-05', '2022-02-23 09:41:55.788642-05', '1011', '2022-02-23 09:44:19.09291-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (4, '1.1.2 VIVIENDA', '2022-02-23 09:42:05.318492-05', '2022-02-23 09:42:05.318508-05', '1012', '2022-02-23 09:44:29.229835-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (1, '1. RNE', '2022-02-23 09:05:01.668184-05', '2022-02-23 09:05:01.6682-05', '10', '2022-02-23 09:45:03.857217-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (6, '2.NORMAS SECTORIALES', '2022-02-23 09:42:40.75365-05', '2022-02-23 09:42:40.753672-05', '20', '2022-02-23 09:45:12.751351-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (10, '3.OPINIONES VINCULANTES', '2022-02-23 09:43:47.504592-05', '2022-02-23 09:43:47.504608-05', '30', '2022-02-23 09:45:20.206555-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (5, '1.2 ESPECIALIDADES RELACIONADAS', '2022-02-23 09:42:26.021685-05', '2022-02-23 09:42:26.021702-05', '102', '2022-02-23 09:45:29.210054-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (7, '2.1 GAS VIVIENDAS ENERGIA Y MINAS', '2022-02-23 09:42:55.086064-05', '2022-02-23 09:42:55.08608-05', '201', '2022-02-23 09:45:51.39454-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (8, '2.2 RATDUS-Ministerio de Vivienda', '2022-02-23 09:43:05.920911-05', '2022-02-23 09:43:05.920929-05', '202', '2022-02-23 09:46:01.573184-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (9, '2.3 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA', '2022-02-23 09:43:18.567792-05', '2022-02-23 09:43:18.567807-05', '203', '2022-02-23 09:46:12.495256-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (11, '3.1 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA', '2022-02-23 09:47:30.6806-05', '2022-02-23 09:47:30.680616-05', '301', '2022-02-23 09:47:30.68062-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (12, '4.REGLAMENTO COMENTADO', '2022-02-23 09:47:39.264026-05', '2022-02-23 09:47:39.264041-05', '40', '2022-02-23 09:47:39.264046-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (13, '4.1 NORMA GRAFICA COMENTADA', '2022-02-23 09:47:55.565945-05', '2022-02-23 09:47:55.565961-05', '401', '2022-02-23 09:47:55.565965-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (14, '4.2 CASUISTICA', '2022-02-23 09:48:07.027824-05', '2022-02-23 09:48:07.02784-05', '402', '2022-02-23 09:48:07.027845-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (15, '4.2.1 APELACIONES RECONSIDERACIONES', '2022-02-23 09:48:14.541377-05', '2022-02-23 09:48:14.541393-05', '4021', '2022-02-23 09:48:14.541397-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (16, '4.2.2 CONCLUSIONES DE CHARLAS(OPINION DE ASUNTOS TECNICOS )', '2022-02-23 09:48:29.521568-05', '2022-02-23 09:48:29.521584-05', '4022', '2022-02-23 09:48:29.521589-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (17, '4.2.3 DIRECTIVAS CAP', '2022-02-23 09:48:36.642629-05', '2022-02-23 09:48:36.642645-05', '4023', '2022-02-23 09:48:36.642649-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (18, '5.INDECOPI', '2022-02-23 09:48:48.838397-05', '2022-02-23 09:48:48.838413-05', '50', '2022-02-23 09:48:48.838418-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (19, '6.NORMAS MUNICIPALES', '2022-02-23 09:48:57.13884-05', '2022-02-23 09:48:57.138856-05', '60', '2022-02-23 09:48:57.13886-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (20, '6.1 NORMAS PROVINCIALES', '2022-02-23 09:49:05.241542-05', '2022-02-23 09:49:05.241558-05', '601', '2022-02-23 09:49:05.241563-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (21, '6.2 NORMAS DISTRITALES', '2022-02-23 09:49:11.307929-05', '2022-02-23 09:49:11.307944-05', '602', '2022-02-23 09:49:11.307948-05');
+INSERT INTO public.normas_subcategories_normas (id, name, register_date_time, created, "order", updated) VALUES (2, '1.1 RNE-ARQUITECTURA', '2022-02-23 09:41:27.328401-05', '2022-02-23 09:41:27.328416-05', '101', '2022-02-23 09:57:31.644659-05');
 
 
 --
@@ -430,7 +430,7 @@ INSERT INTO public.foro_coments_foro (id, coments, likes, dislikes, register_dat
 --
 -- TOC entry 3375 (class 0 OID 44397)
 -- Dependencies: 223
--- Data for Name: normas_categories_normas_area_name; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: normas_categories_normas_name; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
@@ -754,10 +754,10 @@ SELECT pg_catalog.setval('public.normas_areas_normas_id_seq', 1, false);
 --
 -- TOC entry 3437 (class 0 OID 0)
 -- Dependencies: 222
--- Name: normas_categories_normas_area_name_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: normas_categories_normas_name_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.normas_categories_normas_area_name_id_seq', 1, false);
+SELECT pg_catalog.setval('public.normas_categories_normas_name_id_seq', 1, false);
 
 
 --

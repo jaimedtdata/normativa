@@ -7,14 +7,11 @@ def normas_serializer(norma):
         'name_denom' : norma.name_denom,
         'base_legal' : norma.base_legal,
         'tipo_norma_id' : norma.tipo_norma_id,
-        'tipo_norma' : norma.tipo_norma.subcategory_name,
-        'tipo_uso_id' : norma.subtipo_uso.tipo_uso_id,
-        'tipo_uso' : norma.subtipo_uso.tipo_uso.area_name,
-        'subtipo_uso_id' : norma.subtipo_uso.id,
-        'subtipo_uso' : norma.subtipo_uso.name,
-        'order' : norma.subtipo_uso.tipo_uso.order,
+        'tipo_norma' : norma.tipo_norma.name,
+        'tipos_uso_id' : [x.tipo_uso_id for x in norma.subtipo_uso.all()],
+        'subtipos_uso_id' : [x.id for x in norma.subtipo_uso.all()],
         'articulo' : norma.articulo,
-        'estado' : norma.estado,
+        'estado' : norma.estado.name,
         'descripcion' : norma.descripcion if norma.descripcion else '',
         'document' : norma.document.url if norma.document else False,
         'fecha_publi' : norma.fecha_publi.strftime('%Y-%m-%d'),
@@ -35,9 +32,17 @@ def subtipos_uso_serializer(sbu):
         'tipo_uso_id' : sbu.tipo_uso_id,
     }
 
+def tipo_norma_serializer(tn):
+    return {
+        'id' : tn.id,
+        'name' : tn.name,
+        'order' : tn.order,
+        'topico_id' : tn.universo_id,
+    }
+
 def tipos_uso_serializer(tu): #mama
     return {
         'id' : tu.id,
-        'name' : tu.area_name,
+        'name' : tu.name,
         'order' : tu.order,
     }

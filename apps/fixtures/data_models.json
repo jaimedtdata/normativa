@@ -1519,7 +1519,7 @@
   "model": "normas.areas_normas",
   "pk": 1,
   "fields": {
-    "area_name": "VIVIENDA",
+    "name": "VIVIENDA",
     "register_date_time": "2022-02-22T18:03:10.758",
     "created": "2022-02-22T18:03:10.758",
     "updated": "2022-02-22T18:03:10.758"
@@ -1529,7 +1529,7 @@
   "model": "normas.areas_normas",
   "pk": 2,
   "fields": {
-    "area_name": "RESTAURANTES",
+    "name": "RESTAURANTES",
     "register_date_time": "2022-02-22T18:03:14.562",
     "created": "2022-02-22T18:03:14.562",
     "updated": "2022-02-22T18:03:14.562"
@@ -1539,7 +1539,7 @@
   "model": "normas.subcategories_normas",
   "pk": 1,
   "fields": {
-    "subcategory_name": "1. RNE",
+    "name": "1. RNE",
     "register_date_time": "2022-02-22T18:04:19.156",
     "order": "1",
     "created": "2022-02-22T18:04:19.156",
@@ -1550,7 +1550,7 @@
   "model": "normas.subcategories_normas",
   "pk": 2,
   "fields": {
-    "subcategory_name": "1.1 Arquitectura",
+    "name": "1.1 Arquitectura",
     "register_date_time": "2022-02-22T18:04:39.330",
     "order": "2",
     "created": "2022-02-22T18:04:39.330",
@@ -1561,7 +1561,7 @@
   "model": "normas.subcategories_normas",
   "pk": 3,
   "fields": {
-    "subcategory_name": "1.1.1 TRANSVERSALES",
+    "name": "1.1.1 TRANSVERSALES",
     "register_date_time": "2022-02-22T18:05:07.985",
     "order": "3",
     "created": "2022-02-22T18:05:07.985",
@@ -1572,7 +1572,7 @@
   "model": "normas.subcategories_normas",
   "pk": 4,
   "fields": {
-    "subcategory_name": "1.1.2 VIVIENDA",
+    "name": "1.1.2 VIVIENDA",
     "register_date_time": "2022-02-22T18:05:23.191",
     "order": "4",
     "created": "2022-02-22T18:05:23.191",
@@ -1583,7 +1583,7 @@
   "model": "normas.subcategories_normas",
   "pk": 5,
   "fields": {
-    "subcategory_name": "1.2 ESPECIALIDADES RELACIONADAS",
+    "name": "1.2 ESPECIALIDADES RELACIONADAS",
     "register_date_time": "2022-02-22T18:05:30.757",
     "order": "5",
     "created": "2022-02-22T18:05:30.757",
@@ -1594,7 +1594,7 @@
   "model": "normas.subcategories_normas",
   "pk": 6,
   "fields": {
-    "subcategory_name": "2. NORMAS SECTORIALES",
+    "name": "2. NORMAS SECTORIALES",
     "register_date_time": "2022-02-22T18:05:48.182",
     "order": "6",
     "created": "2022-02-22T18:05:48.182",
@@ -1605,7 +1605,7 @@
   "model": "normas.subcategories_normas",
   "pk": 7,
   "fields": {
-    "subcategory_name": "2.1 GAS VIVIENDAS ENERGIA Y MINAS",
+    "name": "2.1 GAS VIVIENDAS ENERGIA Y MINAS",
     "register_date_time": "2022-02-22T18:05:54.735",
     "order": "7",
     "created": "2022-02-22T18:05:54.735",
@@ -1616,7 +1616,7 @@
   "model": "normas.subcategories_normas",
   "pk": 8,
   "fields": {
-    "subcategory_name": "2.2 RATDUS-Ministerio de Vivienda",
+    "name": "2.2 RATDUS-Ministerio de Vivienda",
     "register_date_time": "2022-02-22T18:06:09.959",
     "order": "8",
     "created": "2022-02-22T18:06:09.960",
@@ -1627,7 +1627,7 @@
   "model": "normas.subcategories_normas",
   "pk": 9,
   "fields": {
-    "subcategory_name": "2.3 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA",
+    "name": "2.3 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA",
     "register_date_time": "2022-02-22T18:06:31.174",
     "order": "9",
     "created": "2022-02-22T18:06:31.174",
@@ -1638,7 +1638,7 @@
   "model": "normas.subcategories_normas",
   "pk": 10,
   "fields": {
-    "subcategory_name": "3.OPINIONES VINCULANTES",
+    "name": "3.OPINIONES VINCULANTES",
     "register_date_time": "2022-02-22T18:06:44.407",
     "order": "10",
     "created": "2022-02-22T18:06:44.407",
@@ -1649,7 +1649,7 @@
   "model": "normas.subcategories_normas",
   "pk": 11,
   "fields": {
-    "subcategory_name": "3.1 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA",
+    "name": "3.1 VIVIENDA DE INTERES SOCIAL- MIN. DE VIVIENDA",
     "register_date_time": "2022-02-22T18:06:53.760",
     "order": "11",
     "created": "2022-02-22T18:06:53.760",
@@ -1660,7 +1660,7 @@
   "model": "normas.subcategories_normas",
   "pk": 12,
   "fields": {
-    "subcategory_name": "4.REGLAMENTO COMENTADO",
+    "name": "4.REGLAMENTO COMENTADO",
     "register_date_time": "2022-02-22T18:07:02.659",
     "order": "12",
     "created": "2022-02-22T18:07:02.659",
@@ -1671,7 +1671,7 @@
   "model": "normas.subcategories_normas",
   "pk": 13,
   "fields": {
-    "subcategory_name": "4.1 NORMA GRAFICA COMENTADA",
+    "name": "4.1 NORMA GRAFICA COMENTADA",
     "register_date_time": "2022-02-22T18:07:13.859",
     "order": "13",
     "created": "2022-02-22T18:07:13.859",
@@ -1682,7 +1682,7 @@
   "model": "normas.subcategories_normas",
   "pk": 14,
   "fields": {
-    "subcategory_name": "4.2 CASUISTICA",
+    "name": "4.2 CASUISTICA",
     "register_date_time": "2022-02-22T18:07:23.143",
     "order": "14",
     "created": "2022-02-22T18:07:23.143",
@@ -1693,7 +1693,7 @@
   "model": "normas.subcategories_normas",
   "pk": 15,
   "fields": {
-    "subcategory_name": "4.2.1 APELACIONES RECONSIDERACIONES",
+    "name": "4.2.1 APELACIONES RECONSIDERACIONES",
     "register_date_time": "2022-02-22T18:07:36.055",
     "order": "15",
     "created": "2022-02-22T18:07:36.055",
@@ -1704,7 +1704,7 @@
   "model": "normas.subcategories_normas",
   "pk": 16,
   "fields": {
-    "subcategory_name": "4.2.2 CONCLUSIONES DE CHARLAS(OPINION DE ASUNTOS TECNICOS )",
+    "name": "4.2.2 CONCLUSIONES DE CHARLAS(OPINION DE ASUNTOS TECNICOS )",
     "register_date_time": "2022-02-22T18:07:45.459",
     "order": "16",
     "created": "2022-02-22T18:07:45.459",
@@ -1715,7 +1715,7 @@
   "model": "normas.subcategories_normas",
   "pk": 17,
   "fields": {
-    "subcategory_name": "4.2.3 DIRECTIVAS CAP",
+    "name": "4.2.3 DIRECTIVAS CAP",
     "register_date_time": "2022-02-22T18:07:58.242",
     "order": "17",
     "created": "2022-02-22T18:07:58.242",
@@ -1726,7 +1726,7 @@
   "model": "normas.subcategories_normas",
   "pk": 18,
   "fields": {
-    "subcategory_name": "5. INDECOPI",
+    "name": "5. INDECOPI",
     "register_date_time": "2022-02-22T18:08:12.087",
     "order": "18",
     "created": "2022-02-22T18:08:12.087",
@@ -1737,7 +1737,7 @@
   "model": "normas.subcategories_normas",
   "pk": 19,
   "fields": {
-    "subcategory_name": "6.NORMAS MUNICIPALES",
+    "name": "6.NORMAS MUNICIPALES",
     "register_date_time": "2022-02-22T18:08:21.814",
     "order": "19",
     "created": "2022-02-22T18:08:21.814",
@@ -1748,7 +1748,7 @@
   "model": "normas.subcategories_normas",
   "pk": 20,
   "fields": {
-    "subcategory_name": "6.1 NORMAS PROVINCIALES",
+    "name": "6.1 NORMAS PROVINCIALES",
     "register_date_time": "2022-02-22T18:08:34.868",
     "order": "20",
     "created": "2022-02-22T18:08:34.868",
@@ -1759,7 +1759,7 @@
   "model": "normas.subcategories_normas",
   "pk": 21,
   "fields": {
-    "subcategory_name": "6.2 NORMAS DISTRITALES",
+    "name": "6.2 NORMAS DISTRITALES",
     "register_date_time": "2022-02-22T18:08:46.513",
     "order": "21",
     "created": "2022-02-22T18:08:46.513",

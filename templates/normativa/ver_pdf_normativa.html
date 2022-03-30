@@ -2,97 +2,225 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf_viewer.min.css" integrity="sha512-5cOE2Zw/F4SlIUHR/xLTyFLSAR0ezXsra+8azx47gJyQCilATjazEE2hLQmMY7xeAv/RxxZhs8w8zEL7dTsvnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    *{
+	padding: 0;
+	margin:0;
+	box-sizing: border-box;
+	color: #eee;
+}
+
+button{
+	cursor: pointer;
+	padding: 2px 5px;
+	color: #ccc;
+	background: transparent;
+	border: none;
+	outline: none;
+}
+
+body{
+	font-family: 'Lato', sans-serif;
+	background-color: #171717;
+}
+
+main{
+	width: 100%;
+	min-height: 90vh;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	
+}
+
+main h3{
+	text-align: center;
+	width: 100%;
+	word-spacing: 0.5rem;
+	font-size: 2rem;
+	color: #bbbbbb;
+}
+
+.pdf-viewer{
+	background-color: #333;
+	background-color: #fff;
+	margin: auto;
+}
+
+.hidden{
+	display:none;
+}
+
+footer{
+	position:sticky;
+	bottom:0;
+	height: 10vh;
+	background-color:#000000;
+}
+
+.pagination{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	color: #eee;
+	font-size: 1.4rem;
+}
+
+.pagination span{
+	font-size: 1.1rem;
+	margin: 0 10px;
+}
+
+.pagination button{
+	font-size: 1.5rem;
+}
+
+button:active > *{
+	color: #8d8d8d;
+}
+
+footer ul{
+	list-style-type: none;
+	width: 100%;
+	height: 100%;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	position: relative;
+}
+
+footer ul li:first-child{
+	margin-left: 20px;
+}
+
+footer ul li:last-child{
+	margin-right: 20px;
+}
+
+#zoomValue{
+	display:inline-block;
+	font-size: 0.9rem;
+	width: 60px;
+	vertical-align:center;
+}
+
+#openPDF{
+	font-size: 1.2rem;
+	padding: 2px 5px;
+	font-weight: 700;
+	color:#eee;
+}
+</style>
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center">{{ normativa.norma }} - {{ normativa.name_denom }}</h1>
-<div class="row p-0 mx-0 my-3">
-    <div class="col-md-10 offset-md-1 shadow border border-dark d-flex justify-content-center">
-        <div class="overflow-auto" id="document" style="height: 700px;">
-            <div class="mt-5" id="spinner">
-                <div class="text-center align-middle">
-                    <h1 class="display-4">Cargando Documento</h1>
-                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                    <h4 class="font-weight-light" >Por favor, espere</h4>
-                  </div>
-            </div>
-        </div>
-    </div>
-</div>
+<main>
+    <h3>Open a PDF file</h3>
+    <canvas class="pdf-viewer hidden">
+
+    </canvas>
+</main>
+<footer>
+    <ul>
+        <li>
+            {{ normativa.name_denom }}
+        </li>
+        <li class="pagination">
+            <button id="previous"><i class="fas fa-arrow-alt-circle-left"></i></button>
+            <span id="current_page">0 of 0</span>
+            <button id="next"><i class="fas fa-arrow-alt-circle-right"></i></button>
+        </li>
+
+        <li>
+            <span id="zoomValue">150%</span>
+            <input type="range" id="zoom" name="cowbell" min="100" max="300" value="150" step="50" disabled>
+        </li>
+    </ul>
+</footer>
 
 {% endblock %}
 {% block js %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js" integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js" integrity="sha512-lHibs5XrZL9hXP3Dhr/d2xJgPy91f2mhVAasrSbMkbmoTSm2Kz8DuSWszBLUg31v+BM6tSiHSqT72xwjaNvl0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"
+		integrity="sha512-U5C477Z8VvmbYAoV4HDq17tf4wG6HXPC6/KM9+0/wEXQQ13gmKY2Zb0Z2vu0VNUWch4GlJ+Tl/dfoLOH4i2msw==" crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
 <script>
-url = "{{normativa.document.url}}"
-url = url.replaceAll('&amp;', '&')
+const zoomButton = document.getElementById('zoom');
+const input = document.getElementById('inputFile');
+const openFile = document.getElementById('openPDF');
+const currentPage = document.getElementById('current_page');
+const viewer = document.querySelector('.pdf-viewer');
+let currentPDF = {}
 
-renderPdfByUrl(url)
-
-function renderPdfByUrl(url) {
-    var currPage = 1; 
-    var numPages = 0;
-    var thePDF = null;
-    var documento = document.getElementById('document')
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js';
-    //This is where you start
-    var loadingTask = pdfjsLib.getDocument(url);
-    
-    loadingTask.promise.then(function(pdf) {
-
-        //Set PDFJS global object (so we can easily access in our page functions
-        thePDF = pdf;
-
-        //How many pages it has
-        numPages = pdf.numPages;
-
-        //Start with first page
-        pdf.getPage(1).then(handlePages);
-
-    })
-
-
-    function handlePages(page) {
-        //This gives us the page's dimensions at full scale
-        var viewport = page.getViewport({scale: 1.5});
-
-        //We'll create a canvas for each page to draw it on
-        var canvas = document.createElement("canvas");
-        canvas.style.display = "block";
-        var context = canvas.getContext('2d');
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        //Draw it on the canvas
-        page.render({
-            canvasContext: context,
-            viewport: viewport
-        });
-
-        //Add it to the web page
-        documento.appendChild(canvas);
-
-        //Move to next page
-        currPage++;
-        if (thePDF !== null && currPage <= numPages) {
-            thePDF.getPage(currPage).then(handlePages);
-        }
-
-        
-        
-        if(currPage > numPages) {
-            document.getElementById('spinner').remove()
-        }
-    }
+function resetCurrentPDF() {
+	currentPDF = {
+		file: null,
+		countOfPages: 0,
+		currentPage: 1,
+		zoom: 1.5
+	}
 }
 
 
+
+loadPDF("{{normativa.document.url}}");
+			zoomButton.disabled = false;
+
+
+zoomButton.addEventListener('input', () => {
+	if (currentPDF.file) {
+		document.getElementById('zoomValue').innerHTML = zoomButton.value + "%";
+		currentPDF.zoom = parseInt(zoomButton.value) / 100;
+		renderCurrentPage();
+	}
+});
+
+document.getElementById('next').addEventListener('click', () => {
+	const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
+	if (isValidPage) {
+		currentPDF.currentPage += 1;
+		renderCurrentPage();
+	}
+});
+
+document.getElementById('previous').addEventListener('click', () => {
+	const isValidPage = currentPDF.currentPage - 1 > 0;
+	if (isValidPage) {
+		currentPDF.currentPage -= 1;
+		renderCurrentPage();
+	}
+});
+
+function loadPDF(data) {
+	const pdfFile = pdfjsLib.getDocument(data);
+	resetCurrentPDF();
+	pdfFile.promise.then((doc) => {
+		currentPDF.file = doc;
+		currentPDF.countOfPages = doc.numPages;
+		viewer.classList.remove('hidden');
+		document.querySelector('main h3').classList.add("hidden");
+		renderCurrentPage();
+	});
+
+}
+
+function renderCurrentPage() {
+	currentPDF.file.getPage(currentPDF.currentPage).then((page) => {
+		var context = viewer.getContext('2d');
+		var viewport = page.getViewport({ scale: currentPDF.zoom, });
+		viewer.height = viewport.height;
+		viewer.width = viewport.width;
+
+		var renderContext = {
+			canvasContext: context,
+			viewport: viewport
+		};
+		page.render(renderContext);
+	});
+	currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
+}
 </script>
 
 {% endblock %}

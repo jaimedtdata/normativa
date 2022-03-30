@@ -20,7 +20,7 @@ admin.site.register(Order_payment,Order_paymentAdmin)
 
 #johao
 class Register_NormativaAdmin(admin.ModelAdmin):
-    list_display=('id','norma','name_denom','base_legal','fecha_publi','tipo_norma','subtipo_uso','document')
+    list_display=('id','norma','name_denom','base_legal','fecha_publi','tipo_norma','document')
     #readonly_fields = ['created', 'updated']    
     list_filter = ['estado', 'created', 'name_denom']
 
