@@ -11,7 +11,33 @@ class CheckMembership:
         # One-time configuration and initialization.
 
     def __call__(self, request):
-        
+
+        #Activar o desactivar usuarios profesionales dependiendo si han pagado.
+        if User.objects.exists():
+                print('existen usuarios')
+
+                for user in User.objects.filter(is_active=False):
+                    if user.is_active ==False:
+                        type_membership = user.user_membership.membership.membership_type
+                        if type_membership == 'PLPP' or type_membership == 'PPPP':
+                            print('-----------------------------------------------')
+                            print('usuarios inactivos:', user.email, user.username, 'activo:',user.is_active)
+                            print('-----------------------------------------------')
+                            orders_exists = Order_payment.objects.filter(identity=user.user_membership.identity).exists()
+                    
+                            if orders_exists:
+                                last_order = Order_payment.objects.filter(identity=user.user_membership.identity).latest('created')
+                                day_finish_plan = last_order.validity_date_finish
+                                actual_day = timezone.now()
+                                if actual_day > day_finish_plan:
+                                    # pasa a usuario inactivo
+                                    user.is_active = False
+                                    user.save()
+                                else:
+                                #debe ser usuario activo 
+                                    user.is_active = True
+                                    user.save()
+       
         try:
             user = User.objects.get(username=request.user.username)
             type_membership = user.user_membership.membership.membership_type
@@ -62,6 +88,9 @@ class CheckMembership:
                         pl_profesional=Membership.objects.get(membership_type='PLPP')
                         member.membership = pl_profesional
                         member.save()
+                        user.is_active = True
+                        user.save()
+                        
                        
                 else:
                     # no debe tener acceso
@@ -73,7 +102,7 @@ class CheckMembership:
                             
         except:
             print('eres super user U otro tipo de usuario ')
-        
+            
                      
         # Code to be executed for each request before
         # the view (and later middleware) are called.

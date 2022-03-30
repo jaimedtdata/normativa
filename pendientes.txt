@@ -53,10 +53,10 @@ PENDIENTES:
 2) plan Profesional
     - verificar si el usuario profesional ha pagado ,cuando el pago es a traves del link pago efectivo (TERMINADO)
     - Verificar que el usuario del plan profesional haya pagado y 
-        no quede a mitad del proceso sin haber pagado. (No)
-    - Restringi acceso si solo se registró y no pagó. (No)
-   - Perder acceso en el usuario Profesional cuando vence su membresia[middleware].  (No)
-   - PERMITIRLE PAGAR
+        no quede a mitad del proceso sin haber pagado. (TERMINADO)
+    - Restringi acceso si solo se registró y no pagó. (TERMINADO)
+   - Perder acceso en el usuario Profesional cuando vence su membresia[middleware].  (TERMINADO)
+   - PERMITIRLE PAGAR (FLUJO DE RENOVACION)
 
 3) PAGO PRESENCIAL - PLAN PROFESIONAL 
     - Tienen que enviarnos el tipo de usuario en la api (usuario cap o is_client)
@@ -66,4 +66,5 @@ PENDIENTES:
 
 4) ApI PARA ENVIAR INFORMACION DE PAGOS AL RP
 
-5) Renovacion del paln profesional
+5) Renovacion del paln profesional cuando venció su membesia (es decir esta fuera de la plataforma) --> DENTRO DE VALIDAR DNI
+6) Colocar al usuario profesional y premium en la pasarella de pago cuando no ha terminado el flujo --> DENTRO DE VALIDAR DNI
