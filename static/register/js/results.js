@@ -36,16 +36,27 @@ var base_url = window.location.origin;
                 const user_data = data.data
                 
                 if (user_data.dni){
-                    //users that are in model Member
-                    console.log(user_data.msg);
-                    userExists=`<div>Ya tienes una cuenta registrada <a class="font-weight-bold" href="${base_url}">Inicia sesión aquí.</a></div>
-                    <div>Si olvidaste tu contraseña <a class="font-weight-bold" href="${base_url}/password_reset/">recuperala aquí.</a></div>`
-                    test.innerHTML = userExists
-                    document.getElementById('dni-input').disabled=true
-                    document.getElementById('input-value').disabled=true
-                    spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
+                    if (user_data.activo === false){
+                        console.log('debes pagar para acceder');
+                        console.log(user_data.msg);
+                        userExists=`<div>Tu cuenta se encuentra inactiva,   <a class="font-weight-bold" href="${base_url}/client_choose_plan/"> compra o renueva tu plan aquí.</a></div>`
+                        test.innerHTML = userExists
+                        document.getElementById('dni-input').disabled=true
+                        document.getElementById('input-value').disabled=true
+                        spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
+                    }
 
-                    
+                    if (user_data.activo === true){
+                        console.log(user_data.activo);
+                        //users that are in model Member
+                        console.log(user_data.msg);
+                        userExists=`<div>Ya tienes una cuenta registrada <a class="font-weight-bold" href="${base_url}">Inicia sesión aquí.</a></div>
+                        <div>Si olvidaste tu contraseña <a class="font-weight-bold" href="${base_url}/password_reset/">recuperala aquí.</a></div>`
+                        test.innerHTML = userExists
+                        document.getElementById('dni-input').disabled=true
+                        document.getElementById('input-value').disabled=true
+                        spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
+                    }
 
                 }else{
                     // 2 cases for users that are in ERP but still not have account in this system

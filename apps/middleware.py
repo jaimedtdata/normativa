@@ -14,15 +14,13 @@ class CheckMembership:
 
         #Activar o desactivar usuarios profesionales dependiendo si han pagado.
         if User.objects.exists():
-                print('existen usuarios')
-
                 for user in User.objects.filter(is_active=False):
                     if user.is_active ==False:
                         type_membership = user.user_membership.membership.membership_type
                         if type_membership == 'PLPP' or type_membership == 'PPPP':
-                            print('-----------------------------------------------')
-                            print('usuarios inactivos:', user.email, user.username, 'activo:',user.is_active)
-                            print('-----------------------------------------------')
+                            # print('-----------------------------------------------')
+                            # print('usuarios inactivos:', user.email, user.username, 'activo:',user.is_active)
+                            # print('-----------------------------------------------')
                             orders_exists = Order_payment.objects.filter(identity=user.user_membership.identity).exists()
                     
                             if orders_exists:

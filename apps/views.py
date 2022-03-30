@@ -458,6 +458,10 @@ def checkoutClient(request):
         member = Member.objects.get(identity=request.session.get('user_identity'))
     except:
         member=request.user.user_membership
+        # if request.session.get('user_identity'):
+        #     member = request.session.get('user_identity')
+        # else:
+        #     request.session['user_identity']= cd['identity']
 
     if plpp.price_month == Decimal(price):
         type_membership = "Plan mensual"
