@@ -174,7 +174,10 @@ def update_clave(request,codigo):
 
 @login_required
 def norma_edificatoria(request):
-    return render(request,'normativa/normatividad_edificatoria.html',None)
+    context = {
+        'normas' : Tipo_Normas.objects.filter(universo_id = 1)
+    }
+    return render(request,'normativa/normatividad_edificatoria.html', context)
 
 @login_required
 def norma_datos(request):
@@ -207,11 +210,24 @@ def norma_datos(request):
 
 @login_required
 def reglamento_comentado(request):
-    return render(request,'normativa/reglamento_comentado.html',None)
+    context = {
+        'normas' : Tipo_Normas.objects.filter(universo_id = 2).order_by('order')
+    }
+    return render(request,'normativa/reglamento_comentado.html',context)
 
 @login_required
 def procedimientos_tramites(request):
-    return render(request,'normativa/procedimientos_tramites.html',None)
+    context = {
+        'normas' : Tipo_Normas.objects.filter(universo_id = 3)
+    }
+    return render(request,'normativa/procedimientos_tramites.html',context)
+
+@login_required
+def fichas_tecnicas(request):
+    context = {
+        'normas' : Tipo_Normas.objects.filter(universo_id = 4)
+    }
+    return render(request,'normativa/fichas_tecnicas.html',context)
 
 # FILTRAR NORMATIVAS DE EDIFICACIONES
 def filter_normativa_edificatoria(request):
