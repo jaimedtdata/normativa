@@ -1,0 +1,25 @@
+{% extends 'base_nfr.html' %}
+{% load static %}
+{% load user_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for c in entity %}
+            <div class="col-md-12">
+                <div class="card" >
+                    <div class="card-title">
+                        {{ c.nombre }}
+                    </div>
+                    <div class="card-body">
+                        {{ c.embed|safe }}
+                    </div>
+                    <div class="card-footer">
+                        {{ c.descripcion }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

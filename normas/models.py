@@ -118,7 +118,7 @@ class Register_Normativa(models.Model):
     document = models.FileField(upload_to='Document_normativa',verbose_name='Documentos',null=True,editable=True)
     estado = models.ForeignKey(Estado_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Estado de la Norma')
     propiedad = models.CharField(choices=PROPIEDAD_CHOICES, blank=False, max_length=150, default='PU')
-    descripcion = models.CharField(blank=True,null=True,max_length=200,verbose_name='Descripcion')
+    descripcion = models.CharField(blank=True,null=True,max_length=700,verbose_name='Descripcion')
     articulo = models.CharField(blank=True,null=True,max_length=200,verbose_name='Articulo')
     
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
