@@ -259,10 +259,23 @@
     });
 
     $("#select-norms").val(subnormativas)
+
+    subnormativas = []
+
+    $("#select-norms option").each(function()
+    {
+        if(ne == $(this).text().substring(0,1))
+        {
+            subnormativas.push($(this).val())
+            console.log($(this).val())
+        }
+        console.log($(this).val(), ne)
+
+    });
+
+    $("#select-norms").val(subnormativas)
     
     execFilters() // PRIMERA EJECUCIÓN
-
-
 
     $("#select-norms").change(function(){
         subnormativas = $("#select-norms").val()

@@ -52,7 +52,7 @@
                     {% for n in normas %}
                         {% if n.order|length == 2 %}
                         
-                            <a href="{% url 'norma_urb' %}?norma={{n.name}}&ne={{n.id}}&t=2" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+                            <a href="{% url 'norma_urb' %}?norma={{n.name}}&ne={{n.order|slice:'0:1'}}&t=2" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
                                 <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                                 
                                 <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">

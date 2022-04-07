@@ -39,6 +39,7 @@ LOCAL_APPS = (
     'apps',
     'foro',
     'normas',
+    'cursos',
     'bus_normativa.apps.BusNormativaConfig',
 )
 
