@@ -1,6 +1,5 @@
 {% extends 'base_nfr.html' %}
 {% load static %}
-{% load user_tags %}
 {% block content %}
 
 <div class="card border-secondary mb-3" > 
@@ -63,7 +62,7 @@
               {% for muni in comentarios_list %}
               <div class="d-flex align-items-center w-100 ">
                 <div class="comment-box mt-4 
-                {% if muni.user|has_group:'ESPECIALISTA' %}
+                {% if perms.foro.delete_comentario_foro %}
                   border border-warning shadow p-3 mb-5 bg-white rounded
                 {% endif %}">
                   <span class="commenter-pic">
@@ -89,7 +88,7 @@
                 <form method="POST" action="{% url 'borrar-comentario' foro.id muni.id %}">
                   {% csrf_token %}
                   
-                  {% if request.user|has_group:'ESPECIALISTA' %}
+                  {% if perms.foro.delete_comentario_foro %}
                     <button type="submit" class="btn btn-fat bg-danger float-right ml-2">
                       <i class="fas fa-trash text-white"></i>
                     </button>
