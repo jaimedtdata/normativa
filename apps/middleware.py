@@ -99,7 +99,8 @@ class CheckMembership:
                         
                             
         except:
-            print('eres super user U otro tipo de usuario ')
+            #print('eres super user U otro tipo de usuario ')
+            pass
             
                      
         # Code to be executed for each request before

@@ -91,7 +91,7 @@
                                 <div class="form-group mb-3">
                                 <label for=""> Palabras clave: </label>
         
-                                    <select class="form-control select-tags" name="palabras_clave[]" multiple="multiple" style="width:100%; height:100%;" id="keywords" >
+                                    <select class="form-control select-multiple" name="palabras_clave[]" multiple="multiple" style="width:100%; height:100%;" id="keywords" >
                                         {% for pc in palabras_clave %}
                                             {% if pc.normativas.exists %}
                                                 <option value="{{pc.id}}"> {{pc.name}} </option>
