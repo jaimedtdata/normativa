@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import viewsets
 
 from django.db import models
 from django.views.generic import View
@@ -91,24 +92,25 @@ class RegisterCapAPIView(APIView):
         
         return Response({'data' : serializer.errors, 'error':'tienes un error'}, status=status.HTTP_400_BAD_REQUEST)
 
-class RegisterExternalUsersAPIView(APIView):
 
-    def post(self, request):
-        #usercap = request.data['cap']
-        serializer = MemberExternalSerializer(data=request.data)
-        if serializer.is_valid():
-            cd = serializer.validated_data
-            register_client_user(cd)
-            data = {
-                'names': serializer.data['names'],
-                'identity': serializer.data['identity'],
-                'email': serializer.data['email'],
-                'mobile': serializer.data['mobile'],
-            }
+# class RegisterExternalUsersAPIView(APIView):
 
-            return Response({'data':data, 'success':'registro exitoso'}, status=status.HTTP_201_CREATED)
+#     def post(self, request):
+#         #usercap = request.data['cap']
+#         serializer = MemberExternalSerializer(data=request.data)
+#         if serializer.is_valid():
+#             cd = serializer.validated_data
+#             register_client_user(cd)
+#             data = {
+#                 'names': serializer.data['names'],
+#                 'identity': serializer.data['identity'],
+#                 'email': serializer.data['email'],
+#                 'mobile': serializer.data['mobile'],
+#             }
+
+#             return Response({'data':data, 'success':'registro exitoso'}, status=status.HTTP_201_CREATED)
         
-        return Response({'data' : serializer.errors, 'error':'tienes un error'}, status=status.HTTP_400_BAD_REQUEST)
+#         return Response({'data' : serializer.errors, 'error':'tienes un error'}, status=status.HTTP_400_BAD_REQUEST)
 
 class APIMemberView(APIView):
     #APi to get members from ERP
@@ -117,6 +119,7 @@ class APIMemberView(APIView):
         serializer = ErpSerializer(members_cap, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
         
-# class SesionTokenAPIView(APIView):
 
-#     def post(self, request):
+class APiViewSetERP(viewsets.ModelViewSet):
+    queryset = APIMember.objects
+    serializer_class = ErpSerializer

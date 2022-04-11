@@ -84,9 +84,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'cap.wsgi.application'
 
 # CORS_ALLOWED_ORIGINS = [
-#     "https://apisandbox.vnforappstest.com",
-#     "https://static-content-qas.vnforapps.com",
-    
+#         "https://apisandbox.vnforappstest.com",
+#         "https://static-content-qas.vnforapps.com",
+#         'http://localhost',
+#         'http://127.0.0.1',
 # ]
 
 CORS_ORIGIN_ALLOW_ALL = True    #permitir acceder desde todos los dominios

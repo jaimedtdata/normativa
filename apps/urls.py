@@ -1,11 +1,15 @@
-from django.urls import path, re_path
+from django.urls import path, re_path, include
+from rest_framework import routers
 
-from .views_ajax import get_dni, RegisterCapAPIView, APIMemberView, RegisterExternalUsersAPIView
+from .views_ajax import get_dni, RegisterCapAPIView, APIMemberView, APiViewSetERP
 from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, checkoutClient,
                          checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client,
                          SignUpPremiumCAP, checkout_premium_cap, success_payment_cap, history_purchase,
                          cap_choose_plan, add_plan_cap, cap_cash_payment, add_plan_client, 
                          client_choose_plan, client_cash_payment, premium_choose_plan, add_plan_premium )
+
+router = routers.DefaultRouter()
+router.register(r'users-erp', APiViewSetERP, basename='usersErp')
 
 urlpatterns = [
     #register member
@@ -35,12 +39,11 @@ urlpatterns = [
     path('success-payment-cap/', success_payment_cap, name='success_payment_cap'),
     path('history-purchase/', history_purchase, name='history_purchase'),
 
-
-
     #api views
     path('api/cap/', RegisterCapAPIView.as_view(), name='api-cap'),
+    #path('api/member-external/', RegisterExternalUsersAPIView.as_view(), name='api-member-external'),
     path('api/member-erp/', APIMemberView.as_view(), name='api-member-erp'),
-    path('api/member-external/', RegisterExternalUsersAPIView.as_view(), name='api-member-external'),
-
+    path('api/', include(router.urls)),
 
 ]
+
