@@ -100,7 +100,7 @@ def registrar_palabras_clave(request, normativa):
 
         # AQUI AGREGO, TAL VEZ SE PUEDA USAR OTRO METODO IDK
         for pc in pcs:
-            objx, created = Register_Palabraclave.objects.get_or_create(name = pc)
+            objx, created = Register_Palabraclave.objects.get_or_create(name = pc.upper())
             objx.normativas.add(norma)
 
         palabras = get_all_palabras_clave_normativa(norma)
