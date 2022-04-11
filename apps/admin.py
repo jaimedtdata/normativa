@@ -4,7 +4,7 @@ from django.apps import apps
 from django.contrib.sessions.models import Session
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
-from normas.models import Areas_Normas, Register_Normativa,Register_Palabraclave, Policies_usage, Subtipo_Normas, Tipo_Normas
+from normas.models import Areas_Normas, Grupo_Tipo_Normas, Register_Normativa,Register_Palabraclave, Policies_usage, Subtipo_Normas, Tipo_Normas
 from .models import Member, UsagePolicies, Order_payment
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -30,24 +30,30 @@ admin.site.register(Order_payment,Order_paymentAdmin)
     Normas Admin Site
 '''
 
-class Register_NormativaResource(resources.ModelResource):
+class Grupo_Tipo_Normas_Admin(admin.ModelAdmin):
+    list_display = ('name', 'order','universo', 'created', 'updated')
+    search_fields = ['name']
+    list_filter = ['universo']
+admin.site.register(Grupo_Tipo_Normas, Grupo_Tipo_Normas_Admin)
+
+class Register_Normativa_Resource(resources.ModelResource):
     class Meta:
         model = Register_Normativa
 
-class Register_NormativaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+class Register_Normativa_Admin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display=('id','norma','name_denom','base_legal','fecha_publi','tipo_norma','document')
     #readonly_fields = ['created', 'updated']    
     list_filter = ['estado', 'created', 'name_denom']
-    resource_class = Register_NormativaResource
-admin.site.register(Register_Normativa,Register_NormativaAdmin)
+    resource_class = Register_Normativa_Resource
+admin.site.register(Register_Normativa,Register_Normativa_Admin)
 
 class Tipo_Normas_Resource(resources.ModelResource):
     class Meta:
         model = Tipo_Normas
 
 class Tipo_Normas_Admin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display=('id','name', 'order', 'created')     
-    list_filter = ['name', 'created']
+    list_display=('id', 'name', 'nivel', 'order', 'created')     
+    list_filter = ['grupo']
     resource_class = Tipo_Normas_Resource
 admin.site.register(Tipo_Normas, Tipo_Normas_Admin)
 

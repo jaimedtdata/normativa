@@ -7,7 +7,7 @@ def normas_serializer(norma):
         'name_denom' : norma.name_denom,
         'base_legal' : norma.base_legal,
         'tipo_norma_id' : norma.tipo_norma_id,
-        'tipo_norma' : norma.tipo_norma.name,
+        'tipo_norma' : norma.tipo_norma.name if norma.tipo_norma else None,
         'tipos_uso': [x.tipo_uso.name for x in norma.subtipo_uso.all()],
         'subtipos_uso': [x.name for x in norma.subtipo_uso.all()],
         'tipos_uso_id' : [x.tipo_uso_id for x in norma.subtipo_uso.all()],
@@ -39,7 +39,8 @@ def tipo_norma_serializer(tn):
         'id' : tn.id,
         'name' : tn.name,
         'order' : tn.order,
-        'topico_id' : tn.universo_id,
+        'grupo_id' : tn.grupo_id,
+        'topico_id' : tn.grupo.universo_id if tn.grupo else 0,
     }
 
 def tipos_uso_serializer(tu): #mama

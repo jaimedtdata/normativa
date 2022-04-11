@@ -203,7 +203,7 @@
     get: (searchParams, prop) => searchParams.get(prop),
     });
     // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-    var ne = params.ne; // "some_value"
+    var ne = params.gtn; // "some_value"
     var titulo = params.norma;
     var t = params.t;
 
@@ -264,14 +264,13 @@
 
     $("#select-norms option").each(function()
     {
-        if(ne == $(this).text().substring(0,1))
+        if(ne == $(this).attr("grupo"))
         {
             subnormativas.push($(this).val())
-            console.log($(this).val())
         }
-        console.log($(this).val(), ne)
-
     });
+
+    console.log(subnormativas);
 
     $("#select-norms").val(subnormativas)
     
@@ -321,11 +320,11 @@
         if( topico != 0 ) {
             tipos_norma_json.forEach( tn => {
                 if( tn.topico_id == topico ) {
-                    if ( tn.order.length == 2) {
-                        options_tn += /*html*/`<option class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
+                    if ( tn.nivel == 0) {
+                        options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
                     }
                     else {
-                        options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
+                        options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap" value="${tn.id}">${tn.name}</option>`
                     }
                 }            
             })
@@ -453,10 +452,10 @@
             tipos_norma_json.forEach( tn => {
                 if( tn.topico_id == topico ) {
                     if ( tn.order.length == 2) {
-                        options_tn += /*html*/`<option class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
+                        options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
                     }
                     else {
-                        options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
+                        options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap" value="${tn.id}">${tn.name}</option>`
                     }
                 }            
             })

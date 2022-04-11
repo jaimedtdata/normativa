@@ -61,13 +61,29 @@ class Universo_Normas(models.Model):
     def __str__(self):
         return self.name
 
+class Grupo_Tipo_Normas(models.Model):
+    name = models.CharField(max_length=200, blank=False, verbose_name="Grupo de tipo de norma")
+    icono = models.FileField(upload_to='iconos_grupo_normativa',verbose_name='Icono del grupo', blank=True, null=True, editable=True)
+    order = models.CharField(max_length=10, blank=True)
+    universo = models.ForeignKey(Universo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Universo Norma')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Grupo de Tipo de Norma'
+
+    def __str__(self):
+        return self.name
+
 class Tipo_Normas(models.Model):
-    
     name = models.CharField(max_length=200, blank=False,
         help_text='Nombre de Tipo de norma',
         verbose_name='Tipo norma')
+    grupo = models.ForeignKey(Grupo_Tipo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Grupo Norma')
+    nivel = models.IntegerField(default=1)
     order = models.CharField(max_length=10, blank=True)
-    universo = models.ForeignKey(Universo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Universo Norma')
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                      blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",

@@ -29,7 +29,7 @@ from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
-from normas.models import Areas_Normas, Policies_usage, Subtipo_Normas, Universo_Normas
+from normas.models import Areas_Normas, Grupo_Tipo_Normas, Policies_usage, Subtipo_Normas, Universo_Normas
 from foro.models import Comentario_Foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -175,7 +175,7 @@ def update_clave(request,codigo):
 @login_required
 def norma_edificatoria(request):
     context = {
-        'normas' : Tipo_Normas.objects.filter(universo_id = 1)
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(universo_id = 1)
     }
     return render(request,'normativa/normatividad_edificatoria.html', context)
 
@@ -211,21 +211,21 @@ def norma_datos(request):
 @login_required
 def reglamento_comentado(request):
     context = {
-        'normas' : Tipo_Normas.objects.filter(universo_id = 2).order_by('order')
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(universo_id = 2).order_by('order')
     }
     return render(request,'normativa/reglamento_comentado.html',context)
 
 @login_required
 def procedimientos_tramites(request):
     context = {
-        'normas' : Tipo_Normas.objects.filter(universo_id = 3)
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(universo_id = 3).order_by('order')
     }
     return render(request,'normativa/procedimientos_tramites.html',context)
 
 @login_required
 def fichas_tecnicas(request):
     context = {
-        'normas' : Tipo_Normas.objects.filter(universo_id = 4)
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(universo_id = 4).order_by('order')
     }
     return render(request,'normativa/fichas_tecnicas.html',context)
 
