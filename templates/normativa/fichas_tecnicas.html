@@ -38,9 +38,9 @@
 
     <div class="col-8" >
         <h1 class="gUppercase gFontWeight700" >
-            Reglamento Comentado
+            FICHAS TÉCNICAS
         </h1>
-        <a href="{% url 'norma_urb' %}?t=2" class="btn btn-lg btn-warning text-dark mb-0" style="z-index: -100;" > <b> Búsqueda de normas </b> <i class="fas fa-search text-dark"> </i> </a>
+        <a href="{% url 'norma_urb' %}?t=4" class="btn btn-lg btn-warning text-dark mb-0" style="z-index: -100;" > <b> Búsqueda de normas </b> <i class="fas fa-search text-dark"> </i> </a>
     
         <div class="mt-0 pt-0 gContainer gPositionRelative gContenido align-middle" style="width:100%;">
             <div class="mt-0 pt-0 gAlignCenter">     
@@ -52,7 +52,7 @@
                     {% for n in normas %}
                         {% if n.order|length == 2 %}
                         
-                            <a href="{% url 'norma_urb' %}?norma={{n.name}}&ne={{n.order|slice:'0:1'}}&t=2" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+                            <a href="{% url 'norma_urb' %}?norma={{n.name}}&ne={{n.order|slice:'0:1'}}&t=4" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
                                 <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                                 
                                 <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
