@@ -37,7 +37,7 @@ def foro_comentarios(request, foro_id):
         b.save()
 
         emails = [m.email for m in foro.suscripcion_foro.all()];
-        async_send_email_suscription(request, emails)
+        async_send_email_suscription(request, emails, request.get_full_path())
 
     comentarios_list = Comentario_Foro.objects.filter(foro_id = foro_id)
 

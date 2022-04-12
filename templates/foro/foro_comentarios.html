@@ -1,5 +1,6 @@
 {% extends 'base_nfr.html' %}
 {% load static %}
+{% load user_tags %}
 {% block content %}
 
 <div class="card border-secondary mb-3" > 
@@ -62,7 +63,7 @@
               {% for muni in comentarios_list %}
               <div class="d-flex align-items-center w-100 ">
                 <div class="comment-box mt-4 
-                {% if perms.foro.delete_comentario_foro %}
+                {% if muni.user|has_group:'ESPECIALISTA' %}
                   border border-warning shadow p-3 mb-5 bg-white rounded
                 {% endif %}">
                   <span class="commenter-pic">
