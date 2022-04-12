@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 # Core Django imports
 from django import template
-from django.contrib.auth.models import Group 
+from django.contrib.auth.models import Group, Permission
 # Third-party app imports
 
 # Realative imports of the 'app-name' package
@@ -42,6 +42,7 @@ def has_group(user, group_name):
     group = Group.objects.get(name=group_name) 
     return True if group in user.groups.all() else False
 
-
-
-    
+# @register.filter(name='has_perms')
+# def has_perms(user, perm_name): 
+#     perm = Permission.objects.get(name=perm_name)
+#     return True if perm in user.perms.all() else False

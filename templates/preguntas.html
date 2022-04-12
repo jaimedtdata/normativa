@@ -21,7 +21,7 @@
           <select name="tipo_uso" class="form-control" id="{{ filter.form.id_for_tipo_uso }}">
             <option value="0">TODOS</option>
             {% for tu in tipo_uso %}
-            <option value="{{tu.order}}">{{tu.area_name}}</option>
+            <option value="{{tu.order}}">{{tu.name}}</option>
           {% endfor %}
           </select>
         </div>

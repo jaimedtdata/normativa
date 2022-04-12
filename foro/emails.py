@@ -6,13 +6,21 @@ import threading
 
 FROM_EMAIL = 'Colegio de Arquitectos <{}>'.format(settings.EMAIL_HOST_USER)
 
-def send_email_suscription(request, emails):
+def async_send_email_suscription(request, emails, link):
+    user = request.user
+
+    thread = threading.Thread(target=send_email_suscription(request, emails, link), 
+        args=(user,))
+    thread.start()
+
+def send_email_suscription(request, emails, link):
 	context = {
 		'title': 'Notificación de suscripción',
 		'message': 'Alguien hizo un comentario.',
-		#'link': link,
+		'link': link,
 		'request':request,
 	}
+
 	from_email = FROM_EMAIL
 	print ('from_email:', from_email, emails)
 
@@ -27,9 +35,3 @@ def send_email_suscription(request, emails):
 		html_message=html_message
     )
 
-def async_send_email_suscription(request, emails):
-    user = request.user
-
-    thread = threading.Thread(target=send_email_suscription(request, emails), 
-        args=(user,))
-    thread.start()
