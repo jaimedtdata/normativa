@@ -174,15 +174,7 @@ STATICFILES_DIRS = [
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
-
-# EMAIL_USE_TLS = True
-# EMAIL_HOST =  os.getenv('EMAIL_HOST')
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-# EMAIL_SUBJECT_PREFIX='Colegio de Arquitectos del Perú'
-
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST=os.getenv('EMAIL_HOST')
 EMAIL_HOST_USER=os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD=os.getenv('EMAIL_HOST_PASSWORD')
@@ -190,31 +182,13 @@ EMAIL_PORT=os.getenv('EMAIL_PORT')
 EMAIL_USE_TLS=os.getenv('EMAIL_USE_TLS')
 EMAIL_USE_LOCALTIME=os.getenv('EMAIL_USE_LOCALTIME')
 EMAIL_SUBJECT_PREFIX='Colegio de Arquitectos del Perú'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 USERNAME_NIUBIZ = os.getenv('USERNAME_NIUBIZ')
 PASSWORD_NIUBIZ = os.getenv('PASSWORD_NIUBIZ')
 COMERCIAL_ID = os.getenv('COMERCIAL_ID')
 
 CART_SESSION_ID = 'cart'
-
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'jaimemarston@gmail.com'
-# EMAIL_HOST_PASSWORD = '42088985jrmm$$$'
-
-
-# EMAIL_HOST = config('EMAIL_HOST')
-# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-# EMAIL_SUBJECT_PREFIX = config('EMAIL_SUBJECT_PREFIX')
-# EMAIL_PORT = config('EMAIL_PORT', cast=int)
-# EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
-# EMAIL_USE_LOCALTIME = config('EMAIL_USE_LOCALTIME', cast=bool)
-
-
 
 # # Space AWS
 # AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
