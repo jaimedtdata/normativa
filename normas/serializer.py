@@ -39,6 +39,7 @@ def tipo_norma_serializer(tn):
         'id' : tn.id,
         'name' : tn.name,
         'order' : tn.order,
+        'nivel' : tn.nivel,
         'grupo_id' : tn.grupo_id,
         'topico_id' : tn.grupo.universo_id if tn.grupo else 0,
     }

@@ -49,22 +49,23 @@
                 <hr class="gSeparator gSeparatorTrans gSeparator20">
                 <div class="gRowTemp">
                     
-                    {% for n in normas %}
-                        {% if n.order|length == 2 %}
-                        
-                            <a href="{% url 'norma_urb' %}?norma={{n.name}}&ne={{n.order|slice:'0:1'}}&t=3" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
-                                <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                                
-                                <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                    {% for gtn in grupos_tipo_norma %}
+                        <a href="{% url 'norma_urb' %}?norma={{gtn.name}}&gtn={{gtn.id}}&t={{gtn.universo_id}}" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+                            <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                            
+                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                                {% if gtn.icono %}
+                                    <img class="img-fluid mt-4" src="{{ gtn.icono.url }}" class="gInlineBlock gWidth57 gMarginTop31">
+                                {% else %}
                                     <img class="img-fluid mt-4" src="{% static 'images/edificaciones.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
-                                </div>
-                                
-                                <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                                    {{ n.name }}
-                                </h5>
-                            </a>   
-
-                        {% endif %}             
+                                {% endif %}
+                               
+                            </div>
+                            
+                            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                                {{ gtn.name }}
+                            </h5>
+                        </a>               
                     {% endfor %}
                     
                 </div>
