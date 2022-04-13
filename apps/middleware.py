@@ -2,6 +2,7 @@ from django.utils import timezone
 from datetime import date
 from apps.models import Order_payment
 from apps.models import Membership, Member
+from membership.models import APIMember
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.shortcuts import redirect
@@ -17,12 +18,8 @@ class CheckMembership:
                 for user in User.objects.filter(is_active=False):
                     if user.is_active ==False:
                         type_membership = user.user_membership.membership.membership_type
-                        if type_membership == 'PLPP' or type_membership == 'PPPP':
-                            # print('-----------------------------------------------')
-                            # print('usuarios inactivos:', user.email, user.username, 'activo:',user.is_active)
-                            # print('-----------------------------------------------')
+                        if type_membership == 'PLPP':
                             orders_exists = Order_payment.objects.filter(identity=user.user_membership.identity).exists()
-                    
                             if orders_exists:
                                 last_order = Order_payment.objects.filter(identity=user.user_membership.identity).latest('created')
                                 day_finish_plan = last_order.validity_date_finish
@@ -35,6 +32,15 @@ class CheckMembership:
                                 #debe ser usuario activo 
                                     user.is_active = True
                                     user.save()
+
+                        if  type_membership == 'PPPP':
+                            #profesional plan pago presencial
+                            pro_usuario = APIMember.objects.get(identity=user.username)
+                            actual_day = timezone.now()
+                            if pro_usuario.date_expired > actual_day:
+                                user.is_active = True  
+                                user.save()
+                                
        
         try:
             user = User.objects.get(username=request.user.username)
@@ -67,8 +73,8 @@ class CheckMembership:
                     member.membership = pl_agremiado
                     member.save()
 
-            elif type_membership=='PLPP' or type_membership=='PPPP' :
-                #profesional plan
+            elif type_membership=='PLPP' :
+                #profesional plan pago en linea
                 print('usuario:', user.is_active)
 
                 if orders_exists:
@@ -91,12 +97,25 @@ class CheckMembership:
                         
                        
                 else:
-                    # no debe tener acceso
                     user.is_active = False
                     user.save()
                     logout(request)
                     return redirect('login')
-                        
+            
+            elif type_membership=='PPPP' :
+                #profesional plan pago presencial
+                pro_usuario = APIMember.objects.get(identity=request.user.username)
+                actual_day = timezone.now()
+                if pro_usuario.date_expired > actual_day:
+                    print("tienes membresia activa")
+                else:
+                    print("no debes tener membresia")
+                    user.is_active = False  
+                    user.save()
+                    logout(request)
+                    return redirect('login')
+                
+                
                             
         except:
             #print('eres super user U otro tipo de usuario ')

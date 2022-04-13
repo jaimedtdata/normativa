@@ -766,8 +766,13 @@ def cap_cash_payment(request):
 def history_purchase(request):
     user =  request.user.user_membership.identity
     orders = Order_payment.objects.filter(identity=user)
+    if APIMember.objects.filter(identity=request.user.username).exists():
+        pro_user = APIMember.objects.get(identity=request.user.username)
+    else:
+        pro_user = None
     context = {
         'orders': orders,
+        'pro_user': pro_user,
     }
     return render(request, 'checkout/premium_free/history_purchase.html' , context)
 

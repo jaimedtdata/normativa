@@ -99,8 +99,8 @@ class APIMember(models.Model):
     has_tutition = models.BooleanField(default=False, verbose_name='¿Es colegiado?')
     is_client = models.BooleanField(default=False, verbose_name='¿Es cliente?')
     
-    date_enrollment = models.DateField(verbose_name='fecha de inscripcion', blank=True, null=True)
-    date_expired = models.DateField(verbose_name='fecha de caducidad', blank=True, null=True)
+    date_enrollment = models.DateTimeField(verbose_name='fecha de inscripcion', blank=True, null=True)
+    date_expired = models.DateTimeField(verbose_name='fecha de caducidad', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion')
     updated = models.DateTimeField(auto_now=True, verbose_name='Fecha de actualización')
 
