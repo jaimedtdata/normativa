@@ -31,9 +31,9 @@ admin.site.register(Order_payment,Order_paymentAdmin)
 '''
 
 class Grupo_Tipo_Normas_Admin(admin.ModelAdmin):
-    list_display = ('name', 'order','universo', 'created', 'updated')
+    list_display = ('name', 'order','topico', 'created', 'updated')
     search_fields = ['name']
-    list_filter = ['universo']
+    list_filter = ['topico']
 admin.site.register(Grupo_Tipo_Normas, Grupo_Tipo_Normas_Admin)
 
 class Register_Normativa_Resource(resources.ModelResource):
@@ -41,9 +41,9 @@ class Register_Normativa_Resource(resources.ModelResource):
         model = Register_Normativa
 
 class Register_Normativa_Admin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display=('id','norma','name_denom','base_legal','fecha_publi','tipo_norma','document')
+    list_display=('id','norma','denominacion','base_legal','fecha_publicacion','tipo_norma','document')
     #readonly_fields = ['created', 'updated']    
-    list_filter = ['estado', 'created', 'name_denom']
+    list_filter = ['estado', 'created', 'denominacion']
     resource_class = Register_Normativa_Resource
 admin.site.register(Register_Normativa,Register_Normativa_Admin)
 
@@ -52,7 +52,7 @@ class Tipo_Normas_Resource(resources.ModelResource):
         model = Tipo_Normas
 
 class Tipo_Normas_Admin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display=('id', 'name', 'nivel', 'order', 'created')     
+    list_display=('id', 'name', 'order', 'created')     
     list_filter = ['grupo']
     resource_class = Tipo_Normas_Resource
 admin.site.register(Tipo_Normas, Tipo_Normas_Admin)

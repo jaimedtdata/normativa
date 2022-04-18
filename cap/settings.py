@@ -39,7 +39,6 @@ LOCAL_APPS = (
     'foro',
     'normas',
     'cursos',
-    'bus_normativa.apps.BusNormativaConfig',
 )
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

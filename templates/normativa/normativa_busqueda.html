@@ -87,7 +87,7 @@
                                                         {% for n in normas %}
                                                             <tr>
                                                                 <td>{{n.norma}}</td>
-                                                                <td>{{n.name_denom}}</td>
+                                                                <td>{{n.denominacion}}</td>
                                                                 <td>{{n.base_legal}}</td>
                                                                 <td>{{n.tipo_uso}}</td>
 
@@ -106,7 +106,7 @@
                                                                     {% endif %}
 
                                                                 </td>
-                                                                <td>{{n.fecha_publi}}</td>
+                                                                <td>{{n.fecha_publicacion}}</td>
                                                             </tr>
                                                         {% endfor %}
                                                         
@@ -143,7 +143,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>{{norm.norma}}</td>
-                                                            <td>{{norm.name_denom}}</td>
+                                                            <td>{{norm.denominacion}}</td>
                                                             <td>{{norm.base_legal}}</td>
                                                             <td>
                                                                 <a target="_blank" href="{{norm.document.url}}">
@@ -153,7 +153,7 @@
                                                                     </svg>
                                                                 </a>
                                                             </td>
-                                                            <td>{{norm.fecha_publi}}</td>
+                                                            <td>{{norm.fecha_publicacion}}</td>
                                                         </tr>
 
                                                     </tbody>

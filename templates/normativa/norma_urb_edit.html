@@ -148,7 +148,7 @@
                                 <td>{{norma.subtipo_uso.tipo_uso}}</td>
                                 <td>{{norma.subtipo_uso}}</td>
                                 <td>{{norma.norma}}</td>
-                                <td>{{norma.name_denom}}
+                                <td>{{norma.denominacion}}
                                     - {{ norma.estado }}
                                 </td>
                                 <td>
@@ -178,7 +178,7 @@
                                             aria-hidden="true"></i></span>
                                     {% endif %}
                                 </td>
-                                <td>{{norma.fecha_publi}}</td>
+                                <td>{{norma.fecha_publicacion}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -360,7 +360,7 @@ function getSearchNormativas(search)
     if( search != undefined ) {
         return uac.filter(n => {
             return n.norma.toLowerCase().includes(search.toLowerCase()) 
-                    || n.name_denom.toLowerCase().includes(search.toLowerCase()) 
+                    || n.denominacion.toLowerCase().includes(search.toLowerCase()) 
                     || n.base_legal.toLowerCase().includes(search.toLowerCase())
                     || n.descripcion.toLowerCase().includes(search.toLowerCase())
         })
@@ -396,7 +396,7 @@ function getNormasPorFechas(date_range)
     if (date_range != undefined) {
 
         return uac.filter(n => {
-            return moment(n.fecha_publi) >= moment(date_range.startDate.format('YYYY-MM-DD')) && moment(n.fecha_publi) <= moment(date_range.endDate.format('YYYY-MM-DD'))
+            return moment(n.fecha_publicacion) >= moment(date_range.startDate.format('YYYY-MM-DD')) && moment(n.fecha_publicacion) <= moment(date_range.endDate.format('YYYY-MM-DD'))
         })
     } else {
         return uac
@@ -487,7 +487,7 @@ function render(resultado)
         html +=/*html*/
             `</td>
                 <td>
-                    ${r.name_denom}`
+                    ${r.denominacion}`
                     if (r.estado == 'NV') {
                         html += /*html*/`
                         <small class="fst-italic fw-lighter fs-7 text-danger">*No Vigente</small>
@@ -520,7 +520,7 @@ function render(resultado)
                     html += /*html*/`
                 </td>
                 <td >
-                    ${r.fecha_publi}
+                    ${r.fecha_publicacion}
                 </td>
             </tr>`
     })

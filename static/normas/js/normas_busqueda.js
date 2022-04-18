@@ -103,7 +103,7 @@ topico.change(function(){
 
     tipos_norma_json.forEach( tn => {
         if( tn.topico_id == topico.val() ) {
-            if ( tn.nivel == 0 ) {
+            if ( !tn.order.includes('.') ) {
                 options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
             }
             else {
@@ -153,7 +153,7 @@ function getSearchNormativas(search)
     if( search != undefined ) {
         return uac.filter(n => {
             return n.norma.toLowerCase().includes(search.toLowerCase()) 
-                    || n.name_denom.toLowerCase().includes(search.toLowerCase()) 
+                    || n.denominacion.toLowerCase().includes(search.toLowerCase()) 
                     || n.base_legal.toLowerCase().includes(search.toLowerCase())
                     || n.descripcion.toLowerCase().includes(search.toLowerCase())
         })
@@ -189,7 +189,7 @@ function getNormasPorFechas(date_range)
     if (date_range != undefined) {
 
         return uac.filter(n => {
-            return moment(n.fecha_publi) >= moment(date_range.startDate.format('YYYY-MM-DD')) && moment(n.fecha_publi) <= moment(date_range.endDate.format('YYYY-MM-DD'))
+            return moment(n.fecha_publicacion) >= moment(date_range.startDate.format('YYYY-MM-DD')) && moment(n.fecha_publicacion) <= moment(date_range.endDate.format('YYYY-MM-DD'))
         })
     } else {
         return uac
@@ -222,7 +222,7 @@ function topicoNorma()
 
     tipos_norma_json.forEach( tn => {
         if( tn.topico_id == topico.val() ) {
-            if ( tn.nivel == 0 ) {
+            if ( !tn.order.includes('.')  ) {
                 options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
             }
             else {
@@ -279,7 +279,7 @@ function render(resultado)
         html +=/*html*/
             `</td>
                 <td>
-                    ${r.name_denom}`
+                    ${r.denominacion}`
                     if (r.estado == 'NV') {
                         html += /*html*/`
                         <small class="fst-italic fw-lighter fs-7 text-danger">*No Vigente</small>
@@ -312,7 +312,7 @@ function render(resultado)
                     html += /*html*/`
                 </td>
                 <td >
-                    ${r.fecha_publi}
+                    ${r.fecha_publicacion}
                 </td>
             </tr>`
     })

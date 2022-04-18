@@ -17,7 +17,7 @@ from normas.forms import NormativaForm
 from django.contrib.auth.decorators import login_required
 
 from normas.serializer import keywords_serializer, subtipos_uso_serializer, tipo_norma_serializer
-from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Tipo_Normas, Subtipo_Normas, Universo_Normas
+from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Tipo_Normas, Subtipo_Normas, Topico_Normas
 
 @login_required
 def index(request):
@@ -62,7 +62,7 @@ def registrar_normativa(request):
     context = {
         'form' : NormativaForm,
         'tipo_uso': Areas_Normas.objects.order_by('order'),
-        'universo_norma': Universo_Normas.objects.all(),
+        'topico_norma': Topico_Normas.objects.all(),
         'palabras_clave' : Register_Palabraclave.objects.all(),
         'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'), # para que ? xd
         'tipo_norma': tipo_normas, 
@@ -109,7 +109,7 @@ def registrar_palabras_clave(request, normativa):
 
 class NormativaUpdateView(UpdateView):
     model = Register_Normativa
-    # fields = ['norma', 'name_denom', 'base_legal', 'fecha_publi', 'tipo_norma', 'tipo_uso', 'document', 'es_foro', 'es_vigente', 'descripcion']
+    # fields = ['norma', 'denominacion', 'base_legal', 'fecha_publicacion', 'tipo_norma', 'tipo_uso', 'document', 'es_foro', 'es_vigente', 'descripcion']
     template_name = 'normativa/edit_normativa.html'
     form_class = NormativaForm
 
@@ -135,7 +135,7 @@ class NormativaUpdateView(UpdateView):
             'subtipo_uso':  subtipos_uso,
             'subtipos_uso_json' : sbu,
             'tipo_norma': tipo_normas, 
-            'universo_norma': Universo_Normas.objects.all(),
+            'topico_norma': Topico_Normas.objects.all(),
             'tipo_uso': Areas_Normas.objects.order_by('order'),
             'palabras_clave' : Register_Palabraclave.objects.all(),
             'palabras_claves_normativa' : normativa.keywords.all(),

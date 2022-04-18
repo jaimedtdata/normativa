@@ -4,7 +4,7 @@ def normas_serializer(norma):
     return {
         'id' : norma.id,
         'norma' : norma.norma,
-        'name_denom' : norma.name_denom,
+        'denominacion' : norma.denominacion,
         'base_legal' : norma.base_legal,
         'tipo_norma_id' : norma.tipo_norma_id,
         'tipo_norma' : norma.tipo_norma.name if norma.tipo_norma else None,
@@ -16,7 +16,7 @@ def normas_serializer(norma):
         'estado' : norma.estado.name,
         'descripcion' : norma.descripcion if norma.descripcion else '',
         'document' : norma.document.url if norma.document else False,
-        'fecha_publi' : norma.fecha_publi.strftime('%Y-%m-%d'),
+        'fecha_publicacion' : norma.fecha_publicacion.strftime('%Y-%m-%d'),
         'palabras_clave' : [k.id for k in norma.keywords.all()],
     }
 
@@ -39,9 +39,8 @@ def tipo_norma_serializer(tn):
         'id' : tn.id,
         'name' : tn.name,
         'order' : tn.order,
-        'nivel' : tn.nivel,
         'grupo_id' : tn.grupo_id,
-        'topico_id' : tn.grupo.universo_id if tn.grupo else 0,
+        'topico_id' : tn.grupo.topico_id if tn.grupo else 0,
     }
 
 def tipos_uso_serializer(tu): #mama

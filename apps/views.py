@@ -29,15 +29,13 @@ from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
-from normas.models import Areas_Normas, Grupo_Tipo_Normas, Policies_usage, Subtipo_Normas, Universo_Normas
+from normas.models import Areas_Normas, Grupo_Tipo_Normas, Policies_usage, Subtipo_Normas, Topico_Normas
 from foro.models import Comentario_Foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector, SearchQuery
 
 # Johao #
-
-from bus_normativa.models import date_normativa
 from normas.models import Tipo_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
 from normas.serializer import normas_serializer, subtipos_uso_serializer, tipo_norma_serializer, tipos_uso_serializer
 
@@ -77,20 +75,20 @@ def busque_normativa(request):
         #normas = Register_Normativa.objects.filter(keywords__name__search=pal_clave).order_by('tipo_norma__order')
         
         # normas = Register_Normativa.objects.annotate(
-        #                         search = SearchVector('keywords__name', 'norma','name_denom',
+        #                         search = SearchVector('keywords__name', 'norma','denominacion',
         #                          'base_legal')
         #                         ).filter(search=pal_clave).order_by('tipo_norma__order')
 
         if norma_tipo_uso == 'TODO':
             normas = Register_Normativa.objects.annotate(
-                                search = SearchVector('keywords__name', 'norma','name_denom',
+                                search = SearchVector('keywords__name', 'norma','denominacion',
                                  'base_legal', config='Spanish')
                                 ).filter(search=SearchQuery( pal_clave, config='Spanish')).order_by('tipo_norma__order')
 
         else:
             normas = Register_Normativa.objects.filter(
                     tipo_uso__name=norma_tipo_uso
-                    ).annotate(search = SearchVector('keywords__name', 'norma','name_denom',
+                    ).annotate(search = SearchVector('keywords__name', 'norma','denominacion',
                                  'base_legal', config='Spanish')
                                 ).filter(search=SearchQuery( pal_clave, config='Spanish')).order_by('tipo_norma__order')
         print(norma_tipo_uso)
@@ -107,10 +105,10 @@ def busque_normativa(request):
             row ={
                 'tipo_norma': n.tipo_norma.name,
                 'norma': n.norma,
-                'name_denom': n.name_denom,
+                'denominacion': n.denominacion,
                 'base_legal': n.base_legal,
                 'document': n.document,
-                'fecha_publi': n.fecha_publi,
+                'fecha_publicacion': n.fecha_publicacion,
                 'tipo_uso' : n.tipo_uso
             }
             normas_results.append(row)
@@ -175,7 +173,7 @@ def update_clave(request,codigo):
 @login_required
 def norma_edificatoria(request):
     context = {
-        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(universo_id = 1)
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = 1)
     }
     return render(request,'normativa/normatividad_edificatoria.html', context)
 
@@ -186,7 +184,7 @@ def norma_datos(request):
     area_normas = Areas_Normas.objects.order_by('name')
     palabras_clave = Register_Palabraclave.objects.all()
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
-    topico = Universo_Normas.objects.all()
+    topico = Topico_Normas.objects.all()
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
     tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
@@ -211,21 +209,21 @@ def norma_datos(request):
 @login_required
 def reglamento_comentado(request):
     context = {
-        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(universo_id = 2).order_by('order')
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = 2).order_by('order')
     }
     return render(request,'normativa/reglamento_comentado.html',context)
 
 @login_required
 def procedimientos_tramites(request):
     context = {
-        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(universo_id = 3).order_by('order')
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = 3).order_by('order')
     }
     return render(request,'normativa/procedimientos_tramites.html',context)
 
 @login_required
 def fichas_tecnicas(request):
     context = {
-        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(universo_id = 4).order_by('order')
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = 4).order_by('order')
     }
     return render(request,'normativa/fichas_tecnicas.html',context)
 

@@ -6,7 +6,7 @@ class Cursos(models.Model):
     embed = models.TextField()
     caratula = models.FileField(upload_to='caratulas',verbose_name='Caratula',null=True,editable=True)
     descripcion = models.CharField(blank=True, null=True, max_length=700, verbose_name='Descripcion del video')
-    fecha_publicacion = models.DateTimeField(verbose_name="Fecha de publicación", blank=True, null=True)
+    fecha_publicacioncacion = models.DateTimeField(verbose_name="Fecha de publicación", blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Cursos'

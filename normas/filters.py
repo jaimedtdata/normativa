@@ -37,4 +37,4 @@ class NormativaFilter(django_filters.FilterSet):
         fields = ['content']
 
     def norma_nombre_bl(self, queryset, name, value):
-        return queryset.filter(Q(name_denom__icontains = value) | Q(norma__icontains = value) | Q(base_legal__icontains = value))
+        return queryset.filter(Q(denominacion__icontains = value) | Q(norma__icontains = value) | Q(base_legal__icontains = value))

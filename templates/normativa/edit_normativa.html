@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        {{ form.name_denom|as_crispy_field }}
+                        {{ form.denominacion|as_crispy_field }}
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        {{ form.fecha_publi|as_crispy_field }}
+                        {{ form.fecha_publicacion|as_crispy_field }}
                     </div>
                 </div>
             </div>
@@ -73,8 +73,8 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label> Topico principal de Norma: </label>
-                        <select class="form-control" aria-label="Default select example" name="universo" id="id_universo">
-                                {% for un in universo_norma %}
+                        <select class="form-control" aria-label="Default select example" name="topico" id="id_topico">
+                                {% for un in topico_norma %}
                                 <option value="{{un.id}}">{{un.name}}</option>
                                 {% endfor %}
                         </select>
@@ -155,7 +155,7 @@
         const subtipos_uso = document.getElementById('id_subtipo_uso')
         const subtipos_uso_json = {{ subtipos_uso_json|safe }}
 
-        const universo = document.getElementById('id_universo')
+        const topico = document.getElementById('id_topico')
         const tipo_norma = document.getElementById('id_tipo_norma')
         const tipo_normas_json = {{ tipo_normas_json|safe }}  
 
@@ -169,7 +169,7 @@
         $('#id_subtipo_uso').trigger('change.select2');
 
 
-        universo.value = "{{normativa.tipo_norma.universo_id}}" 
+        topico.value = "{{normativa.tipo_norma.topico_id}}" 
         
         changeOptionsTipoNorma()
 
@@ -185,7 +185,7 @@
         });
 
 
-        universo.addEventListener('change', (e) => {
+        topico.addEventListener('change', (e) => {
 
             changeOptionsTipoNorma()
 
@@ -207,7 +207,7 @@
         function changeOptionsTipoNorma() {
             var options_tn = ``
             tipo_normas_json.forEach( tn => {
-                if( tn.topico_id == universo.value ) {
+                if( tn.topico_id == topico.value ) {
                     options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
                 }            
             })
