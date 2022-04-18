@@ -21,7 +21,7 @@
     }
 </script>
 <br>
-<div class="row text-center">
+<div class="row text-center mx-0">
     <div class="col-2">
 
         <a href="{% url 'home' %}">
@@ -38,16 +38,16 @@
 
     <div class="col-8" >
         <h1 class="gUppercase gFontWeight700" >
-            Normativa Edificatoria
+            {{topico_norma}}
         </h1>
-        <a href="{% url 'norma_urb' %}?t=1" class="btn btn-lg btn-warning text-dark mb-0" style="z-index: -100;" > <b> Búsqueda por normas, por uso y palabras clave </b> <i class="fas fa-search text-dark"> </i> </a>
+        <a href="{% url 'buscador' %}?t={{topico_norma.id}}" class="btn btn-lg btn-warning text-dark mb-0" style="z-index: -100;" > <b> Búsqueda por normas, por uso y palabras clave </b> <i class="fas fa-search text-dark"> </i> </a>
     
         <div class="mt-0 pt-0 gContainer gPositionRelative gContenido align-middle" style="width:100%;">
             <div class="mt-0 pt-0 gAlignCenter">     
                 <hr class="gSeparator gSeparatorTrans gSeparator20">
                 <div class="gRowTemp">
                     {% for gtn in grupos_tipo_norma %}
-                        <a href="{% url 'norma_urb' %}?norma={{gtn.name}}&gtn={{gtn.id}}&t={{gtn.topico_id}}" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+                        <a href="{% url 'buscador' %}?norma={{gtn.name}}&gtn={{gtn.id}}&t={{gtn.topico_id}}" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
                             <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                             
                             <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">

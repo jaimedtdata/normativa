@@ -16,8 +16,8 @@ from django.urls import reverse
 from normas.forms import NormativaForm
 from django.contrib.auth.decorators import login_required
 
-from normas.serializer import keywords_serializer, subtipos_uso_serializer, tipo_norma_serializer
-from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Tipo_Normas, Subtipo_Normas, Topico_Normas
+from normas.serializer import keywords_serializer, normas_serializer, subtipos_uso_serializer, tipo_norma_serializer, tipos_uso_serializer
+from .models import Areas_Normas, Grupo_Tipo_Normas, Register_Normativa, Register_Palabraclave, Tipo_Normas, Subtipo_Normas, Topico_Normas
 
 @login_required
 def index(request):

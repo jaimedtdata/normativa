@@ -22,15 +22,13 @@
         </div>
 
         <div class="col-2">
-            <a href="{% url 'norma_edificatoria' %}">
-                <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
-            </a>
+            
         </div>
     </div>
     <br><br>
 
     <div class="row p-0 m-0">
-        <div class="col-lg-3" style="height:720px;" id="subnormas_caja">
+        <div class="col-lg-3 d-none" style="height:720px;" id="subnormas_caja">
             <div class="form group">
                 <label for="">Topico:</label>
                 <select class="form-control p-0" name="" id="topico" style="font-size: .9rem;">
@@ -43,10 +41,10 @@
                 <label for="">Tipo de norma:</label>
                 <select class="form-control" name="tipo_normas[]" multiple="multiple" style="height:100%;" id="tipos_norma">
                     {% for sn in subcategories_normas %}
-                        {% if sn.order|length == 2 %}
-                        <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.name}} </option>
+                        {% if '.' not in sn.order %}
+                        <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.order}} {{sn.name}} </option>
                         {% else %}
-                        <option class="text-wrap" value="{{sn.id}}">{{sn.name}} </option>
+                        <option class="text-wrap" value="{{sn.id}}">{{sn.order}} {{sn.name}} </option>
                         {% endif %}
                     {% endfor %}
                 </select>
@@ -310,13 +308,13 @@ topico.change(function(){
 
     tipos_norma_json.forEach( tn => {
         if( tn.topico_id == topico.val() ) {
-            if ( tn.nivel == 0 ) {
-                options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
+            if ( !tn.order.includes('.') ) {
+                options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap font-weight-bold" value="${tn.id}">${tn.order} ${tn.name}</option>`
             }
             else {
-                options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap" value="${tn.id}">${tn.name}</option>`
+                options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap" value="${tn.id}">${tn.order} ${tn.name}</option>`
             }
-        }            
+        }          
     })
 
     tipos_norma.html(options_tn)
@@ -429,13 +427,13 @@ function topicoNorma()
 
     tipos_norma_json.forEach( tn => {
         if( tn.topico_id == topico.val() ) {
-            if ( tn.nivel == 0 ) {
-                options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
+            if ( !tn.order.includes('.') ) {
+                options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap font-weight-bold" value="${tn.id}">${tn.order} ${tn.name}</option>`
             }
             else {
-                options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap" value="${tn.id}">${tn.name}</option>`
+                options_tn += /*html*/`<option grupo="${tn.grupo_id}" class="text-wrap" value="${tn.id}">${tn.order} ${tn.name}</option>`
             }
-        }            
+        }         
     })
     
     console.log(options_tn)

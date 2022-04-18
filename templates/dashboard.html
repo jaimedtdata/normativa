@@ -34,55 +34,11 @@
                     
                     <hr class="gSeparator gSeparatorTrans gSeparator20">
                     <div class="gRowTemp">
-                        <a href="{% url 'norma_edificatoria' %}" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
-                            <div class="gWidth50 gHeight3 gFondoCircleNaranja gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleNaranaja gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                                <img class="img-fluid mt-2 pl-1" src="{% static 'images/normativa_edificatoria.svg' %}" class="gInlineBlock gWidth60 gMarginTop31" width="85">
-                                
-                            </div>
-                            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                                NORMATIVA
-                                <br>
-                                EDIFICATORIA
-                            </h5></a>
-                        
-                        <a href="{% url 'reglamento_comentado' %}" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox3"> 
-                            <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                            
-                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                                <img class="img-fluid mt-4" src="{% static 'images/reglamento_comentado.svg' %}" class="gInlineBlock gWidth60 gMarginTop31" width="94">
-                            </div>
-                            
-                            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                                REGLAMENTO
-                                <br>
-                                COMENTADO
-                            </h5>
-                            </a>
-                        
-                        <a href="{% url 'procedimientos_tramites' %}" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox4">
-                            <div class="gWidth50 gHeight3 gFondoCircleRojo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleRojo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                                <img class="img-fluid p-2 mt-4" src="{% static 'images/procedimiento.svg' %}" class="gInlineBlock gWidth65 gMarginTop31">
-                            </div>
-                            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                                PROCEDIMIENTOS Y
-                                <br>
-                                TRÁMITES DE LICENCIAS
-                            </h5></a>
+                        {% include './normativa/topico_normativa.html' %}
                     </div>
                     <hr class="gSeparator gSeparatorTrans gSeparator20">
                     <div class="gRowTemp">
-                        <a href="{% url 'fichas_tecnicas' %}" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox5">
-                            <div class="gWidth50 gHeight3 gFondoCircleGris3 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                            <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris3 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                                <img class="img-fluid p-2" src="{% static 'images/fichas_tecnicas.svg' %}" class="gInlineBlock gMarginTop5" width="100">
-                            </div>
-                            
-                            <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">FICHAS TÉCNICAS<br>
-                                Y PROVEEDORES
-                                <br>
-                                </h5></a>
+                        
                         <a href="{% url 'foro' %}" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
                             <div class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
                             <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">

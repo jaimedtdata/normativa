@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User,Group
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
-
+from django.utils.safestring import mark_safe
 from apps.email import (send_confirm_account, send_success_sign_up,
     send_password_reset, send_success_password_reset,)
 
@@ -170,69 +170,6 @@ def update_clave(request,codigo):
         Register_Palabraclave.objects.filter(id=codigo).update(name=pala_clave)
         return redirect('dateregister_norm')
 
-@login_required
-def norma_edificatoria(request):
-    context = {
-        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = 1)
-    }
-    return render(request,'normativa/normatividad_edificatoria.html', context)
-
-@login_required
-def norma_datos(request):
-    norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso').order_by('norma')
-    tipo_normas = Tipo_Normas.objects.order_by('order')
-    area_normas = Areas_Normas.objects.order_by('name')
-    palabras_clave = Register_Palabraclave.objects.all()
-    subtipo_usos = Subtipo_Normas.objects.order_by('order')
-    topico = Topico_Normas.objects.all()
-
-    normas = [ normas_serializer(norma) for norma in norma_date ]
-    tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
-    sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
-    tu = [ tipos_uso_serializer(tu) for tu in area_normas ]
-
-
-    context={
-            'norma_date':norma_date,
-            'subcategories_normas':tipo_normas, 
-            'area_normas' : area_normas, 
-            'palabras_clave' : palabras_clave,
-            'subtipo_usos' : subtipo_usos,
-            'normas' : json.dumps(normas),
-            'sbu' : json.dumps(sbu),
-            'tu' : json.dumps(tu),
-            'topico' : topico,
-            'tn' : tn
-            }
-    return render(request,'normativa/norma_urb_edit.html',context)
-
-@login_required
-def reglamento_comentado(request):
-    context = {
-        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = 2).order_by('order')
-    }
-    return render(request,'normativa/reglamento_comentado.html',context)
-
-@login_required
-def procedimientos_tramites(request):
-    context = {
-        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = 3).order_by('order')
-    }
-    return render(request,'normativa/procedimientos_tramites.html',context)
-
-@login_required
-def fichas_tecnicas(request):
-    context = {
-        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = 4).order_by('order')
-    }
-    return render(request,'normativa/fichas_tecnicas.html',context)
-
-# FILTRAR NORMATIVAS DE EDIFICACIONES
-def filter_normativa_edificatoria(request):
-    subnormativas = request.GET.getlist('subnormativas[]')        
-    normativas = Register_Normativa.objects.filter(tipo_norma_id__in = subnormativas)
-    return HttpResponse(normativas)
-
 def normas_tecnicauso(request):
     return render(request,'normativa/norma_tecnuso.html',None)
 def busqueda_provedor(request):
@@ -296,7 +233,47 @@ def busq_palclave_prov(request):
 
         
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    context = {
+        'topicos_norma' : Topico_Normas.objects.all()
+    }
+    return render(request, 'dashboard.html', context)
+
+@login_required
+def grupo_normativa(request, tn):
+    context = {
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = tn),
+        'topico_norma' : Topico_Normas.objects.get(id = tn)
+    }
+    return render(request,'normativa/grupo_normativa.html', context)
+
+@login_required
+def buscador(request):
+    norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso').order_by('norma')
+    tipo_normas = Tipo_Normas.objects.order_by('order')
+    area_normas = Areas_Normas.objects.order_by('name')
+    palabras_clave = Register_Palabraclave.objects.all()
+    subtipo_usos = Subtipo_Normas.objects.order_by('order')
+    topico = Topico_Normas.objects.all()
+
+    normas = [ normas_serializer(norma) for norma in norma_date ]
+    tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
+    sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
+    tu = [ tipos_uso_serializer(tu) for tu in area_normas ]
+
+    context={
+            'norma_date':norma_date,
+            'subcategories_normas':tipo_normas, 
+            'area_normas' : area_normas, 
+            'palabras_clave' : palabras_clave,
+            'subtipo_usos' : subtipo_usos,
+            'normas' : mark_safe(json.dumps(normas)),
+            'sbu' : mark_safe(json.dumps(sbu)),
+            'tu' : mark_safe(json.dumps(tu)),
+            'topico' : topico,
+            'tn' : tn
+            }
+
+    return render(request,'normativa/buscador_normativa.html',context)
 
 def get_user_by_form_data(data, roles=[]):
         user = {

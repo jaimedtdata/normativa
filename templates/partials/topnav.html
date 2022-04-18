@@ -40,7 +40,7 @@
             <a class="nav-link text-link" aria-current="page" href="{% url 'home' %}">Inicio</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-link" aria-current="page" href="{% url 'norma_urb' %}?t=1">Busqueda de normas</a>
+            <a class="nav-link text-link" aria-current="page" href="{% url 'buscador' %}?t=1">Busqueda de normas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-link" aria-current="page" href="{% url 'foro' %}">Foro de Discución</a>
@@ -126,7 +126,7 @@
                         <i class="fas fa-address-card"></i>
                         Foro Interactivo
                     </a>
-                    <a href="{% url 'norma_urb' %}" class="dropdown-item">
+                    <a href="{% url 'buscador' %}?t=1" class="dropdown-item">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         Búsqueda por normas, por uso <br> y palabras clave 
                     </a>

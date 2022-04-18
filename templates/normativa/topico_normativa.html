@@ -1,0 +1,24 @@
+{% load static %}
+
+{% for tn in topicos_norma %}
+<a href="{% url 'grupo-normativa' tn.id %}"
+    class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+    <div
+        class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine">
+    </div>
+
+    <div
+        class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+        {% if gtn.icono %}
+        <img class="img-fluid mt-4" src="{{ tn.icono.url }}" class="gInlineBlock gWidth57 gMarginTop31">
+        {% else %}
+        <img class="img-fluid mt-4" src="{% static 'images/edificaciones.svg' %}"
+            class="gInlineBlock gWidth57 gMarginTop31">
+        {% endif %}
+    </div>
+
+    <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+        {{ tn.name }}
+    </h5>
+</a>
+{% endfor %}
