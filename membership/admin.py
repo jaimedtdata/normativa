@@ -4,7 +4,7 @@ from .models import Membership, MembershipBenefits, APIMember, MembershipConditi
 
 @admin.register(Membership)
 class MemberShipAdmin(admin.ModelAdmin):
-    list_display= ['membership_type', 'get_benefits']
+    list_display= ['name','membership_type', 'get_benefits']
   
 
 @admin.register(MembershipBenefits)

@@ -46,8 +46,7 @@ class CheckMembership:
             user = User.objects.get(username=request.user.username)
             type_membership = user.user_membership.membership.membership_type
             #exclude super users
-            print("usuario premium agremiado", type_membership=='PLPPA')
-            print("usuario agremiado",type_membership=='PLPA')
+            #print("usuario premium agremiado", type_membership=='PLPPA')
             identity = user.user_membership.identity
             member = Member.objects.get(identity=identity)
             orders_exists = Order_payment.objects.filter(identity=identity).exists()
@@ -107,9 +106,9 @@ class CheckMembership:
                 pro_usuario = APIMember.objects.get(identity=request.user.username)
                 actual_day = timezone.now()
                 if pro_usuario.date_expired > actual_day:
-                    print("tienes membresia activa")
+                    #print("tienes membresia activa")
+                    pass
                 else:
-                    print("no debes tener membresia")
                     user.is_active = False  
                     user.save()
                     logout(request)

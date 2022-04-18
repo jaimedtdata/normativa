@@ -763,6 +763,7 @@ def cap_cash_payment(request):
 ### end Payment process -  PLAN AGREMIADO TO PREMIUM
 ##########
 
+@login_required
 def history_purchase(request):
     user =  request.user.user_membership.identity
     orders = Order_payment.objects.filter(identity=user)

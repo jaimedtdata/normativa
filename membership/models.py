@@ -25,6 +25,8 @@ class MembershipConditions(models.Model):
         verbose_name_plural = 'Condiciones de las Membresías'
 
 class Membership(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True, 
+                                verbose_name="Nombre del Plan")
     membership_type = models.CharField(
                 choices=MEMBERSHIP_CHOICES, default='PLPA', max_length=30)
     price_month = models.DecimalField(default=0, max_digits=10, decimal_places=2)
@@ -39,7 +41,7 @@ class Membership(models.Model):
     #precio que se pago anual
 
     def __str__(self):
-       return self.membership_type
+       return f'{self.name} - {self.membership_type}'
 
     def get_benefits(self):
         return "---\n".join([b.name for b in self.benefits.all()])
