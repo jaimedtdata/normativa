@@ -17,9 +17,23 @@ def upload_photos(instance, filename):
     ext = filename.split('.')[-1]
     return 'photos/{}.{}'.format(instance.identity, ext)
 
+class Universo_Normas(models.Model):
+    name = models.CharField(max_length=150, blank=False, verbose_name="Nombre de universo")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
+                                     blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
+                                     blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Topico Principal de Norma'
+
+    def __str__(self):
+        return self.name
+
 class Areas_Normas(models.Model):
     
-    name = models.CharField(max_length=200, blank=False, help_text='Nombre de Categoria', verbose_name='Nombre de la Categoria')      
+    name = models.CharField(max_length=200, blank=False, help_text='Nombre de Categoria', verbose_name='Nombre de la Categoria') 
+    universo = models.ForeignKey(Universo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Universo Norma')
     order = models.CharField(max_length=10, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                      blank=True, null=True)
@@ -44,19 +58,6 @@ class Subtipo_Normas(models.Model):
     
     class Meta:
         verbose_name_plural = 'Subtipo de Uso'
-
-    def __str__(self):
-        return self.name
-
-class Universo_Normas(models.Model):
-    name = models.CharField(max_length=150, blank=False, verbose_name="Nombre de universo")
-    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
-                                     blank=True, null=True)
-    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
-                                     blank=True, null=True)
-
-    class Meta:
-        verbose_name_plural = 'Topico Principal de Norma'
 
     def __str__(self):
         return self.name
