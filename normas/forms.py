@@ -5,7 +5,7 @@ class NormativaForm(forms.ModelForm):
     norma = forms.CharField(max_length=200,)
     name_denom = forms.CharField(label="Título", max_length=100)
     base_legal = forms.CharField(label="Base Legal", max_length=200)
-    fecha_publi = forms.DateField(label="Fecha de Publicación", widget=forms.DateInput(attrs={'type': 'date'}))
+    fecha_publi = forms.DateField(label="Fecha de Publicación", widget=forms.DateInput(attrs={'type': 'date'}), required=False)
     tipo_norma = forms.ModelChoiceField(label="Tipo de Norma", queryset=Tipo_Normas.objects.order_by('name'))
     subtipo_uso = forms.ModelMultipleChoiceField(label="Subtipo de Uso", queryset=Subtipo_Normas.objects.all(),  widget=forms.SelectMultiple(attrs={'class': 'select-multiple', 'style' : 'width:100%;'}))
     document = forms.FileField(label="Documento", max_length=100,allow_empty_file=True,required=False)
