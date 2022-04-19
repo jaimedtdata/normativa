@@ -1,4 +1,17 @@
 from datetime import datetime
+import json
+
+
+def group_by_duplicate(array):
+    sublists = []
+
+    for item in array:
+        if item not in sublists:
+            sublists.append(item)
+
+    return sublists
+
+
 
 def normas_serializer(norma):
     return {
@@ -8,8 +21,8 @@ def normas_serializer(norma):
         'base_legal' : norma.base_legal,
         'tipo_norma_id' : norma.tipo_norma_id,
         'tipo_norma' : norma.tipo_norma.name,
-        'tipos_uso': [x.tipo_uso.name for x in norma.subtipo_uso.all()],
-        'subtipos_uso': [x.name for x in norma.subtipo_uso.all()],
+        'tipos_uso': group_by_duplicate([x.tipo_uso.name for x in norma.subtipo_uso.all()]),
+        'subtipos_uso': group_by_duplicate([x.name for x in norma.subtipo_uso.all()]),
         'tipos_uso_id' : [x.tipo_uso_id for x in norma.subtipo_uso.all()],
         'subtipos_uso_id' : [x.id for x in norma.subtipo_uso.all()],
         'articulo' : norma.articulo if norma.articulo else '',
@@ -32,6 +45,7 @@ def subtipos_uso_serializer(sbu):
         'name' : sbu.name,
         'order' : sbu.order,
         'tipo_uso_id' : sbu.tipo_uso_id,
+        'topico_id' : sbu.tipo_uso.universo_id,
     }
 
 def tipo_norma_serializer(tn):
@@ -47,4 +61,5 @@ def tipos_uso_serializer(tu): #mama
         'id' : tu.id,
         'name' : tu.name,
         'order' : tu.order,
+        'topico_id' : tu.universo_id,
     }

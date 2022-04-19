@@ -16,7 +16,7 @@ from django.urls import reverse
 from normas.forms import NormativaForm
 from django.contrib.auth.decorators import login_required
 
-from normas.serializer import keywords_serializer, subtipos_uso_serializer, tipo_norma_serializer
+from normas.serializer import keywords_serializer, subtipos_uso_serializer, tipo_norma_serializer, tipos_uso_serializer
 from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Tipo_Normas, Subtipo_Normas, Universo_Normas
 
 @login_required
@@ -53,6 +53,9 @@ def ver_pdf(request, normativa):
 
 @login_required
 def registrar_normativa(request):
+    tipos_uso = Areas_Normas.objects.all()
+    tu = [ tipos_uso_serializer(tu) for tu in tipos_uso ]
+
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
     sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
 
@@ -69,6 +72,7 @@ def registrar_normativa(request):
         'subtipo_uso': subtipo_usos,
         'subtipos_uso_json' : sbu,
         'tipo_normas_json': tn,
+        'tipos_uso_json' : tu,
     }
 
     if request.method=='POST':
@@ -122,6 +126,9 @@ class NormativaUpdateView(UpdateView):
         normativa = Register_Normativa.objects.get(pk = normativa)
         
         context = super(NormativaUpdateView, self).get_context_data(**kwargs)
+        tipos_uso = Areas_Normas.objects.all()
+        tu = [ tipos_uso_serializer(tu) for tu in tipos_uso ]
+        
         subtipos_uso = Subtipo_Normas.objects.order_by('order')
         sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipos_uso ]
 
@@ -141,8 +148,8 @@ class NormativaUpdateView(UpdateView):
             'palabras_claves_normativa' : normativa.keywords.all(),
             'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'),
             'tipo_normas_json': tn,
-            'tnn' : json.dumps(tnn)
-
+            'tnn' : json.dumps(tnn),
+            'tipos_uso_json' : tu,
         })
         
         return context

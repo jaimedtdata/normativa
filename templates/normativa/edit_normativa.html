@@ -3,252 +3,277 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    
-    <div class="container ">
-        <div class="row text-center">
-            <div class="col-2">
-                <a href="{% url 'home' %}">
-                    <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
-                </a>
+
+<div class="container ">
+    <div class="row text-center">
+        <div class="col-2">
+            <a href="{% url 'home' %}">
+                <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div class="col-8">
+            <h1 class="gUppercase gFontWeight700">
+                Editar Normativa
+            </h1>
+        </div>
+
+        <div class="col-2">
+            <a href="{% url 'index-normativas' %}">
+                <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <br><br>
+    <form id="fileForm" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.norma|as_crispy_field }}
+                </div>
             </div>
-    
-            <div class="col-8">
-                <h1 class="gUppercase gFontWeight700">
-                    Editar Normativa
-                </h1>
-            </div>
-    
-            <div class="col-2">
-                <a href="{% url 'index-normativas' %}">
-                    <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
-                </a>
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.name_denom|as_crispy_field }}
+                </div>
             </div>
         </div>
-        <br><br>
-        <form  id="fileForm" method='POST' enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        {{ form.norma|as_crispy_field }}
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        {{ form.name_denom|as_crispy_field }}
-                    </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.base_legal|as_crispy_field }}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        {{ form.base_legal|as_crispy_field }}
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        {{ form.fecha_publi|as_crispy_field }}
-                    </div>
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.fecha_publi|as_crispy_field }}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label> Topico principal de Norma: </label>
-                        <select class="form-control" aria-label="Default select example" name="universo" id="id_universo">
-                                {% for un in universo_norma %}
-                                <option value="{{un.id}}">{{un.name}}</option>
-                                {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div class="col-6">
-                    {{ form.tipo_norma|as_crispy_field }}
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label> Topico principal de Norma: </label>
+                    <select class="form-control" aria-label="Default select example" name="universo" id="id_universo">
+                        {% for un in universo_norma %}
+                        <option value="{{un.id}}">{{un.name}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label> Tipo de Uso: </label>
-                        <select class="form-control select-multiple" multiple="multiple" aria-label="Default select example" name="tipo_uso" id="tipo_uso_id"  style="width: 100%;">
-                            {% for tipo in tipo_uso %}
-                            <option value="{{tipo.id}}">{{tipo.name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+            <div class="col-6">
+                {{ form.tipo_norma|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="tipo_uso_id"> Tipo de Uso: </label>
+                    <select class="form-control select-multiple" multiple="multiple" aria-label="Default select example"
+                        name="tipo_uso" id="tipo_uso_id" style="width: 100%;">
+                        {% for tipo in tipo_uso %}
+                        <option value="{{tipo.id}}">{{tipo.name}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        {{ form.subtipo_uso|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.subtipo_uso|as_crispy_field }}
 
-                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        {{ form.propiedad|as_crispy_field }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.estado|as_crispy_field }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.document|as_crispy_field }}
-                        {% if normativa.document %}
-                            <a class="text-dark" target="_blank" href="{{normativa.document.url}}">
-                                <b> Esta Normativa tiene archivo (click para ver) </b>
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="mb-3">
-                        <div class="w-full bg-gray-100">
-                            <div class="progress">
-                                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-                              </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    {{ form.propiedad|as_crispy_field }}
+                </div>
+                <div class="form-group">
+                    {{ form.estado|as_crispy_field }}
+                </div>
+                <div class="form-group">
+                    {{ form.document|as_crispy_field }}
+                    {% if normativa.document %}
+                    <a class="text-dark" target="_blank" href="{{normativa.document.url}}">
+                        <b> Esta Normativa tiene archivo (click para ver) </b>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <div class="w-full bg-gray-100">
+                        <div class="progress">
+                            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                style="width: 0%"></div>
                         </div>
                     </div>
-                    <div class="mt-2">
-                        <h3 id="status"></h3>
-                    </div>
-                    <div class="form-group">
-                        {{ form.articulo|as_crispy_field }}
-                    </div>
-                    
-                    
                 </div>
-                <div class="col-6 ">
-                    <div class="form-group ">
-                        {{ form.descripcion|as_crispy_field }}
-                    </div>
-                    <span id="max_characters" class="text-muted text-italic float-right">0/700</span>
+                <div class="mt-2">
+                    <h3 id="status"></h3>
                 </div>
+                <div class="form-group">
+                    {{ form.articulo|as_crispy_field }}
+                </div>
+
+
             </div>
-            <button class="btn btn-lg btn-primary float-right mt-2" type="submit" id="submitBtn3" >Guardar Cambios</button>
-        </form>
-        <h2 class="text-center mt-5"> Editar Palabras Clave</h2>
-        {% include '../partials/_palabras_clave.html' %}
-        
-    </div>
+            <div class="col-6 ">
+                <div class="form-group ">
+                    {{ form.descripcion|as_crispy_field }}
+                </div>
+                <span id="max_characters" class="text-muted text-italic float-right">0/700</span>
+            </div>
+        </div>
+        <button class="btn btn-lg btn-primary float-right mt-2" type="submit" id="submitBtn3">Guardar Cambios</button>
+    </form>
+    <h2 class="text-center mt-5"> Editar Palabras Clave</h2>
+    {% include '../partials/_palabras_clave.html' %}
+
+</div>
 {% endblock %}
 
 
 {% block js %}
 <script>
-    
+
 </script>
 
-    <script>
+<script>
 
-        const max_characters = document.getElementById('max_characters')
-        const ld = document.getElementById('id_descripcion')
-        const label_tipo_uso = document.querySelectorAll("[for=tipo_uso_id]");
-        const label_subtipo_uso = document.querySelectorAll("[for=id_subtipo_uso]");
+    const max_characters = document.getElementById('max_characters')
+    const ld = document.getElementById('id_descripcion')
+    const label_tipo_uso = document.querySelectorAll("[for=tipo_uso_id]");
+    const label_subtipo_uso = document.querySelectorAll("[for=id_subtipo_uso]");
 
-        ld.addEventListener('keyup', e => {
-            max_characters.innerHTML = `${ld.value.length}/700`
+    max_characters.innerHTML = `${ld.value.length}/700`
+
+    ld.addEventListener('keyup', e => {
+        max_characters.innerHTML = `${ld.value.length}/700`
+    })
+
+    ld.addEventListener('keypress', e => {
+        max_characters.innerHTML = `${ld.value.length}/700`
+    })
+
+    // FUNCIONES PARA EL LISTADO DINAMICO
+    const tipos_uso = $('#tipo_uso_id')
+    const tipos_uso_json = {{ tipos_uso_json| safe }}
+    const subtipos_uso = document.getElementById('id_subtipo_uso')
+    const subtipos_uso_json = {{ subtipos_uso_json| safe }}
+
+    const universo = document.getElementById('id_universo')
+    const tipo_norma = document.getElementById('id_tipo_norma')
+    const tipo_normas_json = {{ tipo_normas_json| safe }}
+
+
+    tipos_uso.val({{ tnn| safe }});
+    tipos_uso.trigger('change.select2');
+
+    changeOptionsSubtipoUso()
+
+    $('#id_subtipo_uso').val({{ form.subtipo_uso.value | safe }})
+    $('#id_subtipo_uso').trigger('change.select2');
+
+
+    universo.value = "{{normativa.tipo_norma.universo_id}}"
+
+    changeOptionsTipoNorma()
+
+    tipo_norma.value = "{{normativa.tipo_norma_id}}"
+
+    $(document).ready(function () {
+        $('#tipo_uso_id').on('select2:select', function () {
+            changeOptionsSubtipoUso()
         })
-
-        ld.addEventListener('keypress', e => {
-            max_characters.innerHTML = `${ld.value.length}/700`
+        $('#tipo_uso_id').on('select2:unselect', function () {
+            changeOptionsSubtipoUso()
         })
-
-        // FUNCIONES PARA EL LISTADO DINAMICO
-        const tipos_uso = $('#tipo_uso_id')
-        const subtipos_uso = document.getElementById('id_subtipo_uso')
-        const subtipos_uso_json = {{ subtipos_uso_json|safe }}
-
-        const universo = document.getElementById('id_universo')
-        const tipo_norma = document.getElementById('id_tipo_norma')
-        const tipo_normas_json = {{ tipo_normas_json|safe }}  
+    });
 
 
-        tipos_uso.val({{ tnn|safe }});
-        tipos_uso.trigger('change.select2');
+    universo.addEventListener('change', (e) => {
 
-        changeOptionsSubtipoUso()
-        
-        $('#id_subtipo_uso').val({{form.subtipo_uso.value|safe}})
-        $('#id_subtipo_uso').trigger('change.select2');
-
-
-        universo.value = "{{normativa.tipo_norma.universo_id}}" 
-        
         changeOptionsTipoNorma()
+        changeOptionsTipoUso()
 
-        tipo_norma.value = "{{normativa.tipo_norma_id}}" 
-
-        $(document).ready(function() {
-            $('#tipo_uso_id').on('select2:select', function() {
-                changeOptionsSubtipoUso()
-            })
-            $('#tipo_uso_id').on('select2:unselect', function() {
-                changeOptionsSubtipoUso()
-            })
-        });
-
-
-        universo.addEventListener('change', (e) => {
-
-            changeOptionsTipoNorma()
-
-            if(universo.value == 3) {
+        if (universo.value == 3) {
             label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:"
             label_subtipo_uso[0].innerHTML = "Subtipo de Procedimiento:"
-            } else {
-                label_tipo_uso[0].innerHTML = "Tipo de Uso:"
-                label_subtipo_uso[0].innerHTML = "Subtipo de Uso*"
+        } else {
+            label_tipo_uso[0].innerHTML = "Tipo de Uso:"
+            label_subtipo_uso[0].innerHTML = "Subtipo de Uso*"
+        }
+
+    })
+
+
+    function changeOptionsTipoUso() {
+        var options_tu = ``
+        tipos_uso_json.forEach(tu => {
+            if (tu.topico_id == universo.value) {
+                options_tu += /*html*/`<option class="text-wrap" value="${tu.id}">${tu.name}</option>`
             }
-            
         })
 
-        function changeOptionsSubtipoUso() {
-            var options_sbu = ``
-            var tipos = tipos_uso.val()
-            subtipos_uso_json.forEach( sbu => {
-                    if( tipos.includes((sbu.tipo_uso_id).toString()) ) {
-                        options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
-                        
-                    }
-                })
-            
-            subtipos_uso.innerHTML = options_sbu
+        if (options_tu.length == 0) {
+            options_tu += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPOS DE USO, SELECCIONE OTRO UNIVERSO---</option>`
         }
 
-        function changeOptionsTipoNorma() {
-            var options_tn = ``
-            tipo_normas_json.forEach( tn => {
-                if( tn.topico_id == universo.value ) {
-                    options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
-                }            
-            })
+        tipos_uso.html(options_tu)
+        
+        $('#id_subtipo_uso').empty().trigger("change");
+    }
 
-            if (options_tn.length == 0) {
-                options_tn += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPO DE NORMA, SELECCIONE OTRO UNIVERSO---</option>`
+    function changeOptionsSubtipoUso() {
+        var options_sbu = ``
+        var tipos = tipos_uso.val()
+        subtipos_uso_json.forEach(sbu => {
+            if (tipos.includes((sbu.tipo_uso_id).toString())) {
+                options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+
             }
+        })
 
-            tipo_norma.innerHTML = options_tn
+        subtipos_uso.innerHTML = options_sbu
+    }
+
+    function changeOptionsTipoNorma() {
+        var options_tn = ``
+        tipo_normas_json.forEach(tn => {
+            if (tn.topico_id == universo.value) {
+                options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
+            }
+        })
+
+        if (options_tn.length == 0) {
+            options_tn += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPO DE NORMA, SELECCIONE OTRO UNIVERSO---</option>`
         }
 
-        $(document).ready(function() {
+        tipo_norma.innerHTML = options_tn
+    }
 
-            $('#id_tipo_norma').val('{{normativa.tipo_norma_id}}')    
-            $('#id_tipo_uso').val('{{normativa.tipo_uso_id}}')    
-            $('#id_es_foro').prop('checked',  '{{normativa.es_foro}}' == 'True' ? true : false )
-            $('#id_es_vigente').prop('checked',  '{{normativa.es_vigente}}' == 'True' ? true : false )
-            
-            $("#registrar_palabras").submit( function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: $(this).attr('method'),
-                    data: $(this).serialize()
-                  }).done(function(data) {
-                    $('.select-tags').val(null).trigger('change');
-                    html = ``
-    
-                    data.forEach((e) => {
-                        html += /*html*/
-                                `<tr>
+    $(document).ready(function () {
+
+        $('#id_tipo_norma').val('{{normativa.tipo_norma_id}}')
+        $('#id_tipo_uso').val('{{normativa.tipo_uso_id}}')
+        $('#id_es_foro').prop('checked', '{{normativa.es_foro}}' == 'True' ? true : false)
+        $('#id_es_vigente').prop('checked', '{{normativa.es_vigente}}' == 'True' ? true : false)
+
+        $("#registrar_palabras").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize()
+            }).done(function (data) {
+                $('.select-tags').val(null).trigger('change');
+                html = ``
+
+                data.forEach((e) => {
+                    html += /*html*/
+                        `<tr>
                                     <th scope="row">${e.id}</th>
                                     <td>${e.name}</td>
                                     <td>
@@ -257,31 +282,31 @@
                                         </button>
                                     </td>
                                 </tr>`
-                    })
-    
-                    document.getElementById('normativas_palabras_clave').innerHTML = html;
-    
-                  });
-            })
-    
-            
-            
-    
-        });
-    
-        function eliminarPc(id) {
-            $.ajax({
-                url: `{% url 'eliminar-palabras-clave-normativa' normativa.id %}`,
-                data: {
-                    'palabra_clave_id' : id
-                }
-                }).done(function(data) {
-    
-                html = ``
-    
-                data.forEach((e) => {
-                    html += /*html*/
-                            `<tr>
+                })
+
+                document.getElementById('normativas_palabras_clave').innerHTML = html;
+
+            });
+        })
+
+
+
+
+    });
+
+    function eliminarPc(id) {
+        $.ajax({
+            url: `{% url 'eliminar-palabras-clave-normativa' normativa.id %}`,
+            data: {
+                'palabra_clave_id': id
+            }
+        }).done(function (data) {
+
+            html = ``
+
+            data.forEach((e) => {
+                html += /*html*/
+                    `<tr>
                                 <th scope="row">${e.id}</th>
                                 <td>${e.name}</td>
                                 <td>
@@ -290,123 +315,123 @@
                                     </button>
                                 </td>
                             </tr>`
-                })
-    
-                document.getElementById('normativas_palabras_clave').innerHTML = html;
-    
-                });
-        }
+            })
 
-        let submitting = false
-        let file = null
+            document.getElementById('normativas_palabras_clave').innerHTML = html;
 
-        function setIsSubmitting(val) {
-            submitting = val
-        }
+        });
+    }
 
-        function setFile(val) {
-            file = val
-        }
+    let submitting = false
+    let file = null
 
-        _("id_document").addEventListener("change", event => {
-            setFile(event.target.files[0])
-        })
+    function setIsSubmitting(val) {
+        submitting = val
+    }
 
-        _("submitBtn").addEventListener("click", event => {
-            if (file != null ) {
-                handleSubmit(event)
-                _("submitBtn").disabled = true
-                _("submitBtn").innerHTML = /*html*/`<div class="spinner-border spinner-border-sm text-light" role="status">
+    function setFile(val) {
+        file = val
+    }
+
+    _("id_document").addEventListener("change", event => {
+        setFile(event.target.files[0])
+    })
+
+    _("submitBtn").addEventListener("click", event => {
+        if (file != null) {
+            handleSubmit(event)
+            _("submitBtn").disabled = true
+            _("submitBtn").innerHTML = /*html*/`<div class="spinner-border spinner-border-sm text-light" role="status">
                                                         <span class="sr-only">Loading...</span>                   
                                                         </div>
                                                     Guardar
                                                     `
-            }
-        })
+        }
+    })
 
-        const handleSubmit = async event => {
+    const handleSubmit = async event => {
 
-            setIsSubmitting(true)
+        setIsSubmitting(true)
 
-            const signedUrl = await getSignedUrl()
+        const signedUrl = await getSignedUrl()
 
-            try {
-                uploadFile(signedUrl)
-            }
-            catch (err) {
-                setIsSubmitting(false)
-                console.log(err)
-                alert('There was an error uploading your file.')
-                throw err
-            }
-
+        try {
+            uploadFile(signedUrl)
+        }
+        catch (err) {
             setIsSubmitting(false)
+            console.log(err)
+            alert('There was an error uploading your file.')
+            throw err
         }
 
-        const getSignedUrl = async () => {
-            const body = {
-                fileName: file.name,
-                fileType: file.type,
-            }
+        setIsSubmitting(false)
+    }
 
-            const response = await fetch("{% url 'signed-url' %}", {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: {'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}"}
-            })
-            const { url } = await response.json()
-            return url
+    const getSignedUrl = async () => {
+        const body = {
+            fileName: file.name,
+            fileType: file.type,
         }
 
-        function _(el) {
-            return document.getElementById(el);
-        }
+        const response = await fetch("{% url 'signed-url' %}", {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
+        })
+        const { url } = await response.json()
+        return url
+    }
 
-        function uploadFile(signedUrl) {
-            var formdata = new FormData();
-            formdata.append("file", file);
-            var ajax = new XMLHttpRequest();
-            ajax.upload.addEventListener("progress", progressHandler, false);
-            ajax.addEventListener("load", completeHandler, false);
-            ajax.addEventListener("error", errorHandler, false);
-            ajax.addEventListener("abort", abortHandler, false);
-            ajax.addEventListener("loadend", loadendHandler, false)
-            ajax.open("PUT", signedUrl);
-            ajax.setRequestHeader('Content-Type', file.type)
-            ajax.setRequestHeader('x-amz-acl', 'public-read')
-            ajax.send(formdata);
-        }
+    function _(el) {
+        return document.getElementById(el);
+    }
 
-        async function submitForm() {
-            _("fileForm").submit()
-            _("submitBtn").disabled = false
-        }
+    function uploadFile(signedUrl) {
+        var formdata = new FormData();
+        formdata.append("file", file);
+        var ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.addEventListener("error", errorHandler, false);
+        ajax.addEventListener("abort", abortHandler, false);
+        ajax.addEventListener("loadend", loadendHandler, false)
+        ajax.open("PUT", signedUrl);
+        ajax.setRequestHeader('Content-Type', file.type)
+        ajax.setRequestHeader('x-amz-acl', 'public-read')
+        ajax.send(formdata);
+    }
 
-        async function loadendHandler(event) {
-            await submitForm()
-        }
+    async function submitForm() {
+        _("fileForm").submit()
+        _("submitBtn").disabled = false
+    }
 
-        function progressHandler(event) {
-            var percent = Math.round((event.loaded / event.total) * 100);
-            _("progressBar").style.width = `${percent}%`;
-            _("progressBar").innerText = `${percent}%`;
-            _("status").innerHTML = percent + "% Subiendo.. espere un momento";
-        }
+    async function loadendHandler(event) {
+        await submitForm()
+    }
 
-        function completeHandler(event) {
-            _("status").innerHTML = event.target.responseText;
-            _("progressBar").style.width = 0;
-            _("progressBar").innerText = "0%";
-        }
+    function progressHandler(event) {
+        var percent = Math.round((event.loaded / event.total) * 100);
+        _("progressBar").style.width = `${percent}%`;
+        _("progressBar").innerText = `${percent}%`;
+        _("status").innerHTML = percent + "% Subiendo.. espere un momento";
+    }
 
-        function errorHandler(event) {
-            _("status").innerHTML = "Por favor espere";
-        }
+    function completeHandler(event) {
+        _("status").innerHTML = event.target.responseText;
+        _("progressBar").style.width = 0;
+        _("progressBar").innerText = "0%";
+    }
 
-        function abortHandler(event) {
-            _("status").innerHTML = "Upload Aborted";
-        }
+    function errorHandler(event) {
+        _("status").innerHTML = "Por favor espere";
+    }
+
+    function abortHandler(event) {
+        _("status").innerHTML = "Upload Aborted";
+    }
 
 
-    </script>
+</script>
 {% endblock %}

@@ -218,8 +218,9 @@
     var titulo = params.norma;
     var t = params.t;
 
-    $('#topico').val(t)
-
+    if (t != null) {
+        $('#topico').val(t);
+    }
 
     if (params.norma == null) {
         titulo = $('#topico option:selected').text()
@@ -260,11 +261,18 @@
         ordering: true,
         lengthChange: false,
         responsive: true,
+        columnDefs: [
+            { width: 200, targets: 0 }
+        ],
     })
 
     //console.log(normas)
 
-    topicoNorma()
+    tiposNormaReactivo()
+    tiposUsoReactivo()
+    subtiposUsoReactivo()
+
+    execFilters() // PRIMERA EJECUCIÓN
 
     if (ne != null) {
         subnormativas = []
@@ -274,12 +282,9 @@
             }
 
         });
-
+        $("#select-norms").val(subnormativas)
+        execFilters() 
     }
-
-    $("#select-norms").val(subnormativas)
-
-    execFilters() // PRIMERA EJECUCIÓN
 
     $("#select-norms").change(function () {
         subnormativas = $("#select-norms").val()
@@ -287,58 +292,20 @@
     });
 
     $("#filter-input").keyup(function () {
-
         search = $("#filter-input").val()
         execFilters()
     })
 
     // 
     $("#area-normas").change(function () {
-        tu_id = $("#area-normas").val()
-
-        var options_sbu = `<option class="text-wrap" value="0">TODOS</option>`
-
-        if (tu_id != 0) {
-            subtipos_uso_json.forEach(sbu => {
-                if (sbu.tipo_uso_id == tu_id) {
-                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
-                }
-            })
-
-
-        } else {
-            subtipos_uso_json.forEach(sbu => {
-                options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
-            })
-        }
-
-        $("#subtipo_usos").html(options_sbu)
-        tipo_uso_option = $("#area-normas option:selected").text()
-        sbu_id = $("#subtipo_usos").val()
+        tiposUsoReactivo()
         execFilters()
     })
 
     $("#topico").change(function () {
-        topico = $("#topico").val()
-
-        var options_tn = ``
-        if (topico != 0) {
-            tipos_norma_json.forEach(tn => {
-                if (tn.topico_id == topico) {
-                    if (tn.order.length == 2) {
-                        options_tn += /*html*/`<option class="text-wrap font-weight-bold" value="${tn.id}">${tn.name}</option>`
-                    }
-                    else {
-                        options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
-                    }
-                }
-            })
-
-
-        }
-
-        $("#select-norms").html(options_tn)
-        $("#select-norms option").prop("selected", true)
+        tiposNormaReactivo()
+        tiposUsoReactivo()
+        subtiposUsoReactivo()
 
         if (topico == 3) {
             label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:";
@@ -351,6 +318,9 @@
             $("#td_tipo").html("Tipo de Uso:");
             $("#td_subtipo").html("Subtipo de Uso*");
         }
+
+        execFilters() // PRIMERA EJECUCIÓN
+
     })
 
     $("#subtipo_usos").change(function () {
@@ -455,7 +425,7 @@
 
     }
 
-    function topicoNorma() {
+    function tiposNormaReactivo() {
         topico = $("#topico").val()
 
         var options_tn = ``
@@ -473,10 +443,48 @@
 
 
         }
-
         $("#select-norms").html(options_tn)
         $("#select-norms option").prop("selected", true)
         subnormativas = $("#select-norms").val()
+
+    }
+
+    function tiposUsoReactivo() {
+        topico = $("#topico").val()
+
+        var options_tu = `<option class="text-wrap" value="0">TODOS</option>`
+        if (topico != 0) {
+            tipos_uso_json.forEach(tu => {
+                if (tu.topico_id == topico) {
+                    options_tu += /*html*/`<option class="text-wrap" value="${tu.id}">${tu.name}</option>`
+                }
+            })
+        }
+
+        $("#area-normas").html(options_tu)
+        tu_id = $("#area-normas").val()
+    }
+
+    function subtiposUsoReactivo() {
+        topico = $("#topico").val()
+
+        tu_id = $("#area-normas").val()
+        var options_sbu = `<option class="text-wrap" value="0">TODOS</option>`
+        subtipos_uso_json.forEach(sbu => {
+            if (tu_id != 0) {
+                if (sbu.tipo_uso_id == tu_id) {
+                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+                }
+            } else {
+                if (sbu.topico_id == topico) {
+                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+                }
+            }
+        })
+
+        $("#subtipo_usos").html(options_sbu)
+        tipo_uso_option = $("#area-normas option:selected").text()
+        sbu_id = $("#subtipo_usos").val()
     }
 
     function execFilters() {
@@ -494,7 +502,6 @@
         normas_tabla = $('#normas-tabla').DataTable({
             searching: false,
             ordering: true,
-
             lengthChange: false,
         })
 
@@ -509,8 +516,8 @@
             html += /*html*/
                 `<tr >
                         <td>${r.tipo_norma}</td>
-                        <td>${r.tipos_uso}</td>
-                        <td>${r.subtipos_uso}</td>
+                        <td>${(r.tipos_uso).join('\n')}</td>
+                        <td>${(r.subtipos_uso).join('\n')}</td>
                         <td >
                             ${r.norma}`;
 
