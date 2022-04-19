@@ -74,7 +74,22 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label> Tipo de Uso: </label>
+                    <label> Topico principal de Norma: </label>
+                    <select class="form-control" aria-label="Default select example" name="universo" id="id_universo">
+                            {% for un in universo_norma %}
+                            <option value="{{un.id}}">{{un.name}}</option>
+                            {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                {{ form.tipo_norma|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="tipo_uso_id"> Tipo de Uso: </label>
                     <select class="form-control select-multiple" multiple="multiple" aria-label="Default select example" name="tipo_uso" id="tipo_uso_id" style="width: 100%;">
                         {% for tipo in tipo_uso %}
                         <option value="{{tipo.id}}">{{tipo.name}}</option>
@@ -87,21 +102,6 @@
                     {{ form.subtipo_uso|as_crispy_field }}
 
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <label> Topico principal de Norma: </label>
-                    <select class="form-control" aria-label="Default select example" name="universo" id="id_universo">
-                            {% for un in universo_norma %}
-                            <option value="{{un.id}}">{{un.name}}</option>
-                            {% endfor %}
-                    </select>
-                </div>
-            </div>
-            <div class="col-6">
-                {{ form.tipo_norma|as_crispy_field }}
             </div>
         </div>
         <div class="row">
@@ -173,6 +173,8 @@
     // PARA CONTAR CARACTERES RESTANTES EN DESCRIPCION
     const max_characters = document.getElementById('max_characters')
     const ld = document.getElementById('id_descripcion')
+    const label_tipo_uso = document.querySelectorAll("[for=tipo_uso_id]");
+    const label_subtipo_uso = document.querySelectorAll("[for=id_subtipo_uso]");
 
     ld.addEventListener('keyup', e => {
         max_characters.innerHTML = `${ld.value.length}/700`
@@ -206,6 +208,13 @@
 
     universo.addEventListener('change', (e) => {
         changeOptionsTipoNorma()
+        if(universo.value == 3) {
+            label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:"
+            label_subtipo_uso[0].innerHTML = "Subtipo de Procedimiento:"
+        } else {
+            label_tipo_uso[0].innerHTML = "Tipo de Uso:"
+            label_subtipo_uso[0].innerHTML = "Subtipo de Uso*"
+        }
     })
 
     function changeOptionsSubtipoUso() {
