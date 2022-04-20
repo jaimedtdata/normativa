@@ -1,2 +1,0 @@
-1. Se pueden modificar los precios pero no los nombres de los planes ni tampoco se pueden borrar porque
-el programa necesita el nombre para obtener los precios.

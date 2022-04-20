@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User,Group
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
-
+from django.utils.safestring import mark_safe
 from apps.email import (send_confirm_account, send_success_sign_up,
     send_password_reset, send_success_password_reset,)
 
@@ -29,16 +29,14 @@ from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
-from normas.models import Areas_Normas, Policies_usage, Subtipo_Normas, Universo_Normas
+from normas.models import Tipo_Uso_Normas, Grupo_Tipo_Normas, Preguntas_Frecuentes, Subtipo_Normas, Topico_Normas
 from foro.models import Comentario_Foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector, SearchQuery
 
 # Johao #
-
-from bus_normativa.models import date_normativa
-from normas.models import Tipo_Normas,Areas_Normas,Register_Normativa,Register_Palabraclave
+from normas.models import Tipo_Normas,Tipo_Uso_Normas,Normativa,Palabra_Clave_Normas
 from normas.serializer import normas_serializer, subtipos_uso_serializer, tipo_norma_serializer, tipos_uso_serializer
 
 from .utils import create_member_free, register_client_user, register_client_premium
@@ -53,18 +51,18 @@ from decimal import Decimal
 
 
 def busqueda_clavenormativa(request):
-    area_normas=Areas_Normas.objects.all()
+    tipo_uso=Tipo_Uso_Normas.objects.all()
 
-    item_area_normas=[]
-    for i in area_normas:
-        item_area_normas.append(
+    item_tipo_uso=[]
+    for i in tipo_uso:
+        item_tipo_uso.append(
             {
                 'id':i.id,
                 'name':i.name
             }
         )
     context={
-        'item_area_normas':item_area_normas,
+        'item_tipo_uso':item_tipo_uso,
         }
     return render(request,'normativa/normativa.html',context)
 
@@ -72,25 +70,25 @@ def busque_normativa(request):
     if request.method=='POST':
         pal_clave=request.POST['pal_clave'].upper()
         norma_tipo_uso=request.POST['tipo_uso'].upper()
-        area_normas=Areas_Normas.objects.order_by('name')
+        tipo_uso=Tipo_Uso_Normas.objects.order_by('name')
         normas= None
-        #normas = Register_Normativa.objects.filter(keywords__name__search=pal_clave).order_by('tipo_norma__order')
+        #normas = Normativa.objects.filter(keywords__name__search=pal_clave).order_by('tipo_norma__order')
         
-        # normas = Register_Normativa.objects.annotate(
-        #                         search = SearchVector('keywords__name', 'norma','name_denom',
+        # normas = Normativa.objects.annotate(
+        #                         search = SearchVector('keywords__name', 'norma','denominacion',
         #                          'base_legal')
         #                         ).filter(search=pal_clave).order_by('tipo_norma__order')
 
         if norma_tipo_uso == 'TODO':
-            normas = Register_Normativa.objects.annotate(
-                                search = SearchVector('keywords__name', 'norma','name_denom',
+            normas = Normativa.objects.annotate(
+                                search = SearchVector('keywords__name', 'norma','denominacion',
                                  'base_legal', config='Spanish')
                                 ).filter(search=SearchQuery( pal_clave, config='Spanish')).order_by('tipo_norma__order')
 
         else:
-            normas = Register_Normativa.objects.filter(
+            normas = Normativa.objects.filter(
                     tipo_uso__name=norma_tipo_uso
-                    ).annotate(search = SearchVector('keywords__name', 'norma','name_denom',
+                    ).annotate(search = SearchVector('keywords__name', 'norma','denominacion',
                                  'base_legal', config='Spanish')
                                 ).filter(search=SearchQuery( pal_clave, config='Spanish')).order_by('tipo_norma__order')
         print(norma_tipo_uso)
@@ -107,17 +105,17 @@ def busque_normativa(request):
             row ={
                 'tipo_norma': n.tipo_norma.name,
                 'norma': n.norma,
-                'name_denom': n.name_denom,
+                'denominacion': n.denominacion,
                 'base_legal': n.base_legal,
                 'document': n.document,
-                'fecha_publi': n.fecha_publi,
+                'fecha_publicacion': n.fecha_publicacion,
                 'tipo_uso' : n.tipo_uso
             }
             normas_results.append(row)
 
         context={ 
             'pal_clave'  : pal_clave,
-            'area_normas':area_normas,
+            'tipo_uso':tipo_uso,
             'normas_results' : normas_results
         }
 
@@ -128,10 +126,10 @@ def busque_normativa(request):
 
 # CRUD Palabra clave
 def palabra_clave(request,codigo):
-    normativa=Register_Normativa.objects.get(pk=codigo)
-    # date_palaclave=Register_Palabraclave.objects.filter(normativa=codigo)
+    normativa=Normativa.objects.get(pk=codigo)
+    # date_palaclave=Palabra_Clave_Normas.objects.filter(normativa=codigo)
     palabras_claves_normativa = normativa.keywords.all()
-    palabras_clave = Register_Palabraclave.objects.all()
+    palabras_clave = Palabra_Clave_Normas.objects.all()
     context={
         'normativa':normativa,
         # 'date_palaclave':date_palaclave
@@ -141,11 +139,11 @@ def palabra_clave(request,codigo):
     return render(request,'norm_palabraclave/agregar_palabraclave.html',context)
 
 def register_palabra_clave(request,codigo):
-    normativa=Register_Normativa.objects.get(pk=codigo)
+    normativa=Normativa.objects.get(pk=codigo)
     palabra_clave=request.POST['palabra_clave']
     palabra_clave=palabra_clave.upper()
-    Register_Palabraclave.objects.create(name=palabra_clave,normativa=normativa)
-    date_palaclave=Register_Palabraclave.objects.filter(normativa=codigo)
+    Palabra_Clave_Normas.objects.create(name=palabra_clave,normativa=normativa)
+    date_palaclave=Palabra_Clave_Normas.objects.filter(normativa=codigo)
     for a in date_palaclave:
         print(a.name)
     context={
@@ -155,11 +153,11 @@ def register_palabra_clave(request,codigo):
     return render(request,'norm_palabraclave/datos_palabras_claves.html',context)
 
 def delete_palclave(request, codigo):
-    Register_Palabraclave.objects.filter(id=codigo).delete()
+    Palabra_Clave_Normas.objects.filter(id=codigo).delete()
     return redirect('dateregister_norm')
 
 def update_template(request,codigo):
-    clave =Register_Palabraclave.objects.filter(id=codigo)
+    clave =Palabra_Clave_Normas.objects.filter(id=codigo)
     context = {
         'clave':clave
     }
@@ -169,71 +167,8 @@ def update_clave(request,codigo):
     if request.method=='POST':
         pala_clave=request.POST['pala_clave']
         pala_clave=pala_clave.upper()
-        Register_Palabraclave.objects.filter(id=codigo).update(name=pala_clave)
+        Palabra_Clave_Normas.objects.filter(id=codigo).update(name=pala_clave)
         return redirect('dateregister_norm')
-
-@login_required
-def norma_edificatoria(request):
-    context = {
-        'normas' : Tipo_Normas.objects.filter(universo_id = 1)
-    }
-    return render(request,'normativa/normatividad_edificatoria.html', context)
-
-@login_required
-def norma_datos(request):
-    norma_date = Register_Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso').order_by('norma')
-    tipo_normas = Tipo_Normas.objects.order_by('order')
-    area_normas = Areas_Normas.objects.order_by('name')
-    palabras_clave = Register_Palabraclave.objects.all()
-    subtipo_usos = Subtipo_Normas.objects.order_by('order')
-    topico = Universo_Normas.objects.all()
-
-    normas = [ normas_serializer(norma) for norma in norma_date ]
-    tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
-    sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
-    tu = [ tipos_uso_serializer(tu) for tu in area_normas ]
-
-
-    context={
-            'norma_date':norma_date,
-            'subcategories_normas':tipo_normas, 
-            'area_normas' : area_normas, 
-            'palabras_clave' : palabras_clave,
-            'subtipo_usos' : subtipo_usos,
-            'normas' : json.dumps(normas),
-            'sbu' : json.dumps(sbu),
-            'tu' : json.dumps(tu),
-            'topico' : topico,
-            'tn' : tn
-            }
-    return render(request,'normativa/norma_urb_edit.html',context)
-
-@login_required
-def reglamento_comentado(request):
-    context = {
-        'normas' : Tipo_Normas.objects.filter(universo_id = 2).order_by('order')
-    }
-    return render(request,'normativa/reglamento_comentado.html',context)
-
-@login_required
-def procedimientos_tramites(request):
-    context = {
-        'normas' : Tipo_Normas.objects.filter(universo_id = 3)
-    }
-    return render(request,'normativa/procedimientos_tramites.html',context)
-
-@login_required
-def fichas_tecnicas(request):
-    context = {
-        'normas' : Tipo_Normas.objects.filter(universo_id = 4)
-    }
-    return render(request,'normativa/fichas_tecnicas.html',context)
-
-# FILTRAR NORMATIVAS DE EDIFICACIONES
-def filter_normativa_edificatoria(request):
-    subnormativas = request.GET.getlist('subnormativas[]')        
-    normativas = Register_Normativa.objects.filter(tipo_norma_id__in = subnormativas)
-    return HttpResponse(normativas)
 
 def normas_tecnicauso(request):
     return render(request,'normativa/norma_tecnuso.html',None)
@@ -298,7 +233,47 @@ def busq_palclave_prov(request):
 
         
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    context = {
+        'topicos_norma' : Topico_Normas.objects.all()
+    }
+    return render(request, 'dashboard.html', context)
+
+@login_required
+def grupo_normativa(request, tn):
+    context = {
+        'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = tn),
+        'topico_norma' : Topico_Normas.objects.get(id = tn)
+    }
+    return render(request,'normativa/grupo_normativa.html', context)
+
+@login_required
+def buscador(request):
+    norma_date = Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso').order_by('norma')
+    tipo_normas = Tipo_Normas.objects.order_by('order')
+    tipo_uso = Tipo_Uso_Normas.objects.order_by('name')
+    palabras_clave = Palabra_Clave_Normas.objects.all()
+    subtipo_usos = Subtipo_Normas.objects.order_by('order')
+    topico = Topico_Normas.objects.all()
+
+    normas = [ normas_serializer(norma) for norma in norma_date ]
+    tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
+    sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipo_usos ]
+    tu = [ tipos_uso_serializer(tu) for tu in tipo_uso ]
+
+    context={
+            'norma_date':norma_date,
+            'subcategories_normas':tipo_normas, 
+            'tipo_uso' : tipo_uso, 
+            'palabras_clave' : palabras_clave,
+            'subtipo_usos' : subtipo_usos,
+            'normas' : mark_safe(json.dumps(normas)),
+            'sbu' : mark_safe(json.dumps(sbu)),
+            'tu' : mark_safe(json.dumps(tu)),
+            'topico' : topico,
+            'tn' : tn
+            }
+
+    return render(request,'normativa/buscador_normativa.html',context)
 
 def get_user_by_form_data(data, roles=[]):
         user = {
@@ -781,10 +756,10 @@ def history_purchase(request):
 
 @login_required
 def preguntas(request):
-    tipo_uso = Areas_Normas.objects.order_by('name')
+    tipo_uso = Tipo_Uso_Normas.objects.order_by('name')
     page = request.GET.get('page', 1)
 
-    queryset = Policies_usage.objects.all()
+    queryset = Preguntas_Frecuentes.objects.all()
     filter = PoliciesFilter(request.GET, queryset=queryset)
 
     queryset = filter.qs
@@ -805,13 +780,13 @@ def filter_preguntas(request):
     tipo_uso_id = request.GET.get('tipo_uso_id', 0)
     pregunta = request.GET.get('pregunta', '')
     
-    preguntas = Policies_usage.objects.filter(title__icontains = pregunta)
+    preguntas = Preguntas_Frecuentes.objects.filter(title__icontains = pregunta)
 
 
 
 def password_reset(request):
-    #cuestions = Policies_usage.objects.all()
-    #cuestions = Policies_usage.objects.filter(pk=2)
+    #cuestions = Preguntas_Frecuentes.objects.all()
+    #cuestions = Preguntas_Frecuentes.objects.filter(pk=2)
     #for staff in cuestions:
     #    print (staff.norma_name.all())     
     context = {'cuestions': ''}

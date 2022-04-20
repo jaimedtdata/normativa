@@ -40,7 +40,6 @@ LOCAL_APPS = (
     'foro',
     'normas',
     'cursos',
-    'bus_normativa.apps.BusNormativaConfig',
 )
 
 CORS_ORIGIN_ALLOW_ALL = True

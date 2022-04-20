@@ -1,12 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from apps.views import ( SignUpFormView ,Login, dashboard, fichas_tecnicas,home , index, liquid, 
-    comision, plan, plan_edit, plan_delete, carga_rules,preguntas, procedimientos_tramites, reglamento_comentado,signup,
+from apps.views import ( SignUpFormView ,Login, buscador, dashboard, grupo_normativa,home , index, liquid, 
+    comision, plan, plan_edit, plan_delete, carga_rules,preguntas,signup,
 	entrevistas, charts,member, configs, works, foro_comentarios,
     password_reset,SignUpOthers,success_sign_up,
     #johao
-    dash,palabra_clave,delete_palclave,update_template,update_clave,
-    norma_edificatoria,norma_datos,normas_tecnicauso,busqueda_provedor,busq_palclave_prov, filter_normativa_edificatoria)
+    dash,palabra_clave,delete_palclave,update_template,update_clave,normas_tecnicauso,busqueda_provedor,busq_palclave_prov)
 
 from apps.views import busque_normativa,busqueda_clavenormativa,register_palabra_clave
     #end
@@ -26,6 +25,9 @@ urlpatterns = [
     path('', Login.as_view(), name='login'),
     path('login/', Login.as_view(), name='login'),
     path('home/', dashboard, name='home'),
+    path('grupo-normativa/<int:tn>', grupo_normativa, name='grupo-normativa'),
+    path('buscador', buscador, name='buscador'),
+
     path('db-admin/', admin.site.urls),
     path('success_sign_up/', success_sign_up, name='success_sign_up'),
     path('logout/', logout_view, name='logout'),
@@ -59,12 +61,7 @@ urlpatterns = [
     path('update_template/<int:codigo>',update_template,name='update_template'),
     path('update_clave/<int:codigo>',update_clave,name='update_clave'),
     #
-    path('norma_edificatoria/',norma_edificatoria,name='norma_edificatoria'),
-    path('norma_urb',norma_datos,name='norma_urb'),
-    path('reglamento_comentado/',reglamento_comentado,name='reglamento_comentado'),
-    path('procedimientos_tramites/',procedimientos_tramites,name='procedimientos_tramites'),
-    path('fichas_tecnicas/',fichas_tecnicas,name='fichas_tecnicas'),
-    path('filter-normativa-edificatoria/',filter_normativa_edificatoria,name='filter-normativa-edificatoria'),
+
     path('norma_tecuso/',normas_tecnicauso,name='norma_tecuso'),
     path('bus_provedor/',busqueda_provedor,name='bus_provedor'),
     path('bus_palclave/',busq_palclave_prov,name='bus_palclave'),

@@ -4,7 +4,7 @@ from django.apps import apps
 from django.contrib.sessions.models import Session
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
-from normas.models import Areas_Normas, Register_Normativa,Register_Palabraclave, Policies_usage, Subtipo_Normas, Tipo_Normas
+from normas.models import Tipo_Uso_Normas, Grupo_Tipo_Normas, Normativa,Palabra_Clave_Normas, Preguntas_Frecuentes, Subtipo_Normas, Tipo_Normas
 from .models import Member, UsagePolicies, Order_payment
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -30,36 +30,44 @@ admin.site.register(Order_payment,Order_paymentAdmin)
     Normas Admin Site
 '''
 
-class Register_NormativaResource(resources.ModelResource):
-    class Meta:
-        model = Register_Normativa
+class Grupo_Tipo_Normas_Admin(admin.ModelAdmin):
+    list_display = ('name', 'order','topico', 'created', 'updated')
+    search_fields = ['name']
+    list_filter = ['topico']
+admin.site.register(Grupo_Tipo_Normas, Grupo_Tipo_Normas_Admin)
 
-class Register_NormativaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display=('id','norma','name_denom','base_legal','fecha_publi','tipo_norma','document')
+class Normativa_Resource(resources.ModelResource):
+    class Meta:
+        model = Normativa
+
+class Normativa_Admin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display=('id','norma','denominacion','base_legal','fecha_publicacion','tipo_norma','document')
     #readonly_fields = ['created', 'updated']    
-    list_filter = ['estado', 'created', 'name_denom']
-    resource_class = Register_NormativaResource
-admin.site.register(Register_Normativa,Register_NormativaAdmin)
+    list_filter = ['estado', 'created', 'denominacion']
+    resource_class = Normativa_Resource
+admin.site.register(Normativa,Normativa_Admin)
 
 class Tipo_Normas_Resource(resources.ModelResource):
     class Meta:
         model = Tipo_Normas
 
 class Tipo_Normas_Admin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display=('id','name', 'order', 'created')     
-    list_filter = ['name', 'created']
+    list_display=('id', 'name', 'order', 'created')
+    search_fields = ['name']     
+    list_filter = ['grupo']
     resource_class = Tipo_Normas_Resource
 admin.site.register(Tipo_Normas, Tipo_Normas_Admin)
 
-class Areas_Normas_Resource(resources.ModelResource):
+class Tipo_Uso_Normas_Resource(resources.ModelResource):
     class Meta:
-        model = Areas_Normas
+        model = Tipo_Uso_Normas
 
-class Areas_Normas_Admin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display=('id','name', 'order', 'created')     
-    list_filter = ['name', 'created']
-    resource_class = Areas_Normas_Resource
-admin.site.register(Areas_Normas, Areas_Normas_Admin)
+class Tipo_Uso_Normas_Admin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display=('id', 'name', 'topico', 'order', 'created')     
+    search_fields = ['name']
+    list_filter = ['topico']
+    resource_class = Tipo_Uso_Normas_Resource
+admin.site.register(Tipo_Uso_Normas, Tipo_Uso_Normas_Admin)
 
 class Subtipo_Normas_Resource(resources.ModelResource):
     class Meta:
@@ -67,11 +75,12 @@ class Subtipo_Normas_Resource(resources.ModelResource):
 
 class Subtipo_Normas_Admin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display=('id','name', 'tipo_uso', 'order', 'created')     
-    list_filter = ['name', 'created']
+    list_filter = ['tipo_uso', 'created']
+    search_fields = ['name']
     resource_class = Subtipo_Normas_Resource
 admin.site.register(Subtipo_Normas, Subtipo_Normas_Admin)
 
-class Register_PalabraclaveAdmin(admin.ModelAdmin):
+class Palabra_Clave_NormasAdmin(admin.ModelAdmin):
     list_display=('id','name','normativa')
 
 class SubNormativaAdmin(admin.ModelAdmin):
@@ -80,8 +89,8 @@ class SubNormativaAdmin(admin.ModelAdmin):
 class UsagePoliciesAdmin(admin.ModelAdmin):
     list_display = ['title', 'order']
 
-admin.site.register(Register_Palabraclave)
-admin.site.register(Policies_usage, )
+admin.site.register(Palabra_Clave_Normas)
+admin.site.register(Preguntas_Frecuentes, )
 admin.site.register(UsagePolicies,UsagePoliciesAdmin )
 
 #

@@ -1,7 +1,7 @@
 import django_filters
 from datetime import datetime
 from django.db.models import Q
-from normas.models import Policies_usage, Register_Normativa
+from normas.models import Preguntas_Frecuentes, Normativa
 
 class PoliciesFilter(django_filters.FilterSet):
 
@@ -10,7 +10,7 @@ class PoliciesFilter(django_filters.FilterSet):
     datetimes = django_filters.CharFilter(method = 'date_range')
 
     class Meta:
-        model = Policies_usage
+        model = Preguntas_Frecuentes
         fields = ['content', 'tipo_uso', 'datetimes']
     
     def title_or_message(self, queryset, name, value):
@@ -33,8 +33,8 @@ class NormativaFilter(django_filters.FilterSet):
     content = django_filters.CharFilter(method = 'norma_nombre_bl')
 
     class Meta:
-        model = Register_Normativa
+        model = Normativa
         fields = ['content']
 
     def norma_nombre_bl(self, queryset, name, value):
-        return queryset.filter(Q(name_denom__icontains = value) | Q(norma__icontains = value) | Q(base_legal__icontains = value))
+        return queryset.filter(Q(denominacion__icontains = value) | Q(norma__icontains = value) | Q(base_legal__icontains = value))

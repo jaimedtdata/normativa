@@ -15,7 +15,7 @@
                 {% csrf_token %}
                 <select class="form-select" name="tipo_uso" aria-label="Default select example">
                     <option selected>Todo</option>
-                    {% for a in area_normas %}
+                    {% for a in tipo_uso %}
                     <option value="{{a.name}}">{{a.name}}</option>
                     {% endfor %}
                 </select>
@@ -42,7 +42,7 @@
                 <li> {{tipo_norma}}
                     <ul>
                         {% for n in normas %}
-                        <li>{{n.norma}} --- {{n.name_denom}} --- {{n.base_legal}}--- {{n.document.url}} ---{{n.fecha_publi}}</li>
+                        <li>{{n.norma}} --- {{n.denominacion}} --- {{n.base_legal}}--- {{n.document.url}} ---{{n.fecha_publicacion}}</li>
                         {% endfor %}
                     </ul>
                 </li>
@@ -88,7 +88,7 @@
                                             {% for n in normas %}
                                                 <tr>
                                                     <td>{{n.norma}}</td>
-                                                    <td>{{n.name_denom}}</td>
+                                                    <td>{{n.denominacion}}</td>
                                                     <td>{{n.base_legal}}</td>
                                                     <td>
                                                         <a target="_blank" href="{{n.document.url}}">
@@ -98,7 +98,7 @@
                                                             </svg>
                                                         </a>
                                                     </td>
-                                                    <td>{{n.fecha_publi}}</td>
+                                                    <td>{{n.fecha_publicacion}}</td>
                                                 </tr>
                                                 {% endfor %}
                                             </tbody>
