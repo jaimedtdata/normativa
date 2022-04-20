@@ -7,7 +7,7 @@ from foro.emails import async_send_email_suscription, send_email_suscription
 from foro.exceptions import MyException
 from foro.serializer import foro_serializer
 from .models import Comentario_Foro, Foro
-from normas.models import Areas_Normas, Register_Normativa
+from normas.models import Tipo_Uso_Normas, Normativa
 from apps.models import Member, UserToken
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -93,9 +93,9 @@ def buscar_foro(request):
 
     # area_id = request.GET.get('area_norma')
     # if area_id == '0' :
-    #     foros = Register_Normativa.objects.filter(name_denom__icontains=foro).filter(es_foro = True)
+    #     foros = Normativa.objects.filter(denominacion__icontains=foro).filter(es_foro = True)
     # else :
-    #     foros = Register_Normativa.objects.filter(name_denom__icontains=foro).filter(tipo_uso_id = area_id).filter(es_foro = True)
+    #     foros = Normativa.objects.filter(denominacion__icontains=foro).filter(tipo_uso_id = area_id).filter(es_foro = True)
     
     foros = Foro.objects.filter(nombre__icontains=foro)
     foros = [ foro_serializer(foro) for foro in foros ]

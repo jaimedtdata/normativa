@@ -16,12 +16,12 @@ from django.urls import reverse
 from normas.forms import NormativaForm
 from django.contrib.auth.decorators import login_required
 
-from normas.serializer import keywords_serializer, subtipos_uso_serializer, tipo_norma_serializer, tipos_uso_serializer
-from .models import Areas_Normas, Register_Normativa, Register_Palabraclave, Tipo_Normas, Subtipo_Normas, Universo_Normas
+from normas.serializer import keywords_serializer, normas_serializer, subtipos_uso_serializer, tipo_norma_serializer, tipos_uso_serializer
+from .models import Tipo_Uso_Normas, Grupo_Tipo_Normas, Normativa, Palabra_Clave_Normas, Tipo_Normas, Subtipo_Normas, Topico_Normas
 
 @login_required
 def index(request):
-    queryset = Register_Normativa.objects.all()
+    queryset = Normativa.objects.all()
     page = request.GET.get('page', 1)
     filter = NormativaFilter(request.GET, queryset=queryset)
 
@@ -42,7 +42,7 @@ def index(request):
 
 @login_required
 def ver_pdf(request, normativa):
-    normativa = Register_Normativa.objects.get(id = normativa)
+    normativa = Normativa.objects.get(id = normativa)
     if normativa.document:
         context = {
             'normativa': normativa
@@ -53,7 +53,7 @@ def ver_pdf(request, normativa):
 
 @login_required
 def registrar_normativa(request):
-    tipos_uso = Areas_Normas.objects.all()
+    tipos_uso = Tipo_Uso_Normas.objects.all()
     tu = [ tipos_uso_serializer(tu) for tu in tipos_uso ]
 
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
@@ -64,9 +64,9 @@ def registrar_normativa(request):
 
     context = {
         'form' : NormativaForm,
-        'tipo_uso': Areas_Normas.objects.order_by('order'),
-        'universo_norma': Universo_Normas.objects.all(),
-        'palabras_clave' : Register_Palabraclave.objects.all(),
+        'tipo_uso': Tipo_Uso_Normas.objects.order_by('order'),
+        'topico_norma': Topico_Normas.objects.all(),
+        'palabras_clave' : Palabra_Clave_Normas.objects.all(),
         'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'), # para que ? xd
         'tipo_norma': tipo_normas, 
         'subtipo_uso': subtipo_usos,
@@ -84,7 +84,7 @@ def registrar_normativa(request):
 
             # AQUI AGREGO, TAL VEZ SE PUEDA USAR OTRO METODO IDK
             for pc in pcs:
-                objx, created = Register_Palabraclave.objects.get_or_create(name = pc.upper())
+                objx, created = Palabra_Clave_Normas.objects.get_or_create(name = pc.upper())
                 objx.normativas.add(normativa)
 
             messages.success(request, 'Normativa Creada')
@@ -99,12 +99,12 @@ def registrar_normativa(request):
 @login_required
 def registrar_palabras_clave(request, normativa):
     if request.method=='POST':
-        norma = Register_Normativa.objects.get(id = normativa)
+        norma = Normativa.objects.get(id = normativa)
         pcs = request.POST.getlist('palabras_clave[]')
 
         # AQUI AGREGO, TAL VEZ SE PUEDA USAR OTRO METODO IDK
         for pc in pcs:
-            objx, created = Register_Palabraclave.objects.get_or_create(name = pc.upper())
+            objx, created = Palabra_Clave_Normas.objects.get_or_create(name = pc.upper())
             objx.normativas.add(norma)
 
         palabras = get_all_palabras_clave_normativa(norma)
@@ -112,8 +112,8 @@ def registrar_palabras_clave(request, normativa):
         return HttpResponse(json.dumps(palabras, default=str), content_type="application/json")
 
 class NormativaUpdateView(UpdateView):
-    model = Register_Normativa
-    # fields = ['norma', 'name_denom', 'base_legal', 'fecha_publi', 'tipo_norma', 'tipo_uso', 'document', 'es_foro', 'es_vigente', 'descripcion']
+    model = Normativa
+    # fields = ['norma', 'denominacion', 'base_legal', 'fecha_publicacion', 'tipo_norma', 'tipo_uso', 'document', 'es_foro', 'es_vigente', 'descripcion']
     template_name = 'normativa/edit_normativa.html'
     form_class = NormativaForm
 
@@ -123,10 +123,10 @@ class NormativaUpdateView(UpdateView):
     
     def get_context_data(self, **kwargs):
         normativa = self.get_object().id
-        normativa = Register_Normativa.objects.get(pk = normativa)
+        normativa = Normativa.objects.get(pk = normativa)
         
         context = super(NormativaUpdateView, self).get_context_data(**kwargs)
-        tipos_uso = Areas_Normas.objects.all()
+        tipos_uso = Tipo_Uso_Normas.objects.all()
         tu = [ tipos_uso_serializer(tu) for tu in tipos_uso ]
         
         subtipos_uso = Subtipo_Normas.objects.order_by('order')
@@ -142,9 +142,9 @@ class NormativaUpdateView(UpdateView):
             'subtipo_uso':  subtipos_uso,
             'subtipos_uso_json' : sbu,
             'tipo_norma': tipo_normas, 
-            'universo_norma': Universo_Normas.objects.all(),
-            'tipo_uso': Areas_Normas.objects.order_by('order'),
-            'palabras_clave' : Register_Palabraclave.objects.all(),
+            'topico_norma': Topico_Normas.objects.all(),
+            'tipo_uso': Tipo_Uso_Normas.objects.order_by('order'),
+            'palabras_clave' : Palabra_Clave_Normas.objects.all(),
             'palabras_claves_normativa' : normativa.keywords.all(),
             'fecha_hoy' : datetime.today().strftime('%Y-%m-%d'),
             'tipo_normas_json': tn,
@@ -156,7 +156,7 @@ class NormativaUpdateView(UpdateView):
 
 @login_required
 def eliminar_normativa(request, normativa):
-    Register_Normativa.objects.filter(id = normativa).delete()
+    Normativa.objects.filter(id = normativa).delete()
     messages.success(request, 'Normativa Eliminada')
     return redirect('/normativas/')
 
@@ -164,9 +164,9 @@ def eliminar_normativa(request, normativa):
 # * VISTAS PARA PALABRAS CLAVE DE NORMATIVAS
 @login_required
 def eliminar_palabras_clave_normativa(request, normativa):
-    norma = Register_Normativa.objects.get(id = normativa)
+    norma = Normativa.objects.get(id = normativa)
     pc = request.GET.get('palabra_clave_id')
-    pc = Register_Palabraclave.objects.get(id = pc)
+    pc = Palabra_Clave_Normas.objects.get(id = pc)
     pc.normativas.remove(norma)
     palabras = get_all_palabras_clave_normativa(norma)
 

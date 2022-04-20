@@ -39,8 +39,8 @@
       </div> 
     </form>
     
-    {% if perms.normas.add_policies_usage and request.user.is_staff %}
-      <a href="{% url 'admin:normas_policies_usage_add' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar pregunta</a> 
+    {% if perms.normas.add_preguntas_frecuentes and request.user.is_staff %}
+      <a href="{% url 'admin:normas_preguntas_frecuentes_add' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar pregunta</a> 
     {% endif %}
 
 

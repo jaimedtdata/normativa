@@ -35,7 +35,7 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    {{ form.name_denom|as_crispy_field }}
+                    {{ form.denominacion|as_crispy_field }}
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    {{ form.fecha_publi|as_crispy_field }}
+                    {{ form.fecha_publicacion|as_crispy_field }}
                 </div>
             </div>
         </div>
@@ -55,8 +55,8 @@
             <div class="col-6">
                 <div class="form-group">
                     <label> Topico principal de Norma: </label>
-                    <select class="form-control" aria-label="Default select example" name="universo" id="id_universo">
-                        {% for un in universo_norma %}
+                    <select class="form-control" aria-label="Default select example" name="topico" id="id_topico">
+                        {% for un in topico_norma %}
                         <option value="{{un.id}}">{{un.name}}</option>
                         {% endfor %}
                     </select>
@@ -106,7 +106,8 @@
                         <div class="progress">
                             <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
                                 role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                                style="width: 0%"></div>
+                                style="width: 0%">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,6 +128,7 @@
             </div>
         </div>
         <button class="btn btn-lg btn-primary float-right mt-2" type="submit" id="submitBtn3">Guardar Cambios</button>
+
     </form>
     <h2 class="text-center mt-5"> Editar Palabras Clave</h2>
     {% include '../partials/_palabras_clave.html' %}
@@ -163,42 +165,37 @@
     const subtipos_uso = document.getElementById('id_subtipo_uso')
     const subtipos_uso_json = {{ subtipos_uso_json| safe }}
 
-    const universo = document.getElementById('id_universo')
+    const topico = document.getElementById('id_topico')
     const tipo_norma = document.getElementById('id_tipo_norma')
     const tipo_normas_json = {{ tipo_normas_json| safe }}
 
 
+    topico.value = "{{normativa.tipo_norma.grupo.topico_id}}"
     tipos_uso.val({{ tnn| safe }});
     tipos_uso.trigger('change.select2');
-
-    changeOptionsSubtipoUso()
-
-    $('#id_subtipo_uso').val({{ form.subtipo_uso.value | safe }})
-    $('#id_subtipo_uso').trigger('change.select2');
-
-
-    universo.value = "{{normativa.tipo_norma.universo_id}}"
-
-    changeOptionsTipoNorma()
-
     tipo_norma.value = "{{normativa.tipo_norma_id}}"
 
-    $(document).ready(function () {
-        $('#tipo_uso_id').on('select2:select', function () {
+    
+    changeOptionsSubtipoUso()
+    changeOptionsTipoNorma()
+    
+    $('#id_subtipo_uso').val({{ form.subtipo_uso.value|safe }})
+    
+    $(document).ready(function() {
+        $('#tipo_uso_id').on('select2:select', function() {
             changeOptionsSubtipoUso()
         })
-        $('#tipo_uso_id').on('select2:unselect', function () {
+        $('#tipo_uso_id').on('select2:unselect', function() {
             changeOptionsSubtipoUso()
         })
     });
 
-
-    universo.addEventListener('change', (e) => {
+    topico.addEventListener('change', (e) => {
 
         changeOptionsTipoNorma()
         changeOptionsTipoUso()
 
-        if (universo.value == 3) {
+        if (topico.value == 3) {
             label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:"
             label_subtipo_uso[0].innerHTML = "Subtipo de Procedimiento:"
         } else {
@@ -212,17 +209,17 @@
     function changeOptionsTipoUso() {
         var options_tu = ``
         tipos_uso_json.forEach(tu => {
-            if (tu.topico_id == universo.value) {
+            if (tu.topico_id == topico.value) {
                 options_tu += /*html*/`<option class="text-wrap" value="${tu.id}">${tu.name}</option>`
             }
         })
 
         if (options_tu.length == 0) {
-            options_tu += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPOS DE USO, SELECCIONE OTRO UNIVERSO---</option>`
+            options_tu += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPOS DE USO, SELECCIONE OTRO TOPICO---</option>`
         }
 
         tipos_uso.html(options_tu)
-        
+
         $('#id_subtipo_uso').empty().trigger("change");
     }
 
@@ -242,13 +239,13 @@
     function changeOptionsTipoNorma() {
         var options_tn = ``
         tipo_normas_json.forEach(tn => {
-            if (tn.topico_id == universo.value) {
+            if (tn.topico_id == topico.value) {
                 options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
             }
         })
 
         if (options_tn.length == 0) {
-            options_tn += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPO DE NORMA, SELECCIONE OTRO UNIVERSO---</option>`
+            options_tn += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPO DE NORMA, SELECCIONE OTRO TOPICO---</option>`
         }
 
         tipo_norma.innerHTML = options_tn

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="text-center">Registro de Normativas</h1>
+    <h1 class="text-center">Registro de Normativa</h1>
     <br>
     <div class="row">
         <div class="col">
@@ -27,7 +27,7 @@
        </div>
     </form>
     <br>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-responsive">
         <thead>
             <tr>
                 <td>T. Norma</td>
@@ -59,7 +59,7 @@
                             <small class="fst-italic fw-lighter fs-7 text-danger">*Derogado Parcialmente</small>
                         {% endif %}
                     </td>
-                    <td>{{norma.name_denom}} 
+                    <td>{{norma.denominacion}} 
                         
                     </td>
                     <td>{{norma.base_legal}}</td>
@@ -74,7 +74,7 @@
                         <span class="text-center"><i class="fa fa-minus fa-2x text-dark" aria-hidden="true"></i></span>
                         {% endif %}
                     </td>
-                    <td>{{norma.fecha_publi}}</td>
+                    <td>{{norma.fecha_publicacion}}</td>
                     <td>
                         <a href="{% url 'actualizar-normativa' norma.id %}" class="btn btn-warning">
                             <i class="fas fa-edit" ></i>
