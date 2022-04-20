@@ -179,9 +179,10 @@
 		}
 	}
 
+	var url = "{{normativa.document.url}}"
+	url = url.replaceAll('&amp;', '&')
 
-
-	loadPDF("{{normativa.document.url}}");
+	loadPDF(url);
 	zoomButton.disabled = false;
 
 
