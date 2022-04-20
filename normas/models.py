@@ -108,9 +108,9 @@ PROPIEDAD_CHOICES = [
 ]
 
 class Normativa(models.Model):
-    norma = models.CharField(blank=False,null=False,max_length=200,verbose_name='Norma')
-    denominacion = models.TextField(blank=False,null=False,verbose_name='Denominacion')
-    base_legal = models.CharField(blank=False,null=False,max_length=200,verbose_name='Base Legal')
+    norma = models.CharField(blank=True, null=True, max_length=200, verbose_name='Norma')
+    denominacion = models.TextField(blank=False, null=False, verbose_name='Titulo')
+    base_legal = models.CharField(blank=True, null=True, max_length=200, verbose_name='Base Legal')
     fecha_publicacion = models.DateField(blank=True,null=True,verbose_name='Publicacion')
     tipo_norma = models.ForeignKey(Tipo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo de Norma')
     subtipo_uso = models.ManyToManyField(Subtipo_Normas, verbose_name='Subtipo de uso', related_name='normativas', blank=True)
