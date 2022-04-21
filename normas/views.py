@@ -10,7 +10,6 @@ from django.views import generic
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.contrib import messages
-from normas.filters import NormativaFilter
 from django.views.generic.edit import UpdateView
 from django.urls import reverse
 from normas.forms import NormativaForm
@@ -21,22 +20,30 @@ from .models import Tipo_Uso_Normas, Grupo_Tipo_Normas, Normativa, Palabra_Clave
 
 @login_required
 def index(request):
-    queryset = Normativa.objects.all()
-    page = request.GET.get('page', 1)
-    filter = NormativaFilter(request.GET, queryset=queryset)
+    normativas = Normativa.objects.order_by('tipo_norma').order_by('subtipo_uso').order_by('norma')
+    tipos_norma = Tipo_Normas.objects.order_by('order')
+    tipos_uso = Tipo_Uso_Normas.objects.order_by('name')
+    palabras_clave = Palabra_Clave_Normas.objects.all()
+    subtipos_uso = Subtipo_Normas.objects.order_by('order')
+    topicos = Topico_Normas.objects.all()
 
-    try:
-        queryset = filter.qs
-        paginator = Paginator(queryset, 5)
-        queryset = paginator.page(page)
-    except:
-        raise Http404
+    normas = [ normas_serializer(norma) for norma in normativas ]
+    tn = [ tipo_norma_serializer(tn) for tn in tipos_norma ]
+    sbu = [ subtipos_uso_serializer(sbu) for sbu in subtipos_uso ]
+    tu = [ tipos_uso_serializer(tu) for tu in tipos_uso ]
 
-    context = {
-        'entity': queryset,
-        'paginator' : paginator,
-        'filter' : filter,
-    }
+    context={
+            'normativas': normativas,
+            'tipos_norma': tipos_norma, 
+            'tipos_uso' : tipos_uso, 
+            'subtipos_uso' : subtipos_uso,
+            'palabras_clave' : palabras_clave,
+            'normativas_json' : json.dumps(normas),
+            'sbu_json' : json.dumps(sbu),
+            'tu_json' : json.dumps(tu),
+            'tn_json' : tn,
+            'topicos' : topicos,
+            }
 
     return render(request, 'normativa/index.html', context)
 
