@@ -45,7 +45,8 @@
     </div>
     {% endif %}
 
-    <form class="form mb-5" method='POST' id="fileForm" action="{% url 'registrar-normativa' %}" autocomplete="off" enctype="multipart/form-data">
+    <form class="form mb-5" method='POST' id="fileForm" action="{% url 'registrar-normativa' %}" autocomplete="off"
+        enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
             <div class="col-6">
@@ -76,9 +77,9 @@
                 <div class="form-group">
                     <label> Topico principal de Norma: </label>
                     <select class="form-control" aria-label="Default select example" name="topico" id="id_topico">
-                            {% for un in topico_norma %}
-                            <option value="{{un.id}}">{{un.name}}</option>
-                            {% endfor %}
+                        {% for un in topico_norma %}
+                        <option value="{{un.id}}">{{un.name}}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -90,7 +91,8 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="tipo_uso_id"> Tipo de Uso: </label>
-                    <select class="form-control select-multiple" multiple="multiple" aria-label="Default select example" name="tipo_uso" id="tipo_uso_id" style="width: 100%;">
+                    <select class="form-control select-multiple" multiple="multiple" aria-label="Default select example"
+                        name="tipo_uso" id="tipo_uso_id" style="width: 100%;">
                         {% for tipo in tipo_uso %}
                         <option value="{{tipo.id}}">{{tipo.name}}</option>
                         {% endfor %}
@@ -151,7 +153,7 @@
                 <option value="{{pc.name}}"> {{pc.name}} </option>
                 {% endfor %}
             </select>
-            
+
         </div>
         <div class="row my-4">
             <div class="col">
@@ -186,23 +188,24 @@
 
     // FUNCIONES PARA EL LISTADO DINAMICO
     const tipos_uso = $('#tipo_uso_id')
-    const tipos_uso_json = {{ tipos_uso_json|safe }}
+    const tipos_uso_json = {{ tipos_uso_json| safe }}
     const subtipos_uso = document.getElementById('id_subtipo_uso')
-    const subtipos_uso_json = {{ subtipos_uso_json|safe }}
-    
+    const subtipos_uso_json = {{ subtipos_uso_json| safe }}
+
     const topico = document.getElementById('id_topico')
     const tipo_norma = document.getElementById('id_tipo_norma')
-    const tipo_normas_json = {{ tipo_normas_json|safe }}
-    
+    const tipo_normas_json = {{ tipo_normas_json| safe }}
+
     changeOptionsSubtipoUso()
     changeOptionsTipoNorma()
-    
+    requireForTopico(topico.value)
 
-    $(document).ready(function() {
-        $('#tipo_uso_id').on('select2:select', function() {
+
+    $(document).ready(function () {
+        $('#tipo_uso_id').on('select2:select', function () {
             changeOptionsSubtipoUso()
         })
-        $('#tipo_uso_id').on('select2:unselect', function() {
+        $('#tipo_uso_id').on('select2:unselect', function () {
             changeOptionsSubtipoUso()
         })
     });
@@ -210,21 +213,15 @@
     topico.addEventListener('change', (e) => {
         changeOptionsTipoNorma()
         changeOptionsTipoUso()
-        if(topico.value == 3) {
-            label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:"
-            label_subtipo_uso[0].innerHTML = "Subtipo de Procedimiento:"
-        } else {
-            label_tipo_uso[0].innerHTML = "Tipo de Uso:"
-            label_subtipo_uso[0].innerHTML = "Subtipo de Uso*"
-        }
+        requireForTopico(topico.value)
     })
 
     function changeOptionsTipoUso() {
         var options_tu = ``
-        tipos_uso_json.forEach( tu => {
-            if( tu.topico_id == topico.value ) {
+        tipos_uso_json.forEach(tu => {
+            if (tu.topico_id == topico.value) {
                 options_tu += /*html*/`<option class="text-wrap" value="${tu.id}">${tu.name}</option>`
-            }            
+            }
         })
 
         if (options_tu.length == 0) {
@@ -239,13 +236,13 @@
     function changeOptionsSubtipoUso() {
         var options_sbu = ``
         var tipos = tipos_uso.val()
-        
-        subtipos_uso_json.forEach( sbu => {
-                if( tipos.includes((sbu.tipo_uso_id).toString()) ) {
-                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
-                }
-            })
-        
+
+        subtipos_uso_json.forEach(sbu => {
+            if (tipos.includes((sbu.tipo_uso_id).toString())) {
+                options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+            }
+        })
+
 
         // if (options_sbu.length == 0) {
         //     options_sbu += /*html*/`<option class="text-wrap" value selected disabled>---SIN SUBTIPOS, SELECCIONE OTRO TIPO DE USO---</option>`
@@ -256,19 +253,43 @@
 
     function changeOptionsTipoNorma() {
         var options_tn = ``
-        tipo_normas_json.forEach( tn => {
-            if( tn.topico_id == topico.value ) {
+        tipo_normas_json.forEach(tn => {
+            if (tn.topico_id == topico.value) {
                 options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
-            }            
+            }
         })
 
-        
+
 
         if (options_tn.length == 0) {
             options_tn += /*html*/`<option class="text-wrap" value selected disabled>---SIN TIPO DE NORMA, SELECCIONE OTRO UNIVERSO---</option>`
         }
 
         tipo_norma.innerHTML = options_tn
+    }
+
+    function requireForTopico(topico) {
+
+        if (topico == 4) {
+            document.getElementById('id_norma').removeAttribute('required');
+            document.getElementById('id_base_legal').removeAttribute('required');
+            document.getElementById('id_estado').removeAttribute('required');
+            document.getElementById('id_document').setAttribute('required', true);
+        } else {
+            document.getElementById('id_norma').setAttribute('required', true);
+            document.getElementById('id_base_legal').setAttribute('required', true);
+            document.getElementById('id_estado').setAttribute('required', true);
+            document.getElementById('id_document').removeAttribute('required');
+        }
+
+        if (topico == 3) {
+            label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:"
+            label_subtipo_uso[0].innerHTML = "Subtipo de Procedimiento:"
+        } else {
+            label_tipo_uso[0].innerHTML = "Tipo de Uso:"
+            label_subtipo_uso[0].innerHTML = "Subtipo de Uso*"
+        }
+
     }
 
 

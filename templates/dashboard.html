@@ -1,108 +1,139 @@
 {% extends 'base_nfr.html' %}
 {% load static %}
-    {% block content %}
-    <link href="{% static 'css/css-estilos_das.css' %}" rel="stylesheet">
-    <!--   Area Form    -->
-    <script type="text/javascript">
-        function submitByEnter(e) {
-            if (e.keyCode == 13) {
-                document.getElementById("FormListado:b_RealizaBusqueda").click();
-                return false;
-            }
-            else {
-                return true;
-            }
+{% block content %}
+<link href="{% static 'css/css-estilos_das.css' %}" rel="stylesheet">
+<!--   Area Form    -->
+<script type="text/javascript">
+    function submitByEnter(e) {
+        if (e.keyCode == 13) {
+            document.getElementById("FormListado:b_RealizaBusqueda").click();
+            return false;
         }
-    </script>
-     <div class="gAlignCenter">
-        <hr class="gSeparator gSeparatorTrans gSeparator15">
-        <h1 class="gUppercase gFontWeight700">
-            Plataforma de
-            <span class="gColorNaranja">Normas</span>  y <br>
-            Reglamento <span class="gColorNaranja">Comentado</span>
-        </h1>
+        else {
+            return true;
+        }
+    }
+</script>
+<div class="gAlignCenter">
+    <hr class="gSeparator gSeparatorTrans gSeparator15">
+    <h1 class="gUppercase gFontWeight700">
+        Plataforma de
+        <span class="gColorNaranja">Normas</span> y <br>
+        Reglamento <span class="gColorNaranja">Comentado</span>
+    </h1>
+</div>
+
+<div class="row m-0 p-0">
+    <div class="col-lg-2 d-flex justify-content-around">
+        <img class="img-fluid" src="{% static 'banners/baner-login.png' %}" alt="">
     </div>
- 
-    <div class="row m-0 p-0">
-        <div class="col-lg-2 d-flex justify-content-around">
-            <img class="img-fluid" src="{% static 'banners/baner-login.png' %}" alt="">
-        </div>
-        <div class="col-lg ">
-            <div class="gContainer gPositionRelative gContenido">
-                <div class="gAlignCenter">
-                    <hr class="gWidth100 gSeparator gSeparatorTrans gInlineBlock">
-                    
-                    <hr class="gSeparator gSeparatorTrans gSeparator20">
-                    <div class="gRowTemp">
-                        {% include './normativa/topico_normativa.html' %}
-                    </div>
-                    <hr class="gSeparator gSeparatorTrans gSeparator20">
-                    <div class="gRowTemp">
-                        
-                        <a href="{% url 'foro' %}" class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
-                            <div class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                            <div class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                                    <img class="img-fluid mt-2" src="{% static 'images/foro_discusion.svg' %}" class="gInlineBlock gMarginTop5" width="67">
-                                
-                            </div>
-                            <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">FORO DE
-                                                                                                                        <br>
-                                                                                                                        DISCUSIÓN
-                                                                                                                        <br>
-                                                                                                                        </h5></a>
-                                                                                                                       
-        
-                        <a href="{% url 'cursos' %}" class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
-                            <div class="gWidth50 gHeight3 gFondoCircleGris gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
-                                <img  class="img-fluid" src="{% static 'images/cursos_linea.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
-                                
-                            </div>
-                            <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">CURSOS EN LÍNEA</h5></a>
-                                                                                            
-                    </div>
-                    
-                    <hr class="gSeparator gSeparatorTrans gSeparator20">
+    <div class="col-lg ">
+        <div class="gContainer gPositionRelative gContenido">
+            <div class="gAlignCenter">
+                <hr class="gWidth100 gSeparator gSeparatorTrans gInlineBlock">
+
+                <hr class="gSeparator gSeparatorTrans gSeparator20">
+                <div class="gRowTemp">
+                    {% include './normativa/topico_normativa.html' %}
                 </div>
+                <hr class="gSeparator gSeparatorTrans gSeparator20">
+                <div class="gRowTemp">
+                    {% if reglamento_comentado %}
+                    <a href="{% url 'buscador' %}?norma={{reglamento_comentado.name}}&gtn={{reglamento_comentado.id}}&t={{reglamento_comentado.topico_id}}" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+                        <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                        
+                        <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                            {% if reglamento_comentado.icono %}
+                                <img class="img-fluid mt-4" src="{{ reglamento_comentado.icono.url }}" class="gInlineBlock gWidth57 gMarginTop31">
+                            {% else %}
+                                <img class="img-fluid mt-4" src="{% static 'images/edificaciones.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
+                            {% endif %}
+                           
+                        </div>
+                        
+                        <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                            {{ reglamento_comentado.name }}
+                        </h5>
+                    </a>
+                    {% endif %}
+
+                    <a href="{% url 'foro' %}"
+                        class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
+                        <div
+                            class="gWidth50 gHeight3 gFondoCircleAmarilo2 gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine">
+                        </div>
+                        <div
+                            class="gWidth100 gHeight100 gLineHeight100 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo2 gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                            <img class="img-fluid mt-2" src="{% static 'images/foro_discusion.svg' %}"
+                                class="gInlineBlock gMarginTop5" width="67">
+
+                        </div>
+                        <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">FORO
+                            DE
+                            <br>
+                            DISCUSIÓN
+                            <br>
+                        </h5>
+                    </a>
+
+
+                    <a href="{% url 'cursos' %}"
+                        class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
+                        <div
+                            class="gWidth50 gHeight3 gFondoCircleGris gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine">
+                        </div>
+                        <div
+                            class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleGris gBoxShadowBottom gPositionRelative gZindex2 gAnimate gTop0 gImgg">
+                            <img class="img-fluid" src="{% static 'images/cursos_linea.svg' %}"
+                                class="gInlineBlock gWidth57 gMarginTop31">
+
+                        </div>
+                        <h5 class="gUppercase gMarginTop20 gLineHeight20 gFontWeight700 gPositionRelative gZindex2">
+                            CURSOS EN LÍNEA</h5>
+                    </a>
+
+                </div>
+
+                <hr class="gSeparator gSeparatorTrans gSeparator20">
             </div>
         </div>
-        <div class="col-lg-2 d-flex justify-content-around">
-            <img class="img-fluid" src="{% static 'banners/baner-login.png' %}" alt="">
-        </div>
     </div>
-    <hr>
-    <div class="row mx-5 mb-5 text-center">
-        <div class="col-lg clom-md-6 col-sm-6 col-6 d-flex justify-content-end mr-lg-5">
-                <a href="{% url 'plan_list' %}" class="text-danger font-weight-bold">
-                    <i class="fa-solid fa-user-group fa-3x gInlineBlock gWidth65 gMarginTop31"></i>
-                    <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                        Planes y 
-                        <br>
-                        Suscripción
-                    </h5>
-                </a>
-        </div>
-        <div class="col-lg clom-md-6 col-sm-6 col-6 d-flex justify-content-start  ml-lg-5">
-                <a href="{% url 'preguntas' %}" class="text-warning font-weight-bold" >
-                    <i class="fa-solid fa-question fa-3x gInlineBlock gWidth65 gMarginTop31"></i>
-                    <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                        Preguntas
-                        <br>
-                        Frecuentes
-                    </h5>
-                </a>
-        </div>
+    <div class="col-lg-2 d-flex justify-content-around">
+        <img class="img-fluid" src="{% static 'banners/baner-login.png' %}" alt="">
     </div>
-    <style>
-        #sidebar ul li a {
-           padding: 1.4rem 2rem;
-           font-size: 1.6rem;
-           display: block;
-           color:white;
-       }
-    </style>
-    {% endblock %}
-   
+</div>
+<hr>
+<div class="row mx-5 mb-5 text-center">
+    <div class="col-lg clom-md-6 col-sm-6 col-6 d-flex justify-content-end mr-lg-5">
+        <a href="{% url 'plan_list' %}" class="text-danger font-weight-bold">
+            <i class="fa-solid fa-user-group fa-3x gInlineBlock gWidth65 gMarginTop31"></i>
+            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                Planes y
+                <br>
+                Suscripción
+            </h5>
+        </a>
+    </div>
+    <div class="col-lg clom-md-6 col-sm-6 col-6 d-flex justify-content-start  ml-lg-5">
+        <a href="{% url 'preguntas' %}" class="text-warning font-weight-bold">
+            <i class="fa-solid fa-question fa-3x gInlineBlock gWidth65 gMarginTop31"></i>
+            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                Preguntas
+                <br>
+                Frecuentes
+            </h5>
+        </a>
+    </div>
+</div>
+<style>
+    #sidebar ul li a {
+        padding: 1.4rem 2rem;
+        font-size: 1.6rem;
+        display: block;
+        color: white;
+    }
+</style>
+{% endblock %}
+
 
 <!--endjohao-->
-

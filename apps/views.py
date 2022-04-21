@@ -234,7 +234,8 @@ def busq_palclave_prov(request):
         
 def dashboard(request):
     context = {
-        'topicos_norma' : Topico_Normas.objects.all()
+        'topicos_norma' : Topico_Normas.objects.all(),
+        'reglamento_comentado' : Grupo_Tipo_Normas.objects.get(id = 4)
     }
     return render(request, 'dashboard.html', context)
 
@@ -242,7 +243,7 @@ def dashboard(request):
 def grupo_normativa(request, tn):
     context = {
         'grupos_tipo_norma' : Grupo_Tipo_Normas.objects.filter(topico_id = tn),
-        'topico_norma' : Topico_Normas.objects.get(id = tn)
+        'topico_norma' : Topico_Normas.objects.get(id = tn),
     }
     return render(request,'normativa/grupo_normativa.html', context)
 

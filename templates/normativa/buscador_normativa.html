@@ -257,8 +257,19 @@
 
     $('#datetimes').daterangepicker({
         locale: {
-            format: 'YYYY-MM-DD'
+            format: 'DD/MM/YYYY',
         }
+    });
+
+    $('#datetimes').on('apply.daterangepicker', function (ev, picker) {
+        date_range = $(this).data('daterangepicker');
+        execFilters()
+    });
+
+    $('#datetimes').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('')
+        date_range = undefined
+        execFilters()
     });
 
     if (t != null) {
@@ -320,11 +331,6 @@
     subtipos_uso.change(function () {
         sbu_id = $("#subtipo_usos").val()
         subtipo_uso_option = $("#subtipo_usos option:selected").text()
-        execFilters()
-    })
-
-    $('#datetimes').change(function () {
-        date_range = $('#datetimes').data('daterangepicker')
         execFilters()
     })
 
@@ -403,7 +409,11 @@
                     return n.palabras_clave.includes(parseInt(k))
                 })
 
-                respuesta = respuesta.concat(r)
+                r.forEach(r => {
+                    if (respuesta.indexOf(r) == -1) {
+                        respuesta = respuesta.concat(r)
+                    }
+                })
             })
 
             return respuesta
