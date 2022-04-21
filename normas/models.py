@@ -79,7 +79,7 @@ class Grupo_Tipo_Normas(models.Model):
 class Tipo_Normas(models.Model):
     name = models.CharField(max_length=200, blank=False, help_text='Nombre de Tipo de norma',verbose_name='Tipo norma')
     grupo = models.ForeignKey(Grupo_Tipo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Grupo Norma')
-    order = models.CharField(max_length=10, blank=True)
+    order = models.CharField(max_length=10, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, blank=True, null=True, verbose_name="Fecha de actualización")
 
@@ -109,7 +109,7 @@ PROPIEDAD_CHOICES = [
 
 class Normativa(models.Model):
     norma = models.CharField(blank=True, null=True, max_length=200, verbose_name='Norma')
-    denominacion = models.TextField(blank=False, null=False, verbose_name='Titulo')
+    denominacion = models.TextField(max_length=300, blank=False, null=False, verbose_name='Titulo')
     base_legal = models.CharField(blank=True, null=True, max_length=200, verbose_name='Base Legal')
     fecha_publicacion = models.DateField(blank=True,null=True,verbose_name='Publicacion')
     tipo_norma = models.ForeignKey(Tipo_Normas, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Tipo de Norma')

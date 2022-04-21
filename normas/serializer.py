@@ -52,7 +52,7 @@ def tipo_norma_serializer(tn):
     return {
         'id' : tn.id,
         'name' : tn.name,
-        'order' : tn.order,
+        'order' : tn.order if tn.order else 0,
         'grupo_id' : tn.grupo_id,
         'topico_id' : tn.grupo.topico_id if tn.grupo else 0,
     }

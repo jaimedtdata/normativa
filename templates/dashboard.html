@@ -38,24 +38,7 @@
                 </div>
                 <hr class="gSeparator gSeparatorTrans gSeparator20">
                 <div class="gRowTemp">
-                    {% if reglamento_comentado %}
-                    <a href="{% url 'buscador' %}?norma={{reglamento_comentado.name}}&gtn={{reglamento_comentado.id}}&t={{reglamento_comentado.topico_id}}" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
-                        <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                        
-                        <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                            {% if reglamento_comentado.icono %}
-                                <img class="img-fluid mt-4" src="{{ reglamento_comentado.icono.url }}" class="gInlineBlock gWidth57 gMarginTop31">
-                            {% else %}
-                                <img class="img-fluid mt-4" src="{% static 'images/edificaciones.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
-                            {% endif %}
-                           
-                        </div>
-                        
-                        <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                            {{ reglamento_comentado.name }}
-                        </h5>
-                    </a>
-                    {% endif %}
+                    
 
                     <a href="{% url 'foro' %}"
                         class="gInlineBlock gWidth200 gMargin0-50 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox6">
@@ -76,6 +59,24 @@
                         </h5>
                     </a>
 
+                    {% if reglamento_comentado %}
+                    <a href="{% url 'buscador' %}?norma={{reglamento_comentado.name}}&gtn={{reglamento_comentado.id}}&t={{reglamento_comentado.topico_id}}" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
+                        <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
+                        
+                        <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
+                            {% if reglamento_comentado.icono %}
+                                <img class="img-fluid mt-4" src="{{ reglamento_comentado.icono.url }}" class="gInlineBlock gWidth57 gMarginTop31">
+                            {% else %}
+                                <img class="img-fluid mt-4" src="{% static 'images/edificaciones.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
+                            {% endif %}
+                           
+                        </div>
+                        
+                        <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
+                            {{ reglamento_comentado.name }}
+                        </h5>
+                    </a>
+                    {% endif %}
 
                     <a href="{% url 'cursos' %}"
                         class="gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox1">
