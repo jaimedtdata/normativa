@@ -26,7 +26,7 @@ def normas_serializer(norma):
         'tipos_uso_id' : [x.tipo_uso_id for x in norma.subtipo_uso.all()],
         'subtipos_uso_id' : [x.id for x in norma.subtipo_uso.all()],
         'articulo' : norma.articulo if norma.articulo else '',
-        'estado' : norma.estado.name,
+        'estado' :norma.estado.name if norma.estado else '',
         'descripcion' : norma.descripcion if norma.descripcion else '',
         'document' : norma.document.url if norma.document else False,
         'fecha_publicacion' : norma.fecha_publicacion.strftime('%Y-%m-%d') if norma.fecha_publicacion else '',

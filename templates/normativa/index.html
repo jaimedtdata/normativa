@@ -1,121 +1,513 @@
 {% extends 'base_nfr.html' %}
 {% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
 <div class="container">
     <h1 class="text-center">Registro de Normativa</h1>
     <br>
-    <div class="row">
-        <div class="col">
-            <a href="{% url 'registrar-normativa' %}" class="btn btn-primary text-white" style="background-color:#24387C;">
-                <i class="fas fa-plus"></i>
-                Agregar nueva
-            </a>
-        </div>
-    </div>
-    <form  class="form-group mt-3" method="GET">
-       <div class="row">
-        <div class="col-5">
-            <input type="text" name="content" class="form-control" placeholder="BUSCAR POR NORMA, TITULO O BASE LEGAL" id="{{ filter.form.id_for_content }}" value="{{request.GET.content}}">
-        </div>
-        <div class="col-1 form-group" >
-            
-            <button type="submit" class="btn btn-info btn-lg" >
-                <i class="fas fa-search"></i>
-            </button>
-          </div>
-       </div>
-    </form>
-    <br>
-    <table class="table table-bordered table-responsive">
-        <thead>
-            <tr>
-                <td>T. Norma</td>
-                <td>T. Uso - St Uso</td>
-                <td >Norma</td>
-                <td>Titulo</td>
-                <td>Base Legal</td>
-                <td>Articulado</td>
-                <td>Documento</td>
-                <td>Publicacion</td>
-                <td>Observacion</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% if entity %}
-                {% for norma in entity %}
-                <tr>
-                    <td>{{norma.tipo_norma}}</td>
-                    <td>
-                    {% for stu in norma.subtipo_uso.all %}
-                        {{ stu.tipo_uso }} - {{ stu.name}} 
-                        <hr style="background-color:  black;">
-                    {% endfor %}
-                    </td>
-                        <td>{{norma.norma}}
-                        {% if norma.estado == 'NV' %}
-                            <small class="fst-italic fw-lighter fs-7 text-danger">*No vigente</small>
-                        {% elif norma.estado == 'DP' %}
-                            <small class="fst-italic fw-lighter fs-7 text-danger">*Derogado Parcialmente</small>
-                        {% endif %}
-                    </td>
-                    <td>{{norma.denominacion}} 
-                        
-                    </td>
-                    <td>{{norma.base_legal}}</td>
-                    <td>{{norma.articulo}}</td>
-                    <td class="text-center">
-                        {% if norma.document %}
-                            <a target="_blank" href="{% url 'ver-pdf' norma.id %}">
-                                <i class="fa fa-file-pdf fa-2x text-danger mr-1" aria-hidden="true"></i>
-                            </a>
-                        {% else %}
 
-                        <span class="text-center"><i class="fa fa-minus fa-2x text-dark" aria-hidden="true"></i></span>
-                        {% endif %}
-                    </td>
-                    <td>{{norma.fecha_publicacion}}</td>
-                    <td>
-                        <a href="{% url 'actualizar-normativa' norma.id %}" class="btn btn-warning">
-                            <i class="fas fa-edit" ></i>
-                        </a>
-                    
-                        <a onclick="ConfirmDelete({{norma.id}})" href="#" class="btn btn-danger">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                {% empty %}
-                    <tr>
-                        <td>NADA</td>
-                    </tr>
-                {% endfor %}
-            {% endif %}
-        </tbody>
-    </table>  
-
-    {% include '../partials/_paginator.html' %}
 
     {% if messages %}
-        {% for m in messages %}
-        
-        <script>
-            Swal.fire({
-                'title' : "Completado",
-                "text" : "{{m}}",
-                "icon" : "success",
-            })
-        </script>
-        
-        {% endfor %}
+    {% for m in messages %}
+
+    <script>
+        Swal.fire({
+            'title': "Completado",
+            "text": "{{m}}",
+            "icon": "success",
+        })
+    </script>
+
+    {% endfor %}
     {% endif %}
+</div>
+<div class="row mx-0">
+    <div class="col-lg-3" style="height:720px;" id="subnormas_caja">
+        <div class="form group">
+            <label for="">Topico:</label>
+            <select class="form-control p-0" name="" id="topico" style="font-size: .9rem;">
+                {% for t in topicos %}
+                <option value="{{t.id}}">{{t.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Tipo de norma:</label>
+            <select class="form-control" name="tipos_norma[]" multiple="multiple" style="height:100%;" id="tipos_norma">
+                {% for sn in tipos_norma %}
+                {% if '.' not in sn.order %}
+                <option class="text-wrap font-weight-bold" value="{{sn.id}}">{{sn.order}} {{sn.name}} </option>
+                {% else %}
+                <option class="text-wrap" value="{{sn.id}}">{{sn.order}} {{sn.name}} </option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <a href="{% url 'registrar-normativa' %}" class="btn btn-lg btn-block btn-primary text-white"
+                    style="background-color:#24387C;">
+                    <i class="fas fa-plus"></i>
+                    Agregar nueva
+                </a>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="tipos_uso"> Tipo de uso: </label>
+                            <select class="form-control" id="tipos_uso">
+                                <option class="text-wrap" value="0">TODOS</option>
+                                {% for an in tipos_uso %}
+                                <option class="text-wrap" value="{{an.id}}">{{an.name}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="subtipos_uso"> Subtipo de uso: </label>
+                            <select class="form-control" id="subtipos_uso">
+                                <option class="text-wrap" value="0">TODOS</option>
+                                {% for sbu in subtipos_uso %}
+                                <option class="text-wrap" value="{{sbu.id}}">{{sbu.name}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <div class="form-group mb-3">
+                                <label for=""> Palabras clave: </label>
+
+                                <select class="form-control select-multiple" name="palabras_clave[]" multiple="multiple"
+                                    style="width:100%; height:100%;" id="keywords">
+                                    {% for pc in palabras_clave %}
+                                    {% if pc.normativas.exists %}
+                                    <option value="{{pc.id}}"> {{pc.name}} </option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <div class="form-group mb-3">
+                                <input class="form-control" type="text" id="filter_input"
+                                    placeholder="BUSCAR POR NORMA, TITULO, DESCRIPCIÓN O BASE LEGAL" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4  ">
+                        <input class="form-control text-sm text-center" style="font-size: 1rem;" type="text"
+                            name="datetimes" id="datetimes" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col table-responsive">
+                <table class="table table-bordered" id="datatable_normativas">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th>Tipo de Norma</th>
+                            <th id="td_tipo">Tipo de Uso</th>
+                            <th id="td_subtipo">Subtipo de Uso</th>
+                            <th>Norma</th>
+                            <th>Titulo</th>
+                            <th>Descripción</th>
+                            <th>Base Legal</th>
+                            <th>Articulado</th>
+                            <th>Documento</th>
+                            <th>Publicacion</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="normativas">
+                        {% for norma in norma_date %}
+                        <tr>
+                            <td>{{norma.tipo_norma}}</td>
+                            <td>{{norma.subtipo_uso.tipo_uso}}</td>
+                            <td>{{norma.subtipo_uso}}</td>
+                            <td>{{norma.norma}}</td>
+                            <td>{{norma.denominacion}}
+                                - {{ norma.estado }}
+                            </td>
+                            <td>
+                                {% if norma.descripcion %}
+                                <p class="mt-3 ">
+                                    <bold class="fw-bold">Descripción:</bold><small> {{norma.descripcion}}.</small>
+                                </p>
+                                {% endif %}
+                            </td>
+                            <td>{{norma.base_legal}}</td>
+                            <td>{{norma.articulo}}</td>
+                            <td class="text-center">
+                                {% if norma.document %}
+                                <a target="_blank" href="{% url 'ver-pdf' norma.id %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="color:black;position:relative;"
+                                        width="28" height="28" fill="currentColor" class="bi bi-file-pdf"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+                                        <path
+                                            d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.701 19.701 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.716 5.716 0 0 1-.911-.95 11.642 11.642 0 0 0-1.997.406 11.311 11.311 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.27.27 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.647 12.647 0 0 1 1.01-.193 11.666 11.666 0 0 1-.51-.858 20.741 20.741 0 0 1-.5 1.05zm2.446.45c.15.162.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.881 3.881 0 0 0-.612-.053zM8.078 5.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z" />
+                                    </svg>
+                                </a>
+                                {% else %}
+
+                                <span class="text-center"><i class="fa fa-minus fa-2x text-dark"
+                                        aria-hidden="true"></i></span>
+                                {% endif %}
+                            </td>
+                            <td>{{norma.fecha_publicacion}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block js %}
-    <script>
-        function ConfirmDelete(id){
-            Swal.fire({
+<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+    const subtipos_uso_json = {{ sbu_json| safe }},
+    tipos_uso_json = {{ tu_json | safe }},
+    tipos_norma_json = {{ tn_json | safe }},
+    normativas_json = {{ normativas_json | safe }};
+
+
+    var topico = $("#topico").val(),
+        tu_id = $('#tipos_uso').val(),
+        sbu_id = $('#subtipos_uso').val(),
+        tn_id = $("#tipos_norma").val(), // "Titulo de grupo de tipo de norma"
+        tipos_norma = $("#tipos_norma"),
+        search = $("#filter_input"),
+        tipos_uso = $("#tipos_uso"),
+        subtipos_uso = $('#subtipos_uso'),
+        keywords = $("#keywords"),
+        date_range = undefined,
+        universo_acotado = normativas_json,
+        datatable_normativas = $('#datatable_normativas').DataTable({
+            searching: false,
+            ordering: true,
+            lengthChange: false,
+            responsive: true,
+        })
+
+    datatable_normativas.columns.adjust().draw();
+
+    $('#datetimes').daterangepicker({
+        locale: {
+            format: 'DD/MM/YYYY',
+            cancelLabel: 'Clear'
+        }
+    });
+
+    $('#datetimes').on('apply.daterangepicker', function (ev, picker) {
+        date_range = $(this).data('daterangepicker');
+        execFilters()
+    });
+
+    $('#datetimes').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('')
+        date_range = undefined
+        execFilters()
+    });
+
+    tiposNormaReactivo()
+    tiposUsoReactivo()
+    subtiposUsoReactivo()
+    execFilters()
+
+
+    tipos_norma.change(function () {
+        execFilters()
+    });
+
+    search.keyup(function () {
+        execFilters()
+    })
+
+    tipos_uso.change(function () {
+        subtiposUsoReactivo()
+        execFilters()
+    })
+
+    $('#topico').change(function () {
+        tiposNormaReactivo()
+        tiposUsoReactivo()
+        subtiposUsoReactivo()
+        execFilters()
+    })
+
+    subtipos_uso.change(function () {
+        sbu_id = $("#subtipos_uso").val()
+        subtipos_uso_option = $("#subtipos_uso option:selected").text()
+        execFilters()
+    })
+
+
+    keywords.change(function () {
+        execFilters()
+    })
+
+    function getNormativa(tipo_normas) {
+        if (tipo_normas.length != 0) {
+            let respuesta = [];
+
+            tipo_normas.forEach(sn => {
+                let r = universo_acotado.filter(n => {
+                    return n.tipo_norma_id == sn
+                })
+
+                respuesta = respuesta.concat(r)
+            })
+            return respuesta
+        } else {
+            return universo_acotado
+        }
+    }
+
+    function getSearchNormativa(search) {
+        if (search != undefined) {
+            return universo_acotado.filter(n => {
+                return n.norma.toLowerCase().includes(search.toLowerCase())
+                    || n.denominacion.toLowerCase().includes(search.toLowerCase())
+                    || n.base_legal.toLowerCase().includes(search.toLowerCase())
+                    || n.descripcion.toLowerCase().includes(search.toLowerCase())
+            })
+        } else {
+            return universo_acotado
+        }
+    }
+
+    function getTipoUsoNormativa(tu_id) {
+        if (tu_id != 0) {
+            return universo_acotado.filter(n => {
+                return n.tipos_uso_id.includes(parseInt(tu_id))
+            })
+        } else {
+            return universo_acotado
+        }
+    }
+
+    function getSubTipoUsoNormativa(sbu_id) {
+        if (sbu_id != 0) {
+            return universo_acotado.filter(n => {
+                return n.subtipos_uso_id.includes(parseInt(sbu_id))
+            })
+        } else {
+            return universo_acotado
+        }
+    }
+
+    function getNormasPorFechas(date_range) {
+        if (date_range != undefined && date_range != '') {
+
+            return universo_acotado.filter(n => {
+                return moment(n.fecha_publicacion) >= moment(date_range.startDate.format('DD/MM/YYYY')) && moment(n.fecha_publicacion) <= moment(date_range.endDate.format('DD/MM/YYYY'))
+            })
+        } else {
+            return universo_acotado
+        }
+    }
+
+    function getNormasPorKeywords(keywords) {
+
+        if (keywords.length != 0) {
+            let respuesta = [];
+
+            keywords.filter(k => {
+                let r = universo_acotado.filter(n => {
+                    return n.palabras_clave.includes(parseInt(k))
+                })
+
+
+                r.forEach(r => {
+                    if (respuesta.indexOf(r) == -1) {
+                        respuesta = respuesta.concat(r)
+                    }
+                })
+            })
+
+            return respuesta
+        } else {
+            return universo_acotado
+        }
+    }
+
+    function execFilters() {
+        universo_acotado = getNormativa(tipos_norma.val())
+        universo_acotado = getSearchNormativa(search.val())
+        universo_acotado = getTipoUsoNormativa(tipos_uso.val())
+        universo_acotado = getSubTipoUsoNormativa(subtipos_uso.val())
+        universo_acotado = getNormasPorKeywords(keywords.val())
+        universo_acotado = getNormasPorFechas(date_range)
+
+        datatable_normativas.destroy()
+
+        render(universo_acotado)
+
+        datatable_normativas = $('#datatable_normativas').DataTable({
+            searching: false,
+            ordering: true,
+            lengthChange: false,
+        })
+
+        universo_acotado = normativas_json
+    }
+
+    function tiposNormaReactivo() {
+        topico = $("#topico").val()
+
+        var options_tn = ``
+        if (topico != 0) {
+            tipos_norma_json.forEach(tn => {
+                if (tn.topico_id == topico) {
+                    if (tn.order.length == 2) {
+                        options_tn += /*html*/`<option class="text-wrap font-weight-bold" grupo="${tn.grupo_id}" value="${tn.id}">${tn.name}</option>`
+                    }
+                    else {
+                        options_tn += /*html*/`<option class="text-wrap" grupo="${tn.grupo_id}" value="${tn.id}">${tn.name}</option>`
+                    }
+                }
+            })
+
+        }
+        $("#tipos_norma").html(options_tn)
+        $("#tipos_norma option").prop("selected", true)
+    }
+
+    function tiposUsoReactivo() {
+        topico = $("#topico").val()
+
+        var options_tu = `<option class="text-wrap" value="0">TODOS</option>`
+        if (topico != 0) {
+            tipos_uso_json.forEach(tu => {
+                if (tu.topico_id == topico) {
+                    options_tu += /*html*/`<option class="text-wrap" value="${tu.id}">${tu.name}</option>`
+                }
+            })
+        }
+
+        $("#tipos_uso").html(options_tu)
+        tu_id = $("#tipos_uso").val()
+    }
+
+    function subtiposUsoReactivo() {
+        topico = $("#topico").val()
+        tu_id = $("#tipos_uso").val()
+        var options_sbu = `<option class="text-wrap" value="0">TODOS</option>`
+
+        subtipos_uso_json.forEach(sbu => {
+            if (tu_id != 0) {
+                if (sbu.tipos_uso_id == tu_id) {
+                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+                }
+            } else {
+                if (sbu.topico_id == topico) {
+                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
+                }
+            }
+        })
+
+        $("#subtipos_uso").html(options_sbu)
+        tipos_uso_option = $("#tipos_uso option:selected").text()
+        sbu_id = $("#subtipos_uso").val()
+    }
+
+    function render(resultado) {
+        html = ``
+
+        resultado.forEach((r) => {
+            html += /*html*/
+                `<tr >
+                    <td>${r.tipo_norma}</td>
+                    <td>${(r.tipos_uso).join('\n')}</td>
+                    <td>${(r.subtipos_uso).join('\n')}</td>
+                    <td >
+                        ${r.norma}`;
+
+            if (r.es_vigente) {
+                html += /*html*/`
+                <span class="fst-italic fw-lighter fs-7 text-center text-danger">*No vigente</span>
+            `
+            }
+
+            html +=/*html*/
+                `</td>
+                <td>
+                    ${r.denominacion}`
+            if (r.estado == 'NV') {
+                html += /*html*/`
+                        <small class="fst-italic fw-lighter fs-7 text-danger">*No Vigente</small>
+                        `
+            } else if (r.estado == 'DP') {
+                html += /*html*/` <small class="fst-italic fw-lighter fs-7 text-danger">*Derogado Parcialmente</small>`
+            }
+
+            html += /*html*/`
+                </td>
+                
+                <td >${r.descripcion}</td>
+                <td >${r.base_legal}</td>
+                <td >${r.articulo}</td>
+                <td class="text-center">
+                    `
+
+            if (r.document) {
+                html += /*html*/`
+                            <a target="_blank" href="/normativas/${r.id}/ver-pdf">
+                                <i class="fa fa-file-pdf fa-2x text-danger mr-1" aria-hidden="true"></i>
+                            </a>
+
+                    
+                        `
+            } else {
+                html += /*html*/` <span class="text-center"><i class="fa fa-minus fa-2x text-dark" aria-hidden="true"></i></span>`
+            }
+
+            html += /*html*/`
+                </td>
+                <td >
+                    ${r.fecha_publicacion}
+                </td>
+                <td>
+                    <a href="${r.id}/actualizar" class="btn btn-warning">
+                            <i class="fas fa-edit" ></i>
+                        </a>
+                    
+                        <a onclick="ConfirmDelete(${r.id})" href="#" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+            </tr>`
+        })
+
+        $('#normativas').html(html);
+    }
+
+
+    function ConfirmDelete(id) {
+        Swal.fire({
             title: 'Esta seguro que desea eliminar?',
             text: "Esta accion es irreversible!",
             icon: 'warning',
@@ -123,11 +515,11 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = `/normativas/${id}/eliminar`
-                }
-            })
-        }
-    </script>
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/normativas/${id}/eliminar`
+            }
+        })
+    }
+</script>
 {% endblock %}

@@ -28,13 +28,3 @@ class PoliciesFilter(django_filters.FilterSet):
         date_2 = datetime.strptime(value[1], '%d-%m-%Y')
 
         return queryset.filter( validity_date_start__gte = date_1 ).filter(validity_date_finish__lte = date_2 )
-
-class NormativaFilter(django_filters.FilterSet):
-    content = django_filters.CharFilter(method = 'norma_nombre_bl')
-
-    class Meta:
-        model = Normativa
-        fields = ['content']
-
-    def norma_nombre_bl(self, queryset, name, value):
-        return queryset.filter(Q(denominacion__icontains = value) | Q(norma__icontains = value) | Q(base_legal__icontains = value))
