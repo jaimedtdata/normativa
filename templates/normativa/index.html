@@ -239,6 +239,14 @@
         execFilters()
     });
 
+    $('#datetimes').keypress(function (event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            date_range = $(this).data('daterangepicker');
+            execFilters()
+        }
+    });
+
     tiposNormaReactivo()
     tiposUsoReactivo()
     subtiposUsoReactivo()
