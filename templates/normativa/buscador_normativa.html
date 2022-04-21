@@ -38,7 +38,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="">Tipo de norma:</label>
+                <label for="tipos_norma">Tipo</label>
                 <select class="form-control" name="tipo_normas[]" multiple="multiple" style="height:100%;"
                     id="tipos_norma">
                     {% for sn in subcategories_normas %}
@@ -90,8 +90,8 @@
                                 <div class="form-group mb-3">
                                     <label for=""> Palabras clave: </label>
 
-                                    <select class="form-control select-multiple" name="palabras_clave[]" multiple="multiple"
-                                        style="width:100%; height:100%;" id="keywords">
+                                    <select class="form-control select-multiple" name="palabras_clave[]"
+                                        multiple="multiple" style="width:100%; height:100%;" id="keywords">
                                         {% for pc in palabras_clave %}
                                         {% if pc.normativas.exists %}
                                         <option value="{{pc.id}}"> {{pc.name}} </option>
@@ -128,7 +128,7 @@
                     <table class="table table-bordered  datatable" id="normas-tabla">
                         <thead class="thead-dark">
                             <tr class="text-center">
-                                <th>Tipo de Norma</th>
+                                <th id="td_tipo_norma">Tipo de Norma</th>
                                 <th id="td_tipo">Tipo de Uso</th>
                                 <th id="td_subtipo">Subtipo de Uso</th>
                                 <th>Norma</th>
@@ -224,13 +224,15 @@
     tipos_uso_json = {{ tu | safe }},
     tipos_norma_json = {{ tn | safe }},
     label_tipo_uso = document.querySelectorAll("[for=tipo_uso]"),
-    label_subtipo_uso = document.querySelectorAll("[for=subtipo_usos]");
+    label_subtipo_uso = document.querySelectorAll("[for=subtipo_usos]"),
+    label_tipos_norma = document.querySelectorAll("[for=tipos_norma]");
 
     var universo_acotado = normas; // temporal para ejecutar mis filtros
 
-    // if (params.t != null) {
-    //     $('#topico').val(t);
-    // }
+    if (t != null) {
+        $('#topico').val(t)
+        topico = t;
+    }
 
     if (titulo == null) { // si el titulo no esta definido muestro el filtro de tipos de norma
         titulo = $('#topico option:selected').text()
@@ -240,6 +242,36 @@
     }
 
     $('#titulo').html(titulo);
+    changeTSlabel()
+
+    function changeTitulo() {
+        titulo = $('#topico option:selected').text()
+        $('#titulo').html(titulo);
+    }
+
+    function changeTSlabel() {
+        if (topico == 3) {
+            label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:";
+            label_subtipo_uso[0].innerHTML = "Subtipo de Procedimiento:";
+            $("#td_tipo").html("Tipo de Procedimiento:");
+            $("#td_subtipo").html("Subtipo de Procedimiento:");
+        } else {
+            label_tipo_uso[0].innerHTML = "Tipo de Uso:";
+            label_subtipo_uso[0].innerHTML = "Subtipo de Uso*";
+            $("#td_tipo").html("Tipo de Uso:");
+            $("#td_subtipo").html("Subtipo de Uso*");
+        }
+
+        if (topico == 1) {
+            label_tipos_norma[0].innerHTML = "Tipo de norma:"
+            $("#td_tipo_norma").html("Tipo de Norma:");
+
+        } else {
+            label_tipos_norma[0].innerHTML = "Tipo:"
+            $("#td_tipo_norma").html("Tipo");
+
+        }
+    }
 
     var tipos_norma = $("#tipos_norma"),
         search = $("#filter_input"),
@@ -258,7 +290,8 @@
     $('#datetimes').daterangepicker({
         locale: {
             format: 'DD/MM/YYYY',
-        }
+        },
+        showDropdowns: true,
     });
 
     $('#datetimes').on('apply.daterangepicker', function (ev, picker) {
@@ -272,9 +305,7 @@
         execFilters()
     });
 
-    if (t != null) {
-        $('#topico').val(t)
-    }
+
 
     tiposNormaReactivo()
     tiposUsoReactivo()
@@ -312,18 +343,8 @@
         tiposNormaReactivo()
         tiposUsoReactivo()
         subtiposUsoReactivo()
-
-        if (topico == 3) {
-            label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:";
-            label_subtipo_uso[0].innerHTML = "Subtipo de Procedimiento:";
-            $("#td_tipo").html("Tipo de Procedimiento:");
-            $("#td_subtipo").html("Subtipo de Procedimiento:");
-        } else {
-            label_tipo_uso[0].innerHTML = "Tipo de Uso:";
-            label_subtipo_uso[0].innerHTML = "Subtipo de Uso*";
-            $("#td_tipo").html("Tipo de Uso:");
-            $("#td_subtipo").html("Subtipo de Uso*");
-        }
+        changeTitulo()
+        changeTSlabel()
 
         execFilters()
     })
@@ -451,10 +472,12 @@
         if (topico != 0) {
             tipos_norma_json.forEach(tn => {
                 if (tn.topico_id == topico) {
-                    if (tn.order.length == 2) {
-                        options_tn += /*html*/`<option class="text-wrap font-weight-bold" grupo="${tn.grupo_id}" value="${tn.id}">${tn.name}</option>`
+                    if (tn.order != 0 && !tn.order.includes('.') ) {
+                        options_tn += /*html*/`<option class="text-wrap font-weight-bold" grupo="${tn.grupo_id}" value="${tn.id}">${tn.order} ${tn.name}</option>`
                     }
-                    else {
+                    else if (tn.order != 0) {
+                        options_tn += /*html*/`<option class="text-wrap" grupo="${tn.grupo_id}" value="${tn.id}">${tn.order} ${tn.name}</option>`
+                    } else {
                         options_tn += /*html*/`<option class="text-wrap" grupo="${tn.grupo_id}" value="${tn.id}">${tn.name}</option>`
                     }
                 }
