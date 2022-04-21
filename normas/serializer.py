@@ -29,7 +29,7 @@ def normas_serializer(norma):
         'estado' :norma.estado.name if norma.estado else '',
         'descripcion' : norma.descripcion if norma.descripcion else '',
         'document' : norma.document.url if norma.document else False,
-        'fecha_publicacion' : norma.fecha_publicacion.strftime('%Y-%m-%d') if norma.fecha_publicacion else '',
+        'fecha_publicacion' : norma.fecha_publicacion.strftime('%d/%m/%Y') if norma.fecha_publicacion else '',
         'palabras_clave' : [k.id for k in norma.keywords.all()],
     }
 

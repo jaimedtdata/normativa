@@ -11,6 +11,7 @@
         Registro de Normativa 
         <a href="{% url 'registrar-normativa' %}" class="btn btn-primary btn-fat text-white"
         style="background-color:#24387C;">
+        Agregar Norma
         <i class="fas fa-plus"></i>
     </a>
     </h1>
@@ -197,7 +198,7 @@
     label_tipo_uso = document.querySelectorAll("[for=tipos_uso]"),
     label_subtipo_uso = document.querySelectorAll("[for=subtipos_uso]"),
     label_tipos_norma = document.querySelectorAll("[for=tipos_norma]");
-
+    console.log(normativas_json)
 
     var topico = $("#topico").val(),
         tu_id = $('#tipos_uso').val(),
@@ -327,10 +328,9 @@
     }
 
     function getNormasPorFechas(date_range) {
-        if (date_range != undefined && date_range != '') {
-
+        if (date_range != undefined) {
             return universo_acotado.filter(n => {
-                return moment(n.fecha_publicacion) >= moment(date_range.startDate.format('DD/MM/YYYY')) && moment(n.fecha_publicacion) <= moment(date_range.endDate.format('DD/MM/YYYY'))
+                return moment(n.fecha_publicacion) >= moment(date_range.startDate) && moment(n.fecha_publicacion) <= moment(date_range.endDate)
             })
         } else {
             return universo_acotado
