@@ -124,35 +124,28 @@
 			<span class="sr-only">Loading...</span>
 		</div>
 	</h3>
-
 	<canvas class="pdf-viewer hidden">
-
 	</canvas>
 </main>
 <footer>
-    <ul>
-        <li class="text-wrap" style="width: 30rem;">
-			{{ normativa.denominacion }}
+	<ul>
+		<li class="text-wrap">
+			{{normativa.denominacion}}
 			{% if normativa.propiedad == 'PU' and normativa.document %}
-				<a href="{{ normativa.document.url }}" download>
-					<i class="fas fa-download"></i>
-				</a>
+			<a href="{{ normativa.document.url }}" download>
+				<i class="fas fa-download"></i>
+			</a>
 			{% endif %}
-        </li>
-        <li class="pagination">
-            <button id="previous"><i class="fas fa-arrow-alt-circle-left"></i></button>
-            <span id="current_page">0 of 0</span>
-            <button id="next"><i class="fas fa-arrow-alt-circle-right"></i></button>
-        </li>
 		</li>
 		<li class="pagination">
 			<button id="previous"><i class="fas fa-arrow-alt-circle-left"></i></button>
-			<span id="current_page">0 of 0</span>
+			<span id="current_page">0 de 0</span>
 			<button id="next"><i class="fas fa-arrow-alt-circle-right"></i></button>
 		</li>
+
 		<li>
-			<span id="zoomValue">150%</span>
-			<input type="range" id="zoom" name="cowbell" min="100" max="300" value="150" step="50" disabled>
+			<span id="zoomValue">100%</span>
+			<input type="range" id="zoom" name="cowbell" min="100" max="300" value="100" step="20" disabled>
 		</li>
 	</ul>
 </footer>
@@ -175,7 +168,7 @@
 			file: null,
 			countOfPages: 0,
 			currentPage: 1,
-			zoom: 1.5
+			zoom: 1
 		}
 	}
 
@@ -236,7 +229,7 @@
 			};
 			page.render(renderContext);
 		});
-		currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
+		currentPage.innerHTML = currentPDF.currentPage + ' de ' + currentPDF.countOfPages;
 	}
 </script>
 

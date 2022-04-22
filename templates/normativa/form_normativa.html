@@ -75,7 +75,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label> Topico principal de Norma: </label>
+                    <label> Tópico principal de Norma: </label>
                     <select class="form-control" aria-label="Default select example" name="topico" id="id_topico">
                         {% for un in topico_norma %}
                         <option value="{{un.id}}">{{un.name}}</option>
@@ -196,6 +196,7 @@
     const tipo_norma = document.getElementById('id_tipo_norma')
     const tipo_normas_json = {{ tipo_normas_json| safe }}
 
+    changeOptionsTipoUso()
     changeOptionsSubtipoUso()
     changeOptionsTipoNorma()
     requireForTopico(topico.value)
