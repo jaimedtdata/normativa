@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label> Topico principal de Norma: </label>
+                    <label> Tópico principal de Norma: </label>
                     <select class="form-control" aria-label="Default select example" name="topico" id="id_topico">
                         {% for un in topico_norma %}
                         <option value="{{un.id}}">{{un.name}}</option>
@@ -171,31 +171,40 @@
 
 
     topico.value = "{{normativa.tipo_norma.grupo.topico_id}}"
+    requireForTopico(topico.value)
+
+    changeOptionsTipoUso()
     tipos_uso.val({{ tnn| safe }});
     tipos_uso.trigger('change.select2');
-    tipo_norma.value = "{{normativa.tipo_norma_id}}"
-
-    
     changeOptionsSubtipoUso()
+    $('#id_subtipo_uso').val({{ form.subtipo_uso.value | safe }})
+
     changeOptionsTipoNorma()
+    tipo_norma.value = "{{normativa.tipo_norma_id}}"
     
-    $('#id_subtipo_uso').val({{ form.subtipo_uso.value|safe }})
-    
-    $(document).ready(function() {
-        $('#tipo_uso_id').on('select2:select', function() {
+    $(document).ready(function () {
+        $('#tipo_uso_id').on('select2:select', function () {
             changeOptionsSubtipoUso()
         })
-        $('#tipo_uso_id').on('select2:unselect', function() {
+        $('#tipo_uso_id').on('select2:unselect', function () {
             changeOptionsSubtipoUso()
         })
     });
 
-    topico.addEventListener('change', (e) => {
+    function requireForTopico(topico) {
+        if (topico == 4) {
+            document.getElementById('id_norma').removeAttribute('required');
+            document.getElementById('id_base_legal').removeAttribute('required');
+            document.getElementById('id_estado').removeAttribute('required');
+            document.getElementById('id_document').setAttribute('required', true);
+        } else {
+            document.getElementById('id_norma').setAttribute('required', true);
+            document.getElementById('id_base_legal').setAttribute('required', true);
+            document.getElementById('id_estado').setAttribute('required', true);
+            document.getElementById('id_document').removeAttribute('required');
+        }
 
-        changeOptionsTipoNorma()
-        changeOptionsTipoUso()
-
-        if (topico.value == 3) {
+        if (topico == 3) {
             label_tipo_uso[0].innerHTML = "Tipo de Procedimiento:"
             label_subtipo_uso[0].innerHTML = "Subtipo de Procedimiento:"
         } else {
@@ -203,6 +212,12 @@
             label_subtipo_uso[0].innerHTML = "Subtipo de Uso*"
         }
 
+    }
+
+    topico.addEventListener('change', (e) => {
+        changeOptionsTipoNorma()
+        changeOptionsTipoUso()
+        requireForTopico(topico.value)
     })
 
 
