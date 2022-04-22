@@ -133,14 +133,11 @@
     {% include '../partials/_palabras_clave.html' %}
 
 </div>
+
 {% endblock %}
 
 
 {% block js %}
-<script>
-
-</script>
-
 <script>
 
     const max_characters = document.getElementById('max_characters')
@@ -180,7 +177,7 @@
 
     changeOptionsTipoNorma()
     tipo_norma.value = "{{normativa.tipo_norma_id}}"
-    
+
     $(document).ready(function () {
         $('#tipo_uso_id').on('select2:select', function () {
             changeOptionsSubtipoUso()

@@ -46,7 +46,7 @@ class Tipo_Uso_Normas(models.Model):
         verbose_name_plural = 'Tipo de Uso'
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.topico}'
 
 class Subtipo_Normas(models.Model):
 
@@ -74,7 +74,7 @@ class Grupo_Tipo_Normas(models.Model):
         verbose_name_plural = 'Grupo de Tipo de Norma'
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.topico}'
 
 class Tipo_Normas(models.Model):
     name = models.CharField(max_length=200, blank=False, help_text='Nombre de Tipo de norma',verbose_name='Tipo norma')
