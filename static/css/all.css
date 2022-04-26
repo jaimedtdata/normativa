@@ -1,0 +1,152 @@
+@import 'header.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Lato');
+
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+.bg-cap {
+    background-color: #153878;
+}
+
+.bg-cap-2 {
+    background-color: #1e2b46;
+}
+
+.fa-15x {
+    font-size: 1.5rem;
+}
+
+.carousel-item-image {
+    object-fit: cover;
+    height: 600px;
+    max-height: 600px;
+}
+
+.carousel-text {
+    position: absolute;
+    bottom: 20px;
+}
+
+.seccion-normas-reglamentos {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    background-color: #ffffff;
+}
+
+
+.seccion-cursos-online {
+    background-color: #c1a03f;
+}
+
+.box {
+    position: relative;
+    width: 100%;
+    display: flex;
+    color: #858585;
+    box-shadow: 0 0rem 5rem rgba(0, 0, 0, 0.175)!important;
+}
+.box:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+}
+.box:hover{
+    background-color: #153878;
+    color: white !important;
+    cursor: pointer;
+}
+.box-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.padre {
+    position: relative;
+}
+
+.hijo-1 {
+    position: absolute;
+    z-index: 100;
+    width: calc(100% - 30px);
+    height: calc(100% - 24px);
+}
+
+.h-70 {
+    height: 70% !important;
+}
+.h-30 {
+    height: 30% !important;
+}
+
+.text-1{
+    color: #153878;
+    font-size: 45px;
+    line-height: 100%;
+}
+.text-2{
+    color: #000000;
+    font-size: 35px;
+    line-height: 100%;
+
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+.text-3{
+    color: #858585;
+    font-size: 25px;
+    line-height: 100%;
+}
+/* .container-grid{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat( 3 , 33% );
+    column-gap: 10px;
+    row-gap: 10px;
+}
+.container-grid:after {
+    content: '';
+    padding-bottom: 100%;
+}
+.element-grid{
+    border: 1px solid rgb(0, 0, 0);
+}
+.element-grid--primera{
+    grid-column: 1 / 4;
+} */
+
+
+.seccion-noticias-caprl {
+    background-color: #ffffff;
+}
+.seccion-noticias-caprl h1{
+    color: #173a79;
+}
+.noticias-caprl-imagenes {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.seccion-empresas-asociadas {
+    background-color: #d9dfed;
+}
+
+.seccion-enlaces-interes h2{
+    color: #6b6e74;
+}
+.enlaces-interes-imagenes {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.footer {
+    background-color: #f2f2f2;
+    color: #6b6e74 !important;
+}
+.footer a {
+    color: #6b6e74 !important;
+}
+  

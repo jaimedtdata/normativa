@@ -29,7 +29,7 @@ from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
 from normas.filters import PoliciesFilter
-from normas.models import Tipo_Uso_Normas, Grupo_Tipo_Normas, Preguntas_Frecuentes, Subtipo_Normas, Topico_Normas
+from normas.models import Estado_Normas, Tipo_Uso_Normas, Grupo_Tipo_Normas, Preguntas_Frecuentes, Subtipo_Normas, Topico_Normas
 from foro.models import Comentario_Foro
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -237,7 +237,7 @@ def dashboard(request):
         'topicos_norma' : Topico_Normas.objects.all(),
         'reglamento_comentado' : Grupo_Tipo_Normas.objects.get(id = 4)
     }
-    return render(request, 'dashboard.html', context)
+    return render(request, 'home.html', context)
 
 @login_required
 def grupo_normativa(request, tn):
@@ -255,6 +255,7 @@ def buscador(request):
     palabras_clave = Palabra_Clave_Normas.objects.all()
     subtipo_usos = Subtipo_Normas.objects.order_by('order')
     topico = Topico_Normas.objects.all()
+    estado = Estado_Normas.objects.all()
 
     normas = [ normas_serializer(norma) for norma in norma_date ]
     tn = [ tipo_norma_serializer(tn) for tn in tipo_normas ]
@@ -267,6 +268,7 @@ def buscador(request):
             'tipo_uso' : tipo_uso, 
             'palabras_clave' : palabras_clave,
             'subtipo_usos' : subtipo_usos,
+            'estado': estado,
             'normas' : mark_safe(json.dumps(normas)),
             'sbu' : mark_safe(json.dumps(sbu)),
             'tu' : mark_safe(json.dumps(tu)),

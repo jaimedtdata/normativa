@@ -1,4 +1,4 @@
-{% extends 'base_nfr.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 <!--Css-->
 {% block css %}
@@ -8,7 +8,7 @@
 <!--content-->
 {% block content %}
 
-<div class="px-2">
+<div class="px-2 py-5">
     <div class="row text-center p-0 m-0">
         <div class="col-2">
             <a href="{% url 'home' %}">
@@ -28,9 +28,14 @@
     <br><br>
 
     <div class="row p-0 m-0">
+
         <div class="col-lg-3 d-none" style="height:720px;" id="subnormas_caja">
+            <div class="alert alert-success" role="alert">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Buscar por Categoría y SubCatergoría
+            </div>
             <div class="form group">
-                <label for="">Tópico:</label>
+                <label for="">Categoría:</label>
                 <select class="form-control p-0" name="" id="topico" style="font-size: .9rem;">
                     {% for t in topico %}
                     <option value="{{t.id}}">{{t.name}}</option>
@@ -38,17 +43,17 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="tipos_norma">Tipo</label>
+                <label for="tipos_norma">Subcategoría</label>
                 <select class="form-control" name="tipo_normas[]" multiple="multiple" style="height:100%;"
                     id="tipos_norma">
-                    
+
                 </select>
             </div>
         </div>
 
         <div class="col-lg" id="right">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class="col-md-10 offset-md-1">
                     <div class="alert alert-warning" role="alert">
                         <i class="fa-solid fa-circle-exclamation"></i>
                         Los filtros no son obligatorios
@@ -73,6 +78,18 @@
                                     <option class="text-wrap" value="0">TODOS</option>
                                     {% for sbu in subtipo_usos %}
                                     <option class="text-wrap" value="{{sbu.id}}">{{sbu.name}} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 ">
+                            <div class="form-group">
+                                <label for="subtipo_usos"> Estado: </label>
+                                <select class="form-control" id="estado">
+                                    <option class="text-wrap" value="0">TODOS</option>
+                                    {% for e in estado %}
+                                    <option class="text-wrap" value="{{e.id}}">{{e.name}} </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -102,15 +119,15 @@
                             <div class="form-group">
                                 <div class="form-group mb-3">
                                     <input class="form-control" type="text" id="filter_input"
-                                        placeholder="BUSCAR POR NORMA, TÍTULO, DESCRIPCIÓN O BASE LEGAL" />
+                                        placeholder="BUSCAR POR NORMA, TÍTULO, DESCRIPCIÓN, BASE LEGAL O MUNICIPALIDAD" />
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-4  ">
+                        <div class="col-md-3 ">
                             <input class="form-control text-sm text-center datepicker-here" style="font-size: 1rem;"
-                            type="text" name="datetimes" id="datetimes" data-language='es' data-range="true"
-                            data-multiple-dates-separator="-" placeholder="--Rango de Fechas--"/>
+                                type="text" name="datetimes" id="datetimes" data-language='es' data-range="true"
+                                data-multiple-dates-separator="-" placeholder="--Rango de Fechas--" />
                         </div>
                     </div>
                 </div>
@@ -249,6 +266,7 @@
         tipos_uso = $("#tipo_uso"),
         subtipos_uso = $('#subtipo_usos'),
         keywords = $("#keywords"),
+        estado = $("#estado"),
         date_range = undefined;
 
     var normas_tabla = $('#normas-tabla').DataTable({
@@ -260,7 +278,7 @@
 
     $('#datetimes').datepicker({
         clearButton: true,
-        onSelect: function(formattedDate, date) {
+        onSelect: function (formattedDate, date) {
             date.length == 2 ? date_range = date : date_range = undefined;
             execFilters();
         }
@@ -286,16 +304,20 @@
 
 
     tipos_norma.change(function () {
-        execFilters()
+        execFilters();
     });
 
     search.keyup(function () {
-        execFilters()
+        execFilters();
     })
 
     tipos_uso.change(function () {
         subtiposUsoReactivo()
-        execFilters()
+        execFilters();
+    })
+
+    estado.change(function () {
+        execFilters();
     })
 
     $('#topico').change(function () {
@@ -402,6 +424,16 @@
         }
     }
 
+    function getNormasPorEstado(estado_id) {
+        if (estado_id != 0) {
+            return universo_acotado.filter(n => {
+                return n.estado_id == estado_id
+            })
+        } else {
+            return universo_acotado
+        }
+    }
+
     function execFilters() {
         universo_acotado = getNormativa(tipos_norma.val())
         universo_acotado = getSearchNormativa(search.val())
@@ -409,6 +441,7 @@
         universo_acotado = getSubTipoUsoNormativa(subtipos_uso.val())
         universo_acotado = getNormasPorKeywords(keywords.val())
         universo_acotado = getNormasPorFechas(date_range)
+        universo_acotado = getNormasPorEstado(estado.val())
 
         normas_tabla.destroy()
 
@@ -431,7 +464,7 @@
         if (topico != 0) {
             tipos_norma_json.forEach(tn => {
                 if (tn.topico_id == topico) {
-                    if (tn.order != 0 && !tn.order.includes('.') ) {
+                    if (tn.order != 0 && !tn.order.includes('.')) {
                         options_tn += /*html*/`<option class="text-wrap font-weight-bold" grupo="${tn.grupo_id}" value="${tn.id}">${tn.order} ${tn.name}</option>`
                     }
                     else if (tn.order != 0) {
@@ -525,7 +558,7 @@
                     `
 
             if (r.document) {
-                if( r.document.includes('.pdf') ) {
+                if (r.document.includes('.pdf')) {
                     html += /*html*/`
                             <a target="_blank" href="/normativas/${r.id}/ver-pdf">
                                 <i class="fa fa-file-pdf fa-2x text-danger mr-1" aria-hidden="true"></i>

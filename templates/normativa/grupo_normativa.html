@@ -1,4 +1,4 @@
-{% extends 'base_nfr.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -7,90 +7,93 @@
 <link href="{% static 'css/css-estilos_das.css' %}" rel="stylesheet">
 {% endblock %}
 
-  
-<!--   Area Form    -->
-<script type="text/javascript">
-    function submitByEnter(e) {
-        if (e.keyCode == 13) {
-            document.getElementById("FormListado:b_RealizaBusqueda").click();
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-</script>
-<br>
-<div class="row text-center mx-0">
-    <div class="col-2">
+<div class="container py-5">
 
-        <a href="{% url 'home' %}">
-            <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
-        </a>
-
-        <div class="my-5 py-5">
-            <a  href="{% url 'home' %}">
-                <img class="img-fluid" src="{% static 'img/logo_cap.png' %}"   class="d-inline-block align-top" alt="">
-            </a> 
-        </div>   
-
-    </div>
-
-    <div class="col-8" >
-        <h1 class="gUppercase gFontWeight700" >
-            {{topico_norma}}
-        </h1>
-        <a href="{% url 'buscador' %}?t={{topico_norma.id}}" class="btn btn-lg btn-warning text-dark mb-0" style="z-index: -100;" > 
-            <b> {{topico_norma.button}} </b> <i class="fas fa-search text-dark"> </i> 
-        </a>
-    
-        <div class="mt-0 pt-0 gContainer gPositionRelative gContenido align-middle" style="width:100%;">
-            <div class="mt-0 pt-0 gAlignCenter">     
-                <hr class="gSeparator gSeparatorTrans gSeparator20">
-                <div class="gRowTemp">
-                    {% for gtn in grupos_tipo_norma %}
-                        <a href="{% url 'buscador' %}?norma={{gtn.name}}&gtn={{gtn.id}}&t={{gtn.topico_id}}" class="mx-3 mb-sm-2 mb-md-5  gInlineBlock gWidth200 gPositionRelative gCircleBox gVerticalTop gPaddingBottom25 gCircleBox2">
-                            <div class="gWidth50 gHeight3 gFondoCircleAmarilo gBlock gPositionAbsolute gBottom0 gLeft0 gRight0 gMarginAuto gAnimate3 gZindex1 gLine"></div>
-                            
-                            <div class="gWidth120 gHeight120 gLineHeight120 gInlineBlock gFondoBlanco gBorderRadius100p gBorder4 gBorderCircleAmarillo gBoxShadowBottom gPositionRelative gAnimate gTop0 gZindex2 gImgg">
-                                {% if gtn.icono %}
-                                    <img class="img-fluid mt-4" src="{{ gtn.icono.url }}" class="gInlineBlock gWidth57 gMarginTop31">
-                                {% else %}
-                                    <img class="img-fluid mt-4" src="{% static 'images/edificaciones.svg' %}" class="gInlineBlock gWidth57 gMarginTop31">
-                                {% endif %}
-                               
+    <div class="row">
+        <div class="col-xl-9 col-lg-9 col-md-12 col-12">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 padre">
+                    <div class="box-3 hijo-1">
+                        <div class="d-flex align-items-center text-1" style="height: 45%;">
+                            <p class="m-0">{{topico_norma.name}}</p>
+                        </div>
+                        <a href="{% url 'buscador' %}?t={{topico_norma.id}}">
+                            <div class="d-flex align-items-center text-2" style="height: 35%;">
+                                <p class="m-0"><b>{{topico_norma.button}} <i class="fas fa-search text-dark"></i></b></p>
                             </div>
-                            
-                            <h5 class="gUppercase gMarginTop20 gLineHeight25 gFontWeight700 gPositionRelative gZindex2">
-                                {{ gtn.name }}
-                            </h5>
-                        </a>               
-                    {% endfor %}
-                    
+                        </a>
+                        <div class="d-flex align-items-end text-3" style="height: 20%;">
+                            <p class="m-0">Por favor seleccione una subcategoría:</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
+                            <div class="box" style="box-shadow: none !important;">
+                                <div class="box-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <hr class="gSeparator gSeparatorTrans gSeparator20">
+                {% for gtn in grupos_tipo_norma %}
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-4">
+                    <a href="{% url 'buscador' %}?norma={{gtn.name}}&gtn={{gtn.id}}&t={{gtn.topico_id}}">
+                        <div class="box shadow-lg">
+                            <div class="box-content">
+                                <div class="h-70 d-flex justify-content-center align-items-center">
+                                    {% if gtn.icono %}
+                                    <img src="{{ gtn.icono.url }}" alt="" class="h-75">
+                                    {% else %}
+                                    <img src="{% static 'img/icono-circulo.png' %}" alt="" class="h-75">
+                                    {% endif %}
+
+                                </div>
+                                <div class="h-30 d-flex justify-content-center align-items-center">
+                                    <h5 class="text-center  h-100">{{ gtn.name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-12 col-12">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 mb-4">
+                    <div class="box shadow-lg" style="background-color: #418cc8;">
+                        <div class="box-content">
+                            <div class="h-100 d-flex justify-content-center align-items-center">
+                                <h1 class="text-center text-white">Espacio para anunciante</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 mb-4">
+                    <div class="box shadow-lg" style="background-color: #418cc8;">
+                        <div class="box-content">
+                            <div class="h-100 d-flex justify-content-center align-items-center">
+                                <h1 class="text-center text-white">Espacio para anunciante</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 mb-4">
+                    <div class="box shadow-lg" style="background-color: #2e3192;">
+                        <div class="box-content">
+                            <div class="h-100 d-flex justify-content-center align-items-center">
+                                <h1 class="text-center text-white">Colocar link para boletin legal</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-2">
-        <a href="{% url 'home' %}">
-            <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
-        </a>
-    </div>
-    <div class="col-1"></div>
+
 </div>
 
-
-
-<style>
-    #sidebar ul li a {
-       padding: 1.4rem 2rem;
-       font-size: 1.6rem;
-       display: block;
-       color:white;
-   }
-</style>
 {% endblock %}
 
 <!--endjohao-->
