@@ -1,4 +1,4 @@
-{% extends 'base_nfr.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 {% block css %}
 <link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container py-5">
     <h1 class="text-center">
         Registro de Normativa
         <a href="{% url 'registrar-normativa' %}" class="btn btn-primary btn-fat text-white"
@@ -51,7 +51,7 @@
     </div>
     <div class="col-lg-9">
         <div class="row">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-10 offset-md-1">
 
                 <div class="row">
                     <div class="col-md">
@@ -73,6 +73,18 @@
                                 <option class="text-wrap" value="0">TODOS</option>
                                 {% for sbu in subtipos_uso %}
                                 <option class="text-wrap" value="{{sbu.id}}">{{sbu.name}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 ">
+                        <div class="form-group">
+                            <label for="subtipo_usos"> Estado: </label>
+                            <select class="form-control" id="estado">
+                                <option class="text-wrap" value="0">TODOS</option>
+                                {% for e in estado %}
+                                <option class="text-wrap" value="{{e.id}}">{{e.name}} </option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -179,6 +191,7 @@
         tipos_uso = $("#tipos_uso"),
         subtipos_uso = $('#subtipos_uso'),
         keywords = $("#keywords"),
+        estado = $("#estado"),
         date_range = undefined,
         universo_acotado = normativas_json,
         datatable_normativas = $('#datatable_normativas').DataTable({
@@ -206,6 +219,10 @@
     tipos_uso.change(function () {
         subtiposUsoReactivo()
         execFilters()
+    })
+
+    estado.change(function () {
+        execFilters();
     })
 
     datetimes.datepicker({
@@ -319,6 +336,16 @@
         }
     }
 
+    function getNormasPorEstado(estado_id) {
+        if (estado_id != 0) {
+            return universo_acotado.filter(n => {
+                return n.estado_id == estado_id
+            })
+        } else {
+            return universo_acotado
+        }
+    }
+
     function execFilters() {
         universo_acotado = getNormativa(tipos_norma.val())
         universo_acotado = getSearchNormativa(search.val())
@@ -326,6 +353,7 @@
         universo_acotado = getSubTipoUsoNormativa(subtipos_uso.val())
         universo_acotado = getNormasPorKeywords(keywords.val())
         universo_acotado = getNormasPorFechas(date_range)
+        universo_acotado = getNormasPorEstado(estado.val())
 
         datatable_normativas.destroy()
 

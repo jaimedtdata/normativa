@@ -1,0 +1,17 @@
+div.text-white a {
+    color: #f2f2f2;
+}
+
+div.text-white a:hover {
+    color: #c7c7c7;
+}
+
+.a-nav:hover {
+    transition: 0.2s;
+    background-color: #181e2e;
+}
+
+.nav-search {
+    border-radius: 1rem;
+    background-color: transparent;
+}

@@ -4,7 +4,7 @@ from normas.models import PROPIEDAD_CHOICES, Estado_Normas, Normativa, Subtipo_N
 
 class NormativaForm(forms.ModelForm):
     norma = forms.CharField(max_length=200, required=False)
-    denominacion = forms.CharField(label="Título", max_length=100)
+    denominacion = forms.CharField(label="Título", max_length=300)
     base_legal = forms.CharField(label="Base Legal", max_length=200, required=False)
     fecha_publicacion = forms.DateField(label="Fecha de Publicación", widget=forms.DateInput(attrs={'type': 'date'}), required=False)
     tipo_norma = forms.ModelChoiceField(label="Tipo de Norma", queryset=Tipo_Normas.objects.order_by('name'))

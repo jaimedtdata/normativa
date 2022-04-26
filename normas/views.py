@@ -16,7 +16,7 @@ from normas.forms import NormativaForm
 from django.contrib.auth.decorators import login_required
 
 from normas.serializer import keywords_serializer, normas_serializer, subtipos_uso_serializer, tipo_norma_serializer, tipos_uso_serializer
-from .models import Tipo_Uso_Normas, Grupo_Tipo_Normas, Normativa, Palabra_Clave_Normas, Tipo_Normas, Subtipo_Normas, Topico_Normas
+from .models import Estado_Normas, Tipo_Uso_Normas, Grupo_Tipo_Normas, Normativa, Palabra_Clave_Normas, Tipo_Normas, Subtipo_Normas, Topico_Normas
 
 @login_required
 def index(request):
@@ -26,6 +26,7 @@ def index(request):
     palabras_clave = Palabra_Clave_Normas.objects.all()
     subtipos_uso = Subtipo_Normas.objects.order_by('order')
     topicos = Topico_Normas.objects.all()
+    estado = Estado_Normas.objects.all()
 
     normas = [ normas_serializer(norma) for norma in normativas ]
     tn = [ tipo_norma_serializer(tn) for tn in tipos_norma ]
@@ -38,6 +39,7 @@ def index(request):
             'tipos_uso' : tipos_uso, 
             'subtipos_uso' : subtipos_uso,
             'palabras_clave' : palabras_clave,
+            'estado': estado,
             'normativas_json' : json.dumps(normas),
             'sbu_json' : json.dumps(sbu),
             'tu_json' : json.dumps(tu),
