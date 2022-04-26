@@ -17,30 +17,32 @@ class CheckMembership:
         if User.objects.exists():
                 for user in User.objects.filter(is_active=False):
                     if user.is_active ==False:
-                        type_membership = user.user_membership.membership.membership_type
-                        if type_membership == 'PLPP':
-                            orders_exists = Order_payment.objects.filter(identity=user.user_membership.identity).exists()
-                            if orders_exists:
-                                last_order = Order_payment.objects.filter(identity=user.user_membership.identity).latest('created')
-                                day_finish_plan = last_order.validity_date_finish
-                                actual_day = timezone.now()
-                                if actual_day > day_finish_plan:
-                                    # pasa a usuario inactivo
-                                    user.is_active = False
-                                    user.save()
-                                else:
-                                #debe ser usuario activo 
-                                    user.is_active = True
-                                    user.save()
+                        try:
+                            type_membership = user.user_membership.membership.membership_type
+                            if type_membership == 'PLPP':
+                                orders_exists = Order_payment.objects.filter(identity=user.user_membership.identity).exists()
+                                if orders_exists:
+                                    last_order = Order_payment.objects.filter(identity=user.user_membership.identity).latest('created')
+                                    day_finish_plan = last_order.validity_date_finish
+                                    actual_day = timezone.now()
+                                    if actual_day > day_finish_plan:
+                                        # pasa a usuario inactivo
+                                        user.is_active = False
+                                        user.save()
+                                    else:
+                                    #debe ser usuario activo 
+                                        user.is_active = True
+                                        user.save()
 
-                        if  type_membership == 'PPPP':
-                            #profesional plan pago presencial
-                            pro_usuario = APIMember.objects.get(identity=user.username)
-                            actual_day = timezone.now()
-                            if pro_usuario.date_expired > actual_day:
-                                user.is_active = True  
-                                user.save()
-                                
+                            if  type_membership == 'PPPP':
+                                #profesional plan pago presencial
+                                pro_usuario = APIMember.objects.get(identity=user.username)
+                                actual_day = timezone.now()
+                                if pro_usuario.date_expired > actual_day:
+                                    user.is_active = True  
+                                    user.save()
+                        except:
+                            pass
        
         try:
             user = User.objects.get(username=request.user.username)
