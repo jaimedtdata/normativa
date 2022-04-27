@@ -434,7 +434,10 @@ class SignUpClients(FormView):
         self.request.session['user_identity']= cd['identity']
         
         token = UserToken(user_profile=member)
-        send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        try:
+            send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        except:
+            pass
 
         return HttpResponseRedirect(reverse_lazy('client_choose_plan'))
 
@@ -559,7 +562,10 @@ class SignUpPremiumCAP(FormView):
         self.request.session['user_identity']= api_user.identity
         print('api_user identity:',api_user.identity)
         token = UserToken(user_profile=member)
-        send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        try:
+            send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        except:
+            pass
     
         return HttpResponseRedirect(reverse_lazy('premium_choose_plan'))
         #return HttpResponseRedirect(reverse_lazy('client_choose_plan'))

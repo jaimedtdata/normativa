@@ -63,9 +63,9 @@ class APIMember(models.Model):
     name_user = models.CharField(max_length=250, 
         verbose_name='Nombre del usuario')
     first_surname= models.CharField(max_length=250, 
-        verbose_name='Apellido Materno', blank=True, null=True)
-    second_surname = models.CharField(max_length=250, 
         verbose_name='Apellido Paterno', blank=True, null=True)
+    second_surname = models.CharField(max_length=250, 
+        verbose_name='Apellido Materno', blank=True, null=True)
     cap_num = models.PositiveBigIntegerField(verbose_name='No. de Colegiatura')
     identity = models.CharField(max_length=11, blank=True,
         help_text='DNI o RUC',

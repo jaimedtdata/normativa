@@ -37,8 +37,7 @@
                     aria-expanded="false">
                     <i class="fas fa-user"></i>
                     {% if request.user.user_membership %}
-                    <span>@{{request.user.user_membership.names}}{{ request.user.user_membership.first_surname.0 }}{{
-                        request.user.user_membership.second_surname.0 }}</span>
+                    <span>@{{request.user.user_membership.names}}{{ request.user.user_membership.first_surname.0 }}{{ request.user.user_membership.second_surname.0 }}</span>
                     {% else %}
                     <span>@{{request.user.username}}</span>
                     {% endif %}

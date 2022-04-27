@@ -83,7 +83,11 @@ class RegisterCapAPIView(APIView):
             cd = serializer.validated_data
             member = register_cap_users(cd)
             token = UserToken(user_profile=member)
-            send_confirm_account(self.request, token.get_confirm_link(), member.email)
+            try:
+                send_confirm_account(self.request, token.get_confirm_link(), member.email)
+            except:
+                pass
+            
             data = {
                 'email': serializer.data['email'],
             }

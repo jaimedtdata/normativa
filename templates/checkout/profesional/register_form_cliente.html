@@ -134,11 +134,74 @@
     </div>
 </div>
 
+
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     {% include 'register/modal.html' %}
 </div>
 
 <script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
+<script>
+    const name =  document.getElementById('id_names')
+    const first_surname =  document.getElementById('id_first_surname')
+    const second_surname =  document.getElementById('id_second_surname')
+    const identity =  document.getElementById('id_identity')
+    const mobile =  document.getElementById('id_mobile')
+
+    identity.addEventListener('input', (e)=>{
+        if(identity.value.length >11){
+            e.target.value = e.target.value.substring(0,11);
+            return false;
+        }
+    })
+
+    mobile.addEventListener('input', (e)=>{
+        if(mobile.value.length >9){
+            e.target.value = e.target.value.substring(0,9);
+            return false;
+        }
+    })
+
+    name.addEventListener('keydown', (e) =>{
+        //console.log("tecla",e.keyCode)
+
+        if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
+            e.preventDefault()
+        }
+        
+    })
+
+    first_surname.addEventListener('keydown', (e) =>{
+        console.log("tecla",e.keyCode)
+
+        if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
+            e.preventDefault()
+        }
+        
+    })
+
+    second_surname.addEventListener('keydown', (e) =>{
+        console.log("tecla",e.keyCode)
+
+        if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
+            e.preventDefault()
+        }
+        
+    })
+
+    // name.addEventListener('keyup', (e) =>{
+    //     if(e.keyCode===192){
+    //         console.log('keypress xd')
+    //         e.target.value=""
+            
+    //         alert('no se permiten tildes')
+    //         e.preventDefault()
+            
+    //     }
+
+    // })
+
+   
+</script>
 
 {{ExternalUserForm}}
 
