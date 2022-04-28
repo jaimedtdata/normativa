@@ -159,10 +159,16 @@ class ExternalUserForm(forms.Form):
 
         def clean_identity(self):
             identity = self.cleaned_data['identity']
+            member = Member.objects.filter(identity=identity).exists()
+
             
             if  len(str(identity)) < 8:
                 print('error en el dni')
                 raise forms.ValidationError("Ingrese un número de DNI válido")
+            
+            if member:
+                print('error en el dni')
+                raise forms.ValidationError("Este DNI ya se encuentra registrado")
             
             return identity
                     
