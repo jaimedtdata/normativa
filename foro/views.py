@@ -1,7 +1,7 @@
 import random
 import json
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from foro.emails import async_send_email_suscription, send_email_suscription
 
 from foro.exceptions import MyException
@@ -11,6 +11,7 @@ from normas.models import Tipo_Uso_Normas, Normativa
 from apps.models import Member, UserToken
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+from .forms import EditComentForo
 
 @login_required
 def foro(request):
@@ -60,6 +61,20 @@ def borrar_comentario_foro(request, foro_id, comentario_id):
 
     return redirect('foro_comentarios', foro_id = foro_id)
 
+@login_required
+def editar_comentario_foro(request, foro_id, comentario_id):
+    comentario = get_object_or_404(Comentario_Foro, id=comentario_id)
+    form = EditComentForo(instance=comentario ) 
+
+    #comentario = Comentario_Foro.objects.filter(id = comentario_id)
+
+    if request.method == "POST":
+        #form = ProductForm(data=request.POST, files = request.FILES, instance=product)
+        comentario = Comentario_Foro.objects.filter(id = comentario_id)
+        comentario.delete()
+        return redirect('foro_comentarios', foro_id = foro_id)
+
+    return render(request, 'foro/editar_comentario.html', {'form': form})
 
 # SUSCRIPCION Y DESUSCRIPCION DE FORO POR PARTE DE LOS USUARIOS PARTICIPANTES
 @login_required

@@ -5,34 +5,7 @@
 
 <div class="card border-secondary mb-3" > 
   <img class="card-img-top" src="{% static 'img/Forofondo.jpg' %}" alt="Card image cap" style=" height:180px;">
-  <div class="card-body" style='background:white;'>
   
-      <div class="row">
-        <div class="col-md-10">
-          <h5 class="card-title">foro: {{foro.nombre}}</h5>               
-          <p class="card-text">Descripción: {{foro.descripcion}}</p>
-        </div>
-        {% if request.user.user_membership.user_id == request.user.id %}
-
-          {% if is_suscribed %}
-          <div class="col-md-2" id="accion_suscribe">
-            <button class="btn btn-danger" onclick="desuscribirse()">
-              <i class="fa fa-bell-slash" aria-hidden="true"></i>
-              Desuscribirse
-            </button>
-          </div>
-          {% else %}
-          <div class="col-md-2" id="accion_suscribe">
-            <button class="btn btn-success" onclick="suscribirse()">
-              <i class="fa fa-bell" aria-hidden="true"></i>
-              Suscribirse
-            </button>
-          </div>
-          {% endif %}
-
-        {% endif %}
-      </div>
-  </div>
             
 </div>
         
