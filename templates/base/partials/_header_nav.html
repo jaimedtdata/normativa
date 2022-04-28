@@ -72,11 +72,16 @@
                         <i class="fa-solid fa-people-arrows-left-right"></i>
                         Busqueda por proveedor
                     </a>
+                    
+                    {% include 'base/partials/cart_shop.html' %}
+                    
+                    {% if request.user.user_membership %}
                     <div class="dropdown-divider"></div>
                     <a href="{% url 'history_purchase' %}" class="dropdown-item">
                         <i class="fa-solid fa-bag-shopping"></i>
                         Historial de compras
                     </a>
+                    {% endif %}
                     <div class="dropdown-divider"></div>
                     <a href="{% url 'logout' %}" class="dropdown-item">
                         <i class="fas fa-sign-out-alt"></i>
