@@ -1,28 +1,135 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+{% block vendor_css %}
+<link href="{% static 'vendor/airdatepicker/dist/css/datepicker.min.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
+
+{% if messages %}
+{% for m in messages %}
+
+<script>
+    Swal.fire({
+        'title': "Completado",
+        "text": "{{m}}",
+        "icon": "success",
+    })
+</script>
+
+{% endfor %}
+{% endif %}
+
 <div class="container py-5">
     <h1>Cursos en linea</h1>
+    <form class="form-group" method="get" autocomplete="off">
+        <div class="row ">
+            <div class="col">
+                <div class="row">
+                    <div class="col-md-9">
+                        {{filter.form.contenido|as_crispy_field}}
+                    </div>
+                    <div class="col-md-3">
+                        {{filter.form.rango_fechas|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        {{filter.form.palabras_clave|as_crispy_field}}
+                    </div>
+                </div>
+                <button class="btn btn-warning">
+                    Buscar
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="{% url 'crear-curso' %}" class="btn btn-primary float-right">
+                    Agregar Curso
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </form>
+
     <div class="row row-cols-1 row-cols-md-3">
         {% for c in entity %}
         <div class="col mb-4">
-            <a href="{% url 'ver-curso' c.id %}">
-                <div class="card h-100">
-                    {% if c.caratula %}
-                        <img src="{{ c.caratula.url }}" class="card-img-top" alt="...">
-                    {% else %}
-                        <img src="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" class="card-img-top" alt="...">
-                    {% endif %}
-                    <div class="card-body">
-                    <h5 class="card-title">{{ c.titulo }}</h5>
-                    <p class="card-text">{{ c.descripcion }}</p>
-                    <p class="card-text"><small class="text-muted">{{ c.fecha_publicacion }}</small></p>
-                    </div>
+            <div class="card h-100">
+                {% if c.caratula %}
+                <img src="{{ c.caratula.url }}" class="card-img-top" alt="...">
+                {% else %}
+                <img src="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
+                    class="card-img-top" alt="...">
+                {% endif %}
+                <div class="card-body">
+                    <a href="{% url 'ver-curso' c.id %}">
+                        <h5 class="card-title">{{ c.titulo }}</h5>
+                        <p class="card-text">{{ c.descripcion }}</p>
+                        <p class="card-text">
+                            {% if c.fecha_publicacion %}
+                            <small class="text-muted">{{ c.fecha_publicacion }}</small>
+                            {% endif %}
+                        </p>
+                    </a>
                 </div>
-            </a>
+                <div class="card-footer">
+                    <a href="{% url 'editar-curso' c.id %}" class="btn btn-info">
+                        <i class="fas fa-edit"></i>
+                        Editar
+                    </a>
+                    <button class="btn btn-danger float-right" onclick="confirmDelete({{c.id}})">
+                        <i class="fas fa-trash"></i>
+                        Eliminar
+                    </button>
+                </div>
+            </div>
         </div>
         {% endfor %}
+    </div>
+    {% include 'partials/_paginator.html' %}
 
-      </div>
 </div>
+{% endblock %}
+
+{% block vendor_js %}
+<script src="{% static 'vendor/airdatepicker/dist/js/datepicker.min.js' %}"></script>
+<script src="{% static 'vendor/airdatepicker/dist/js/i18n/datepicker.es.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+{% endblock %}
+
+{% block js %}
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Esta seguro que desea eliminar?',
+            text: "Esta accion es irreversible!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/cursos/${id}/eliminar`
+            }
+        })
+    }
+
+    $('#id_rango_fechas').datepicker({
+        clearButton: true,
+        range:true,
+        multipleDatesSeparator:" - ",
+        onSelect: function(formattedDate, date) {
+            console.log(date)
+        }
+    })
+
+    setTimeout(function() {
+        let date_range = "{{request.GET.rango_fechas}}".split(' - ')
+        if (date_range.length == 2) {
+            $('#id_rango_fechas').data('datepicker').selectDate([new Date(moment(date_range[0], "DD/MM/Y")), new Date(moment(date_range[1], "DD/MM/Y"))]);
+        }
+    }, 100)
+</script>
 {% endblock %}

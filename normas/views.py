@@ -122,7 +122,6 @@ def registrar_palabras_clave(request, normativa):
 
 class NormativaUpdateView(UpdateView):
     model = Normativa
-    # fields = ['norma', 'denominacion', 'base_legal', 'fecha_publicacion', 'tipo_norma', 'tipo_uso', 'document', 'es_foro', 'es_vigente', 'descripcion']
     template_name = 'normativa/edit_normativa.html'
     form_class = NormativaForm
 

@@ -35,7 +35,8 @@
 
 <body>
   <div class="wrapper">
-    {% include 'base/partials/_header_nav.html' %}
+    {% include 'base/partials/_header.html' %}
+    {% include 'base/partials/_top_nav.html' %}
     <div class="content">
       {% block content %}
       {% endblock %}
@@ -62,6 +63,26 @@
     });
     $('.select-multiple').select2({
     });
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+  </script>
+
+  <script>
+    document.getElementById('search_topnav').addEventListener('keypress', (e) => {
+      if (e.keyCode == 13) {
+        window.location.href = `http://127.0.0.1:8000/buscador?norma=OPINIONES%20VINCULANTES%20Y%20CASUISTICA&gtn=3&t=1&search=${document.getElementById('search_topnav').value}`;
+      }
+    })
   </script>
 
   {% block vendor_js %}
