@@ -146,6 +146,13 @@
     const second_surname =  document.getElementById('id_second_surname')
     const identity =  document.getElementById('id_identity')
     const mobile =  document.getElementById('id_mobile')
+    const address =  document.getElementById('id_address')
+
+    //Add Upper class
+    name.classList.add('upper-case')
+    first_surname.classList.add('upper-case')
+    second_surname.classList.add('upper-case')
+    address.classList.add('upper-case')
 
     identity.addEventListener('input', (e)=>{
         if(identity.value.length >11){
@@ -187,6 +194,19 @@
         }
         
     })
+
+   
+    //set to Upper
+    function set_upper_inputs(){
+        var upper_inputs = document.getElementsByClassName('upper-case')
+        for (var i = upper_inputs.length - 1; i >= 0; i--) {
+            upper_inputs[i].oninput = (ev) => {
+                ev.target.value = ev.target.value.toUpperCase()
+            }
+        }
+    }
+    
+    set_upper_inputs()
 
     // name.addEventListener('keyup', (e) =>{
     //     if(e.keyCode===192){
