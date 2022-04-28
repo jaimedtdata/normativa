@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block vendor_css %}
+<link href="{% static 'vendor/slick/slick.css' %}" rel="stylesheet" />
+<link href="{% static 'vendor/slick/slick-theme.css' %}" rel="stylesheet" />
+<link href="{% static 'css/slick-custom.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="container mb-3">
+    <h1>Hubo un error con tu tarjeta, comunicate con tu banco</h1>
+    <p>Transccion no realizada</p>
+    
+    {% if request.user.is_authenticated %}
+        <a class="btn btn-primary" href="{% url 'home' %}">Retornar al Home</a>
+    {% else %}
+        <a class="btn btn-primary" href="{% url 'login' %}">Iniciar sesión</a>
+        
+    {% endif %}
+        
+</div>
+    
+{% endblock %}
+{% block vendor_js %}
+<!-- ---------------------------------Slick 1.8.1--------------------------------- -->
+<script src="{% static 'vendor/slick/slick.min.js' %}"></script>
+<script src="{% static 'js/slick-custom.js' %}"></script>
+{% endblock %}
+{% block js %}
+{% endblock %}

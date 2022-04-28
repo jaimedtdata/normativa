@@ -496,21 +496,26 @@ def checkoutClient(request):
         token_transaccion = request.POST['transactionToken']
         #user=request.user.user_membership
         user=member
-        print('checkout',cd)
+        #print('checkout',cd)
         if request.POST['channel'] == 'pagoefectivo':
             url=request.POST['url']
             return redirect('client_cash_payment')
 
         transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
-        print("transacion exitosa", transaction_success)
-        niubiz_id = transaction_success['ecoreTransactionUUID']
-        orden = create_order_payment(user,email,niubiz_id, price, type_membership)
-        #create transaction niubiz
-        create_niubiz_transaction(transaction_success, orden)
-        #DELETE THE SESSION
-        
+        try:
+            #sigue el flujo
+            print("transacion exitosa", transaction_success)
+            niubiz_id = transaction_success['ecoreTransactionUUID']
+            orden = create_order_payment(user,email,niubiz_id, price, type_membership)
+            #create transaction niubiz
+            create_niubiz_transaction(transaction_success, orden)
+            #DELETE THE SESSION
 
-        return redirect('success_payment_client')
+            return redirect('success_payment_client')
+        except:
+            if transaction_success['errorCode'] == 400:
+                return redirect('manage_error_400')
+            
 
     return render(request, 'checkout/profesional/checkout-client.html', context)
 
@@ -621,21 +626,26 @@ def checkout_premium_cap(request):
         token_transaccion = request.POST['transactionToken']
         #user=request.user.user_membership
         user=member
-        print('checkout',cd)
+        #print('checkout',cd)
         if request.POST['channel'] == 'pagoefectivo':
             url=request.POST['url']
             return redirect('client_cash_payment')
 
         transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
-        print("transacion exitosa", transaction_success)
-        niubiz_id = transaction_success['ecoreTransactionUUID']
-        orden = create_order_payment(user,email,niubiz_id, price, type_membership)
-        #create transaction niubiz
-        create_niubiz_transaction(transaction_success, orden)
-        #DELETE THE SESSION
         
+        try:
+            print("transacion exitosa", transaction_success)
+            niubiz_id = transaction_success['ecoreTransactionUUID']
+            orden = create_order_payment(user,email,niubiz_id, price, type_membership)
+            #create transaction niubiz
+            create_niubiz_transaction(transaction_success, orden)
+            #DELETE THE SESSION
+            return redirect('success_payment_cap')
 
-        return redirect('success_payment_cap')
+        except:
+            if transaction_success['errorCode'] == 400:
+                return redirect('manage_error_400')
+           
 
 
     return render(request, 'checkout/premium_agremiado/checkout_premium_cap.html', context)
@@ -710,22 +720,28 @@ def checkoutCAP(request):
         email=request.POST['customerEmail']
         token_transaccion = request.POST['transactionToken']
         user=request.user.user_membership
-        print('checkout',cd)
+        #print('checkout',cd)
         if request.POST['channel'] == 'pagoefectivo':
             url=request.POST['url']
             return redirect('cap_cash_payment')
 
         transaction_success=require_transaccion_autorizacion(security_token, token_transaccion, price, purchase_number)
-        print("transacion exitosa", transaction_success)
-        niubiz_id = transaction_success['ecoreTransactionUUID']
-        orden = create_order_payment(user,email,niubiz_id, price, type_membership)
-        #create transaction niubiz
-        create_niubiz_transaction(transaction_success, orden)
-        #DELETE THE SESSION
-        del request.session['plan_price']
-        request.session.modified = True
+        
+        try:
+            print("transacion exitosa", transaction_success)
+            niubiz_id = transaction_success['ecoreTransactionUUID']
+            orden = create_order_payment(user,email,niubiz_id, price, type_membership)
+            #create transaction niubiz
+            create_niubiz_transaction(transaction_success, orden)
+            #DELETE THE SESSION
+            del request.session['plan_price']
+            request.session.modified = True
 
-        return redirect('success_suscription_cap')
+            return redirect('success_suscription_cap')
+        except:
+            if transaction_success['errorCode'] == 400:
+                return redirect('manage_error_400')
+            
 
     return render(request, 'checkout/premium_free/checkoutCAP.html', context)
 
@@ -761,6 +777,8 @@ def history_purchase(request):
     }
     return render(request, 'checkout/premium_free/history_purchase.html' , context)
 
+def manage_error_400(request):
+    return render(request, 'checkout/error_request/card_no_authorized.html')
 
 
 @login_required
