@@ -1,9 +1,37 @@
 {% extends 'base/base.html' %}
 {% load static %}
 <!--Css-->
-{% block css %}
+{% block vendor_css %}
 <link href="{% static 'vendor/airdatepicker/dist/css/datepicker.min.css' %}" rel="stylesheet">
 <link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block css %}
+<style>
+    .wrapper1,
+    .wrapper2 {
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    .wrapper1 {
+        height: 20px;
+    }
+
+    .wrapper2 {
+        height: 100%;
+    }
+
+    .div1 {
+        width: 2000px;
+        height: 20px;
+    }
+
+    .div2 {
+        width: 2000px;
+    }
+</style>
 {% endblock %}
 <!--content-->
 {% block content %}
@@ -11,8 +39,8 @@
 <div class="px-2 py-5">
     <div class="row text-center p-0 m-0">
         <div class="col-2">
-            <a href="{% url 'home' %}">
-                <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
+            <a href="{% url 'grupo-normativa' request.GET.t %}">
+                <i class="fa-solid fa-arrow-left text-warning fa-3x"></i>
             </a>
         </div>
 
@@ -28,8 +56,7 @@
     <br><br>
 
     <div class="row p-0 m-0">
-
-        <div class="col-lg-3 d-none" style="height:720px;" id="subnormas_caja">
+        <div class="col-lg-3 d-none" id="subnormas_caja">
             <div class="alert alert-success" role="alert">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 Buscar por Categoría y SubCatergoría
@@ -42,7 +69,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group"  style="height:720px;">
                 <label for="tipos_norma">Subcategoría</label>
                 <select class="form-control" name="tipo_normas[]" multiple="multiple" style="height:100%;"
                     id="tipos_norma">
@@ -134,49 +161,51 @@
             </div>
 
             <div class="row">
+                <div class="col">
+                    <div class="wrapper1">
+                        <div class="div1">
+                        </div>
+                    </div>
+                    <div class="wrapper2">
+                        <div class="div2">
+                            <table class="table table-bordered datatable" id="normas-tabla">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        <th id="td_tipo_norma">Tipo de Norma</th>
+                                        <th id="td_tipo">Tipo de Uso</th>
+                                        <th id="td_subtipo">Subtipo de Uso</th>
+                                        <th>Norma</th>
+                                        <th>Título</th>
+                                        <th>Estado</th>
+                                        <th>Descripción</th>
+                                        <th>Base Legal</th>
+                                        <th>Articulado</th>
+                                        <th>Documento</th>
+                                        <th>Publicación</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="normas_edificatorias">
+                                    {% for norma in norma_date %}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
 
-                {% if norma_date %}
-                <div class="col table-responsive">
-                    <table class="table table-bordered  datatable" id="normas-tabla">
-                        <thead class="thead-dark">
-                            <tr class="text-center">
-                                <th id="td_tipo_norma">Tipo de Norma</th>
-                                <th id="td_tipo">Tipo de Uso</th>
-                                <th id="td_subtipo">Subtipo de Uso</th>
-                                <th>Norma</th>
-                                <th>Título</th>
-                                <th>Descripción</th>
-                                <th>Base Legal</th>
-                                <th>Articulado</th>
-                                <th>Documento</th>
-                                <th>Publicación</th>
-                            </tr>
-                        </thead>
-                        <tbody id="normas_edificatorias">
-                            {% for norma in norma_date %}
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-
-                    </table>
-
+                            </table>
+                        </div>
+                    </div>
                 </div>
-
-
-                {% endif %}
-
-
             </div>
 
         </div>
@@ -193,6 +222,16 @@
 <script src="{% static 'vendor/airdatepicker/dist/js/i18n/datepicker.es.js' %}"></script>
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
+    $(function () {
+        $(".wrapper1").scroll(function () {
+            $(".wrapper2")
+                .scrollLeft($(".wrapper1").scrollLeft());
+        });
+        $(".wrapper2").scroll(function () {
+            $(".wrapper1")
+                .scrollLeft($(".wrapper2").scrollLeft());
+        });
+    });
 
     const params = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
@@ -201,7 +240,7 @@
     var gtn = params.gtn, // "grupo de tipo de norma"
         titulo = params.norma,
         t = params.t,
-
+        search = params.search,
         topico = $("#topico").val(),
         tu_id = $('#tipo_uso').val(),
         sbu_id = $('#subtipo_usos').val(),
@@ -220,6 +259,10 @@
     if (t != null) {
         $('#topico').val(t)
         topico = t;
+    }
+
+    if (search != null) {
+        $('#filter_input').val(search)
     }
 
     if (titulo == null) { // si el titulo no esta definido muestro el filtro de tipos de norma
@@ -273,7 +316,6 @@
         searching: false,
         ordering: true,
         lengthChange: false,
-        responsive: true,
     })
 
     $('#datetimes').datepicker({
@@ -361,14 +403,18 @@
     function getSearchNormativa(search) {
         if (search != undefined) {
             return universo_acotado.filter(n => {
-                return n.norma.toLowerCase().includes(search.toLowerCase())
-                    || n.denominacion.toLowerCase().includes(search.toLowerCase())
-                    || n.base_legal.toLowerCase().includes(search.toLowerCase())
-                    || n.descripcion.toLowerCase().includes(search.toLowerCase())
+                return removeTilde(n.norma).includes(removeTilde(search))
+                    || removeTilde(n.denominacion).includes(removeTilde(search))
+                    || removeTilde(n.base_legal).includes(removeTilde(search))
+                    || removeTilde(n.descripcion).includes(removeTilde(search))
             })
         } else {
             return universo_acotado
         }
+    }
+
+    function removeTilde(word) {
+        return word.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     }
 
     function getTipoUsoNormativa(tu_id) {
@@ -550,7 +596,7 @@
 
             html += /*html*/`
                 </td>
-                
+                <td >${r.estado}</td>
                 <td >${r.descripcion}</td>
                 <td >${r.base_legal}</td>
                 <td >${r.articulo}</td>

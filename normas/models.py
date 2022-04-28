@@ -149,7 +149,7 @@ class Palabra_Clave_Normas(models.Model):
 
 class Preguntas_Frecuentes(models.Model):     
     tipo_norma = models.ManyToManyField(Tipo_Normas,verbose_name='Tipo de norma',
-                                        related_name='preguntas', blank=True)                                         
+                                        related_name='tipos_norma', blank=True)                                         
     title = models.CharField(max_length=700, blank=False,
         help_text='Titulo de Consulta',
         verbose_name='Titulo de Consulta')      

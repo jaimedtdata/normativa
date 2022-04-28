@@ -2,62 +2,62 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block css %}
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+{% block vendor_css %}
+<link href="{% static 'vendor/airdatepicker/dist/css/datepicker.min.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 
 <div class="container py-5">
   <section class="accordion-section clearfix" aria-label="Question Accordions">
-    
+
     <h2>
-      Preguntas Frecuentes  
+      Preguntas Frecuentes
     </h2>
 
-  <form class="form-group" method="get">    
-  <div class="row">
-        <div class="col-3">
-          <select name="tipo_uso" class="form-control" id="{{ filter.form.id_for_tipo_uso }}">
-            <option value="0">TODOS</option>
-            {% for tu in tipo_uso %}
-            <option value="{{tu.order}}">{{tu.name}}</option>
-          {% endfor %}
-          </select>
-        </div>
-        <div class="col-3">
-          <input class="form-control" type="text" name="datetimes" id="id_datetimes" autocomplete="nop" placeholder="--RANGO FECHAS--" value="{{request.GET.datetimes}}"/>
-        </div>
-        <div class="col-5">
-            <input type="text" name="content" class="form-control" placeholder="BUSCAR POR TITULO DE PREGUNTA" id="{{ filter.form.id_for_content }}" value="{{request.GET.content}}">
-        </div>
-        <div class="col-1 form-group" style="padding-left: 0.2px;">
-          <button class="btn btn-warning btn-lg search_btn search_btn filter-btn" type="submit"> 
-            <i class="fas fa-search"></i>  
+    <form class="form-group" method="get" autocomplete="off">
+      <div class="row ">
+        <div class="col">
+          <div class="row">
+            <div class="col-md-9">
+              {{filter.form.contenido|as_crispy_field}}
+            </div>
+            <div class="col-md-3">
+              {{filter.form.rango_fechas|as_crispy_field}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              {{filter.form.tipos_norma|as_crispy_field}}
+            </div>
+          </div>
+          <button class="btn btn-warning">
+            Buscar
+            <i class="fas fa-search"></i>
           </button>
+          {% if perms.normas.add_preguntas_frecuentes and request.user.is_staff %}
+          <a href="{% url 'admin:normas_preguntas_frecuentes_add' %}" class="btn btn-square btn-primary float-right">
+            <i class="fas fa-plus"></i> 
+            Agregar pregunta
+          </a>
+          {% endif %}
         </div>
-      </div> 
+      </div>
     </form>
-    
-    {% if perms.normas.add_preguntas_frecuentes and request.user.is_staff %}
-      <a href="{% url 'admin:normas_preguntas_frecuentes_add' %}" class="btn btn-square btn-primary mb-3" ><i class="fas fa-plus"></i> Agregar pregunta</a> 
-    {% endif %}
-
-
-    
     <div class="accordion mt-3 " id="accordionExample">
       {% for p in entity %}
       <div class="card mb-2 shadow mb-5 bg-white rounded">
         <div class="card-header bg-info " id="headingOne">
           <h2 class="mb-0">
-            <button class="btn  btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{p.id}}" aria-expanded="true" aria-controls="collapse{{p.id}}">
+            <button class="btn  btn-block text-left" type="button" data-toggle="collapse"
+              data-target="#collapse{{p.id}}" aria-expanded="true" aria-controls="collapse{{p.id}}">
               <b class="text-white">
                 {{p.title}}
               </b>
             </button>
           </h2>
         </div>
-    
+
         <div id="collapse{{p.id}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
             {{p.message}}
@@ -66,37 +66,38 @@
       </div>
       {% endfor %}
     </div>
-    
+
   </section>
 </div>
 
 {% include 'partials/_paginator.html' %}
 
 {% endblock content %}
-
+{% block vendor_js %}
+<script src="{% static 'vendor/airdatepicker/dist/js/datepicker.min.js' %}"></script>
+<script src="{% static 'vendor/airdatepicker/dist/js/i18n/datepicker.es.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+{% endblock %}
 {% block js %}
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <script>
-  $(document).ready(function() {
-    $('#id_datetimes').daterangepicker({
-      autoUpdateInput: false,
-      locale: {
-          format: 'DD-MM-YYYY',
-          cancelLabel: 'Clear'
-      }
-    });
-
-    $('#id_datetimes').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
-    });
-
-    $('#id_datetimes').on('cancel.daterangepicker', function(ev, picker) {
-        $(this).val('');
-    });
-    
+  $('#id_rango_fechas').datepicker({
+    clearButton: true,
+    range: true,
+    multipleDatesSeparator: " - ",
+    onSelect: function (formattedDate, date) {
+      console.log(date)
+    }
   })
+
+  setTimeout(function () {
+    let date_range = "{{request.GET.rango_fechas}}".split(' - ')
+    if (date_range.length == 2) {
+      $('#id_rango_fechas').data('datepicker').selectDate([new Date(moment(date_range[0], "DD/MM/Y")), new Date(moment(date_range[1], "DD/MM/Y"))]);
+    }
+  }, 100)
 </script>
 
 {% endblock %}

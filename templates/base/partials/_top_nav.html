@@ -1,22 +1,4 @@
 {% load static %}
-<header class="blog-header bg-cap py-3 px-4 mb-0 shadow">
-    <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-6 text-left">
-            <img class="img-fluid" src="{% static 'img/logo_cap.svg' %}">
-        </div>
-        <div class="col-6 text-right text-white ">
-            <i class="fa-brands fa-facebook-square fa-1x"></i>
-            <i class="fa-brands fa-instagram-square fa-1x"></i>
-            <i class="fa-brands fa-twitter-square fa-1x"></i>
-            <i class="fa-brands fa-linkedin fa-1x"></i>
-            <p class="font-weight-bolder text-sm-none">
-                <a class="text-decoration-none w-100 d-inline-block text-truncate"
-                    href="#">correoparaconsultas@limacap.org</a>
-            </p>
-        </div>
-    </div>
-</header>
-
 <nav class="navbar sticky-top navbar-light py-0 bg-cap-2">
     <div class="container">
         <div class="nav-scroller w-100 h-100">
@@ -27,10 +9,10 @@
                 <a href="{% url 'foro' %}" class="py-4 px-3 text-white text-decoration-none a-nav">Foro de Discusión</a>
                 <a href="{% url 'preguntas' %}" class="py-4 px-3 text-white text-decoration-none a-nav">Preguntas
                     Frecuentes</a>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2  nav-search" type="search" placeholder="Search"
+                <div class="form-inline">
+                    <input class="form-control mr-sm-2  nav-search" type="search" placeholder="Search" id="search_topnav"
                         aria-label="Search">
-                </form>
+                </div>
 
                 {% if request.user %}
                 <a class="py-4 px-3 text-white text-decoration-none a-nav dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"

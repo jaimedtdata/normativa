@@ -58,7 +58,6 @@
 	footer {
 		position: sticky;
 		bottom: 0;
-		height: 10vh;
 		background-color: #000000;
 	}
 
@@ -128,26 +127,25 @@
 	</canvas>
 </main>
 <footer>
-	<ul>
-		<li class="text-wrap">
+	<div class="row mx-0">
+		<div class="col-md text-center">
 			{{normativa.denominacion}}
 			{% if normativa.propiedad == 'PU' and normativa.document %}
 			<a href="{{ normativa.document.url }}" download>
 				<i class="fas fa-download"></i>
 			</a>
 			{% endif %}
-		</li>
-		<li class="pagination">
+		</div>
+		<div class="col-md text-center">
 			<button id="previous"><i class="fas fa-arrow-alt-circle-left"></i></button>
 			<span id="current_page">0 de 0</span>
 			<button id="next"><i class="fas fa-arrow-alt-circle-right"></i></button>
-		</li>
-
-		<li>
+		</div>
+		<div class="col-md text-center">
 			<span id="zoomValue">100%</span>
 			<input type="range" id="zoom" name="cowbell" min="100" max="300" value="100" step="20" disabled>
-		</li>
-	</ul>
+		</div>
+	</div>
 </footer>
 
 {% endblock %}
@@ -156,6 +154,7 @@
 	integrity="sha512-U5C477Z8VvmbYAoV4HDq17tf4wG6HXPC6/KM9+0/wEXQQ13gmKY2Zb0Z2vu0VNUWch4GlJ+Tl/dfoLOH4i2msw=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+	$('.footer.text-center').remove()
 	const zoomButton = document.getElementById('zoom');
 	const input = document.getElementById('inputFile');
 	const openFile = document.getElementById('openPDF');
