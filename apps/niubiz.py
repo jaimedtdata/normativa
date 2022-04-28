@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 import requests
 import json
 from django.conf import settings
@@ -71,26 +72,38 @@ def require_transaccion_autorizacion(token_security, transacion_token, price, pu
 
     response = requests.request("POST", url_test_transaction_autorization, headers=headers, data=payload)
     res = response.json()
+    print("RESPUESTA: ",res)
 
-    data = {
-        "ecoreTransactionUUID": res['header']['ecoreTransactionUUID'],
-        'channel': res['fulfillment']['channel'],
-        "signature": res['fulfillment']['signature'],
-        "tokenId": res['order']['tokenId'],
-        "purchaseNumber": res['order']['purchaseNumber'],
-        "amount": res['order']['amount'],
-        "installment": res['order']['installment'],
-        "currency": res['order']['currency'],
-        "authorizedAmount": res['order']['authorizedAmount'],
-        "authorizationCode": res['order']['authorizationCode'],
-        "traceNumber": res['order']['traceNumber'],
-        "transactionDate": res['order']['transactionDate'],
-        "card": res['dataMap']['CARD'],
-        "action_description": res['dataMap']['ACTION_DESCRIPTION'],
-        "brand": res['dataMap']['BRAND'],
-    }
-    print(res)
-    return data
+    try:
+        print('salio todo bien')
+        data = {
+            "ecoreTransactionUUID": res['header']['ecoreTransactionUUID'],
+            'channel': res['fulfillment']['channel'],
+            "signature": res['fulfillment']['signature'],
+            "tokenId": res['order']['tokenId'],
+            "purchaseNumber": res['order']['purchaseNumber'],
+            "amount": res['order']['amount'],
+            "installment": res['order']['installment'],
+            "currency": res['order']['currency'],
+            "authorizedAmount": res['order']['authorizedAmount'],
+            "authorizationCode": res['order']['authorizationCode'],
+            "traceNumber": res['order']['traceNumber'],
+            "transactionDate": res['order']['transactionDate'],
+            "card": res['dataMap']['CARD'],
+            "action_description": res['dataMap']['ACTION_DESCRIPTION'],
+            "brand": res['dataMap']['BRAND'],
+        }
+        #CARD PUNTOS VIDA SOLUCIONAR
+        return data
+        
+    except:
+        if res['errorCode'] == 400 :
+            print('<-------------------------------')
+            print('entro al error')
+            data = {'error': True, 'errorCode': res['errorCode']}
+            return data
+       
+    
 
 def create_order_payment(user,email,niubiz_id, price, type_membership):
     #check if not exist any order

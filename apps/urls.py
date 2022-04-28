@@ -6,7 +6,8 @@ from .views import ( RegisterMemberTemplateView, plan_list, plan_external_user, 
                          checkoutCAP, success_suscription_cap, SignUpClients, success_payment_client,
                          SignUpPremiumCAP, checkout_premium_cap, success_payment_cap, history_purchase,
                          cap_choose_plan, add_plan_cap, cap_cash_payment, add_plan_client, 
-                         client_choose_plan, client_cash_payment, premium_choose_plan, add_plan_premium )
+                         client_choose_plan, client_cash_payment, premium_choose_plan, add_plan_premium,
+                         manage_error_400 )
 
 router = routers.DefaultRouter()
 router.register(r'users-erp', APiViewSetERP, basename='usersErp')
@@ -39,6 +40,8 @@ urlpatterns = [
     path('success-payment-cap/', success_payment_cap, name='success_payment_cap'),
     path('history-purchase/', history_purchase, name='history_purchase'),
 
+    #error code 400 card shop
+    path('manage_error_400',manage_error_400,name='manage_error_400'),
     #api views
     path('api/cap/', RegisterCapAPIView.as_view(), name='api-cap'),
     #path('api/member-external/', RegisterExternalUsersAPIView.as_view(), name='api-member-external'),
