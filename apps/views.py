@@ -28,7 +28,7 @@ from django.contrib.auth.views import (LoginView, LogoutView,
 from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 from apps.models import Plan, Member, UserToken
-from normas.filters import PoliciesFilter
+from normas.filters import PreguntasFilter
 from normas.models import Estado_Normas, Tipo_Uso_Normas, Grupo_Tipo_Normas, Preguntas_Frecuentes, Subtipo_Normas, Topico_Normas
 from foro.models import Comentario_Foro
 from django.shortcuts import get_object_or_404
@@ -434,7 +434,10 @@ class SignUpClients(FormView):
         self.request.session['user_identity']= cd['identity']
         
         token = UserToken(user_profile=member)
-        send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        try:
+            send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        except:
+            pass
 
         return HttpResponseRedirect(reverse_lazy('client_choose_plan'))
 
@@ -559,7 +562,10 @@ class SignUpPremiumCAP(FormView):
         self.request.session['user_identity']= api_user.identity
         print('api_user identity:',api_user.identity)
         token = UserToken(user_profile=member)
-        send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        try:
+            send_confirm_account(self.request, token.get_confirm_link(), member.email)
+        except:
+            pass
     
         return HttpResponseRedirect(reverse_lazy('premium_choose_plan'))
         #return HttpResponseRedirect(reverse_lazy('client_choose_plan'))
@@ -763,7 +769,7 @@ def preguntas(request):
     page = request.GET.get('page', 1)
 
     queryset = Preguntas_Frecuentes.objects.all()
-    filter = PoliciesFilter(request.GET, queryset=queryset)
+    filter = PreguntasFilter(request.GET, queryset=queryset)
 
     queryset = filter.qs
     paginator = Paginator(queryset, 2)

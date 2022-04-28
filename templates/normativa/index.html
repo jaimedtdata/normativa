@@ -1,12 +1,40 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% block css %}
+{% block vendor_css %}
 <link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="{% static 'vendor/airdatepicker/dist/css/datepicker.min.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block css %}
+<style>
+        .wrapper1,
+    .wrapper2 {
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    .wrapper1 {
+        height: 20px;
+    }
+
+    .wrapper2 {
+        height: 100%;
+    }
+
+    .div1 {
+        width: 2000px;
+        height: 20px;
+    }
+
+    .div2 {
+        width: 2000px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container py-5">
+<div class="container pt-5">
     <h1 class="text-center">
         Registro de Normativa
         <a href="{% url 'registrar-normativa' %}" class="btn btn-primary btn-fat text-white"
@@ -32,8 +60,8 @@
     {% endfor %}
     {% endif %}
 </div>
-<div class="row mx-0">
-    <div class="col-lg-3" style="height:720px;" id="subnormas_caja">
+<div class="row mx-0 pb-5">
+    <div class="col-lg-3" id="subnormas_caja">
         <div class="form group">
             <label for="">Tópico:</label>
             <select class="form-control p-0" name="" id="topico" style="font-size: .9rem;">
@@ -42,8 +70,8 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="form-group">
-            <label for="tipos_norma">Tipo de norma:</label>
+        <div class="form-group"  style="height:720px;" >
+            <label for="tipos_norma" >Tipo de norma:</label>
             <select class="form-control" name="tipos_norma[]" multiple="multiple" style="height:100%;" id="tipos_norma">
 
             </select>
@@ -127,44 +155,54 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col table-responsive">
-                <table class="table table-bordered" id="datatable_normativas">
-                    <thead class="thead-dark">
-                        <tr class="text-center">
-                            <th id="td_tipo_norma">Tipo de Norma</th>
-                            <th id="td_tipo">Tipo de Uso</th>
-                            <th id="td_subtipo">Subtipo de Uso</th>
-                            <th>Norma</th>
-                            <th>Título</th>
-                            <th>Descripción</th>
-                            <th>Base Legal</th>
-                            <th>Articulado</th>
-                            <th>Documento</th>
-                            <th>Publicación</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="normativas">
-                        {% for norma in norma_date %}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="col">
+                <div class="wrapper1">
+                    <div class="div1">
+                    </div>
+                </div>
+                <div class="wrapper2">
+                    <div class="div2">
+                        <table class="table table-bordered" id="datatable_normativas">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th id="td_tipo_norma">Tipo de Norma</th>
+                                    <th id="td_tipo">Tipo de Uso</th>
+                                    <th id="td_subtipo">Subtipo de Uso</th>
+                                    <th>Norma</th>
+                                    <th>Título</th>
+                                    <th>Estado</th>
+                                    <th>Descripción</th>
+                                    <th>Base Legal</th>
+                                    <th>Articulado</th>
+                                    <th>Documento</th>
+                                    <th>Publicación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="normativas">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}
@@ -175,6 +213,17 @@
 <script src="{% static 'vendor/airdatepicker/dist/js/i18n/datepicker.es.js' %}"></script>
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
+    $(function () {
+        $(".wrapper1").scroll(function () {
+            $(".wrapper2")
+                .scrollLeft($(".wrapper1").scrollLeft());
+        });
+        $(".wrapper2").scroll(function () {
+            $(".wrapper1")
+                .scrollLeft($(".wrapper2").scrollLeft());
+        });
+    });
+
     const subtipos_uso_json = {{ sbu_json| safe }},
     tipos_uso_json = {{ tu_json | safe }},
     tipos_norma_json = {{ tn_json | safe }},
@@ -272,14 +321,18 @@
     function getSearchNormativa(search) {
         if (search != undefined) {
             return universo_acotado.filter(n => {
-                return n.norma.toLowerCase().includes(search.toLowerCase())
-                    || n.denominacion.toLowerCase().includes(search.toLowerCase())
-                    || n.base_legal.toLowerCase().includes(search.toLowerCase())
-                    || n.descripcion.toLowerCase().includes(search.toLowerCase())
+                return removeTilde(n.norma).includes(removeTilde(search))
+                    || removeTilde(n.denominacion).includes(removeTilde(search))
+                    || removeTilde(n.base_legal).includes(removeTilde(search))
+                    || removeTilde(n.descripcion).includes(removeTilde(search))
             })
         } else {
             return universo_acotado
         }
+    }
+
+    function removeTilde(word) {
+        return word.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     }
 
     function getTipoUsoNormativa(tu_id) {
@@ -485,7 +538,7 @@
 
             html += /*html*/`
                 </td>
-                
+                <td >${r.estado}</td>
                 <td >${r.descripcion}</td>
                 <td >${r.base_legal}</td>
                 <td >${r.articulo}</td>

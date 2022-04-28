@@ -35,7 +35,7 @@ def create_member_free(user):
                             has_tutition= True
                             )
             print('.............................')
-            print(member)
+            #print(member)
             return member
         else:
             #users that not are abled to free account PLPA
@@ -76,7 +76,7 @@ def create_member_free(user):
                             membership= membership_noagremiado
                             )
         print('====================================')
-        print(member.names)
+        #print(member.names)
         return member
 
 def register_cap_users(user):
@@ -112,7 +112,7 @@ def register_cap_users(user):
                             has_tutition= True
                             )
             print('.............................')
-            print(member)
+            #print(member)
             password = user['password1']
 
             group = Group.objects.get(name='PARTICIPANTE')      

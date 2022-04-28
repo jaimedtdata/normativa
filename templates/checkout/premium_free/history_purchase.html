@@ -9,6 +9,16 @@
 
 {% block content %}
     <div class="container">
+        {% if request.user.user_membership %}
+        <div class="row d-flex justify-content-end">
+            <div class="">
+                <span class="text-success font-weight-bolder">
+                    Tu plan actual es  
+                    {{membership}}
+                </span> 
+            </div>
+        </div>
+        {% endif %}
         <div class="row mb-5">
             <div class="col">
                 <h1>Historial de compras</h1>

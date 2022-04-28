@@ -89,7 +89,7 @@ def require_transaccion_autorizacion(token_security, transacion_token, price, pu
         "action_description": res['dataMap']['ACTION_DESCRIPTION'],
         "brand": res['dataMap']['BRAND'],
     }
-    
+    print(res)
     return data
 
 def create_order_payment(user,email,niubiz_id, price, type_membership):

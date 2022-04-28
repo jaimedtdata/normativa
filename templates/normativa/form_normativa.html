@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container py-5">
     <div class="row text-center">
         <div class="col-2">
-            <a href="{% url 'home' %}">
-                <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
+            <a href="{% url 'index-normativas' %}">
+                <i class="fa fa-arrow-left fa-3x text-warning" aria-hidden="true"></i>
             </a>
         </div>
 
@@ -20,8 +20,8 @@
         </div>
 
         <div class="col-2">
-            <a href="{% url 'index-normativas' %}">
-                <i class="fa fa-arrow-right fa-3x text-warning" aria-hidden="true"></i>
+            <a href="{% url 'home' %}">
+                <i class="fa fa-home fa-3x text-warning" aria-hidden="true"></i>
             </a>
         </div>
     </div>
@@ -102,7 +102,7 @@
             <div class="col-6">
                 <div class="form-group">
                     {{ form.subtipo_uso|as_crispy_field }}
-
+                    <a class="badge badge-info" id="checkbox" style="cursor:pointer"> Seleccionar todos</a>
                 </div>
             </div>
         </div>
@@ -171,6 +171,11 @@
 
 {% block js %}
 <script>
+    $("#checkbox").click(function () {
+        $("#id_subtipo_uso > option").prop("selected", "selected");
+        $("#id_subtipo_uso").trigger("change");
+    });
+
 
     // PARA CONTAR CARACTERES RESTANTES EN DESCRIPCION
     const max_characters = document.getElementById('max_characters')

@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container py-5">
+      
+    <h3 class="text-center"> CREAR VIDEO CURSO </h3>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="form-group">
+                    <label>
+                        Palabra Clave:
+                    </label>
+                    <select class="form-control select-tags" name="palabras_clave" multiple="multiple" style="width:100%;"
+                        id="select4">
+                        {% for pc in palabras_clave %}
+                        <option value="{{pc.name}}"> {{pc.name}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input class="btn btn-primary btn-block" type="submit" value="Guardar">
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -134,11 +134,94 @@
     </div>
 </div>
 
+
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     {% include 'register/modal.html' %}
 </div>
 
 <script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
+<script>
+    const name =  document.getElementById('id_names')
+    const first_surname =  document.getElementById('id_first_surname')
+    const second_surname =  document.getElementById('id_second_surname')
+    const identity =  document.getElementById('id_identity')
+    const mobile =  document.getElementById('id_mobile')
+    const address =  document.getElementById('id_address')
+
+    //Add Upper class
+    name.classList.add('upper-case')
+    first_surname.classList.add('upper-case')
+    second_surname.classList.add('upper-case')
+    address.classList.add('upper-case')
+
+    identity.addEventListener('input', (e)=>{
+        if(identity.value.length >11){
+            e.target.value = e.target.value.substring(0,11);
+            return false;
+        }
+    })
+
+    mobile.addEventListener('input', (e)=>{
+        if(mobile.value.length >9){
+            e.target.value = e.target.value.substring(0,9);
+            return false;
+        }
+    })
+
+    name.addEventListener('keydown', (e) =>{
+        //console.log("tecla",e.keyCode)
+
+        if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
+            e.preventDefault()
+        }
+        
+    })
+
+    first_surname.addEventListener('keydown', (e) =>{
+        console.log("tecla",e.keyCode)
+
+        if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
+            e.preventDefault()
+        }
+        
+    })
+
+    second_surname.addEventListener('keydown', (e) =>{
+        console.log("tecla",e.keyCode)
+
+        if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
+            e.preventDefault()
+        }
+        
+    })
+
+   
+    //set to Upper
+    function set_upper_inputs(){
+        var upper_inputs = document.getElementsByClassName('upper-case')
+        for (var i = upper_inputs.length - 1; i >= 0; i--) {
+            upper_inputs[i].oninput = (ev) => {
+                ev.target.value = ev.target.value.toUpperCase()
+            }
+        }
+    }
+    
+    set_upper_inputs()
+
+    // name.addEventListener('keyup', (e) =>{
+    //     if(e.keyCode===192){
+    //         console.log('keypress xd')
+    //         e.target.value=""
+            
+    //         alert('no se permiten tildes')
+    //         e.preventDefault()
+            
+    //     }
+
+    // })
+
+   
+</script>
 
 {{ExternalUserForm}}
 
