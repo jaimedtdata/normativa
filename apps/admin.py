@@ -80,19 +80,25 @@ class Subtipo_Normas_Admin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = Subtipo_Normas_Resource
 admin.site.register(Subtipo_Normas, Subtipo_Normas_Admin)
 
-class Palabra_Clave_NormasAdmin(admin.ModelAdmin):
-    list_display=('id','name','normativa')
+class Palabra_Clave_Normas_Resource(resources.ModelResource):
+    class Meta:
+        model = Palabra_Clave_Normas
 
-class SubNormativaAdmin(admin.ModelAdmin):
-    list_display=('norma','norma_sub')
+class Palabra_Clave_Normas_Admin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display=('id', 'name')
+    search_fields = ['name']
+    resource_class = Palabra_Clave_Normas_Resource
+admin.site.register(Palabra_Clave_Normas, Palabra_Clave_Normas_Admin)
 
-class UsagePoliciesAdmin(admin.ModelAdmin):
-    list_display = ['title', 'order']
+class Preguntas_Frecuentes_Resource(resources.ModelResource):
+    class Meta:
+        model = Preguntas_Frecuentes
 
-admin.site.register(Palabra_Clave_Normas)
-admin.site.register(Preguntas_Frecuentes, )
-admin.site.register(UsagePolicies,UsagePoliciesAdmin )
-
+class Preguntas_Frecuentes_Admin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display=('id', 'title')
+    search_fields = ['title']
+    resource_class = Preguntas_Frecuentes_Resource
+admin.site.register(Preguntas_Frecuentes, Preguntas_Frecuentes_Admin)
 #
 class ListAdminMixin(object):
     def __init__(self, model, admin_site):

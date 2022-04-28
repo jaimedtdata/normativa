@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 import django_filters
 from datetime import datetime
 from django.db.models import Q
@@ -24,7 +25,7 @@ class PoliciesFilter(django_filters.FilterSet):
 
     def date_range(self, queryset, name, value):
         value = value.split(" - ")
-        date_1 = datetime.strptime(value[0], '%d-%m-%Y')
-        date_2 = datetime.strptime(value[1], '%d-%m-%Y')
+        date_1 = datetime.strptime(value[0], '%d/%m/%Y')
+        date_2 = datetime.strptime(value[1], '%d/%m/%Y')
 
         return queryset.filter( validity_date_start__gte = date_1 ).filter(validity_date_finish__lte = date_2 )

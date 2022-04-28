@@ -3,6 +3,7 @@ from apps.choices import *
 from django.contrib import admin
 from django.utils.html import format_html
 from django.contrib.auth.models import User
+from cursos.models import Curso
 # Create your models here.
 
 def upload_file(instance, filename):
@@ -131,11 +132,11 @@ class Normativa(models.Model):
     def __str__(self):
         return self.norma
 
-    
 class Palabra_Clave_Normas(models.Model):
     name = models.CharField(blank=False,null=False,unique=True, max_length=200,verbose_name='Nombre Palabra Clave')
     normativas = models.ManyToManyField(Normativa,verbose_name='Normativa',
                                         related_name='keywords', blank=True)
+    cursos = models.ManyToManyField(Curso, verbose_name="Curso", related_name="keywords", blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",
                                         blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización",
@@ -146,15 +147,10 @@ class Palabra_Clave_Normas(models.Model):
     def __str__(self):
         return self.name
 
-
-class Preguntas_Frecuentes(models.Model):
-    tipo_uso = models.ManyToManyField(Tipo_Uso_Normas,verbose_name='Tipo de uso',
-                                        related_name='preguntas', blank=True)
-    subtipo_uso = models.ManyToManyField(Subtipo_Normas,verbose_name='Subtipo de uso',
-                                        related_name='preguntas', blank=True)        
-    topico = models.ManyToManyField(Topico_Normas,verbose_name='Topico de norma',
+class Preguntas_Frecuentes(models.Model):     
+    tipo_norma = models.ManyToManyField(Tipo_Normas,verbose_name='Tipo de norma',
                                         related_name='preguntas', blank=True)                                         
-    title = models.CharField(max_length=200, blank=False,
+    title = models.CharField(max_length=700, blank=False,
         help_text='Titulo de Consulta',
         verbose_name='Titulo de Consulta')      
     message = models.TextField(blank=False,
