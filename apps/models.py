@@ -54,6 +54,9 @@ class Member(models.Model):
     identity = models.CharField(max_length=11, blank=True,
         help_text='DNI o RUC',
         verbose_name='Documento de Identidad')
+    foreign_card = models.CharField(max_length=11, blank=True,
+        help_text='Documento de Extranjería',
+        verbose_name='Documento de Extranjería')
     profession = models.CharField(max_length=1,
         help_text='Profesión', choices=PROFESSION_CHOICES,
         verbose_name='Profesión', blank=True)
