@@ -44,14 +44,16 @@
           <span class="total-comments comments-sort">{{ncomentarios}} Comentarios</span>
         </div>
 
-         <div class="comment-box add-comment">
+         <div class="comment-box add-comment mb-5">
           <span class="commenter-pic">
             <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
           </span>
-                <form method="POST" >
+                <form method="POST" enctype="multipart/form-data">
                   {% csrf_token %}
                   <span class="commenter-name">
-                    <input autocomplete="off" id="mensaje" maxlength="150"  type="text" name="comentario" placeholder="Agregue aqui un nuevo comentario" name="Add Comment">
+                    {{form.comentario}}
+                    {{form.file_one}}
+                    <!-- <input autocomplete="off" id="mensaje" maxlength="150"  type="text" name="comentario" placeholder="Agregue aqui un nuevo comentario" name="Add Comment"> -->
                     <div id="contador">0/150</div>
                     <div class="form-group">    
                       <button  type="submit" class="btn btn-default">Comentar</button>
@@ -59,6 +61,7 @@
                   </span>
                 </form>
           </div>
+          <br><br><br>
 
               {% for muni in comentarios_list %}
               <div class="d-flex align-items-center w-100 ">
@@ -81,7 +84,35 @@
                   </span>
                   <p class="comment-txt more">
                     {{muni.comentario}}
-                    <a class="btn btn-warning float-right" href="#">Editar</a>
+                    <br>
+                    
+                    {% if muni.file_one %}
+                     <a href="{{muni.file_one.url}}">{{muni.file_one.name}}</a> 
+                    {% endif %}
+                    <br>
+                      
+
+                    {% if muni.file_two %}
+                     <a href="{{muni.file_two.url}}">{{muni.file_two.name}}</a> 
+                    {% endif %}
+                    <br>
+                    
+                    {% if muni.file_three %}
+                      <a href="{{muni.file_three.url}}">{{muni.file_three.name}}</a> 
+                    {% endif %}
+
+                    {% if muni.file_four %}
+                    <a href="{{muni.file_four.url}}">{{muni.file_four.name}}</a> 
+                  {% endif %}
+
+                    
+                    
+                    {% if muni.user.id == request.user.id %}
+                    <a class="btn btn-warning float-right" href="{% url 'editar-comentario' foro.id muni.id %}">
+                      <i class="fa-solid fa-pen text-white"></i>
+                    </a>
+                    {% endif %}
+                      
                     <small class="font-italic text-muted float-right">{{ muni.created }}</small>
                   </p>   
                                 
@@ -105,6 +136,23 @@
     </div>
   </div>
 </div>
+
+  <!-- messages -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+    {% for m in messages %}
+      <script>
+          Swal.fire({
+            "title": "Felicitaciones",
+            "text" : "{{ m }}",
+            "icon" : "success"
+          })
+      </script>
+    {% endfor %}
+    {% endif %}
+  <!-- messages -->
+  
+
 {% endblock %}
 
 {% block css %}
@@ -285,7 +333,7 @@
     })
   }
 
-const mensaje = document.getElementById('mensaje');
+const mensaje = document.getElementById('id_comentario');
 const contador = document.getElementById('contador');
 
 mensaje.addEventListener('input', function(e) {
