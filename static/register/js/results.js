@@ -56,7 +56,10 @@ var base_url = window.location.origin;
                         test.innerHTML = userExists
                         document.getElementById('dni-input').disabled=true
                         document.getElementById('input-value').disabled=true
-                        n_reload.style.display='block' //button reload
+                        if(document.getElementById('input-value').disabled=true){
+
+                            document.getElementById('n_reload').style.display="block" //button reload
+                        }
                         spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
                     }
 
@@ -109,7 +112,10 @@ var base_url = window.location.origin;
                         document.getElementById('input-value').disabled=true
                         blockExternal=document.getElementById('block-external')
                         blockExternal.classList.remove('form-hide')
-                        n_reload.style.display='block' //button reload
+                        if(document.getElementById('input-value').disabled=true){
+
+                            document.getElementById('n_reload').style.display="block" //button reload
+                        }
                         spinnerDni.innerHTML = `<div style="display: none;" class="spinner-border text-muted"></div>`
 
                         
