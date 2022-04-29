@@ -1,6 +1,20 @@
 (function ($) {
     "use strict";
 
+    $('.slick-inicio').slick({
+        dots: true,
+        infinite: true,
+        autoplay: true,
+        speed:2000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        prevArrow:'<button class="arrow-slick-inicio prev-arrow-slick-inicio"><i class="zmdi zmdi-caret-left"></i></button>',
+        nextArrow:'<button class="arrow-slick-inicio next-arrow-slick-inicio"><i class="zmdi zmdi-caret-right"></i></button>',
+        dots: true,
+    })
+
+
     $('.slick-empresas-asociadas').slick({
         dots: true,
         infinite: false,

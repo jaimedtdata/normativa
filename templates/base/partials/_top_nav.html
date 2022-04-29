@@ -3,76 +3,14 @@
     <div class="container">
         <div class="nav-scroller w-100 h-100">
             <nav class="nav p-0 d-flex justify-content-between align-items-stretch">
-                <a href="{% url 'home' %}" class="py-4 px-3 text-white text-decoration-none a-nav">Inicio</a>
-                <a href="{% url 'buscador' %}?t=1" class="py-4 px-3 text-white text-decoration-none a-nav">Búsqueda de
-                    Normas</a>
-                <a href="{% url 'foro' %}" class="py-4 px-3 text-white text-decoration-none a-nav">Foro de Discusión</a>
-                <a href="{% url 'preguntas' %}" class="py-4 px-3 text-white text-decoration-none a-nav">Preguntas
-                    Frecuentes</a>
+                <a class="py-4 px-3 text-white text-decoration-none a-nav" href="{% url 'home' %}">Inicio</a>
+                <a class="py-4 px-3 text-white text-decoration-none a-nav" href="{% url 'buscador' %}">Búsqueda de Normas</a>
+                <a class="py-4 px-3 text-white text-decoration-none a-nav" href="{% url 'foro' %}">Foro de Discusión</a>
+                <a class="py-4 px-3 text-white text-decoration-none a-nav" href="{% url 'preguntas' %}">Preguntas Frecuentes</a>
                 <div class="form-inline">
-                    <input class="form-control mr-sm-2  nav-search" type="search" placeholder="Search" id="search_topnav"
+                    <input class="form-control mr-sm-2  nav-search" type="search" placeholder="Buscar" id="search_topnav"
                         aria-label="Search">
                 </div>
-
-                {% if request.user %}
-                <a class="py-4 px-3 text-white text-decoration-none a-nav dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="fas fa-user"></i>
-                    {% if request.user.user_membership %}
-                    <span>@{{request.user.user_membership.names}}{{ request.user.user_membership.first_surname.0 }}{{ request.user.user_membership.second_surname.0 }}</span>
-                    {% else %}
-                    <span>@{{request.user.username}}</span>
-                    {% endif %}
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                    {% if request.user.is_superuser or request.user.is_staff %}
-                    <a href="{% url 'admin:index' %}" class="dropdown-item" target="_blank">
-                        <i class="fa-solid fa-database"></i>
-                        Adm. Base de Datos
-                    </a>
-                    <a href="{% url 'dash' %}" class="dropdown-item">
-                        <i class="fa-solid fa-chart-column"></i>
-                        Estadistica
-                    </a>
-                    <a href="{% url 'index-normativas' %}" class="dropdown-item">
-                        <i class="fas fa-plus"></i>
-                        Agregar Norma
-                    </a>
-                    {% endif %}
-
-
-                    <a href="{% url 'foro' %}" class="dropdown-item">
-                        <i class="fas fa-address-card"></i>
-                        Foro Interactivo
-                    </a>
-                    <a href="{% url 'buscador' %}?t=1" class="dropdown-item">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        Busqueda por normas, usos, <br> opiniones vinculantes y palabras clave
-                    </a>
-                    <a href="{% url 'bus_provedor' %}" class="dropdown-item">
-                        <i class="fa-solid fa-people-arrows-left-right"></i>
-                        Busqueda por proveedor
-                    </a>
-                    
-                    {% include 'base/partials/cart_shop.html' %}
-                    
-                    {% if request.user.user_membership %}
-                    <div class="dropdown-divider"></div>
-                    <a href="{% url 'history_purchase' %}" class="dropdown-item">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        Historial de compras
-                    </a>
-                    {% endif %}
-                    <div class="dropdown-divider"></div>
-                    <a href="{% url 'logout' %}" class="dropdown-item">
-                        <i class="fas fa-sign-out-alt"></i>
-                        Cerrar
-                    </a>
-
-                </div>
-                {% endif %}
-
             </nav>
         </div>
     </div>
