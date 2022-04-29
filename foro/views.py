@@ -1,7 +1,7 @@
 import random
 import json
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from foro.emails import async_send_email_suscription, send_email_suscription
 
 from foro.exceptions import MyException
@@ -11,6 +11,8 @@ from normas.models import Tipo_Uso_Normas, Normativa
 from apps.models import Member, UserToken
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+from .forms import EditComentForo
+from django.contrib import messages
 
 @login_required
 def foro(request):
@@ -26,18 +28,27 @@ def foro(request):
 # VISTA Y REGISTO DE COMENTARIOS DE FORO
 @login_required
 def foro_comentarios(request, foro_id):
-
+    form = EditComentForo() 
     foro = Foro.objects.get(id = foro_id)
     
     if request.method == "POST":
-        comentario = request.POST.get('comentario')
-        print ('POSTBOTON',comentario)
-        b = Comentario_Foro(foro_id = foro_id, user = request.user, comentario = comentario)
-        print ('POSTBBB',b)
-        b.save()
+        # comentario = request.POST.get('comentario')
+        # print ('POSTBOTON',comentario)
+        # b = Comentario_Foro(foro_id = foro_id, user = request.user, comentario = comentario)
+        # print ('POSTBBB',b)
+        # b.save()
+        form = EditComentForo(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            cd = form.cleaned_data
+            cm = Comentario_Foro(foro_id = foro_id, user = request.user,
+                                 comentario = cd['comentario'], file_one=cd['file_one'])
+            cm.save()
 
-        emails = [m.email for m in foro.suscripcion_foro.all()];
-        async_send_email_suscription(request, emails, request.get_full_path())
+            emails = [m.email for m in foro.suscripcion_foro.all()];
+            async_send_email_suscription(request, emails, request.get_full_path())
+            
+            return redirect('foro_comentarios', foro_id = foro_id)
+
 
     comentarios_list = Comentario_Foro.objects.filter(foro_id = foro_id)
 
@@ -47,7 +58,8 @@ def foro_comentarios(request, foro_id):
     context = {
         'foro' : foro,
         'comentarios_list' : comentarios_list, 
-        'is_suscribed' : is_suscribed
+        'is_suscribed' : is_suscribed,
+        'form' : form
     }
 
     return render(request, 'foro/foro_comentarios.html', context)
@@ -60,6 +72,25 @@ def borrar_comentario_foro(request, foro_id, comentario_id):
 
     return redirect('foro_comentarios', foro_id = foro_id)
 
+@login_required
+def editar_comentario_foro(request, foro_id, comentario_id):
+    foro = get_object_or_404(Foro, id = foro_id)
+    comentario = get_object_or_404(Comentario_Foro, id=comentario_id)
+    form = EditComentForo(instance=comentario ) 
+    data = {
+        'foro': foro,
+        'comentario': comentario,
+        'form' : form
+    }
+
+    if request.method == "POST":
+        form = EditComentForo(data=request.POST, files=request.FILES, instance=comentario)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Comentario modificado correctamente")
+            return redirect('foro_comentarios', foro_id = foro_id)
+
+    return render(request, 'foro/editar_comentario.html', data)
 
 # SUSCRIPCION Y DESUSCRIPCION DE FORO POR PARTE DE LOS USUARIOS PARTICIPANTES
 @login_required
