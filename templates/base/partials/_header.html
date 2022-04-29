@@ -4,15 +4,77 @@
         <div class="col-6 text-left">
             <img class="img-fluid" width="300" src="{% static 'img/logo_cap.svg' %}">
         </div>
-        <div class="col-6 text-right text-white ">
-            <i class="fa-brands fa-facebook-square fa-2x"></i>
-            <i class="fa-brands fa-instagram-square fa-2x"></i>
-            <i class="fa-brands fa-twitter-square fa-2x"></i>
-            <i class="fa-brands fa-linkedin fa-2x"></i>
+        <div class="col-6 text-right">
+            <i class="fa-brands fa-facebook-f fa-2x"></i>
+            <i class="fa-brands fa-instagram fa-2x"></i>
+            <i class="fa-brands fa-twitter fa-2x"></i>
+            <i class="fa-brands fa-linkedin-in fa-2x"></i>
             <p class="font-weight-bolder text-sm-none">
-                <a class="text-decoration-none w-100 d-inline-block text-truncate"
+                <a class="text-decoration-none w-100 d-inline-block text-truncate text-white"
                     href="#">correoparaconsultas@limacap.org</a>
             </p>
+            {% if request.user %}
+
+            <div class="btn-group">
+                <a class="py-4 px-3 text-white text-decoration-none a-nav dropdown-toggle" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                    {% if request.user.user_membership %}
+                    <span>@{{request.user.user_membership.names}}{{ request.user.user_membership.first_surname.0 }}{{
+                        request.user.user_membership.second_surname.0 }}</span>
+                    {% else %}
+                    <span>@{{request.user.username}}</span>
+                    {% endif %}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="z-index: 9999;">
+
+                    {% if request.user.is_superuser or request.user.is_staff %}
+                    <a href="{% url 'admin:index' %}" class="dropdown-item" target="_blank">
+                        <i class="fa-solid fa-database"></i>
+                        Adm. Base de Datos
+                    </a>
+                    <a href="{% url 'dash' %}" class="dropdown-item">
+                        <i class="fa-solid fa-chart-column"></i>
+                        Estadistica
+                    </a>
+                    <a href="{% url 'index-normativas' %}" class="dropdown-item">
+                        <i class="fas fa-plus"></i>
+                        Agregar Norma
+                    </a>
+                    {% endif %}
+
+
+                    <a href="{% url 'foro' %}" class="dropdown-item">
+                        <i class="fas fa-address-card"></i>
+                        Foro Interactivo
+                    </a>
+                    <a href="{% url 'buscador' %}?t=1" class="dropdown-item">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Busqueda por normas, usos, <br> opiniones vinculantes y palabras clave
+                    </a>
+                    <a href="{% url 'bus_provedor' %}" class="dropdown-item">
+                        <i class="fa-solid fa-people-arrows-left-right"></i>
+                        Busqueda por proveedor
+                    </a>
+
+                    {% include 'base/partials/cart_shop.html' %}
+
+                    {% if request.user.user_membership %}
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'history_purchase' %}" class="dropdown-item">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        Historial de compras
+                    </a>
+                    {% endif %}
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'logout' %}" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Cerrar
+                    </a>
+
+                </div>
+            </div>
+
+            {% endif %}
         </div>
-    </div>
 </header>

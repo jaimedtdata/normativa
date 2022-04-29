@@ -70,6 +70,9 @@ class APIMember(models.Model):
     identity = models.CharField(max_length=11, blank=True,
         help_text='DNI o RUC',
         verbose_name='Documento de Identidad')
+    foreign_card = models.CharField(max_length=11, blank=True,
+        help_text='Documento de Extranjería',
+        verbose_name='Documento de Extranjería')
     person_type = models.CharField(max_length=1, default='N',
         help_text='Tipo de Persona', choices=PERSON_TYPE_CHOICES,
         verbose_name='Tipo de Persona', blank=False)

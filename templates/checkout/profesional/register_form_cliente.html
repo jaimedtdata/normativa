@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-md-4 ">
+                            <div class="col-md-3 ">
                                 <label class="text-muted lead" >Documento de Identidad:</label>
                                 {{form.identity}}
                                 <span class="text-danger field-error text-md">
@@ -41,9 +41,16 @@
     
                                 </span>
                             </div>
+
+                            <div class="col-md-3 ">
+                                <label class="text-muted lead" >Carnet de Extranjería:</label>
+                                {{form.foreign_card}}
+                                <span class="text-danger field-error text-md">
+                                </span>
+                            </div>
                             
                     
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="text-muted lead" >Teléfono Celular:</label>
                                 {{form.mobile}}
                                 <span class="text-danger" id="error_id_formulario2-mobile"></span>
@@ -54,7 +61,7 @@
                                 </span>
                             </div>
                         
-                            <div class="col-md-4 ">
+                            <div class="col-md-3 ">
                                 <label id="tuition_title" class="text-muted lead" >Teléfono Fijo:</label>
                                 {{form.phone}}
                             </div>
@@ -178,7 +185,6 @@
     })
 
     first_surname.addEventListener('keydown', (e) =>{
-        console.log("tecla",e.keyCode)
 
         if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
             e.preventDefault()
@@ -187,7 +193,7 @@
     })
 
     second_surname.addEventListener('keydown', (e) =>{
-        console.log("tecla",e.keyCode)
+        //console.log("tecla",e.keyCode)
 
         if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
             e.preventDefault()

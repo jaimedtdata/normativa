@@ -168,6 +168,7 @@ def register_client_user(user):
                             first_surname= user['first_surname'], 
                             second_surname= user['second_surname'], 
                             identity= user['identity'], 
+                            foreign_card= user['foreign_card'], 
                             mobile= user['mobile'],
                             phone= user['phone'], 
                             email= user['email'], 

@@ -106,6 +106,12 @@ class ExternalUserForm(forms.Form):
                                         'placeholder' : ''
                                         }),
                                         help_text='Ingresa tu Documento Nacional de Identidad',)
+        foreign_card = forms.IntegerField(label='Documento de Extranjeria' ,required=False,
+                                widget=forms.NumberInput(attrs={
+                                        'class': "form-control",
+                                        'placeholder' : ''
+                                        }),
+                                        help_text='Ingresa tu Documento de Extranjería',)
         #person_type = forms.IntegerField()
         mobile = forms.IntegerField(label='Teléfono Celular',required=True ,
                                 widget=forms.NumberInput(attrs={

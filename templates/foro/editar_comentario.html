@@ -5,153 +5,54 @@
 
 <div class="card border-secondary mb-3" > 
   <img class="card-img-top" src="{% static 'img/Forofondo.jpg' %}" alt="Card image cap" style=" height:180px;">
-  <div class="card-body" style='background:white;'>
   
-      <div class="row">
-        <div class="col-md-10">
-          <h5 class="card-title">foro: {{foro.nombre}}</h5>               
-          <p class="card-text">Descripción: {{foro.descripcion}}</p>
-        </div>
-        {% if request.user.user_membership.user_id == request.user.id %}
-
-          {% if is_suscribed %}
-          <div class="col-md-2" id="accion_suscribe">
-            <button class="btn btn-danger" onclick="desuscribirse()">
-              <i class="fa fa-bell-slash" aria-hidden="true"></i>
-              Desuscribirse
-            </button>
-          </div>
-          {% else %}
-          <div class="col-md-2" id="accion_suscribe">
-            <button class="btn btn-success" onclick="suscribirse()">
-              <i class="fa fa-bell" aria-hidden="true"></i>
-              Suscribirse
-            </button>
-          </div>
-          {% endif %}
-
-        {% endif %}
-      </div>
-  </div>
             
 </div>
         
-<div class="container mb-5">
+<div class="container mb-5" style="margin-bottom: 200px;">
   <div class="row">
     <div class="col-12">
       <div class="comments">
         <div class="comments-details">
-          <span class="total-comments comments-sort">{{ncomentarios}} Comentarios</span>
+          <span class="total-comments comments-sort"> Comentarios</span>
         </div>
 
-         <div class="comment-box add-comment mb-5">
+         <div class="comment-box add-comment">
           <span class="commenter-pic">
             <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
           </span>
-                <form method="POST" enctype="multipart/form-data">
+          
+
+                <form method="POST" enctype="multipart/form-data" >
                   {% csrf_token %}
                   <span class="commenter-name">
                     {{form.comentario}}
-                    {{form.file_one}}
-                    <!-- <input autocomplete="off" id="mensaje" maxlength="150"  type="text" name="comentario" placeholder="Agregue aqui un nuevo comentario" name="Add Comment"> -->
                     <div id="contador">0/150</div>
+
+                    <br>
+                    {{form.file_one}}
+                    <span class="text-danger field-error text-md">
+                      {{ form.file_one.errors }}
+                    </span>
+                    <br>
+                    {{form.file_two}}
+                    <br>
+                    {{form.file_three}}
+                    <br>
+                    {{form.file_four}}
                     <div class="form-group">    
-                      <button  type="submit" class="btn btn-default">Comentar</button>
+                      <a class="btn btn-danger"  href="{% url 'foro_comentarios' foro.id %}">Cancelar</a>
+                      <button  type="submit" class="btn btn-default">Guardar</button>
                     </div>
                   </span>
                 </form>
           </div>
-          <br><br><br>
-
-              {% for muni in comentarios_list %}
-              <div class="d-flex align-items-center w-100 ">
-                <div class="comment-box mt-4 
-                {% if muni.user|has_group:'ESPECIALISTA' %}
-                  border border-warning shadow p-3 mb-5 bg-white rounded
-                {% endif %}">
-                  <span class="commenter-pic">
-                    <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
-                  </span>
-                  <span class="commenter-name" >
-                    <a style='color:black;' href="#">
-                      {% if muni.user.user_membership %}
-                      <span>{{muni.user.user_membership.names}} {{ muni.user.user_membership.first_surname.0 }} {{ muni.user.user_membership.second_surname.0 }}</span> 
-                      {% else %}
-                      <span>{{muni.user.username}}</span> 
-                      {% endif %}	
-                    
-                    </a>
-                  </span>
-                  <p class="comment-txt more">
-                    {{muni.comentario}}
-                    <br>
-                    
-                    {% if muni.file_one %}
-                     <a href="{{muni.file_one.url}}">{{muni.file_one.name}}</a> 
-                    {% endif %}
-                    <br>
-                      
-
-                    {% if muni.file_two %}
-                     <a href="{{muni.file_two.url}}">{{muni.file_two.name}}</a> 
-                    {% endif %}
-                    <br>
-                    
-                    {% if muni.file_three %}
-                      <a href="{{muni.file_three.url}}">{{muni.file_three.name}}</a> 
-                    {% endif %}
-
-                    {% if muni.file_four %}
-                    <a href="{{muni.file_four.url}}">{{muni.file_four.name}}</a> 
-                  {% endif %}
-
-                    
-                    
-                    {% if muni.user.id == request.user.id %}
-                    <a class="btn btn-warning float-right" href="{% url 'editar-comentario' foro.id muni.id %}">
-                      <i class="fa-solid fa-pen text-white"></i>
-                    </a>
-                    {% endif %}
-                      
-                    <small class="font-italic text-muted float-right">{{ muni.created }}</small>
-                  </p>   
-                                
-                </div>
-              
-                <form method="POST" action="{% url 'borrar-comentario' foro.id muni.id %}">
-                  {% csrf_token %}
-                  
-                  {% if perms.foro.delete_comentario_foro %}
-                    <button type="submit" class="btn btn-fat bg-danger float-right ml-2">
-                      <i class="fas fa-trash text-white"></i>
-                    </button>
-                  {% endif %}
-                  
-                </form>
-              
-              </div>
-              {% endfor %}
-        
+            
       </div>
     </div>
   </div>
 </div>
-
-  <!-- messages -->
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {% if messages %}
-    {% for m in messages %}
-      <script>
-          Swal.fire({
-            "title": "Felicitaciones",
-            "text" : "{{ m }}",
-            "icon" : "success"
-          })
-      </script>
-    {% endfor %}
-    {% endif %}
-  <!-- messages -->
-  
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 {% endblock %}
 
@@ -335,6 +236,8 @@
 
 const mensaje = document.getElementById('id_comentario');
 const contador = document.getElementById('contador');
+const clar_field = document.getElementById('file_one-clear_id');
+
 
 mensaje.addEventListener('input', function(e) {
     const target = e.target;
@@ -342,6 +245,8 @@ mensaje.addEventListener('input', function(e) {
     const longitudAct = target.value.length;
     contador.innerHTML = `${longitudAct}/${longitudMax}`;
 });
+
+//clar_field.style.display="none"
 </script>
 {% endblock %}
 

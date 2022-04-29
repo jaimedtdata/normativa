@@ -1,10 +1,10 @@
 {% load static %}
 
-{% csrf_token %}
 <div class="d-flex align-items-center">
 	<div class="">
 		<form method="POST" id="dni-form">
-			<label class="text-muted lead">Valida tu Documenxto de Identidad:</label>
+			{% csrf_token %}
+			<label class="text-muted lead">Valida tu Documento de Identidad:</label>
 			<div class="row">
 				<div class="col-md-8">
 					<input type="number" name="dni" placeholder="Ingresa número" id="dni-input" min="8" required class="form-control">
@@ -19,8 +19,15 @@
 	</div>
 		
 	<div class="mt-4">
-		<button style="display: none;" id="n_reload" onClick="window.location.reload();" class="ml-5 btn btn-success">Nueva Busqueda</button>		<span class="text-danger" id="error_id_input_dni"></span>
+		<button style="display: none;" id="n_reload" onClick="window.location.reload();" class="ml-5 btn btn-success">Nueva Busqueda</button>		
 	</div>			
 </div>
 
+<script>
+	
+	document.getElementById('dni-form').addEventListener('submit', (e)=>{
+		document.getElementById('n_reload').style.display= "block"
+	})
+
+</script>
 
