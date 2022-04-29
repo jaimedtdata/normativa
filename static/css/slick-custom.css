@@ -1,3 +1,38 @@
+.wrap-slick-inicio {
+    position: relative;
+}
+.wrap-slick-inicio:hover .arrow-slick1 {
+    opacity: 1;
+}
+
+.item-slick-inicio {
+    max-height: 70vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.item-slick-inicio-img{
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+}
+.slick-inicio {
+    margin-bottom: 0px !important;
+}
+.slick-inicio .slick-dots {
+    bottom: 20px;
+}
+.slick-inicio .slick-dots li button:before {
+    font-size: 20px;
+}
+.slick-inicio .slick-dots li button:before {
+    color: white;
+}
+.slick-inicio .slick-dots li.slick-active button:before {
+    opacity: .75;
+    color: white;
+}
+
 .square {
     position: relative;
     width: 100%;
