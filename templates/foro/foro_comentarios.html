@@ -40,98 +40,100 @@
   <div class="row">
     <div class="col-12">
       <div class="comments">
-        <div class="comments-details">
-          <span class="total-comments comments-sort">{{ncomentarios}} Comentarios</span>
-        </div>
-
-         <div class="comment-box add-comment mb-5">
-          <span class="commenter-pic">
-            <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
-          </span>
-                <form method="POST" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <span class="commenter-name">
-                    {{form.comentario}}
-                    {{form.file_one}}
-                    <!-- <input autocomplete="off" id="mensaje" maxlength="150"  type="text" name="comentario" placeholder="Agregue aqui un nuevo comentario" name="Add Comment"> -->
-                    <div id="contador">0/150</div>
-                    <div class="form-group">    
-                      <button  type="submit" class="btn btn-default">Comentar</button>
-                    </div>
-                  </span>
-                </form>
+        <h2 class="">{{ncomentarios}} Comentarios</h2>
+        <div class="d-flex align-items-center w-100 ">
+          <div class="add-comment d-flex align-items-center w-100 my-2 p-3">
+            <div class="add-comment-header m-2">
+              <span class="commenter-pic">
+                <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
+              </span>
+            </div>
+            <div class="add-comment-body flex-fill">
+              <form method="POST" enctype="multipart/form-data" autocomplete="off">
+                {% csrf_token %}
+                {{form.comentario}}
+                <div class="my-2" id="contador">0/150</div>
+                <div class="custom-file my-3">
+                  {{form.file_one}}
+                  <label class="custom-file-label" for="id_file_one" data-browse="Elegir">Seleccionar Archivo</label>
+                </div>
+                <div class="form-group">    
+                  <button  type="submit" class="btn btn-default">Comentar</button>
+                </div>
+              </form>
+            </div>
           </div>
-          <br><br><br>
-
-              {% for muni in comentarios_list %}
-              <div class="d-flex align-items-center w-100 ">
-                <div class="comment-box mt-4 
-                {% if muni.user|has_group:'ESPECIALISTA' %}
-                  border border-warning shadow p-3 mb-5 bg-white rounded
-                {% endif %}">
+        </div>
+        {% for muni in comentarios_list %}
+          <div class="d-flex align-items-center w-100 ">
+            <div 
+              class="comment-box my-2 p-3
+              {% if muni.user|has_group:'ESPECIALISTA' %}
+                border border-warning shadow p-3 mb-5 bg-white rounded
+              {% endif %}"
+            >
+              <div class="comment-header d-flex justify-content-between align-items-center">
+                <div class="user-info">
                   <span class="commenter-pic">
                     <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
                   </span>
                   <span class="commenter-name" >
                     <a style='color:black;' href="#">
                       {% if muni.user.user_membership %}
-                      <span>{{muni.user.user_membership.names}} {{ muni.user.user_membership.first_surname.0 }} {{ muni.user.user_membership.second_surname.0 }}</span> 
+                        <span>{{muni.user.user_membership.names}} {{ muni.user.user_membership.first_surname.0 }} {{ muni.user.user_membership.second_surname.0 }}</span> 
                       {% else %}
-                      <span>{{muni.user.username}}</span> 
+                        <span>{{muni.user.username}}</span> 
                       {% endif %}	
-                    
                     </a>
                   </span>
-                  <p class="comment-txt more">
-                    {{muni.comentario}}
-                    <br>
-                    
-                    {% if muni.file_one %}
-                     <a href="{{muni.file_one.url}}">{{muni.file_one.name}}</a> 
-                    {% endif %}
-                    <br>
-                      
-
-                    {% if muni.file_two %}
-                     <a href="{{muni.file_two.url}}">{{muni.file_two.name}}</a> 
-                    {% endif %}
-                    <br>
-                    
-                    {% if muni.file_three %}
-                      <a href="{{muni.file_three.url}}">{{muni.file_three.name}}</a> 
-                    {% endif %}
-
-                    {% if muni.file_four %}
-                    <a href="{{muni.file_four.url}}">{{muni.file_four.name}}</a> 
-                  {% endif %}
-
-                    
-                    
-                    {% if muni.user.id == request.user.id %}
-                    <a class="btn btn-warning float-right" href="{% url 'editar-comentario' foro.id muni.id %}">
+                </div>
+                <div class="options-buttons d-flex">
+                  {% if muni.user.id == request.user.id %}
+                    <a class="btn btn-warning mx-1" href="{% url 'editar-comentario' foro.id muni.id %}">
                       <i class="fa-solid fa-pen text-white"></i>
                     </a>
+                  {% endif %}
+                  <form method="POST" action="{% url 'borrar-comentario' foro.id muni.id %}">
+                    {% csrf_token %}
+                    {% if perms.foro.delete_comentario_foro %}
+                      <button type="submit" class="btn btn-danger mx-1">
+                        <i class="fas fa-trash text-white"></i>
+                      </button>
                     {% endif %}
-                      
-                    <small class="font-italic text-muted float-right">{{ muni.created }}</small>
-                  </p>   
-                                
+                  </form>
                 </div>
-              
-                <form method="POST" action="{% url 'borrar-comentario' foro.id muni.id %}">
-                  {% csrf_token %}
+              </div>
+              <div class="comment-body">
+                <p class="comment-txt more">
+                  {{muni.comentario}}
                   
-                  {% if perms.foro.delete_comentario_foro %}
-                    <button type="submit" class="btn btn-fat bg-danger float-right ml-2">
-                      <i class="fas fa-trash text-white"></i>
-                    </button>
+                  {% if muni.file_one %}
+                    <br>
+                    <a href="{{muni.file_one.url}}">{{muni.file_one.name}}</a> 
+                  {% endif %}
+  
+                  {% if muni.file_two %}
+                    <br>
+                    <a href="{{muni.file_two.url}}">{{muni.file_two.name}}</a> 
                   {% endif %}
                   
-                </form>
-              
-              </div>
-              {% endfor %}
-        
+                  {% if muni.file_three %}
+                    <br>
+                    <a href="{{muni.file_three.url}}">{{muni.file_three.name}}</a> 
+                  {% endif %}
+  
+                  {% if muni.file_four %}
+                    <br>
+                    <a href="{{muni.file_four.url}}">{{muni.file_four.name}}</a> 
+                  {% endif %}
+                </p> 
+              </div> 
+              <div class="comment-footer">
+                <small class="font-italic text-muted float-right">{{ muni.created }}</small>
+              </div>        
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -170,26 +172,15 @@
   .comments .dropup {
       position: relative;
   }
-  .comments button {
-      background-color: transparent;
-      border: none;
-  }
   .comments .comment-box {
-      width: 100%;
-      float: left;
-      height: 100px;
-      background-color: #FAFAFA;
-      padding: 10px 10px 10px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
+    width: 100%;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    border: 1px solid #ddd;
   }
   .comments .add-comment {
-      background-color: transparent;
-      border: none;
-      position: relative;
-      margin-bottom: 10px;
-      height: 100px;
+    background-color: transparent;
+    border: none;
   }
   .comments .commenter-pic {
       width: 50px;
@@ -207,17 +198,24 @@
       top: 20px;
       left: 0px;
   }
-  .comments .add-comment input {
-      border-top: 0px;
-      border-bottom: 1px solid #ccc;
-      border-left: 0px;
-      border-right: 0px;
-      outline: 0px;
-      box-shadow: none;
-      border-radius: 0;
-      width: 100%;
-      padding: 0;
-      font-weight: forol;
+  .comments .add-comment input[type=text] {
+    border-top: 0px;
+    border-bottom: 1px solid #ccc;
+    border-left: 0px;
+    border-right: 0px;
+    outline: 0px;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .comments .add-comment input[type=file] {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
   }
   .comments .add-comment input:focus {
       border-color: #03a9f4;
@@ -242,8 +240,6 @@
   }
   .comments p.comment-txt {
       font-size: 15px;
-      border-bottom: 1px solid #ddd;
-      padding: 0px 0px 15px;
   }
   .comments .commenter-name {
       display: inline-block;
