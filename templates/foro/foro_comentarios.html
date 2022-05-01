@@ -139,17 +139,27 @@
 
   <!-- messages -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {% if messages %}
+  {% if messages %}
     {% for m in messages %}
-      <script>
+      {% if m.tags == "error" %}
+        <script>
           Swal.fire({
-            "title": "Felicitaciones",
+            "title": "ERROR!",
+            "text" : "{{ m }}",
+            "icon" : "error"
+          })
+      </script>
+      {% elif m.tags == "success" %} 
+        <script>
+          Swal.fire({
+            "title": "FELICITACIONES",
             "text" : "{{ m }}",
             "icon" : "success"
           })
       </script>
+      {% endif %}
     {% endfor %}
-    {% endif %}
+  {% endif %}
   <!-- messages -->
   
 

@@ -43,11 +43,14 @@ def foro_comentarios(request, foro_id):
             cm = Comentario_Foro(foro_id = foro_id, user = request.user,
                                  comentario = cd['comentario'], file_one=cd['file_one'])
             cm.save()
+            messages.success(request, "Comentario añadido")
 
             emails = [m.email for m in foro.suscripcion_foro.all()];
             async_send_email_suscription(request, emails, request.get_full_path())
             
             return redirect('foro_comentarios', foro_id = foro_id)
+        else:
+            messages.error(request, "El tamaño máximo que puedes subir es  4MB")
 
 
     comentarios_list = Comentario_Foro.objects.filter(foro_id = foro_id)
@@ -89,6 +92,8 @@ def editar_comentario_foro(request, foro_id, comentario_id):
             form.save()
             messages.success(request, "Comentario modificado correctamente")
             return redirect('foro_comentarios', foro_id = foro_id)
+        else:
+            messages.error(request, "El tamaño máximo que puedes subir es  4MB")
 
     return render(request, 'foro/editar_comentario.html', data)
 
