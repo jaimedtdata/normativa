@@ -31,11 +31,11 @@ class Comentario_Foro(models.Model):
     dislikes = models.PositiveSmallIntegerField(default=0,help_text='Dislikes', verbose_name='Dislikes')
     file_one = models.FileField(blank=True, null=True,  validators=[validate_file_size],
                                 upload_to='comentario_foro',verbose_name='Archivo 1')
-    file_two = models.FileField(blank=True, null=True,  
+    file_two = models.FileField(blank=True, null=True,  validators=[validate_file_size],
                                 upload_to='comentario_foro',verbose_name='Archivo 2')
-    file_three = models.FileField(blank=True, null=True, 
+    file_three = models.FileField(blank=True, null=True, validators=[validate_file_size],
                                  upload_to='comentario_foro',verbose_name='Archivo 3')
-    file_four = models.FileField(blank=True, null=True, 
+    file_four = models.FileField(blank=True, null=True, validators=[validate_file_size],
                                  upload_to='comentario_foro',verbose_name='Archivo 4')
     
 

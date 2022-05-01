@@ -89,6 +89,10 @@ def editar_comentario_foro(request, foro_id, comentario_id):
             form.save()
             messages.success(request, "Comentario modificado correctamente")
             return redirect('foro_comentarios', foro_id = foro_id)
+        else:
+            print("form invalid-----", form)
+            print("request invalid-----", request.POST)
+            messages.error(request, "El tamaño máximo que puedes subir es  4MB")
 
     return render(request, 'foro/editar_comentario.html', data)
 
