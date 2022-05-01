@@ -32,6 +32,7 @@ def normas_serializer(norma):
         'document' : norma.document.url if norma.document else False,
         'fecha_publicacion' : norma.fecha_publicacion.strftime('%d/%m/%Y') if norma.fecha_publicacion else '',
         'palabras_clave' : [k.id for k in norma.keywords.all()],
+        'palabras_clave_nombre' : [k.name for k in norma.keywords.all()],
     }
 
 def keywords_serializer(palabra):

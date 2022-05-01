@@ -4,8 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-    name='viewport' />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Regional Lima - Colegio de Arquitectos del Perú</title>
   <link rel="icon" type="image/jpg" href="{% static 'img/cropped-logo-web-192x192.png' %}" sizes="192x192" />
@@ -24,6 +23,9 @@
   <!-- Vendor -->
   <link href="{% static 'vendor/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/select2/css/select2.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'vendor/slick/slick.css' %}" rel="stylesheet" />
+  <link href="{% static 'vendor/slick/slick-theme.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/slick-custom.css' %}" rel="stylesheet" />
   <link href="{% static 'css/all.css' %}" rel="stylesheet" />
 
   {% block vendor_css %}
@@ -34,7 +36,6 @@
 </head>
 
 <body>
-  <div class="wrapper">
     {% include 'base/partials/_header.html' %}
     {% include 'base/partials/_top_nav.html' %}
     <div class="content">
@@ -44,12 +45,13 @@
     <div class="footer">
       {% include 'base/partials/_footer.html' %}
     </div>
-  </div>
 
   <!-- Vendor -->
   <script src="{% static 'vendor/jquery3/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap4/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap4/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'vendor/select2/js/select2.min.js' %}"></script>
+  <script src="{% static 'vendor/slick/slick.min.js' %}"></script>
+  <script src="{% static 'js/slick-custom.js' %}"></script>
 
   <!-- CDN -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
@@ -80,7 +82,7 @@
   <script>
     document.getElementById('search_topnav').addEventListener('keypress', (e) => {
       if (e.keyCode == 13) {
-        window.location.href = `http://159.89.35.17:8001/buscador?norma=OPINIONES%20VINCULANTES%20Y%20CASUISTICA&gtn=3&t=1&search=${document.getElementById('search_topnav').value}`;
+        window.location.href = `http://127.0.0.1:8000/buscador?search=${document.getElementById('search_topnav').value}`;
       }
     })
   </script>

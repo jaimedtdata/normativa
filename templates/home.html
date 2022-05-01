@@ -1,59 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block vendor_css %}
-<link href="{% static 'vendor/slick/slick.css' %}" rel="stylesheet" />
-<link href="{% static 'vendor/slick/slick-theme.css' %}" rel="stylesheet" />
-<link href="{% static 'css/slick-custom.css' %}" rel="stylesheet" />
-{% endblock %}
-
 {% block content %}
-<div class=" text-white bg-dark">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{% static 'img/img-1.jpg' %}" class="d-block w-100 carousel-item-image" alt="...">
-
-                <div class="position-absolute h-100 w-100 p-md-5" style="bottom: 0px;">
-                    <div class="d-flex align-items-center h-100 col-md-6 ">
-                        <div>
-                            <h1 class="display-3 font-italic">NORMATIVA EDIFICATORIA</h1>
-                            <h3 class="display-4 font-italic">Por normas, por usos y palabras claves.</h3>
-                            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers
-                                quickly
-                                and efficiently about what’s most interesting in this post’s contents.</p>
-                            <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <!-- <div class="carousel-item p-md-5" style="background-image: url('{% static 'img/img-1.jpg' %}');">
-                <div class="col-md-6 px-0">
-                    <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-                    <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly
-                        and efficiently about what’s most interesting in this post’s contents.</p>
-                    <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
-                </div>
-            </div>
-            <div class="carousel-item p-md-5" style="background-image: url('{% static 'img/img-1.jpg' %}');">
-                <div class="col-md-6 px-0">
-                    <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-                    <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly
-                        and efficiently about what’s most interesting in this post’s contents.</p>
-                    <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
-                </div>
-            </div> -->
-        </div>
-    </div>
-</div>
+{% include 'base/partials/_section_slider.html' %}
 
 <div class="seccion-normas-reglamentos" style="background-color: #f2f2f2;">
     <div class="container container-grid">
@@ -65,7 +14,7 @@
                             <div class="d-flex align-items-center text-1" style="height: 45%;">
                                 <p class="m-0">Plataforma de Normas y <b>Reglamento Comentado</b></p>
                             </div>
-                            <div class="d-flex align-items-center text-2" style="height: 35%;">
+                            <div class="d-flex align-items-center text-2 border-top-2 border-bottom-2" style="height: 35%;">
                                 <p class="m-0"><b>Encuentre aquí el compendio normativo actualizado y concordado</b></p>
                             </div>
                             <div class="d-flex align-items-end text-3" style="height: 20%;">
@@ -197,167 +146,9 @@
     </div>
 </div>
 
-<div class="seccion-cursos-online">
-    <div class="container py-4">
-        <h1>Cursos <b>Online</b></h1>
-        <div class="slick-empresas-asociadas">
-            <div class="m-2 p-2">
-                <div class="square">
-                    <iframe style="width: 100%;"
-                        src="https://www.youtube.com/embed/diAaL9-REi4?list=PLqIwMHc5XXsR_MxmtHXCzruFsQ3SXeF_I"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <iframe style="width: 100%;"
-                        src="https://www.youtube.com/embed/WByWUyfLmIQ?list=PLqIwMHc5XXsR_MxmtHXCzruFsQ3SXeF_I"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <iframe style="width: 100%;"
-                        src="https://www.youtube.com/embed/aHIAJvlw7co?list=PLqIwMHc5XXsR_MxmtHXCzruFsQ3SXeF_I"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <iframe style="width: 100%;"
-                        src="https://www.youtube.com/embed/MtgW_MB8ExU?list=PLqIwMHc5XXsR_MxmtHXCzruFsQ3SXeF_I"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <iframe style="width: 100%;"
-                        src="https://www.youtube.com/embed/diAaL9-REi4?list=PLqIwMHc5XXsR_MxmtHXCzruFsQ3SXeF_I"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square" style="background-color: #418cc8;">
+{% include 'base/partials/_section_courses.html' %}
+{% include 'base/partials/_section_news.html' %}
+{% include 'base/partials/_section_affiliates.html' %}
+{% include 'base/partials/_section_links.html' %}
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="seccion-noticias-caprl">
-    <div class="container py-4">
-        <h1>Noticias <b>CAPRL</b></h1>
-        <div class="slick-empresas-asociadas">
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/foro.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/UNP.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/edificaciones.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/foro.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/UNP.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square" style="background-color: #418cc8;">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="seccion-empresas-asociadas">
-    <div class="container py-4">
-        <h1>Empresas <b>Asociadas</b></h1>
-        <div class="slick-empresas-asociadas">
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/e-a-1.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/e-a-2.png' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/e-a-3.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/e-a-1.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square">
-                    <img class="empresas-asociadas-imagenes" src="{% static 'img/e-a-2.png' %}" alt="">
-                </div>
-            </div>
-            <div class="m-2 p-2">
-                <div class="square" style="background-color: red;">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="seccion-enlaces-interes">
-    <div class="container py-4">
-        <h2 class="text-center">ENLACES DE <b>INTERÉS</b></h2>
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <img class="enlaces-interes-imagenes" src="{% static 'img/e-i-1.png' %}" alt="">
-            </div>
-            <div class="col d-flex justify-content-center">
-                <img class="enlaces-interes-imagenes" src="{% static 'img/e-i-2.jpg' %}" alt="">
-            </div>
-            <div class="col d-flex justify-content-center">
-                <img class="enlaces-interes-imagenes" src="{% static 'img/e-i-3.png' %}" alt="">
-            </div>
-            <div class="col d-flex justify-content-center">
-                <img class="enlaces-interes-imagenes" src="{% static 'img/e-i-4.png' %}" alt="">
-            </div>
-            <div class="col d-flex justify-content-center">
-                <img class="enlaces-interes-imagenes" src="{% static 'img/e-i-5.jpg' %}" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
-{% block vendor_js %}
-<!-- ---------------------------------Slick 1.8.1--------------------------------- -->
-<script src="{% static 'vendor/slick/slick.min.js' %}"></script>
-<script src="{% static 'js/slick-custom.js' %}"></script>
-{% endblock %}
-{% block js %}
 {% endblock %}

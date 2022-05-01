@@ -39,9 +39,11 @@
 <div class="px-2 py-5">
     <div class="row text-center p-0 m-0">
         <div class="col-2">
+            {% if request.GET.t %}
             <a href="{% url 'grupo-normativa' request.GET.t %}">
                 <i class="fa-solid fa-arrow-left text-warning fa-3x"></i>
             </a>
+            {% endif %}
         </div>
 
         <div class="col-8">
@@ -64,12 +66,13 @@
             <div class="form group">
                 <label for="">Categoría:</label>
                 <select class="form-control p-0" name="" id="topico" style="font-size: .9rem;">
+                    <option class="text-wrap" value="0">TODOS</option>
                     {% for t in topico %}
                     <option value="{{t.id}}">{{t.name}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="form-group"  style="height:720px;">
+            <div class="form-group" style="height:720px;">
                 <label for="tipos_norma">Subcategoría</label>
                 <select class="form-control" name="tipo_normas[]" multiple="multiple" style="height:100%;"
                     id="tipos_norma">
@@ -127,7 +130,6 @@
                             <div class="form-group">
                                 <div class="form-group mb-3">
                                     <label for=""> Palabras clave: </label>
-
                                     <select class="form-control select-multiple" name="palabras_clave[]"
                                         multiple="multiple" style="width:100%; height:100%;" id="keywords">
                                         {% for pc in palabras_clave %}
@@ -251,18 +253,27 @@
     tipos_uso_json = {{ tu | safe }},
     tipos_norma_json = {{ tn | safe }},
     label_tipo_uso = document.querySelectorAll("[for=tipo_uso]"),
-    label_subtipo_uso = document.querySelectorAll("[for=subtipo_usos]"),
-    label_tipos_norma = document.querySelectorAll("[for=tipos_norma]");
+        label_subtipo_uso = document.querySelectorAll("[for=subtipo_usos]"),
+        label_tipos_norma = document.querySelectorAll("[for=tipos_norma]");
 
     var universo_acotado = normas; // temporal para ejecutar mis filtros
+    var keywords = $("#keywords");
 
     if (t != null) {
         $('#topico').val(t)
         topico = t;
     }
 
+    
     if (search != null) {
-        $('#filter_input').val(search)
+        let array = []
+        $('#keywords option').each(function () {
+            if (removeTilde($(this).text()).includes(removeTilde(search))) {
+                array.push($(this).val())
+            }
+        })
+        keywords.val(array)
+        keywords.trigger('change')
     }
 
     if (titulo == null) { // si el titulo no esta definido muestro el filtro de tipos de norma
@@ -308,7 +319,6 @@
         search = $("#filter_input"),
         tipos_uso = $("#tipo_uso"),
         subtipos_uso = $('#subtipo_usos'),
-        keywords = $("#keywords"),
         estado = $("#estado"),
         date_range = undefined;
 
@@ -325,7 +335,6 @@
             execFilters();
         }
     })
-
 
 
     tiposNormaReactivo()
@@ -369,7 +378,6 @@
         subtiposUsoReactivo()
         changeTitulo()
         changeTSlabel()
-
         execFilters()
     })
 
@@ -451,12 +459,10 @@
 
         if (keywords.length != 0) {
             let respuesta = [];
-
             keywords.filter(k => {
                 let r = universo_acotado.filter(n => {
                     return n.palabras_clave.includes(parseInt(k))
                 })
-
                 r.forEach(r => {
                     if (respuesta.indexOf(r) == -1) {
                         respuesta = respuesta.concat(r)
@@ -507,8 +513,8 @@
         topico = $("#topico").val()
 
         var options_tn = ``
-        if (topico != 0) {
-            tipos_norma_json.forEach(tn => {
+        tipos_norma_json.forEach(tn => {
+            if (topico != 0) {
                 if (tn.topico_id == topico) {
                     if (tn.order != 0 && !tn.order.includes('.')) {
                         options_tn += /*html*/`<option class="text-wrap font-weight-bold" grupo="${tn.grupo_id}" value="${tn.id}">${tn.order} ${tn.name}</option>`
@@ -519,9 +525,11 @@
                         options_tn += /*html*/`<option class="text-wrap" grupo="${tn.grupo_id}" value="${tn.id}">${tn.name}</option>`
                     }
                 }
-            })
+            } else {
+                options_tn += /*html*/`<option class="text-wrap" value="${tn.id}">${tn.name}</option>`
+            }
+        })
 
-        }
         $("#tipos_norma").html(options_tn)
         $("#tipos_norma option").prop("selected", true)
     }
@@ -530,13 +538,15 @@
         topico = $("#topico").val()
 
         var options_tu = `<option class="text-wrap" value="0">TODOS</option>`
-        if (topico != 0) {
-            tipos_uso_json.forEach(tu => {
+        tipos_uso_json.forEach(tu => {
+            if (topico != 0) {
                 if (tu.topico_id == topico) {
                     options_tu += /*html*/`<option class="text-wrap" value="${tu.id}">${tu.name}</option>`
                 }
-            })
-        }
+            } else {
+                options_tu += /*html*/`<option class="text-wrap" value="${tu.id}">${tu.name}</option>`
+            }
+        })
 
         $("#tipo_uso").html(options_tu)
         tu_id = $("#tipo_uso").val()
@@ -553,9 +563,7 @@
                     options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
                 }
             } else {
-                if (sbu.topico_id == topico) {
-                    options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
-                }
+                options_sbu += /*html*/`<option class="text-wrap" value="${sbu.id}">${sbu.name}</option>`
             }
         })
 
