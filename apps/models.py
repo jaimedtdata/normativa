@@ -51,12 +51,9 @@ class Member(models.Model):
     person_type = models.CharField(max_length=1, default='N',
         help_text='Tipo de Persona', choices=PERSON_TYPE_CHOICES,
         verbose_name='Tipo de Persona', blank=True)
-    identity = models.CharField(max_length=11, blank=True,
+    identity = models.CharField(max_length=16, blank=True,
         help_text='DNI o RUC',
         verbose_name='Documento de Identidad')
-    foreign_card = models.CharField(max_length=11, blank=True,
-        help_text='Documento de Extranjería',
-        verbose_name='Documento de Extranjería')
     profession = models.CharField(max_length=1,
         help_text='Profesión', choices=PROFESSION_CHOICES,
         verbose_name='Profesión', blank=True)
@@ -69,7 +66,7 @@ class Member(models.Model):
     email = models.EmailField(max_length=50, blank=False,
         help_text='Correo Electrónico',
         verbose_name='Email')
-    tuition = models.PositiveIntegerField(null=True, blank=True,
+    tuition = models.CharField(max_length=16,null=True, blank=True,
         help_text='Colegiatura',
         verbose_name='Colegiatura')
     secret_code = models.PositiveIntegerField(null=True, blank=True,
@@ -187,7 +184,7 @@ class Order_payment(models.Model):
     email = models.EmailField(max_length=50, blank=True, null=True,
         help_text='Correo Electrónico',
         verbose_name='Email')
-    identity = models.CharField(max_length=11, blank=True,
+    identity = models.CharField(max_length=16, blank=True,
         help_text='DNI o RUC',
         verbose_name='Documento de Identidad')
     paid = models.BooleanField(default=False)

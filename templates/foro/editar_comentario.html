@@ -9,55 +9,72 @@
             
 </div>
         
-<div class="container mb-5" style="margin-bottom: 200px;">
+<div class="container mb-5">
   <div class="row">
     <div class="col-12">
       <div class="comments">
-        <div class="comments-details">
-          <span class="total-comments comments-sort"> Comentarios</span>
-        </div>
+        <h2>Editar Comentarios</h2>
+        {% if messages %}
+          {% for m in messages %}
+            {% if m.tags == 'error' %}
+              <div class="alert alert-danger" role="alert"> {{m}} </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
 
-         <div class="comment-box add-comment">
-          <span class="commenter-pic">
-            <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
-          </span>
+        <div class="d-flex align-items-center w-100 ">
+          <div class="add-comment d-flex align-items-center w-100 my-2 p-3">
+            <div class="add-comment-header m-2">
+              <span class="commenter-pic">
+                <img src="https://img.icons8.com/office/80/000000/user.png" class="img-fluid">
+              </span>
+            </div>
+            <div class="add-comment-body flex-fill">
+              <form method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                {{form.comentario}}
+                <div id="contador">0/150</div>
+                
+                <div class="file my-5 p-3">
+                  {{form.file_one}}
+                </div>
+
+                <div class="file my-5 p-3">
+                  {{form.file_two}}
+                </div>
+                
+                <div class="file my-5 p-3">
+                  {{form.file_three}}
+                </div>
+
+                <div class="file my-5 p-3">
+                  {{form.file_four}}
+                </div>
           
-
-                <form method="POST" enctype="multipart/form-data" >
-                  {% csrf_token %}
-                  <span class="commenter-name">
-                    {{form.comentario}}
-                    <div id="contador">0/150</div>
-
-                    <br>
-                    {{form.file_one}}
-                    <span class="text-danger field-error text-md">
-                      {{ form.file_one.errors }}
-                    </span>
-                    <br>
-                    {{form.file_two}}
-                    <br>
-                    {{form.file_three}}
-                    <br>
-                    {{form.file_four}}
-                    <div class="form-group">    
-                      <a class="btn btn-danger"  href="{% url 'foro_comentarios' foro.id %}">Cancelar</a>
-                      <button  type="submit" class="btn btn-default">Guardar</button>
-                    </div>
-                  </span>
-                </form>
+                <div class="form-group">    
+                  <a class="btn btn-danger"  href="{% url 'foro_comentarios' foro.id %}">Cancelar</a>
+                  <button  type="submit" class="btn btn-default">Guardar</button>
+                </div>
+              </form>
+            </div>
           </div>
-            
+        </div>    
       </div>
     </div>
   </div>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 {% endblock %}
 
 {% block css %}
 <style>
+  .file a{
+    display: block;
+    margin-bottom: 10px;
+  }
+  .file input[type=checkbox]{
+    margin-bottom: 20px;
+  }
   .comments-details button.btn.dropdown-toggle,
   .comments-details .total-comments {
       font-size: 18px;
@@ -77,8 +94,6 @@
   }
   .comments .comment-box {
       width: 100%;
-      float: left;
-      height: 100px;
       background-color: #FAFAFA;
       padding: 10px 10px 10px;
       margin-bottom: 15px;
@@ -90,7 +105,6 @@
       border: none;
       position: relative;
       margin-bottom: 10px;
-      height: 100px;
   }
   .comments .commenter-pic {
       width: 50px;
@@ -108,7 +122,7 @@
       top: 20px;
       left: 0px;
   }
-  .comments .add-comment input {
+  .comments .add-comment input[type=text] {
       border-top: 0px;
       border-bottom: 1px solid #ccc;
       border-left: 0px;

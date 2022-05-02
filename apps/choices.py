@@ -16,8 +16,10 @@ PLATAFORMA_TYPE_CHOICES = (
 )
 
 PERSON_TYPE_CHOICES = (
-    ('N', 'NATURAL'),
-    ('J', 'JURÍDICA'),
+    ('N', 'DNI'),
+    ('J', 'RUC'),
+    ('C', 'CARNET DE EXTRANJERÍA'),
+    ('P', 'PASAPORTE'),
 )
 
 USER_ROLES = (
