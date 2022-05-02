@@ -67,12 +67,9 @@ class APIMember(models.Model):
     second_surname = models.CharField(max_length=250, 
         verbose_name='Apellido Materno', blank=True, null=True)
     cap_num = models.PositiveBigIntegerField(verbose_name='No. de Colegiatura')
-    identity = models.CharField(max_length=11, blank=True,
+    identity = models.CharField(max_length=16, blank=True,
         help_text='DNI o RUC',
         verbose_name='Documento de Identidad')
-    foreign_card = models.CharField(max_length=11, blank=True,
-        help_text='Documento de Extranjería',
-        verbose_name='Documento de Extranjería')
     person_type = models.CharField(max_length=1, default='N',
         help_text='Tipo de Persona', choices=PERSON_TYPE_CHOICES,
         verbose_name='Tipo de Persona', blank=False)

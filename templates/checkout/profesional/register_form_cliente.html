@@ -19,33 +19,30 @@
                         {% csrf_token %}
                         
                         <div class="row mb-2">
-                            <div class="col-md-4">
-                                <label class="text-muted lead" >Nombres:</label>
+                            <div class="col-md-3">
+                                <label class="text-muted lead" >Tipo de Documento:</label>
+                                {{form.person_type}}
+                            </div>
+                            <div class="col-md-3">
+                                <label class="text-muted lead" id="names-title" >Nombres:</label>
                                 {{form.names}}
                             </div>
-                            <div class="col-md-4">
-                                <label class="text-muted lead" >Primer Apellido:</label>
+                            <div class="col-md-3">
+                                <label id="first_surname_title" class="text-muted lead" >Primer Apellido:</label>
                                 {{form.first_surname}}
                             </div>		
-                            <div class="col-md-4">
-                                <label class="text-muted lead" >Segundo Apellido:</label>
+                            <div class="col-md-3">
+                                <label id="second_surname_title" class="text-muted lead" >Segundo Apellido:</label>
                                 {{form.second_surname}}
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-3 ">
-                                <label class="text-muted lead" >Documento de Identidad:</label>
+                                <label class="text-muted lead" id="identity-title">Documento de Identidad:</label>
                                 {{form.identity}}
                                 <span class="text-danger field-error text-md">
                                     {{ form.identity.errors }}
     
-                                </span>
-                            </div>
-
-                            <div class="col-md-3 ">
-                                <label class="text-muted lead" >Carnet de Extranjería:</label>
-                                {{form.foreign_card}}
-                                <span class="text-danger field-error text-md">
                                 </span>
                             </div>
                             
@@ -83,7 +80,7 @@
                                 
                                 
                             <div class="col-md-5 ">
-                                <label class="text-muted lead">Dirección:</label>
+                                <label id="address_title" class="text-muted lead">Dirección:</label>
                                 {{form.address}}
                             </div>
                             
@@ -154,6 +151,14 @@
     const identity =  document.getElementById('id_identity')
     const mobile =  document.getElementById('id_mobile')
     const address =  document.getElementById('id_address')
+    const person_type = document.getElementById('id_person_type')
+
+    const names_title =  document.getElementById('names-title')
+    const identity_title =  document.getElementById('identity-title')
+    const first_surname_title = document.getElementById('first_surname_title')
+    const second_surname_title = document.getElementById('second_surname_title')
+    const address_title = document.getElementById('address_title')
+
 
     //Add Upper class
     name.classList.add('upper-case')
@@ -162,10 +167,31 @@
     address.classList.add('upper-case')
 
     identity.addEventListener('input', (e)=>{
-        if(identity.value.length >11){
-            e.target.value = e.target.value.substring(0,11);
-            return false;
+        if (person_type.value == 'N'){
+            if(identity.value.length >8){
+                e.target.value = e.target.value.substring(0,8);
+                return false;
+            }
         }
+        else if (person_type.value == 'J'){
+            if(identity.value.length >11){
+                e.target.value = e.target.value.substring(0,11);
+                return false;
+            }
+        }
+        else if (person_type.value == 'C'){
+            if(identity.value.length >11){
+                e.target.value = e.target.value.substring(0,12);
+                return false;
+            }
+        }
+        else if (person_type.value == 'P'){
+            if(identity.value.length >11){
+                e.target.value = e.target.value.substring(0,12);
+                return false;
+            }
+        }
+        
     })
 
     mobile.addEventListener('input', (e)=>{
@@ -177,8 +203,10 @@
 
     name.addEventListener('keydown', (e) =>{
         //console.log("tecla",e.keyCode)
-
-        if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
+        //numeros
+        //e.keyCode >= 48 && e.keyCode <=57 ||
+        
+        if( e.keyCode==187 || e.keyCode==188 || e.keyCode==189 || e.keyCode==190 || e.keyCode==191 || e.keyCode==192 || e.keyCode==219 || e.keyCode==220 || e.keyCode==221 || e.keyCode==222 || e.keyCode==225 ){
             e.preventDefault()
         }
         
@@ -211,20 +239,66 @@
             }
         }
     }
+
+    function set_person_type_rules(){
+    //name first_surname second_surname identity  mobile address  person_type
+        if (person_type.value == 'N'){
+            names_title.innerText = 'Nombres'
+            identity_title.innerText = 'Documento de Identidad:'
+            address_title.innerText = 'Dirección:'
+            first_surname_title.style.display = 'block'
+            second_surname_title.style.display = 'block'
+            first_surname.style.display = 'block'
+            second_surname.style.display = 'block'
+            
+
+        }
+        else if (person_type.value == 'J'){
+            names_title.innerText = 'Razón Social'
+            identity_title.innerText = 'RUC:'
+            address_title.innerText = 'Dirección Fiscal:'
+            first_surname_title.style.display = 'none'
+            second_surname_title.style.display = 'none'
+            first_surname.style.display = 'none'
+            second_surname.style.display = 'none'
+
+        }
+        else if (person_type.value == 'C'){
+            names_title.innerText = 'Nombres'
+            identity_title.innerText = 'Carnet de Extranjería:'
+            address_title.innerText = 'Dirección:'
+            first_surname_title.style.display = 'block'
+            second_surname_title.style.display = 'block'
+            first_surname.style.display = 'block'
+            second_surname.style.display = 'block'
+            
+
+        }
+        else if (person_type.value == 'P'){
+            names_title.innerText = 'Nombres'
+            identity_title.innerText = 'Pasaporte:'
+            address_title.innerText = 'Dirección:'
+            first_surname_title.style.display = 'block'
+            second_surname_title.style.display = 'block'
+            first_surname.style.display = 'block'
+            second_surname.style.display = 'block'
+            
+
+        }
+
+    }
+    
+
+    if (person_type) {
+        person_type.onchange = () =>{
+            set_person_type_rules()
+	    }
+	set_person_type_rules()
+}
     
     set_upper_inputs()
 
-    // name.addEventListener('keyup', (e) =>{
-    //     if(e.keyCode===192){
-    //         console.log('keypress xd')
-    //         e.target.value=""
-            
-    //         alert('no se permiten tildes')
-    //         e.preventDefault()
-            
-    //     }
-
-    // })
+   
 
    
 </script>

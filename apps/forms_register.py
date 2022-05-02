@@ -1,6 +1,7 @@
 from django import forms
 from apps.models import Member
 from membership.models import APIMember
+from .choices import *
 
 class MemberCapForm(forms.Form):
     email = forms.EmailField(label='email',required=True ,
@@ -82,36 +83,37 @@ class MemberPremiumCapForm(forms.Form):
 
 class ExternalUserForm(forms.Form):
 
+        person_type = forms.ChoiceField(label='Nombres',required=True , choices=PERSON_TYPE_CHOICES,
+                            widget=forms.Select(attrs={
+                                'class': "form-control",
+                                'placeholder' : ''
+                                }),
+                                help_text='Ingresa tu nombre',)
+
         names = forms.CharField(label='Nombres',required=True ,
                             widget=forms.TextInput(attrs={
                                 'class': "form-control",
                                 'placeholder' : ''
                                 }),
                                 help_text='Ingresa tu nombre',)
-        first_surname = forms.CharField(label='Primer Apellido',required=True ,
+        first_surname = forms.CharField(label='Primer Apellido',required=False ,
                                 widget=forms.TextInput(attrs={
                                         'class': "form-control",
                                         'placeholder' : ''
                                         }),
                                         help_text='Ingresa Apellido paterno',)
-        second_surname = forms.CharField(label='Segundo Apellido',required=True ,
+        second_surname = forms.CharField(label='Segundo Apellido',required=False ,
                                 widget=forms.TextInput(attrs={
                                         'class': "form-control",
                                         'placeholder' : ''
                                         }),
                                         help_text='Ingresa Apellido materno',)
-        identity = forms.IntegerField(label='Documento Nacional de Identidad',required=True ,
-                                widget=forms.NumberInput(attrs={
+        identity = forms.CharField(label='Documento Nacional de Identidad',required=True ,
+                                widget=forms.TextInput(attrs={
                                         'class': "form-control",
                                         'placeholder' : ''
                                         }),
                                         help_text='Ingresa tu Documento Nacional de Identidad',)
-        foreign_card = forms.IntegerField(label='Documento de Extranjeria' ,required=False,
-                                widget=forms.NumberInput(attrs={
-                                        'class': "form-control",
-                                        'placeholder' : ''
-                                        }),
-                                        help_text='Ingresa tu Documento de Extranjería',)
         #person_type = forms.IntegerField()
         mobile = forms.IntegerField(label='Teléfono Celular',required=True ,
                                 widget=forms.NumberInput(attrs={
