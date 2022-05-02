@@ -41,6 +41,13 @@
     <div class="col-12">
       <div class="comments">
         <h2 class="">{{ncomentarios}} Comentarios</h2>
+        {% if messages %}
+          {% for m in messages %}
+            {% if m.tags == 'error' %}
+              <div class="alert alert-danger" role="alert"> {{m}} </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
         <div class="d-flex align-items-center w-100 ">
           <div class="add-comment d-flex align-items-center w-100 my-2 p-3">
             <div class="add-comment-header m-2">
